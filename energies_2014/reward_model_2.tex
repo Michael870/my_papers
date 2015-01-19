@@ -1,0 +1,50 @@
+\noindent 
+
+We compare Shadow Replication to two other replication techniques,
+traditional replication and profit-aware stretched replication.
+Traditional replication requires that the two processes always execute
+at the same speed $\sigma_{max}$. Unlike traditional replication
+Shadow Replication is dependent upon failure detection, enabling the
+replica to increase its execution speed upon failure and maintain the
+targeted response time thus maximizing profit. While this is the case
+in many computing environments, there are cases where failure
+detection may not be possible. To address this limitation, we propose
+profit-aware stretched replication, whereby both the main process and
+the shadow execute independently at stretched speeds to meet the
+expected response time, without the need for the main processes failure
+detection. In profit-aware stretched replication both the main and
+shadow execute at speed $\sigma_r$, found by optimizing the profit
+model.  For both traditional replication and stretched replication,
+the task completion time is independent of failure and can be directly
+calculated as:
+\begin{equation}
+t_c=\frac{W}{\sigma_{max}} \text{ or } t_c=\frac{W}{\sigma_r}
+\end{equation}
+
+%Profit-aware stretched replication is similar to traditional
+%replication in that it executes at one speed but different in that it
+%determines the execution speed that maximizes the profit much like
+%shadow replication.
+
+%In order to evaluate the benefits of shadow replication relative to
+%other resilience schemes, we consider dual level of redundancy and
+%assume that at most one failure may occur, following the same failure
+%model as the one defined for shadow replication. To this end, we
+%propose a new scheme, referred to as profit-aware stretched
+%replication. We also derive the expected energy of pure replication
+%scheme, which is then used for comparative analysis.
+
+Since all tasks will have the same completion time, the job completion
+time would also be $t_c$. Further, the expected income, which depends
+on negotiated reward function and job completion time, is independent
+of failure:
+\begin{equation}
+E[income]=r(t_c)
+\end{equation}
+
+Since both traditional replication and profit-aware stretched
+replication are special cases of our Shadow Replication paradigm where
+$\sigma_m=\sigma_b=\sigma_a=\sigma_{max}$ or
+$\sigma_m=\sigma_b=\sigma_a=\sigma_r$ respectively, we can easily derive the
+expected energy consumption using \refeq{eq:total_energy} with $E_4$
+fixed at 0 and then compute the expected expense using \refeq{eq:expense}.

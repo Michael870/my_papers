@@ -1,0 +1,19 @@
+\BOOKMARK [1][]{section.1}{Introduction}{}
+\BOOKMARK [1][]{section.2}{Cloud Workload Characterization}{}
+\BOOKMARK [1][]{section.3}{Shadow Replication}{}
+\BOOKMARK [1][]{section.4}{Reward Based Optimal shadow replication}{}
+\BOOKMARK [2][]{subsection.4.1}{Reward Model}{section.4}
+\BOOKMARK [2][]{subsection.4.2}{Failure Model}{section.4}
+\BOOKMARK [2][]{subsection.4.3}{Power and Energy Models}{section.4}
+\BOOKMARK [2][]{subsection.4.4}{Income and Expense Models}{section.4}
+\BOOKMARK [1][]{section.5}{Profit-aware stretched replication}{}
+\BOOKMARK [1][]{section.6}{Re-execution}{}
+\BOOKMARK [1][]{section.7}{Evaluation}{}
+\BOOKMARK [2][]{subsection.7.1}{Sensitivity to static power}{section.7}
+\BOOKMARK [2][]{subsection.7.2}{Sensitivity to response time}{section.7}
+\BOOKMARK [2][]{subsection.7.3}{Sensitivity to number of tasks}{section.7}
+\BOOKMARK [2][]{subsection.7.4}{Sensitivity to failure}{section.7}
+\BOOKMARK [2][]{subsection.7.5}{Senstivity to application characteristics}{section.7}
+\BOOKMARK [2][]{subsection.7.6}{Senstivity to communication types}{section.7}
+\BOOKMARK [1][]{section.8}{Related Work}{}
+\BOOKMARK [1][]{section.9}{Conclusion}{}

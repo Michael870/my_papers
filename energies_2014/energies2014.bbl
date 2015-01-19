@@ -1,0 +1,208 @@
+\begin{thebibliography}{-------}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[Tchana \em{et~al.}(2012)Tchana, Broto, and Hagimont]{tchana_cits_2012}
+Tchana, A.; Broto, L.; Hagimont, D.
+\newblock Approaches to cloud computing fault tolerance.
+\newblock  Computer, Information and Telecommunication Systems (CITS), 2012
+  International Conference on,  2012, pp. 1--6.
+
+\bibitem[{Amazon}(2013)]{ec2_site}
+{Amazon}.
+\newblock Amazon Elastic Compute Cloud.
+\newblock http://aws.amazon.com/ec2/,  2013.
+
+\bibitem[Schroeder and Gibson(2010)]{schroeder_2010_dsc}
+Schroeder, B.; Gibson, G.
+\newblock A Large-Scale Study of Failures in High-Performance Computing
+  Systems.
+\newblock {\em Dependable and Secure Computing, IEEE Transactions on} {\bf
+  2010}, {\em 7},~337--350.
+
+\bibitem[Elnozahy \em{et~al.}(2003)Elnozahy, Kistler, and
+  Rajamony]{Elnozahy03energyconservation}
+Elnozahy, M.; Kistler, M.; Rajamony, R.
+\newblock Energy Conservation Policies for Web Servers.
+\newblock  In Proceedings of the 4th USENIX Symposium on Internet Technologies
+  and Systems,  2003.
+
+\bibitem[Raghavendra \em{et~al.}(2008)Raghavendra, Ranganathan, Talwar, Wang,
+  and Zhu]{Raghavendra:2008:NPS}
+Raghavendra, R.; Ranganathan, P.; Talwar, V.; Wang, Z.; Zhu, X.
+\newblock No "power" struggles: coordinated multi-level power management for
+  the data center.
+\newblock {\em SIGARCH Comput. Archit. News} {\bf 2008}, {\em 36},~48--59.
+
+\bibitem[Gelenbe and Herna\`ndez(1990)]{Gelenbe:1990:OPT}
+Gelenbe, E.; Herna\`ndez, M.
+\newblock Optimum checkpoints with Age Dependent Failures.
+\newblock {\em Acta Informatica} {\bf 1990}, {\em 27},~519 -- 531.
+
+\bibitem[Tsai \em{et~al.}(2011)Tsai, Zhong, Elston, Bai, and
+  Chen]{tsai_isads_2011}
+Tsai, W.T.; Zhong, P.; Elston, J.; Bai, X.; Chen, Y.
+\newblock Service Replication Strategies with MapReduce in Clouds.
+\newblock  Autonomous Decentralized Systems (ISADS), 2011 10th International
+  Symposium on,  2011, pp. 381--388.
+
+\bibitem[Ko \em{et~al.}(2010)Ko, Hoque, Cho, and Gupta]{ko_socc_2010}
+Ko, S.Y.; Hoque, I.; Cho, B.; Gupta, I.
+\newblock Making cloud intermediate data fault-tolerant.
+\newblock  Proceedings of the 1st ACM symposium on Cloud computing; ACM: New
+  York, NY, USA,  2010; SoCC '10, pp. 181--192.
+
+\bibitem[Ferdman and et. al.(2012)]{Ferdman:2012:CCS:2150976.2150982}
+Ferdman, M.; et. al..
+\newblock Clearing the clouds: a study of emerging scale-out workloads on
+  modern hardware.
+\newblock  Proc. of the seventeenth Int. Conf. on Architectural Support for
+  Programming Languages and Operating Systems; ACM: New York, NY, USA,  2012;
+  ASPLOS, pp. 37--48.
+
+\bibitem[Sangroya \em{et~al.}(2012)Sangroya, Serrano, and Bouchenak]{mrbs}
+Sangroya, A.; Serrano, D.; Bouchenak, S.
+\newblock Benchmarking Dependability of MapReduce Systems.
+\newblock  Reliable Distributed Systems (SRDS), IEEE 31st Symp. on,  2012, pp.
+  21--30.
+
+\bibitem[Lin and Dyer(2010)]{lin2010data}
+Lin, J.; Dyer, C.
+\newblock Data-intensive text processing with MapReduce.
+\newblock {\em Synthesis Lectures on Human Language Technologies} {\bf 2010},
+  {\em 3},~1--177.
+
+\bibitem[G\"{a}rtner(1999)]{gartner_faults_1999}
+G\"{a}rtner, F.C.
+\newblock Fundamentals of fault-tolerant distributed computing in asynchronous
+  environments.
+\newblock {\em ACM Comput. Surv.} {\bf 1999}, {\em 31},~1--26.
+
+\bibitem[Cristian(1991)]{cristian_comm_1991}
+Cristian, F.
+\newblock Understanding fault-tolerant distributed systems.
+\newblock {\em Commun. ACM} {\bf 1991}, {\em 34},~56--78.
+
+\bibitem[Daw and Touretzky(2002)]{Daw:2002:LRP:639717.639720}
+Daw, N.D.; Touretzky, D.S.
+\newblock Long-term reward prediction in TD models of the dopamine system.
+\newblock {\em Neural Comput.} {\bf 2002}, {\em 14},~2567--2583.
+
+\bibitem[Flautner \em{et~al.}(2002)Flautner, Reinhardt, and
+  Mudge]{flautner_2002_APS}
+Flautner, K.; Reinhardt, S.; Mudge, T.
+\newblock Automatic performance setting for dynamic voltage scaling.
+\newblock {\em Wirel. Netw.} {\bf 2002}, {\em 8},~507--520.
+
+\bibitem[Pillai and Shin(2001)]{pillai_2001_sosp}
+Pillai, P.; Shin, K.G.
+\newblock Real-time dynamic voltage scaling for low-power embedded operating
+  systems.
+\newblock  Proceedings of the eighteenth ACM symposium on Operating systems
+  principles; ACM: New York, NY, USA,  2001; SOSP '01, pp. 89--102.
+
+\bibitem[Rusu \em{et~al.}(2003)Rusu, Melhem, and Moss{\'e}]{rusu_2003_ecs}
+Rusu, C.; Melhem, R.; Moss{\'e}, D.
+\newblock Maximizing rewards for real-time applications with energy
+  constraints.
+\newblock {\em ACM Trans. Embed. Comput. Syst.} {\bf 2003}, {\em 2},~537--559.
+
+\bibitem[Zhai \em{et~al.}(2004)Zhai, Blaauw, Sylvester, and
+  Flautner]{zhai_2004_dac}
+Zhai, B.; Blaauw, D.; Sylvester, D.; Flautner, K.
+\newblock Theoretical and practical limits of dynamic voltage scaling.
+\newblock  Design Automation Conference, 2004. Proceedings. 41st,  2004, pp.
+  868--873.
+
+\bibitem[{MathWorks}(2013)]{matlab_opt}
+{MathWorks}.
+\newblock Optimization Toolbox,  2013.
+
+\bibitem[Agarwal \em{et~al.}(2004)Agarwal, Garg, and
+  Gupta]{Agarwal04adaptiveincremental}
+Agarwal, S.; Garg, R.; Gupta, M.S.
+\newblock Adaptive incremental checkpointing for massively parallel systems.
+\newblock  In ICS ’04: Proceedings of the 18th annual international
+  conference on Supercomputing. ACM Press,  2004, pp. 277--286.
+
+\bibitem[Alvisi \em{et~al.}(1999)Alvisi, Elnozahy, Rao, Husain, and
+  de~Mel]{781058}
+Alvisi, L.; Elnozahy, E.; Rao, S.; Husain, S.; de~Mel, A.
+\newblock An analysis of communication induced checkpointing.
+\newblock  Fault-Tolerant Computing, 1999. Digest of Papers. Twenty-Ninth
+  Annual International Symposium on,  1999, pp. 242--249.
+
+\bibitem[Daly(2006)]{Daly2006303}
+Daly, J.
+\newblock A higher order estimate of the optimum checkpoint interval for
+  restart dumps.
+\newblock {\em Future Generation Computer Systems} {\bf 2006}, {\em 22},~303 --
+  312.
+
+\bibitem[Helary \em{et~al.}(1997)Helary, Mostefaoui, Netzer, and
+  Raynal]{632814}
+Helary, J.M.; Mostefaoui, A.; Netzer, R.; Raynal, M.
+\newblock Preventing useless checkpoints in distributed computations.
+\newblock  Reliable Distributed Systems, 1997. Proceedings., The Sixteenth
+  Symposium on,  1997, pp. 183--190.
+
+\bibitem[El~Mehdi~Diouri \em{et~al.}(2012)El~Mehdi~Diouri, Gluck, Lefevre, and
+  Cappello]{Diouri2012}
+El~Mehdi~Diouri, M.; Gluck, O.; Lefevre, L.; Cappello, F.
+\newblock Energy considerations in checkpointing and fault tolerance protocols.
+\newblock  Dependable Systems and Networks Workshops (DSN-W), 2012 IEEE/IFIP
+  42nd International Conference on,  2012, pp. 1--6.
+
+\bibitem[Ferreira and et. al.(2011)]{Ferreira2011}
+Ferreira, K.; et. al..
+\newblock Evaluating the viability of process replication reliability for
+  exascale systems.
+\newblock  Proceedings of 2011 International Conference for High Performance
+  Computing, Networking, Storage and Analysis; ACM: New York, NY, USA,  2011;
+  SC '11, pp. 44:1--44:12.
+
+\bibitem[Sousa \em{et~al.}(2005)Sousa, Neves, and Verissimo]{Sousa2005}
+Sousa, P.; Neves, N.; Verissimo, P.
+\newblock Resilient state machine replication.
+\newblock  Dependable Computing, 2005. Proceedings. 11th Pacific Rim
+  International Symposium on,  2005, pp. 5 pp.--.
+
+\bibitem[Jhawar \em{et~al.}(2013)Jhawar, Piuri, and
+  Santambrogio]{jhawar_systems_2013}
+Jhawar, R.; Piuri, V.; Santambrogio, M.
+\newblock Fault Tolerance Management in Cloud Computing: A System-Level
+  Perspective.
+\newblock {\em Systems Journal, IEEE} {\bf 2013}, {\em 7},~288--297.
+
+\bibitem[Zhao \em{et~al.}(2010)Zhao, Melliar-Smith, and Moser]{Zhao2010}
+Zhao, W.; Melliar-Smith, P.; Moser, L.
+\newblock Fault Tolerance Middleware for Cloud Computing.
+\newblock  Cloud Computing (CLOUD), 2010 IEEE 3rd International Conference on,
+  2010, pp. 67--74.
+
+\bibitem[Nicolae and Cappello(2011)]{Nicolae2011}
+Nicolae, B.; Cappello, F.
+\newblock BlobCR: efficient checkpoint-restart for HPC applications on IaaS
+  clouds using virtual disk image snapshots.
+\newblock  Proceedings of 2011 International Conference for High Performance
+  Computing, Networking, Storage and Analysis; ACM: New York, NY, USA,  2011;
+  SC '11, pp. 34:1--34:12.
+
+\bibitem[Zheng(2010)]{Zheng2010}
+Zheng, Q.
+\newblock Improving MapReduce fault tolerance in the cloud.
+\newblock  Parallel Distributed Processing, Workshops and Phd Forum (IPDPSW),
+  2010 IEEE International Symposium on,  2010, pp. 1--6.
+
+\bibitem[Chen \em{et~al.}(2012)Chen, Liu, Wang, and Chang]{chen_2012_srds}
+Chen, X.; Liu, X.; Wang, S.; Chang, X.W.
+\newblock TailCon: Power-Minimizing Tail Percentile Control of Response Time in
+  Server Clusters.
+\newblock  Reliable Distributed Systems (SRDS), 2012 IEEE 31st Symposium on,
+  2012, pp. 61--70.
+
+\bibitem[Lin \em{et~al.}(2011)Lin, Wierman, Andrew, and Thereska]{Lin2011}
+Lin, M.; Wierman, A.; Andrew, L.; Thereska, E.
+\newblock Dynamic right-sizing for power-proportional data centers.
+\newblock  INFOCOM, 2011 Proceedings IEEE,  2011, pp. 1098--1106.
+
+\end{thebibliography}

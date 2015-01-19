@@ -1,0 +1,557 @@
+\noindent 
+
+This section evaluates the expected profit of each of the fault tolerance
+methods discussed above under different system environment. We have identified 5
+important parameters which affect the expected profit:
+\begin{itemize}
+\item Static power ratio $\rho$, which determines the portion of power that is unaffected by the execution speed.
+\item SLA - The amount of reward, penalty and the required response times.
+\item $N$ - The total number of tasks.
+\item MTBF - The reliability of an individual node.
+\item Workload - The size, $W$, of each individual task.
+\end{itemize}
+
+
+%In the next sections we will look at the profit sensitivity to each of these parameters for 
+%
+%\hl{I think the reviewers will beat us up for using the space argument in a 12 page paper. -bnm}
+%For the interest of space, in the following we show four sets of experiments  which demonstrate the effects 
+%of different static power ratio, target response time, number of tasks, and task size over MTBF. In the end, 
+%we conclude this section with a discussion.
+
+
+%We conduct experiments using the analytical models
+%introduced in the previous section to evaluate the sensitivity of
+%Shadow Replication (SR) to different settings and assess its potential
+%in profit gain via comparison with traditional replication (TR),
+%constraind optimal Shadow Replication (COSR) and re-execution (RE). In
+%the comparison we use relative values for all parameters except time
+%for simplicity and generality. In particular, 
+
+Without loss of generality, we normalize $\sigma_{max}$ to be 1, so
+that all the speeds can be expressed as a fraction of maximum
+speed. Accordingly, the task workload $W$ is also adjusted such that
+it is equal to the amount of time (in hours) required for a single
+task, preserving the ratios expressed in
+\refeq{eq:tcm} and \refeq{eq:tcs}. The price of
+energy is assumed to be 1 unit. We assume that $R$ in our reward model
+is linearly proportional to the number of tasks $N$ and the maximal
+reward for one task is 3 units, so the total reward for a job is $3
+\times N$ units.  However, for the analysis we look
+at the average of expenditure and income on each task by dividing the
+total expenditure and income by $N$. In our basic configuration we
+assume that the static power ratio is 0.5, the task size is 1 hour, the node MTBF 5 is
+years, the number of tasks is $100000$, and the response time thresholds for
+maximal and minimal rewards are 1.3 hours and 2.6 hours
+respectively. Since the maximal power consumption is 1 unit, the
+energy needed for the task with one process at maximal speed is also 1
+unit. 
+
+%Our sensitivity studies vary the parameters in the basic
+%configuration independently.
+
+\subsection{Sensitivity to static power}
+\label{subsection_rho}
+
+With various architectures and organizations, servers deployed at
+different data centers will have different characteristics in terms of
+power consumption. The static power ratio is used to abstract the
+amount of static power consumed versus dynamic power.  %Through
+%our analysis we observe that static power ratio has a major influence
+%on the execution strategy of Shadow Replication as well as its profit
+%gain compared to other fault tolerance approaches.
+
+%\begin{figure}[!h]
+%	
+%	\begin{center}
+%		\subfigure[Shadow replication execution speeds]
+%		{
+%			\label{fig:rho_first}
+%			\includegraphics[width=\columnwidth]{diagrams/rho_speed.eps}
+%		}
+%		\subfigure[Profits normalized to traditional replication]
+%		{
+%			\label{fig:rho_second}
+%			\includegraphics[width=\columnwidth]{diagrams/rho_profit.eps}
+%		}
+%	\end{center}
+%	\caption{Sensitivity to static power ratio. MTBF=5 years, N=100000, W=1 hour, $t_{R_1}$=1.2 %hours, $t_{R_2}$=2.4 hours.}
+%	\label{fig:rho}
+%\end{figure}
+\begin{table}[!h]\small
+	\caption{Speeds for different static power ratio. MTBF=5 years, N=100000, W=1 hour, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.}
+	\centering
+		\begin{tabular}{|c|c|c|c|}
+		\hline
+		$\rho$ & $\sigma_m$ & $\sigma_b$ & $\sigma_a$ \\
+		\hline
+		0.0 &	0.77 & 	0.65 & 	1.00 \\
+		\hline 
+		0.1 &	0.78 &	0.66 &	1.00 \\
+		\hline
+		0.2 &	0.83 &	0.66 &	1.00 \\
+		\hline
+		0.3	&   0.84 &	0.68 &	1.00 \\
+		\hline
+		0.4	&   0.85 &	0.70 &	1.00 \\
+		\hline
+		0.5	&   0.86 &	0.72 &	1.00 \\
+		\hline
+		0.6	&   0.87 &	0.73 &	1.00 \\
+		\hline
+		0.7	&	0.91 &	0.81 &	1.00 \\
+		\hline
+		0.8	& 	1.00 &	1.00 &	1.00 \\
+		\hline
+		0.9	&	1.00 &	1.00 &	1.00 \\
+		\hline
+		1.0	&	1.00 &	1.00 &	1.00 \\
+		\hline
+		\end{tabular}
+	\label{tbl:rho}
+\end{table}
+
+\begin{figure}[!h]	
+	\begin{center}
+		\includegraphics[width=\columnwidth]{diagrams/rho_profit.eps}
+	\end{center}
+	\caption{Profit for different static power ratio. MTBF=5 years, N=100000, W=1 hour, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.}
+	\label{fig:rho}
+\end{figure}
+
+Table \ref{tbl:rho} shows how the profit-optimized execution speeds
+of Shadow Replication will change as static power increases. The execution speeds increase to reduce the execution time as static power ration increases. Observe
+that $\sigma_a$ is always equal to $\sigma_{max}$, which means that after
+sensing the failure of the main process, the shadow process should always
+shift to maximum speed. This is expected because the optimization will
+reduce the amount of work done by the shadow process before failure
+resulting in the maximum execution speed after failure, thus
+minimizing the amount of repeated work. %As expected the execution speeds
+%increase as static power ratio increase. Reducing the execution speed
+%can only reduce dynamic power, as such when static power increases
+%there is little benefit in reducing execution speeds. A system with
+%high static power would therefore restrict the potential energy
+%savings achieved by shadow, but as long as static power ratio is below
+%80\%, Shadow Replication tends to reduce execution
+%speeds. 
+%Further, when Shadow Replication is not restricted by static
+%power (static power ratio is 0), we find that Shadow Replication would
+%set the speed of the main process to be slightly larger than
+%$\frac{W}{t_{R_1}}$, so that the main process can complete the task in time
+%with reduced power as well as leave enough time for the shadow process to
+%catch up in case of failure.
+
+The potential profit gains achievable by using profit-aware
+replication techniques decreases as static power increases, as is shown
+in \reffig{fig:rho}. The reason is that our profit-aware
+techniques rely upon the fact that one can reduce energy costs by
+adjusting the execution speeds. Modern systems have a static power between 40\%-70\% and
+it is reasonable to suspect that this will continue to be the case. Within
+this target range of static power, Shadow Replication can achieve, on
+average, 19.3\% more profit than traditional replication, 8.9\% more
+than profit-aware stretched replication, and 28.8\% more than re-exeuction.
+
+
+\subsection{Sensitivity to response time}
+
+Response time is critical in the negotiation of SLA as customers
+always expect their tasks to complete as soon as possible. In this
+section we show a sensitivity study with respect to task response
+time. We vary the first threshold $t_{R_1}$ from the minimal response
+time $t_{min}$ to $1.9t_{min}$, and set the second threshold $t_{R_2}$
+to be always $2t_{R_1}$. We do not show results for varying the reward
+and penalty values of the SLA. The reason is that changing these
+values have no effect on the choice of fault tolerance methods because
+they are all affected in a similar way.
+
+%\begin{figure}[!h]	
+%	\begin{center}
+%		\subfigure[Shadow replication execution speeds]
+%		{
+%			\label{fig:t_first}
+%			\includegraphics[width=\columnwidth]{diagrams/t_speed.eps}
+%		}
+%		\subfigure[Profits normalized to traditional replication]
+%		{
+%			\label{fig:t_second}
+%			\includegraphics[width=\columnwidth]{diagrams/t_profit.eps}
+%		}
+%	\end{center}
+%	\caption{Sensitivity to response time threshold. MTBF=5 years, N=100000, W=1 hour, $\rho$=0.5.%}
+%	\label{fig:t}
+%\end{figure}
+\begin{table}[!h]\small
+	\caption{Speeds for different response time threshold. $\rho$=0.5, MTBF=5 years, N=100000, W=1 hour.}
+	\centering
+		\begin{tabular}{|c|c|c|c|}
+		\hline
+		$t_{R_1}$ & $\sigma_m$ & $\sigma_b$ & $\sigma_a$ \\
+		\hline
+		1.0	&	1.00 & 	1.00 &	1.00 \\
+		\hline
+		1.1	&	0.94 &	0.88 &	1.00 \\
+		\hline
+		1.2	&	0.89 &	0.79 &	1.00 \\
+		\hline
+		1.3	&	0.86 &	0.72 &	1.00 \\
+		\hline
+		1.4	&	1.00 &	0.00 &	1.00 \\
+		\hline
+		1.5	&	1.00 &	0.00 &	1.00 \\
+		\hline
+		1.6	&	0.84 &	0.00 &	1.00 \\
+		\hline
+		1.7	&	0.74 &	0.00 &	1.00 \\
+		\hline
+		1.8	&	0.64 &	0.00 &	1.00 \\
+		\hline
+		1.9	&	0.64 &	0.00 &	1.00 \\
+		\hline
+		\end{tabular}
+	\label{tbl:t}
+\end{table}
+
+\begin{figure}[!h]	
+	\begin{center}
+		\includegraphics[width=\columnwidth]{diagrams/t_profit.eps}
+	\end{center}
+	\caption{Profit for different response time threshold. $\rho$=0.5, MTBF=5 years, N=100000, W=1 hour.}
+	\label{fig:t}
+\end{figure}
+
+In Table~\ref{tbl:t} we see that Shadow Replication adapts the execution
+speeds to take advantage of the available laxity, reducing its speeds
+as laxity increases. It is clear that Shadow Replication has two different execution strategies separated by $t_{R_1}=1.4$: when time is critical, it uses both a main and a shadow from the very beginning to guarantee that task can be completed on time; when time is not critical, it mimics re-execution and starts its shadow only after a failure.
+%Execution speeds flatten out beyond laxity factor of 1.8,
+%this is because static power forces the optimization to make a tradeoff
+%between power consumption and time of execution. Thus shadow
+%replication stops reducing the execution speed at a point which is
+%dependent upon the static power. 
+Also note that as $t_{R_1}$
+approaches $t_{min}$, the speeds of the main process and the shadow process
+converge, effectively causing Shadow Replication to mimic traditional
+replication when faced with time-critical jobs.
+
+\reffig{fig:t} shows the effect that targeted response time has upon
+the profitability of each fault tolerance method. Compared to traditional replication, all the other methods increase their profit as the targeted
+response time increases, this is expected because each of the other
+techniques can make use of increased laxity in time to increase
+profit. Re-execution is the most sensitive to the target response
+time since it fully relies upon time redundancy, showing that it should only be used when the targeted response time is \emph{not} stringent. 
+Again, Shadow Replication always achieves more profit than traditional
+replication and profit-aware stretched replication, and the profit
+gains are 52.8\% and 39.0\% on average. 
+%Furthermore, profit-aware stretched replication does not benefit a lot
+%from the increase in target response time as its profits stop
+%increasing after $t_{R_1}=1.3$. To the contrary, the profits of shadow
+%replication increase until $t_{R_1}=1.6$. We believe the reason is
+%that static power restricts the speed tuning of profit-aware stretched
+%replication to a large extent while Shadow Replication is associated
+%with three speeds that are more flexible.
+
+\subsection{Sensitivity to number of tasks}
+
+%\begin{figure}[!h]	
+%	\begin{center}
+%		\subfigure[Shadow replication execution speeds]
+%		{
+%			\label{fig:n_first}
+%			\includegraphics[width=\columnwidth]{diagrams/n_speed.eps}
+%		}
+%		\subfigure[Profit normalized to traditional replication]
+%		{
+%			\label{fig:n_second}
+%			\includegraphics[width=\columnwidth]{diagrams/n_profit.eps}
+%		}
+%	\end{center}
+%	\caption{Sensitivity to number of tasks. MTBF=5 years, W=1 hour, $t_{R_1}$=1.2 hours, %$t_{R_2}$=2.4 hours, $\rho$=0.5.}
+%	\label{fig:n}
+%\end{figure}
+
+\begin{table}[!h]\small
+	\caption{Speeds for different number of tasks. $\rho$=0.5, MTBF=5 years, W=1 hour, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.}
+	\centering
+		\begin{tabular}{|c|c|c|c|}
+		\hline
+		$N$ & $\sigma_m$ & $\sigma_b$ & $\sigma_a$ \\
+		\hline
+		100			&	0.80	&	0.00	&	1 \\
+		\hline
+		1000		&	0.84	&	0.00	&	1 \\
+		\hline
+		10000		&	1.00	&	0.00	&	1 \\
+		\hline
+		100000		&	0.86	&	0.72	&	1 \\
+		\hline
+		1000000		&	0.86	&	0.72	&	1 \\
+		\hline
+		10000000	&	0.86	&	0.72	&   1 \\
+		\hline
+		\end{tabular}
+	\label{tbl:n}
+\end{table}
+
+\begin{figure}[!h]	
+	\begin{center}
+			\includegraphics[width=\columnwidth]{diagrams/n_profit.eps}
+	\end{center}
+	\caption{Profit for different number of tasks. $\rho$=0.5, MTBF=5 years, W=1 hour, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.}
+	\label{fig:n}
+\end{figure}
+
+The number of tasks has a direct influence upon the system level
+failure probability because as the number of tasks increase the
+probability that failure will occur to at least one task
+increases. Recall that even one failure can hurt the total income
+significantly, and keep the other processes waiting. Thus, shadow
+replication will adjust its execution speeds to reduce the waiting
+time.
+
+Table~\ref{tbl:n} is similar to Table~\ref{tbl:t} in that there are also two execution strategies. When there are few parallel tasks, shadow
+replication chooses to execute the main processes at nearly full speed and keeps
+the shadow processes dormant. The
+reason is that it is very likely that all main processes can finish
+their tasks successfully, and the need for redundancy is thus less
+significant. The other case is when there is a huge number of
+tasks to execute, the shadow process would keep running at a slower speed than the main to protect the main as well as save energy. Since the system level failure probability is already 0.9 when $N$ is 100000, the speeds stay the same when $N \ge 100000$.
+
+Figure \ref{fig:n} confirms that for small number of tasks
+re-execution is more profitable than replication. However, re-execution is not scalable
+as its profit decreases rapidly after N reaches 10000. At the same time, traditional
+replication and profit-aware stretched replication are not
+affected by the number of tasks because neither are affected by the
+system level failure rate. On average, Shadow Replication achieves 43.5\%, 59.3\%, and 18.4\%
+more profits than profit-aware stretched replication, traditional replication and re-exeuction, respectively. 
+
+\subsection{Sensitivity to failure}
+
+The ratio between task size and node MTBF represents the tasks
+vulnerability to failure, specifically it is an approximation of the
+probability that failure occurs during the execution of the task. In our
+analysis we found that increasing task size will have the same effect
+as reducing node MTBF. Therefore, we analyze these together using the
+vulnerability to failure, allowing us to analyze a wider range of
+system parameters. %For example, a task of size 1 hour and a MTBF of 5
+%years results in a vulnerability of 2E-5, the same vulnerability is
+%obtained if the task size is 2 hours and the MTBF is 10 years.
+
+%\begin{figure}[!h]
+%	
+%	\begin{center}
+%		\subfigure[Shadow replication execution speeds]
+%		{
+%			\label{fig:mtbf_first}
+%			\includegraphics[width=\columnwidth]{diagrams/mtbf_speed.eps}
+%		}
+%		\subfigure[Profits normalized to traditional replication]
+%		{
+%			\label{fig:mtbf_second}
+%			\includegraphics[width=\columnwidth]{diagrams/mtbf_profit.eps}
+%		}
+%	\end{center}
+%	\caption{Sensitivity to task size over MTBF. W=1 hour, N=100000, $t_{R_1}$=1.2 hours, %$t_{R_2}$=2.4 hours, $\rho$=0.5.}
+%	\label{fig:mtbf}
+%\end{figure}
+
+
+\begin{table}[!h]\small
+	\caption{Speeds for different task size over MTBF. $\rho$=0.5, N=100000, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.}
+	\centering
+		\begin{tabular}{|c|c|c|c|}
+		\hline
+		$W/MTBF$ & $\sigma_m$ & $\sigma_b$ & $\sigma_a$ \\
+		\hline
+		2E-10	&	0.79 &	0.00 &	1.00 \\
+		\hline
+		2E-09	&	0.79 &	0.00 &	1.00 \\
+		\hline
+		2E-08	&	0.80 &	0.00 &	1.00 \\
+		\hline
+		2E-07	&	0.84 &	0.00 &	1.00 \\
+		\hline
+		2E-06	&	1.00 &	0.00 &	1.00 \\
+		\hline
+		2E-05	&	0.86 &	0.72 &	1.00 \\
+		\hline
+		2E-04	&	0.86 &	0.72 &	1.00 \\
+		\hline
+		2E-03	&	0.86 &	0.72 &	1.00 \\
+		\hline
+		%2E-02	&	0.86 &	0.72 &	1.00 \\
+		%\hline
+		\end{tabular}
+	\label{tbl:mtbf}
+\end{table}
+
+\begin{figure}[!h]	
+	\begin{center}
+			\includegraphics[width=\columnwidth]{diagrams/mtbf_profit.eps}
+	\end{center}
+	\caption{Profit for different task size over MTBF. $\rho$=0.5, N=100000, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.}
+	\label{fig:mtbf}
+\end{figure}
+
+As seen in Table~\ref{tbl:mtbf} when the vulnerability to
+failure is low the execution speeds for the shadow process is such
+that no work is done before failure. However, as the
+vulnerability increases, the shadow process performs more work before
+failure. This is analogous to what we observed as we increased the
+number of tasks (Table~\ref{tbl:n}). As expected
+re-execution is desired when the vulnerability to failure is
+low. As always, Shadow Replication can adjust its execution strategy to maximize the profits, as shown in Figure~\ref{fig:mtbf}.
+
+\subsection{Senstivity to application characteristics}
+
+
+Cloud computing applications exhibit different behaviors, in term of
+computation requirements, data access patterns and communication
+dependencies. While some applications are compute-intensive, others
+involve the processing of increasingly large amounts of data. 
+To gain better understanding of the potential benefits of the optimized ``Shadow Replication'', in terms of energy savings and tolerance to failure, 
+we compare its performance to three fault-tolerance techniques, namely traditional replication, stratched replication and reexecution. The comparative
+anlysis is carried out for three different benchmark applications, representing a wide range of
+application: Business Intelligence, Bioinformatics and
+Recommendation System~\cite{mrbs}.
+The business intelligence benchmark application
+is a decision support system for a wholesale supplier. It emphasizes
+executing business-oriented ad-hoc queries using Apache Hive. The
+bioinformatics application performs DNA sequencing, allowing genome
+analysis on a wide range of organisms. The recommendation system is
+similar to those typically found in e-commerce sites which, based upon
+browsing habits and history, recommends similar
+products.
+
+\begin{table}[h]
+	\centering
+		\begin{tabular}{|c|c|}
+			\hline
+			Application               & Processing Rate \\
+			\hline
+			Business Intelligence     & 3.3 (MB/s)      \\ 
+			Bioinformatics            & 6.6 (MB/s)      \\ 
+			Recommendation System     & 13.2 (MB/s)     \\
+			\hline
+                \end{tabular}
+	\caption{Cloud Applications~\cite{mrbs}}
+	\label{tbl:application_processing_rates}
+\end{table}
+
+Using the results of the experiments reported in \cite{mrbs}, we
+derived the time required to process data for each application type (Table~\ref{tbl:application_processing_rates}). We assume that
+these processing rates per task will not change when scaling the
+applications to future cloud environments. This is a reasonable
+assumption given that map-reduce tasks are loosely coupled and data
+are widely distributed, therefore data and task workload will scale
+linearly.
+
+%% commented out because file is missing
+\begin{figure}[!h]
+	
+	\begin{center}
+	\includegraphics[width=\columnwidth]{diagrams/application_comparison.png}
+	\end{center}
+	\caption{Application comparison. $\rho$=0.5, N=$500000$, $t_{R_1}$=$1.3t_{min}$, $t_{R_2}$=$2.6t_{min}$.}
+	\label{fig:app_compare}
+\end{figure}
+
+
+In Figure \ref{fig:app_compare} we compare the expected
+profit for each application using each of the 4 resilience techniques. 
+We consider two data sizes expected in future
+cloud computing environments, 500TB and 2PB. The figure shows that
+for business intelligence applications, Shadow Replication achieves significantly larger profits for both data sizes. This
+is because business intelligence applications tend to be IO intensive
+resulting in longer running tasks. Whereas recommendation systems tend
+to require little data IO resulting in shorter running tasks making
+re-execution as good as Shadow Replication. Bioinformatics tends to be in between
+these two applications resulting in shadow computing performing better
+when processing large datasets (2 PB) but not outstanding on smaller
+datasets (500 TB). The take away from this evaluation is that for the
+shown system parameters if phase execution is short, then re-execution
+performs as well as Shadow Replication. Alternatively, if a phase is long (20 minutes or
+greater), then Shadow Replication can be as much as 47.9\% more
+profitable than re-execution. The previous sensitivity analysis can be
+used to extrapolate expected profit for different system parameters.
+
+%Figure \ref{fig:mtbf} is very similar to Figure \ref{fig:n}, but not
+%exactly the same. On the one hand, both the ratio and number of tasks
+%have an influence on the system level failure probability. On the
+%other hand, however, the direct effect of the ratio is failure
+%probability of each node, while number of tasks changes failure
+%probability at the system level.
+
+%One phenomenon that beyond expectation is that the profits of shadow
+%replication, traditional replication, and constrained optimal shadow
+%replication go up a little bit in the end. Actually, this is a side
+%effect of our one failure assumption. As the ratio gets close to 1, it
+%is very likely that failure would occur to either main or shadow
+%process, and the termination saves expenditure from energy consumption
+%perspective. It may seem that our assumption is unreasonable at first
+%thought. However, this is not the case at all since the ratio equal to
+%2E-3 means each task has a 100-hour workload for MTBF equal to 5
+%years.
+
+
+% LocalWords: MTBF mtbf sla SLA bnm
+   
+\subsection{Senstivity to communication types}
+
+
+One of the key application factors is the amount of coordination
+between the tasks. For example, an application might require no
+inner-task communication, allowing a single task to fail and restart
+without effecting the completion time of other tasks. However, if
+inner-task communication is required, then the failing of a single
+task could potentially delay all tasks with which it would have
+normally communicated. The amount of communication can be thought of
+as the amount of dependencies one task has upon all other tasks and
+affects the application completion time and energy consumption. There
+are wide range of potential applications but they can be classified
+into one of the following types: No Dependency, Blocking Dependency or
+Full Dependency. Details of these communication types can be found in
+Table \ref{tab:application_communication}
+
+\begin{table}
+\footnotesize
+\centering
+\begin{tabular*}{\columnwidth}{p{0.2\columnwidth}|p{0.2\columnwidth}|p{0.6\columnwidth}}
+\toprule
+Application Type & Case & Description \\
+\midrule
+No Dependency           & Map Tasks                & There are no inner-task dependencies, all tasks must complete but could do so with no coordination.\\
+Blocking Dependency	& Independent Simulation   & Tasks can execute independently but are required to communicate at the end of execution to complete the solution. This represents applications that divide work into non-overlapping parts but require collective operations at the end of execution or perform asynchronous communication during execution, the difference being how much work is necessary at the end of execution. \\
+Full Dependency        & Coordinated Simulation   & Tasks are fully-dependent upon other tasks and require constant communication between tasks. This represents an application that frequently performs collective operations during execution.\\
+\bottomrule
+\end{tabular*}
+\caption{
+        Classification of application communication types and their descriptions.
+}
+\label{tab:application_communication}
+\end{table}
+
+<<<<<<< HEAD
+In this subsection we evaluate the profit gains of Shadow Replication over other resilience methods for applications with different communication types, i.e. no communication, barrier communication, and full communication. Figure~\ref{fig:sr_vs_re_rho} compares Shadow Replication with Re-execution. Generally speaking, as static power ratio increases the profit gains of Shadow Replication decreases. This is because Shadow Replication uses DVFS to reduce dynamic power, whose portion becomes smaller when static power ratio increases by definition. However, the above conclusion has one exception, i.e., the profit gains of barrier communication goes up after static power ratio reaches 0.7. This matches previous results in Section ~\ref{subsection_rho}, and the reason is that Shadow Replication converges to Traditional Replication when static power ratio reaches 0.7 and then its profit becomes constant while the profit of Re-execution continues to decrease. Another conclusion from Figure~\ref{fig:sr_vs_re_rho} is that the higher the synchronization requirement is, the higher profit gains Shadow Replication can achieve over Re-execution. This implies that the failure of a single process in a highly synchronized application can incur a much larger cost for Re-execution.
+=======
+In this subsection, we evaluate the profit gains of Shadow Replication over other resilience methods for applications with different communication types, i.e. no communication, barrier communication, and full communication. Figure~\ref{fig:sr_vs_re_rho} compares Shadow Replication with Re-execution. Generally speaking, as static power ratio increases the profit gains of Shadow Replication decreases. This is because Shadow Replication uses DVFS to reduce dynamic power, whose portion becomes smaller when static power ratio increases by definition. However, the above conclusion has one exception, i.e., the profit gains of barrier communication goes up after static power ratio reaches 0.7. This matches previous results in Section ~\ref{subsection_rho}, and the reason is that Shadow Replication converges to Traditional Replication when static power ratio reaches 0.7 and then its profit becomes constant while the profit of Re-execution continues to decrease. Another conclusion from Figure~\ref{fig:sr_vs_re_rho} is that the higher the synchronization requirement is, the higher profit gains Shadow Replication can achieve over Re-execution. This implies that the failure of a single process in a highly synchonized application can incur a much larger cost for Re-execution.
+>>>>>>> 1a214aceafb0fd184e7b941b90161858ffd22283
+
+\begin{figure}[!h]	
+	\begin{center}
+			\includegraphics[width=\columnwidth]{diagrams/sr_vs_re_rho.eps}
+	\end{center}
+	\caption{Profit gains of Shadow Replication over Re-execution for different static power ratio. MTBF=5 years, N=100000, W=1 hour, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.}
+	\label{fig:sr_vs_re_rho}
+\end{figure}
+
+Figure~\ref{fig:sr_vs_tr_rho} compares Shadow Replication with Re-execution. For the same reason, the profit gains of Shadow Replication decreases as static power ratio increases, which is similar to Figure~\ref{fig:sr_vs_re_rho}. The major difference from Figure~\ref{fig:sr_vs_re_rho} is that when static power ratio is low, there is barely any difference among the three communication types in Figure~\ref{fig:sr_vs_tr_rho}. After looking into the raw data, we found the reason is communication types have no influence on Traditional Replication and very limited influence on Shadow Replication while having large influence on Re-execution when static power ratio is low.
+\begin{figure}[!h]	
+	\begin{center}
+			\includegraphics[width=\columnwidth]{diagrams/sr_vs_tr_rho.eps}
+	\end{center}
+	\caption{Profit gains of Shadow Replication over Traditional Replication for different static power ratio. MTBF=5 years, N=100000, W=1 hour, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.}
+	\label{fig:sr_vs_tr_rho}
+\end{figure}
+
+
+
+

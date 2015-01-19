@@ -1,0 +1,45 @@
+
+\noindent 
+The increase of failures in large-scale systems 
+brought to the forefront the need for new fault-tolerance techniques. 
+Coordinated checkpointing, with roll-back recovery, has been the dominant
+fault-tolerance method in high performance computing (HPC)~\cite{Agarwal04adaptiveincremental,781058,Daly2006303,632814}. 
+Based on this method, the execution state of each process is 
+periodically saved to a stable storage. In case of failure, computation is 
+rolled-back to the last error-free, consistent state recorded by all processes. 
+As the scale of the system increases, the viability of coordinated checkpointing has become questionable. 
+Despite numerous improvements of the basic coordinated checkpointing scheme, 
+recent studies show that high failure rates, coupled with the checkpointing
+overhead, limit the feasibility of 
+centralized, coordinated checkpointing~\cite{Diouri2012}. 
+Re-execution and state machine replication have emerged 
+as viable schemes to deal with failures in large-scale systems. 
+
+Re-execution waits until a failure occurs and re-executes the failed process. 
+The major shortcoming of this method stems from the large 
+delay the completion of a job incurs. To avoid such a delay, state machine replication executes simultaneously one or more replicas of each process on different computing nodes.
+a~\cite{Ferreira2011,Sousa2005}. Although it enhances fault tolerance without incurring excessive delay,
+state machine replication increases the
+computing resources needed to complete a job reliably. 
+
+Efforts have been devoted to increase the resiliency of cloud computing. Several of the proposed schemes aim at
+enhancing existing fault-tolerance approaches.  In \cite{jhawar_systems_2013} the authors propose a
+high-level scheme that allows users to specify the desired
+level of resilience, while hiding implementation details. Similarly, \cite{Zhao2010} take a middleware-based
+approach to fault-tolerance and propose a method that maintains strong replica consistency, while achieving transparency
+and low end-to-end latency. Authors in \cite{tchana_cits_2012} 
+propose a collaborative solution to enhance fault-tolerance efficiency.  
+In \cite{Nicolae2011}, the authors leverage
+virtual disk image snapshots to minimize the storage space and
+checkpointing overhead. In \cite{Zheng2010}
+investigates how redundant copies can be provisioned for tasks to
+improve MapReduce fault tolerance and reduce latency. Most 
+of these schemes do not consider the impact of energy on the system. 
+
+As the significance of power and energy consumption in large 
+datacenters increases, energy management becomes
+critical~\cite{chen_2012_srds,Lin2011}. Schemes are proposed to optimize power consumption by either
+shutting down servers, or using CPU DVFS. Our work takes a different approach to fault-tolerance, and proposes 
+a new computational model, referred to as Shadow Replication, to achieve
+high-levels of resiliency, while minimizing energy consumption. In this work, we combine DVFS with traditional replication to achieve fault tolerance and maximize profit, while meeting users' SLA requirement.
+%Researchers at IBM point out that CPU is the largest consuming component for %typical web server configuration.
