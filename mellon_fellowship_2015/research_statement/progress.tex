@@ -1,0 +1,101 @@
+\begin{figure*}[!t]
+	\begin{center}
+		\subfigure[No Failure]
+		{
+			\label{fig:sc_no_fail}
+			\includegraphics[width=0.32\textwidth]{Figures/example1.pdf}
+		}
+		\subfigure[Shadow Process Failure]
+		{
+			\label{fig:sc_shadow_fail}
+			\includegraphics[width=0.29\textwidth]{Figures/example3.pdf}
+		}
+		\subfigure[Main Process Failure]
+		{
+			\label{fig:sc_main_fail}
+			\includegraphics[width=0.33\textwidth]{Figures/example2.png}
+		}
+	\end{center}
+	\caption{Shadow Replication with a single shadow process.}
+	\label{fig:sc_overview}
+\end{figure*}
+
+
+So far, we have accomplished the following goals:
+\begin{itemize}
+	\item A formal definition of the Shadow Replication fault tolerance framework;
+
+	\item Development of a profit-based analytical model to explore the applicability of
+	  Shadow Replication to Cloud Computing, and to determine the optimal
+	  execution rates of all task instances to maximize profit as well as to reduce energy consumption;
+
+	\item Development of an event-driven simulator to verify the above analytical model;
+
+	\item A comprehensive evaluation using both the analytical model and simulator to analyze the profit and 
+	energy savings achievable by Shadow Replication, compared to existing fault tolerance approaches.
+\end{itemize}
+
+We have submitted three papers on this work. \cite{cui_en7085151} is published in Energies 7, no. 8 (2014) and \cite{cui_closer_2014} is accepted to CLOSER 2014. Our third paper is currently under review.
+
+\subsection{Shadow Replication}
+The basic tenet of Shadow Replication is to associate with each main instance a suite of ``shadows" whose size depends on the criticality of the application and its performance requirements, as defined by the SLA. Each instance is executed with a process. 
+To overcome potential failures, each process
+executes on a separate computing node.
+
+Formally, we define the Shadow Replication fault tolerance framework as follows:
+\begin{itemize}
+	\item A main process, $P_m(W$, $\sigma_m)$, that executes at the rate of $\sigma_m$ to complete a task of size $W$;
+	\item A suite of shadow processes, $P_s(W$, $\sigma_b^s$ , $\sigma_a^s)$ $(1 \le s \le S)$, where $S$ is the size of the suite. The shadow processes execute on separate nodes, and start execution simultaneously with the main process at rate $\sigma_b^s$. Upon failure of the main process, all shadows switch their rates to $\sigma_a^s$, with one shadow process designated as the new main process. This continues until the completion of the task.
+\end{itemize}
+
+There are several ways to slow down the execution rates of the processes. The one that we are studying is Dynamic Voltage and Frequency Scaling (DVFS), as it is the most straightforward solution. When DVFS is enabled, the CPU frequency (which translates to execution rate) scales proportionally to the voltage. Therefore, decreasing voltage not only reduces power and energy consumption, but also effectively slows down the running processes. 
+
+To illustrate the behavior of Shadow Replication, we use only one shadow process and consider the scenarios depicted in Figure \ref{fig:sc_overview}, assuming at most one process failure. Figure \ref{fig:sc_no_fail} represents the case when neither the main nor the shadow fails. The main process, executing
+at a higher rate, completes the task at time $t_c^m$. At this time, the shadow process, progressing at a lower rate, stops execution immediately. Figure \ref{fig:sc_shadow_fail} represents the case when the shadow fails. This failure, however, has no impact on the progress of the main process, which can still complete the task at $t_c^m$. Figure \ref{fig:sc_main_fail} depicts the case when the main process fails while the shadow is in progress. After detecting the failure of the main process, the shadow begins executing at a higher rate, completing the task at time $t_c^s$. Given that the failure rate of an individual node is much lower than
+the aggregate system failure, it is very likely that the main process
+will always complete its execution successfully, thereby achieving fault tolerance at a significantly reduced cost of energy consumed by the shadow. 
+
+A closer look at the model reveals that Shadow
+Replication is a generalization of existing fault tolerance
+approaches, namely re-execution and process replication. If the
+SLA specification allows for flexible completion time, Shadow
+Replication would take advantage of the delay laxity to trade time
+redundancy for energy savings. It is clear, therefore, that for a
+large response time, Shadow Replication converges to re-execution, as
+the shadow remains idle during the execution of the main process and
+only starts execution upon failure. If the target response time is
+stringent, however, Shadow Replication converges to process replication,
+as the shadow must execute simultaneously with the main at the same
+rate. The flexibility of the Shadow Replication provides the
+basis for the design of a fault tolerance strategy that strikes a
+balance between task completion time and energy saving, thereby
+maximizing profit.
+
+\subsection{Analytical model and simulator}
+
+One challenge of Shadow Replication resides in determining
+jointly the execution rates of all processes, both before and
+after a failure occurs, with the objective to minimize energy and
+maximize profit. To achieve this, we propose a reward-based analytical
+model. In the model, we consider the completion time and energy consumption of executing a cloud job, which is composed of multiple parallel tasks, under different system specifics and failure distributions. The profit for cloud service providers is modeled as the difference between the payment from customers, and expenses for running the cloud job. Afterwards, an optimization problem is formulated to derive the optimal execution rates. For more details of the analytical model, please refer to~\cite{cui_en7085151}. 
+
+To verify the correctness of the analytical model, we build an event-driven simulator using CSim that simulates the behaviors of Shadow Replication under different configurations and with different failure distributions, and then report statistics, such as number of failures encountered, time to completion, and energy consumption. 
+
+\subsection{Preliminary results}
+With the analytical model and simulator, we identify several important parameters that impact the energy consumption and profit gains of Shadow Replication, and conduct a series of sensitivity studies correspondingly. %The influential parameters can be classified into three categories, i.e., system specifics, SLA specifics, and job specifics. Further, the system specifics includes static power/dynamic power ratio and failure distribution, the job specifics includes workload and number of tasks, and SLA specifics is mainly targeted job completion time 
+The results using both the analytical model and simulation show that Shadow Replication can achieve significant energy savings and profit gains compared to traditional process replication and re-execution, without violating the SLA constraints. %Specifically, we conducted 4  sensitivity studies. 
+
+We first study the sensitivity to static power/dynamic power ratio. In this study, we considered modern systems with static power ratio from 40\% to 70\%. Within this range, Shadow Replication can achieve, on average, 19.3\% more profit than traditional replication, and 28.8\% more than re-execution. In terms of energy, the saving is 15\%-30\%.
+The second study is to the targeted job completion time. The results show that targeted job completion time influences the execution strategies of Shadow Replication to a large extent, and the reason is that Shadow Replication would strive to maintain the completion time constraint. When time is critical, Shadow Replication uses both a main and a shadow from the very beginning, in the same manner as traditional replication, to guarantee that task can be completed on time; when time is not critical, it mimics re-execution and starts its shadow only after a failure. The profit gains by Shadow Replication can be as much as 52.8\%.
+In the next study, we vary the number of tasks from 100 to 10,000,000. On average, Shadow Replication achieves 59.3\% and 18.4\% more profits than process replication and re-execution, respectively.
+Our last study is to assess the sensitivity to failure vulnerability, where we find that increasing the failure vulnerability has the same effect as increasing the number of tasks. 
+
+
+%\begin{itemize}
+%	\item Sensitivity to static power/dynamic power ratio. In this study, we considered modern systems with static power ratio from 40\% to 70\%. Within this range, Shadow Replication can achieve, on average, 19.3\% more profit than traditional replication, and 28.8\% more than re-execution. In terms of energy, the saving is 15\%-30\%.
+%	\item Sensitivity to targeted job completion time. The results show that targeted job completion time influences the execution strategies of Shadow Replication to a large extent, and the reason is that Shadow Replication would strive to maintain the completion time constraint. When time is critical, Shadow Replication uses both a main and a shadow from the very beginning, in the same manner as traditional replication, to guarantee that task can be completed on time; when time is not critical, it mimics rexecution and starts its shadow only after a failure. The profit gains by Shadow Replication can be as much as 52.8\%.
+%	\item Sensitivity to number of tasks. We considered the number of tasks from 100 to 10,000,000. On average, Shadow Replication achieves 59.3\%, and 18.4\% more profits than traditional replication and re-execution, respectively.
+%	\item Sensitivity to failure vulnerability. In this study, we found that increasing the failure vulnerability would have the same effect as increasing the number of tasks. 
+%\end{itemize}
+
+To summarize, Shadow Replication can achieve 15\%-30\% energy savings and 20\%-30\% more profit on modern systems\cite{cui_closer_2014}. Furthermore, Shadow Replication would converge to process replication, when target response time is stringent, and to re-execution when target response time is relaxed or when failure is unlikely.

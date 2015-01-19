@@ -1,0 +1,46 @@
+Cloud Computing has emerged as an attractive platform for increasingly diverse compute- and data-intensive applications, as it allows for low-entry costs, on demand resource provisioning and reduced cost of IT infrastructure maintenance. Cloud Computing will continue to grow and attract attention from commercial and public markets. Recent studies predict an annual growth rate of 17.7\% by 2016, making cloud computing the fastest growing segment in the IT industry.
+
+
+In its basic form, a cloud computing infrastructure is a large cluster
+of interconnected servers hosted in a datacenter that delivers on-demand, ``pay-as-you-go" services and resources to customers. As the demand for cloud computing
+accelerates, cloud service providers will 
+need to expand their infrastructure to ensure the expected
+levels of performance, reliability and cost-effectiveness, resulting
+in a multifold increase in the number of computing, storage and
+communication components in their datacenters. 
+
+
+
+Service level agreement (SLA) is a critical aspect for a sustainable Cloud Computing business. Basically, SLA is a contract between the cloud service provider and consumer that specifies the
+terms and conditions under which the service is to be provided,
+including expected response time and reliability. Failure to deliver the service as specified in the SLA not only subjects the cloud service providers to penalties, but also impacts customers' confidence in using Cloud Computing in the future. 
+Unfortunately, the direct implication of expanded datacenters is its increased propensity to
+failure. While the likelihood of a server failure is very small, the
+sheer number of computing, storage and communication components that
+can fail is daunting. %At such a large scale, failure becomes
+%the norm rather than an exception. 
+In addition, datacenters are fast becoming a major source of global energy consumption, exacerbating the impact of $CO_2$ emission on the environment. It is reported that energy costs alone account
+for 23-50\% of the Cloud Computing expenses and this mounts up to \$30 billion worldwide. Altogether the question of how fault tolerance might impact energy consumption, the profit of Cloud Computing business, and the environment, becomes critical.
+
+Current fault tolerance approaches rely upon either time or hardware
+redundancy in order to tolerate failure. The first approach, which
+uses time redundancy, requires the re-execution of the failed task
+after the failure is detected. Although this can further be optimized
+by the use of checkpointing, such an approach
+can result in a significant delay subjecting cloud service providers to penalties, when SLA terms are violated,
+and high energy costs due to re-execution of failed tasks.
+The second approach exploits hardware redundancy and executes multiple
+instances of the same task in parallel to overcome failure and
+guarantee that at least one task completes without delay.  This approach,
+which has been used extensively to deal with failure in time-critical
+applications, is currently used in Cloud Computing to provide fault
+tolerance while hiding the delay of
+re-execution. This solution,
+however, requires additional hardware resources and increases the energy consumption for a given service, which
+in turn might outweigh the profit gained by providing the service.
+The trade-off between profit and fault-tolerance calls for new
+frameworks to take into account both SLA requirements and energy consumption in
+dealing with failures.
+
+To this end, we propose an energy-aware, SLA-based fault tolerance framework, referred to as “Shadow Replication”, for profit maximization and energy reduction in Cloud Computing. Similar to the second approach above, Shadow Replication ensures successful task completion by simultaneously running multiple instances. However, Shadow Replication is distinctive in that it differentiates the execution rates of the instances. Specifically, it 
+executes the main instance of the task at the rate required for response time constraint, while slowing down the replicas for energy saving, thereby enabling a parameterized trade-off between response time and energy consumption. This allows cloud service providers to maximize the expected profit by accounting for income, potential penalties, and energy cost, ultimately promoting environment-friendly and sustainable Cloud Computing.
