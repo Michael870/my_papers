@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  19 JAN 2015 13:27
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  19 JAN 2015 17:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -425,86 +425,97 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks37
 \@floatcapt=\box39
 )
+(/usr/local/texlive/2013/texmf-dist/tex/latex/sttools/flushend.sty
+Package: flushend 2012/05/29 v1.1 Balancing columns at last page
+Package: flushend 1997/10/01
+\@aaa=\box40
+\@ccc=\box41
+\@viper=\box42
+\hold@viper=\box43
+\atColsBreak=\toks38
+\@extra@skip=\dimen153
+\@nd@page@rule=\dimen154
+)
 (./lazy_shadowing.aux)
 \openout1 = `lazy_shadowing.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 71.
-LaTeX Font Info:    Try loading font information for OMS+pzccm on input line 71
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 72.
+LaTeX Font Info:    Try loading font information for OMS+pzccm on input line 72
 .
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/omspzccm.fd
 File: omspzccm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/pzccm.
 )
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
 
 (/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count126
-\scratchdimen=\dimen153
-\scratchbox=\box40
+\scratchdimen=\dimen155
+\scratchbox=\box44
 \nofMPsegments=\count127
 \nofMParguments=\count128
-\everyMPshowfont=\toks38
+\everyMPshowfont=\toks39
 \MPscratchCnt=\count129
-\MPscratchDim=\dimen154
+\MPscratchDim=\dimen156
 \MPnumerator=\count130
 \makeMPintoPDFobject=\count131
-\everyMPtoPDFconversion=\toks39
+\everyMPtoPDFconversion=\toks40
 )
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Try loading font information for OT1+ptmcm on input line 15
-5.
+6.
  (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ot1ptmcm.fd
 File: ot1ptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ptmcm.
 )
 LaTeX Font Info:    Try loading font information for OML+ptmcm on input line 15
-5.
+6.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/omlptmcm.fd
 File: omlptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ptmcm.
 )
 LaTeX Font Info:    Try loading font information for OMX+psycm on input line 15
-5.
+6.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/omxpsycm.fd
 File: omxpsycm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/psycm.
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 155.
+LaTeX Font Info:    Try loading font information for U+msa on input line 156.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 155.
+LaTeX Font Info:    Try loading font information for U+msb on input line 156.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 155.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 156.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 155.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 156.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 155.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 156.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 155.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 156.
  (./abstract.tex)
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 163.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 164.
 
 (./intro.tex
 <Figures/sandia_system_failure_rate_increase_nodes.png, id=1, 641.89813pt x 424
@@ -549,7 +560,7 @@ File: Figures/fail_new.pdf Graphic file (type pdf)
 Package pdftex.def Info: Figures/fail_new.pdf used on input line 40.
 (pdftex.def)             Requested size: 192.00073pt x 120.74559pt.
 )
-Overfull \hbox (3.909pt too wide) in paragraph at lines 186--186
+Overfull \hbox (3.909pt too wide) in paragraph at lines 187--187
 []\secfnt EXTREME-SCALE FAULT TOL-ER-ANCE
  []
 
@@ -709,7 +720,7 @@ File: Figures/collocation.png Graphic file (type png)
 Package pdftex.def Info: Figures/collocation.png used on input line 16.
 (pdftex.def)             Requested size: 240.0pt x 142.50017pt.
 )) (./conclusion.tex)
-Overfull \hbox (6.07605pt too wide) in paragraph at lines 3--210
+Overfull \hbox (6.07605pt too wide) in paragraph at lines 3--211
 []\T1/ptm/m/n/9 To this end, we pro-pose a proac-tive, power-aware re-silience 
 model,
  []
@@ -718,30 +729,40 @@ model,
 Underfull \vbox (badness 2409) has occurred while \output is active []
 
  [9 <./Figures/nt25.png> <./Figures/ne25.png> <./Figures/wt25.png> <./Figures/w
-e25.png> <./Figures/s_power_5.png>]) [10 <./Figures/collocation.png>] (./lazy_s
-hadowing.aux) ) 
+e25.png> <./Figures/s_power_5.png>])
+Extra height:0.0pt when 609.8965pt
+(2)Left:609.8965pt Right:609.39285pt Output:609.8965pt
+- LAST -
+Extra skip:0.0pt
+Left:609.8965pt
+Right:609.39285pt
+Output:609.8965pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [10 <./Figures/collocation.png>] (./lazy_shadowing.aux) ) 
 Here is how much of TeX's memory you used:
- 6120 strings out of 493315
- 87748 string characters out of 6137904
- 177039 words of memory out of 5000000
- 9358 multiletter control sequences out of 15000+600000
+ 6144 strings out of 493315
+ 88170 string characters out of 6137904
+ 185491 words of memory out of 5000000
+ 9378 multiletter control sequences out of 15000+600000
  80266 words of font info for 117 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  42i,21n,38p,1547b,572s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}
-</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
-/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pf
-b></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
-></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
-/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></
-usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
-b></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr
-/local/texlive/2013/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/
-texlive/2013/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive/201
-3/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-di
-st/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/t
-ype1/urw/times/utmri8a.pfb>
-Output written on lazy_shadowing.pdf (10 pages, 755322 bytes).
+{/usr/local/texlive/2
+013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2013/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2013/texmf-dist/f
+onts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/local/texlive/2013/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2013/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2013/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2013/texmf-dist/fo
+nts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2013/texmf-dis
+t/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts
+/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/
+urw/symbol/usyr.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/u
+tmb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+</usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on lazy_shadowing.pdf (10 pages, 755324 bytes).
 PDF statistics:
  143 PDF objects out of 1000 (max. 8388607)
  87 compressed objects within 1 object stream
