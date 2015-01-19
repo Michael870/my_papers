@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  14 JAN 2015 22:40
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  19 JAN 2015 17:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -452,64 +452,75 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 )))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/sttools/flushend.sty
+Package: flushend 2012/05/29 v1.1 Balancing columns at last page
+Package: flushend 1997/10/01
+\@aaa=\box57
+\@ccc=\box58
+\@viper=\box59
+\hold@viper=\box60
+\atColsBreak=\toks24
+\@extra@skip=\dimen160
+\@nd@page@rule=\dimen161
+)
 (./mellon.aux)
 \openout1 = `mellon.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 371.
-LaTeX Font Info:    ... okay on input line 371.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 371.
-LaTeX Font Info:    ... okay on input line 371.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 371.
-LaTeX Font Info:    ... okay on input line 371.
-LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 371.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 372.
+LaTeX Font Info:    ... okay on input line 372.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 372.
+LaTeX Font Info:    ... okay on input line 372.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 372.
+LaTeX Font Info:    ... okay on input line 372.
+LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 372.
 LaTeX Font Info:    Try loading font information for OMS+pzccm on input line 37
-1.
+2.
  (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/omspzccm.fd
 File: omspzccm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/pzccm.
 )
-LaTeX Font Info:    ... okay on input line 371.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 371.
-LaTeX Font Info:    ... okay on input line 371.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 371.
-LaTeX Font Info:    ... okay on input line 371.
+LaTeX Font Info:    ... okay on input line 372.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 372.
+LaTeX Font Info:    ... okay on input line 372.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 372.
+LaTeX Font Info:    ... okay on input line 372.
  (/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count134
-\scratchdimen=\dimen160
-\scratchbox=\box57
+\scratchdimen=\dimen162
+\scratchbox=\box61
 \nofMPsegments=\count135
 \nofMParguments=\count136
-\everyMPshowfont=\toks24
+\everyMPshowfont=\toks25
 \MPscratchCnt=\count137
-\MPscratchDim=\dimen161
+\MPscratchDim=\dimen163
 \MPnumerator=\count138
 \makeMPintoPDFobject=\count139
-\everyMPtoPDFconversion=\toks25
+\everyMPtoPDFconversion=\toks26
 )
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
  (./intro.tex
-LaTeX Font Info:    Try loading font information for OT1+ptmcm on input line 22
+LaTeX Font Info:    Try loading font information for OT1+ptmcm on input line 31
 .
  (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ot1ptmcm.fd
 File: ot1ptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ptmcm.
 )
-LaTeX Font Info:    Try loading font information for OML+ptmcm on input line 22
+LaTeX Font Info:    Try loading font information for OML+ptmcm on input line 31
 .
  (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/omlptmcm.fd
 File: omlptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ptmcm.
 )
-LaTeX Font Info:    Try loading font information for OMX+psycm on input line 22
+LaTeX Font Info:    Try loading font information for OMX+psycm on input line 31
 .
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/omxpsycm.fd
 File: omxpsycm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/psycm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 22.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 31.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 22.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 31.
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no œ in font ptmr7t!
@@ -540,14 +551,15 @@ Package pdftex.def Info: Figures/example2.png used on input line 17.
  [1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
-]
-Underfull \vbox (badness 1509) has occurred while \output is active []
-
- [2 <./Figures/example1.pdf> <./Figures/example3.pdf
+]) (./future.tex [2 <./Figures/example1.pdf> <./Figures/example3.pdf
 
 pdfTeX warning: pdflatex (file ./Figures/example3.pdf): PDF inclusion: multiple
  pdfs with page group included in a single page
-> <./Figures/example2.png>]) (./future.tex) (./conclusion.tex) (./mellon.bbl)
+> <./Figures/example2.png>]) (./conclusion.tex
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+)
+(./mellon.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -559,25 +571,33 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
+Extra height:0.0pt when 458.27141pt
+(2)Left:458.27141pt Right:457.54285pt Output:458.27141pt
+- LAST -
+Extra skip:0.0pt
+Left:458.27141pt
+Right:457.54285pt
+Output:458.27141pt
 [3] (./mellon.aux) ) 
 Here is how much of TeX's memory you used:
- 5170 strings out of 493315
- 80283 string characters out of 6137904
- 151760 words of memory out of 5000000
- 8515 multiletter control sequences out of 15000+600000
- 44362 words of font info for 85 fonts, out of 8000000 for 9000
+ 5196 strings out of 493315
+ 80714 string characters out of 6137904
+ 160212 words of memory out of 5000000
+ 8535 multiletter control sequences out of 15000+600000
+ 44917 words of font info for 87 fonts, out of 8000000 for 9000
  960 hyphenation exceptions out of 8191
- 42i,7n,38p,942b,338s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,7n,38p,714b,338s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r
-.enc}</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.p
-fb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
-b></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/loc
-al/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive
-/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on mellon.pdf (3 pages, 559536 bytes).
+.enc}</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.
+pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pf
+b></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/loca
+l/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/
+2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on mellon.pdf (3 pages, 566031 bytes).
 PDF statistics:
- 53 PDF objects out of 1000 (max. 8388607)
- 35 compressed objects within 1 object stream
+ 57 PDF objects out of 1000 (max. 8388607)
+ 38 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
