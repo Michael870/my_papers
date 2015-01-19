@@ -1,0 +1,21 @@
+Except static power ratio, all of the above factors impact the probability that an application failure occurs before completion. However, we find that the main to shadow ratio $\alpha$ has two conflicting impacts on the probability. On the one hand, larger $\alpha$ means less workload per process, thus reducing the time exposed to failures. On the other hand, increasing $\alpha$ leads to fewer shadowed sets, increasing the probability that two failures fall into the same set. As a result, these two impacts effectively cancel out and result in no visible influence on the application failure probability. The influence of the rest three factors are shown in Figure~\ref{fig:app_fail_prob}, with $\alpha$ fixed to 1. We consider $N$ from 10,000 to 1,000,000, covering all system sizes from current HPC supercomputers to future extreme-scale ones. For each system size, we vary the per-process workload from 1 hour to 48 hours. In addition, two core level MTTI values, which reflect the range of failure rates in current HPC supercomputers, are evaluated respectively. 
+
+
+\begin{figure}[!t]
+	\begin{center}
+		\subfigure[MTTI=5 years.]
+		{
+			\label{fig:app_fail_5}
+			\includegraphics[width=0.40\textwidth]{Figures/app_fail_5}
+		}
+		\subfigure[MTTI=25 years.]
+		{
+			\label{fig:app_fail_25}
+			\includegraphics[width=0.40\textwidth]{Figures/app_fail_25}
+		}
+	\end{center}
+	\caption{Application failure probabilities. $\alpha$=1.}
+	\label{fig:app_fail_prob}
+\end{figure} 
+
+As expected, the application failure probability increases when using more cores or executing more workload, or when the cores are more likely to fail. Out of the three factors, MTTI is the most influential one while $N$ is the least. Although there is orders of magnitude change in the application failure probability shown in Figure~\ref{fig:app_fail_prob}, the largest probability, which is obtained when $N$=1,000,000, $w$=48 hours, and MTTI=5 years, is still under 50\%. Furthermore, when MTTI=25 years, the largest application failure probability is around 2\%.

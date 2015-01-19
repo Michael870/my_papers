@@ -1,0 +1,36 @@
+The basic tenet of the proposed resiliency model is the concept of shadowing, whereby each process is accompanied by a {\it lazy} replica. 
+The execution dynamics of Lazy Shadowing, in the case of a single task with workload of size $W$, is depicted in Figure~\ref{fig:sync}. Both the main process and its shadow start executing simultaneously, at execution rate $\sigma_m$, and $\sigma_s \le \sigma_m$, respectively.
+%with the main running at  
+%a rate $\sigma_m$ and the lazy shadow at a lower rate $\sigma_s \le \sigma_m$. 
+If the main process does not fail, the task completes at time 
+$t_m = W/\sigma_m$. The successful completion of the main immediately triggers the termination of the associated 
+shadow, as illustrated in Figure~\ref{fig:succ}. However, if at time $t_f < t_m$ the main process fails, the shadow speeds up to $\sigma_a$ to complete the task at time $t_s(t_f)=t_f + (W-\sigma_s * t_f) / \sigma_a$, as depicted in Figure~\ref{fig:fail}. More specifically, the shadow completes $\sigma_s * t_f$ work by time $t_f$, and completes the remaining $(W-\sigma_s * t_f)$ work at a rate $\sigma_a$. The expected completion time, $T$, of the task can be easily computed by integrating $t_s(t_f) * f(t_f)$, where $f(t_f)$ is the probability of a failure occurring at time $t_f$.
+
+\begin{figure}[!t]
+	\begin{center}
+		\subfigure[Execution scenario with no failure.]
+		{
+			\label{fig:succ}
+			\includegraphics[width=0.40\textwidth]{Figures/succ.pdf}
+		}
+		\subfigure[Execution scenario with main process failure.]
+		{
+			\label{fig:fail}
+			\includegraphics[width=0.40\textwidth]{Figures/fail.pdf}
+		}
+	\end{center}
+%\vskip -0.25in 
+	\caption{Lazy Shadowing execution dynamics.}
+	\label{fig:sync}
+\end{figure}
+
+The energy consumed during execution is composed of a static energy, which is proportional to the task's completion time, and a dynamic energy, which depends on the actual executed work. If Dynamic Voltage and Frequency Scaling (DVFS) is used to control the execution rates~\cite{cui_en7085151}, then the dynamic power consumed when a process executes at a speed $\sigma$ is proportional to $\sigma^\beta$, where $\beta$ is between 2 and 3. The expected energy consumption can be obtained by computing the integral of the energy consumption of the mains and shadows when a fault occurs at time $t_f$ with probability $f(t_f)$.
+
+Clearly, for a given task size, $W$, each of the expected execution time, $T$, the expected power consumption, $P$, and the expected energy consumption, $E$, 
+is a function of the execution rates, $\sigma_m$, $\sigma_s$ and $\sigma_a$. 
+Hence, for a given failure probability distribution, these speeds can be 
+appropriately derived to achieve any of several possible objectives, including minimizing $T$, $P$ or $E$, minimizing $T$ subject to constraints on $E$ or $P$, or optimizing a cost 
+metric expressed as a function of $T$, $P$ and $E$. 
+%Consequently, the execution rate
+Achieving high throughput, however, is a desisbale objective in HPC. To realizing this objective requires
+that the main process execution rate, $\sigma_m$, and the shadow execution rate after failure, $\sigma_a$, be set to the maximum. Consequently, the execution rate of the shadow before failure, $\sigma_s$, may be determined by exploring the trade-offs between $T$, $P$ and $E$, to achieve the specified overall objective of the resiliency model. Smaller $\sigma_s$ corresponds to lazier shadowing of the main process, with potential for energy saving at the cost of increased delay.

@@ -1,0 +1,73 @@
+%this algorithm removed shadowed set rejuvenation
+
+
+In this section, we introduced the basic concept of shadowing and discussed several separate techniques that enable Lazy Shadowing to execute tightly coupled parallel applications efficiently and reliably. In the following, we give an algorithm, as shown in Algorithm~\ref{alg:lz_sh}, that combines all the techniques to illustrate how Lazy Shadowing can be applied to HPC.
+
+
+\begin{algorithm}
+    \caption{Lazy Shadowing}
+    \label{alg:lz_sh}
+    \begin{algorithmic}[1]
+        \Procedure{LazyShadowing}{$W, M, S, T$}
+        \State split $W$ into $M$ tasks
+        \State cluster $M$ tasks into $S$ shadowed sets
+        \BState \emph{restart}:
+        \State $T_l \gets T+t_{now}$%, $C_{vul} \gets 0$
+        \State start M(i) and S(i) for each task T(i)
+        \While{execution not done}
+            \If{failure detected in shadowed set SS(j)}
+                \If{SS(j) is vulnerable}
+                    \State notify ``Application failure"
+                    \State terminate all mains and shadows
+                    \State repair all failures
+                    \State \textbf{goto} \emph{restart} %\Comment{re-execution}
+                \Else
+                    \State mark SS(j) as vulnerable
+                    %\State $C_{vul} \gets C_{vul} + 1$
+                    %\If{$C_{vul} == V$}
+                    %    \State perform shadowed set rejuvenation   
+                    %\EndIf 
+                    \If{failure happened to a main M(k)} 
+                        \State promote S(k) to M(k)
+                        \State perform shadow leaping %failure induced shadow leaping
+                        \State $T_l \gets T+t_{now}$
+                    \EndIf
+                \EndIf
+            \EndIf
+            \If{$t_{now} \ge T_l$}
+                \State perform shadow leaping
+                \State $T_l \gets T+t_{now}$
+            \EndIf
+        \EndWhile
+        \State notify ``Application completes"
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+The algorithm assumes that the total workload of size $W$ has been given, and the number of cores for executing main processes, $M$, and for executing shadow processes, $S$ have been determined based on some power or completion time objective. In addition, the forced shadow leaping interval, $T$, should be pre-determined according to the application's message logging characteristics.
+
+The total workload is split into $M$ parallel tasks, as shown in line 2, so that they can be simultaneously executed with $M$
+main processes on the $M$ dedicated cores. Afterwards, to utilize the extra $S$ cores for shadowing of 
+all the $M$ main processes, in line 3 the $M$ tasks is clustered into $S$ shadowed sets, each of which 
+has $\alpha=M/S$ cores for $\alpha$ mains and 1 core for all the shadows of the mains in this shadowed set. Then 
+all the processes start executing their tasks simultaneously, with the forced shadow leaping point 
+($T_l$) set to T time from now. % and the counter for vulnerable shadowed sets cleared. 
+During the execution,
+the system runs a failure monitor that triggers corresponding actions when a failure is detected, as shown from line 8 to 19. A failure may trigger different actions, depending on its type and order. 
+If the failure happens in a vulnerable shadowed set (e.g., SS(j)), this would result in an application failure since 
+all main process in SS(j) have lost their shadow processes. As a result, the system would terminate all running 
+main and shadow processes, repair existing failure by either rebooting or replacing, and restart the 
+execution from the very beginning (this assumes that checkpointing is not used). On the other hand, failure in a non-vulnerable shadowed set
+can be tolerated by Lazy Shadowing and does not translate to an application failure. In this case, 
+the shadowed set in question (SS(j)) is marked as vulnerable. When a failure happens in a non-vulnerable shadowed set, there are two possible cases that either 
+a main fails or a shadow fails. These two cases need to be taken care of separately, because a shadow 
+failure does not impact the normal execution of the mains and thus can be ignored, while a main failure
+would interrupt the application's execution as the other mains are forced to stop and wait. When a main process (e.g., M(k)) fails, all the shadows except S(K) in the shadowed set are terminated and S(k) is promoted to be a main process to recover the failure.
+At the same time, a shadow leaping is performed to roll forward all the other shadows to improve
+efficiency, and the forced shadow leaping point is reset. Along with the failure monitor is an alarm for the forced shadow jumping. 
+If the application runs continuously for T time without a main process failure, the alarm will trigger
+a forced shadow leaping to prevent message queue overflow, as shown in line 20 to 22. 
+
+
+
+

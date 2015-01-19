@@ -1,0 +1,28 @@
+%\subsection{Computational Model and Assumptions}
+We consider the class of tightly-coupled and strongly scaled applications, executing on a large scale computing infrastructure of $N$ cores~\cite{doe_ascr_exascale_2011}. In this framework, the term core represents the unit of computing resource allocation (e.g., a
+CPU core, a multi-core CPU, or a cluster node)~\cite{casanova_inria_2012}. This makes our framework agnostic to the granularity of the resource allocation unit.
+%The focus of our model is a tightly-coupled and strongly scaling application, which executes on a large-scale platform
+%composed of $N$ cores.
+%We consider the execution of a tightly-coupled and strongly scaling application, or job, on a large-scale platform
+%composed of $N$ cores. The application is tightly-coupled because this is typical in the HPC applications, and strong scaling because weak-scaling applications are not expected to suit for extreme-scale computing of which the cpu/memory imbalance would further increase~\cite{doe_ascr_exascale_2011}. Similar to \cite{casanova_inria_2012}, we use the term core to indicate unit of computing resource allocation (e.g., a
+%CPU core, a multi-core CPU, or a cluster node), so that our work is agnostic to the granularity
+%of the platform. 
+%We assume that a standard checkpointing and roll-back recovery is performed at the
+%system level. At most on application process (replica) runs on one core.
+
+
+The application requires $W$ units of work, and can be split arbitrarily into a set of tasks.
+Barriers are used as a method of synchronization among different tasks. Assuming $M \le N$ cores are assigned to the application, the failure-free completion time of the application is $w = W/M$. However, when a core fails, the whole execution will be suspended at the next barrier until recovery is complete. 
+
+%The job can execute on any number $M \le N$ cores. The job is strong scaling so that the time required for a failure-free execution on $M$ cores is $w = W/M$.
+
+%Cores are subject to failures. In most cases, we do not distinguish between soft and hard failures, with the understanding that soft failures are handled via software rejuvenation (i.e., rebooting \cite{466961}) and that hard failures are handled by the replacement of the failed component with a spare, which is a commonplace approach in production systems. For simplicity, we adopt the fail-stop fault model, where a core stops execution once a failure occurs and the failure can be detected by other cores \cite{gartner_faults_1999,cristian_comm_1991}. Since we consider tightly coupled parallel jobs, all $M$ cores operate synchronously. When a core fails, the whole execution is suspended until the failure is recovered. We assume that core failures are independent and identically distributed (i.i.d.). In the real world, instead, failures are bound to be correlated. Obtaining theoretical results for non-i.i.d. failures is beyond the scope of this work. But note that one cause of correlation is the hierarchical structure of computing platforms (each rack comprises compute nodes, each compute node comprises processors, and each processor comprises cores), which leads to simultaneous failures of a group of cores. Our work applies to such failures since a group of failures can be treated as multiple individual failures that happen at the same time and their recovery can be carried out in parallel.
+
+Cores are subject to failures. In our model, we do not distinguish between soft and hard failures. We further assume that soft failures are handled via software rejuvenation (i.e., rebooting \cite{466961}), while hard failures are handled by replacing the failed components with spares. We adopt the fail-stop fault model, whereby a core stops executing upon failure and failures are detected by other non-failing cores \cite{gartner_faults_1999,cristian_comm_1991}. When a core fails, the whole execution is suspended until recovery is complete. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%rethinking%%%%%%%%%%%%%%%%%%%%%%
+We assume that core failures are independent and identically distributed (i.i.d.). In the real world, instead, failures are bound to be correlated. Obtaining theoretical results for non-i.i.d. failures is beyond the scope of this work. But note that one cause of correlation is the hierarchical structure of computing platforms (each rack comprises compute nodes, each compute node comprises processors, and each processor comprises cores), which leads to simultaneous failures of a group of cores. Our work applies to such failures since a group of failures can be treated as multiple individual failures that happen at the same time and their recovery can be carried out in parallel.
+
+%Since we consider tightly coupled parallel jobs, all q cores operate syn- chronously. These cores execute the same amount of work W(q) in parallel, chunk by chunk. The total time (on one core) to execute a chunk of dura- tion, or size, ω and then checkpointing it, is ω + C(q)
+
+%\subsection{Leaping Shadows}

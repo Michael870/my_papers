@@ -1,0 +1,96 @@
+To study the efficiency of Lazy Shadowing in terms of reliability, completion time, and energy consumption, we compare with traditional process replication using the analytical models developed in Section~\ref{sec:analytical}. We also compare to checkpointing, of which the completion time is calculated with Daly's model~\cite{daly_fgcs_2006} assuming the recovery time and checkpointing time are both 10 minutes, and then the energy consumption is derived using Equation~\ref{eq:exp_energy1}. 
+It is clear from Equation~\ref{eq:time_k} that the total recovery delay $\sum_{i=1}^k\tau_i$ is determined by the total execution time $\sum_{i=1}^k\Delta_i$, independent of the distribution of failures which determines 
+the individual value of $\Delta_i$. 
+Therefore, our models are generic with no assumption about failure probability distribution, and the expectation of the total delay from all failures is like that the failures are uniformly distributed~\cite{daly_fgcs_2006}. Specifically, $\Delta_i = w/(k+1)$, and $T_c$ can be rewritten as $w + w*(1-\sigma_s)*\frac{k}{k+1}$ for Lazy Shadowing. Further, we assume that each shadow process gets a fair share of its shadow core's execution rate so that $\sigma_s = \frac{1}{\alpha}$. One may argue that the execution rate of the shadows
+should be degraded because of increased memory pressure or communication overhead. %Agreeing with that, however, we argue that 
+%time sharing, which is the basic mechanism of multi-programming OS, is able to overlap computation and communication and improve system efficiency. For completeness, though, 
+To take that into account, we have also studied the slowing down effect using a penalty model, to be discussed later. 
+To calculate the expected energy consumption for Lazy Shadowing with Equation~\ref{eq:exp_energy2}, we further assume that the dynamic power during shadow leaping is twice of that during normal execution, i.e., $p_{l}=2*p_d$, and the time for shadow leaping through RDMA is half of the time required for recovery, i.e., $E[T_l]=0.5*(E[T_c] - w)$. The static power ratio $\rho$ is fixed at 0.5 for now, other values will be explored later in this section.
+
+The first comparison uses $W=10000$ hours and $N=10000$, reflecting the current HPC systems, and the results are shown in Figure~\ref{fig:1}. For Lazy Shadowing we varied $\alpha$ from 1 to 10, with the understanding that it is unrealistic to collocate too many processes on a core. Besides $\alpha=1$, which is equivalent to process replication, we only show $\alpha=5$ and $\alpha=10$ and other values for $\alpha$ are well implied from the figure.
+
+\begin{figure}[!h]
+	\begin{center}
+		\subfigure[Application failure probability]
+		{
+			\label{fig:f1}
+			\includegraphics[width=\columnwidth]{Figures/f1}
+		} 
+		\subfigure[Expected completion time]
+		{
+			\label{fig:t1}
+			\includegraphics[width=\columnwidth]{Figures/t1}
+		} 
+		\subfigure[Expected energy consumption]
+		{
+			\label{fig:e1}
+			\includegraphics[width=\columnwidth]{Figures/e1}
+		} 
+	\end{center}
+	\caption{First comprison. $W=10000$ hours, $N=10000$, $\rho=0.5$.}
+	\label{fig:1}
+\end{figure}
+
+By definition, the application failure probability for checkpointing is 0, as it periodically saves the execution states, from which the computation can be resumed upon failure. Figure~\ref{fig:f1} shows that with collocation, the application failure probability slightly increases for Lazy Shadowing compared to process replication. Although the application failure probability impacts the expected completion time and energy consumption, from Figure~\ref{fig:t1} and \ref{fig:e1} we can see that Lazy Shadowing with collocation achieves better completion time as well as energy saving, due to the reduced per-process workload and forward progress after each failure. Specifically, Lazy Shadowing with $\alpha=5$ saves 15-39\% time and 25-39\% energy over process replication, for the range of MTBF evaluated. For $\alpha=10$, the savings increase to 20-40\% and 32-44\% respectively. On the other hand, checkpointing is an efficient fault tolerance solution for current HPC systems except when failure rate is extremely high. It consumes the least time and energy when MTBF is above 7 years, with the largest difference being 14\% compared to Lazy Shadowing.
+
+%It is as expected that checkpointing has a very high application failure probability, and needs the most time and energy when MTBF is low. However, checkpointing sharply decreases its time and energy, and outperforms the other approaches, as MTBF increases. The reason for its good performance is that $N$ is small. Lazy shadowing beats process replication in both time and energy.
+
+We then extends $W$ to 240,000 hours without changing the value of $N$ (=10000), so that the per-process workload reaches 48 hours for process replication. The results are in shown Figure~\ref{fig:2}. The expected completion time is not shown because the trend is similar to the expected energy.
+
+\begin{figure}[!h]
+	\begin{center}
+		\subfigure[Application failure probability]
+		{
+			\label{fig:f2}
+			\includegraphics[width=\columnwidth]{Figures/f2}
+		} 
+		%\subfigure[Expected completion time]
+		%{
+		%	\label{fig:t2}
+		%	\includegraphics[width=\columnwidth]{Figures/t2}
+		%} 
+		\subfigure[Expected energy consumption]
+		{
+			\label{fig:e2}
+			\includegraphics[width=\columnwidth]{Figures/e2}
+		} 
+	\end{center}
+	\caption{Second comprison. $W=240,000$ hours, $N=10000$, $\rho=0.5$.}
+	\label{fig:2}
+\end{figure}
+
+Differernt from Figure~\ref{fig:1} where the expected time and energy for process replication are almost constant, the impact of re-execution due to application failure becomes unnegligible in Figure~\ref{fig:2}. This is because the extened execution time largely increases the application's propensity to failure. When MTBF is exetremely low, Lazy Shadowing is the most sensitive one to this effect, implying that Lazy Shadowing may not be suitable for very long executions in environments with exetremely high failure rate. However, the normal MTBF is believed to be between 5 to 25 years for current HPC systems. If this would continue to be true, Lazy Shadowing would be able to efficiently support long executions, with an average of 15\% saving in time and 28\% saving in energy for the normal MTBF range when $\alpha=10$. Checkpointing is scalable in terms of per-process workload, since it splits the whole computation into multiple intervals and after each failure it only re-executes one interval regardless of the total workload. 
+
+%, in Figure~\ref{fig:2} we can see that the effect of re-execution is not negligible any more, as the application failure probabilities are largely increased. : the time and energy for process replication are constant in Figure~\ref{fig:1} but not in Figure~\ref{fig:2}; also, lazy shadowing has much higher application failure probability when MTBF is low, and the result is that it consumes much more time and energy (when MTBF is 1-3 years). Compared to process replication, lazy shadowing saves both time and energy when MTBF reaches 7 years. Althoght the application failure probability increases for checkpointing as per-core workload increases, its completion time and energy consumption are only increased proportionally, which means good scalability in terms of per-core workload. This is because checkpointing splits the whole computation into multiple intervals and after failures it only re-computes one interval. 
+
+Lastly, to explore future exetreme-scale systems, we increase the system size to 1 million cores while also scaling the total workload to 1 million hours. The results are shown in Figure~\ref{fig:3}. Again, we remove the figures of expected completion time for interest of space.
+\begin{figure}[!h]
+	\begin{center}
+		\subfigure[Application failure probability]
+		{
+			\label{fig:f3}
+			\includegraphics[width=\columnwidth]{Figures/f3}
+		} 
+		%\subfigure[Expected completion time]
+		%{
+		%	\label{fig:t31}
+		%	\includegraphics[width=0.4\textwidth]{Figures/t31}
+		%} 
+		\subfigure[Expected energy consumption]
+		{
+			\label{fig:e31}
+			\includegraphics[width=\columnwidth]{Figures/e31}
+		} 
+		\subfigure[Expected energy consumption with checkpoting removed]
+		{
+			\label{fig:e32}
+			\includegraphics[width=\columnwidth]{Figures/e32}
+		} 
+	\end{center}
+	\caption{Third comprison. $W=1,000,000$ hours, $N=1,000,000$, $\rho=0.5$.}
+	\label{fig:3}
+\end{figure}
+It is clear from Figure~\ref{fig:e31} that checkpointing is not scalable in terms of system size, or number of cores, indicating that it may not be a viable fault tolerance approach for future exetreme-scale computing. The energy consumption of checkpointing is so large that the comparison between process replication and lazy shaodowing is invisible in Figure~\ref{fig:e31}. Correspondingly, we re-plot the comparison between Lazy Shadowing and process replication in Figure~\ref{fig:e32}, with checkpointing removed. For most cases, Lazy Shadowing outperforms process replication, achiving up to 5\% saving in time and 23\% saving in energy. However, there is one exception in Figure~\ref{fig:e32} that when MTBF is 1 year, Lazy Shadowing with $\alpha=10$ consumes the most energy. After analysis, we figure out that the reason is that failures are so frequent and the induced waiting time discussed in Section~\ref{frame_induced} dominates the advantages of Lazy Shadowing. 
+
+
+

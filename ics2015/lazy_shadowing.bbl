@@ -1,0 +1,177 @@
+\begin{thebibliography}{10}
+
+\bibitem{Agarwal:04:Adaptive}
+S.~Agarwal, R.~Garg, M.~S. Gupta, and J.~E. Moreira.
+\newblock Adaptive incremental checkpointing for massively parallel systems.
+\newblock In {\em ICS}, St. Malo, France, 2004.
+
+\bibitem{doe_ascr_exascale_2011}
+S.~Ahern and et. al.
+\newblock Scientific discovery at the exascale, a report from the doe ascr 2011
+  workshop on exascale data management, analysis, and visualization, 2011.
+
+\bibitem{alvisi_ftc_1999}
+L.~Alvisi and et. al.
+\newblock An analysis of communication induced checkpointing.
+\newblock In {\em Fault-Tolerant Computing, $29^{th}$ International Symposium
+  on}, pages 242 --249, 1999.
+
+\bibitem{Marz}
+L.~Alvisi and K.~Marzullp.
+\newblock Message logging: Pessimistic, optimistic, causal, and optimal.
+\newblock {\em IEEE Trans. Softw. Eng.}, 42(2):149--159, 1998.
+
+\bibitem{casanova_inria_2012}
+H.~Casanova, Y.~Robert, F.~Vivien, and D.~Zaidouni.
+\newblock {Combining Process Replication and Checkpointing for Resilience on
+  Exascale Systems}.
+\newblock Rapport de recherche RR-7951, INRIA, May 2012.
+
+\bibitem{chandy_trans_1972}
+K.~Chandy and C.~Ramamoorthy.
+\newblock Rollback and recovery strategies for computer programs.
+\newblock {\em Computers, IEEE Transactions on}, C-21(6):546--556, June 1972.
+
+\bibitem{nam_ftc_1997}
+H.~chang Nam, J.~Kim, S.~Lee, and S.~Lee.
+\newblock Probabilistic checkpointing.
+\newblock In {\em In Proceedings of Intl. Symposium on Fault-Tolerant
+  Computing}, pages 153--160, 1997.
+
+\bibitem{chen_2011_hystor}
+F.~Chen, D.~A. Koufaty, and X.~Zhang.
+\newblock Hystor: Making the best use of solid state drives in high performance
+  storage systems.
+\newblock ICS, pages 22--32, New York, USA, 2011.
+
+\bibitem{daly_fgcs_2006}
+J.~Daly.
+\newblock A higher order estimate of the optimum checkpoint interval for
+  restart dumps.
+\newblock {\em Future Gener. Comput. Syst.}, 22(3):303--312, Feb. 2006.
+
+\bibitem{elliott_2012_cpr}
+J.~Elliott and et. al.
+\newblock Combining partial redundancy and checkpointing for {HPC}.
+\newblock ICDCS, pages 615--626, Washington, DC, USA, 2012. IEEE Computer
+  Society.
+
+\bibitem{Elnozahy:02:Survey}
+E.~Elnozahy and et. al.
+\newblock A survey of rollback-recovery protocols in message-passing systems.
+\newblock {\em {ACM} Comput. Surv.}, 34(3):375--408, 2002.
+
+\bibitem{elnozahy_dsc_2004}
+E.~Elnozahy and J.~Plank.
+\newblock Checkpointing for peta-scale systems: a look into the future of
+  practical rollback-recovery.
+\newblock {\em Dependable and Secure Computing, IEEE Transactions on}, 1(2):97
+  -- 108, april-june 2004.
+
+\bibitem{elnozahy_1992_manetho}
+E.~Elnozahy and W.~Zwaenepoel.
+\newblock Manetho: Transparent rollback-recovery with low overhead, limited
+  rollback and fast output commit.
+\newblock {\em TC}, 41:526--531, 1992.
+
+\bibitem{fiala_2012_sdc}
+D.~Fiala and et. al.
+\newblock Detection and correction of silent data corruption for large-scale
+  high-performance computing.
+\newblock SC, pages 78:1--78:12, Los Alamitos, CA, USA, 2012.
+
+\bibitem{guermouche_2011_ipdps}
+A.~Guermouche and et. al.
+\newblock Uncoordinated checkpointing without domino effect for
+  send-deterministic mpi applications.
+\newblock In {\em IPDPS}, pages 989--1000, May 2011.
+
+\bibitem{hakkarine_2013}
+D.~Hakkarinen and Z.~Chen.
+\newblock Multilevel diskless checkpointing.
+\newblock {\em Computers, IEEE Transactions on}, 62(4):772--783, April 2013.
+
+\bibitem{hargrove2006berkeley}
+P.~Hargrove and J.~Duell.
+\newblock Berkeley lab checkpoint/restart (blcr) for linux clusters.
+\newblock In {\em Journal of Physics: Conference Series}, volume~46, page 494,
+  2006.
+
+\bibitem{helary_rds_1997}
+J.~Helary and et. al.
+\newblock Preventing useless checkpoints in distributed computations.
+\newblock In {\em Reliable Distributed Systems}, pages 183 --190, oct 1997.
+
+\bibitem{kalaiselvi_sadhana_2000}
+S.~Kalaiselvi and V.~Rajaraman.
+\newblock A survey of checkpointing algorithms for parallel and distributed
+  computers.
+\newblock {\em Sadhana}, 25(5):489--510, 2000.
+
+\bibitem{lamport_trans_1998}
+L.~Lamport.
+\newblock The part-time parliament.
+\newblock {\em ACM Trans. Comput. Syst.}, 16(2):133--169, May 1998.
+
+\bibitem{li_trans_1994}
+K.~Li, J.~F. Naughton, and J.~S. Plank.
+\newblock Low-latency, concurrent checkpointing for parallel programs.
+\newblock {\em IEEE Trans. Parallel Distrib. Syst.}, 5(8):874--879, Aug. 1994.
+
+\bibitem{mills_2014_icnc}
+B.~Mills and et. al.
+\newblock Shadow computing: An energy-aware fault tolerant computing model.
+\newblock In {\em ICNC}, 2014.
+
+\bibitem{Moody:10:SCR}
+A.~Moody, G.~Bronevetsky, K.~Mohror, and B.~Supinski.
+\newblock Design, modeling, and evaluation of a scalable multi-level
+  checkpointing system.
+\newblock In {\em SC}, pages 1--11, 2010.
+
+\bibitem{ni_2013_acr}
+X.~Ni, E.~Meneses, N.~Jain, and L.~V. Kal{\'e}.
+\newblock Acr: Automatic checkpoint/restart for soft and hard error protection.
+\newblock SC, pages 7:1--7:12, New York, NY, USA, 2013. ACM.
+
+\bibitem{plank_ftcs_1994}
+J.~Plank and K.~Li.
+\newblock Faster checkpointing with n+1 parity.
+\newblock In {\em Fault-Tolerant Computing}, pages 288--297, June 1994.
+
+\bibitem{plank_ftc_1999}
+J.~Plank and M.~Thomason.
+\newblock The average availability of parallel checkpointing systems and its
+  importance in selecting runtime parameters.
+\newblock In {\em Fault-Tolerant Computing}, pages 250 --257, 1999.
+
+\bibitem{randell_domino_effect}
+B.~Randell.
+\newblock System structure for software fault tolerance.
+\newblock In {\em Proceedings of the international conference on Reliable
+  software}, pages 437--449, New York, NY, USA, 1975. ACM.
+
+\bibitem{riesen_sandia_2010}
+R.~Riesen, K.~Ferreira, J.~R. Stearley, R.~Oldfield, J.~H.~L. III, K.~T.
+  Pedretti, and R.~Brightwell.
+\newblock Redundant computing for exascale systems, December 2010.
+
+\bibitem{schneider_1990_tutorial}
+F.~B. Schneider.
+\newblock Implementing fault-tolerant services using the state machine
+  approach: A tutorial.
+\newblock {\em ACM Comput. Surv.}, 22(4):299--319, Dec. 1990.
+
+\bibitem{stearly_2012_partial}
+J.~Stearley and et. al.
+\newblock Does partial replication pay off?
+\newblock In {\em DSN-W}, pages 1--6, June 2012.
+
+\bibitem{zheng_2004_ftccharm}
+G.~Zheng, L.~Shi, and L.~Kale.
+\newblock {FTC-Charm++}: an in-memory checkpoint-based fault tolerant runtime
+  for {Charm++} and {MPI}.
+\newblock In {\em Cluster Computing, 2004 IEEE International Conference on},
+  pages 93--103, Sept 2004.
+
+\end{thebibliography}
