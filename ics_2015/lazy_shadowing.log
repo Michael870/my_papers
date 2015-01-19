@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  17 JAN 2015 01:40
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  19 JAN 2015 13:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -702,12 +702,12 @@ File: Figures/s_power_5.png Graphic file (type png)
 Package pdftex.def Info: Figures/s_power_5.png used on input line 15.
 (pdftex.def)             Requested size: 240.0pt x 141.74081pt.
 ) (./Evaluation/collocation.tex [8 <./Figures/nt5.png> <./Figures/ne5.png>]
-<Figures/collocation.png, id=96, 437.38406pt x 225.84375pt>
+<Figures/collocation.png, id=96, 433.62pt x 257.46187pt>
 File: Figures/collocation.png Graphic file (type png)
 
 <use Figures/collocation.png>
 Package pdftex.def Info: Figures/collocation.png used on input line 16.
-(pdftex.def)             Requested size: 240.0pt x 123.92496pt.
+(pdftex.def)             Requested size: 240.0pt x 142.50017pt.
 )) (./conclusion.tex)
 Overfull \hbox (6.07605pt too wide) in paragraph at lines 3--210
 []\T1/ptm/m/n/9 To this end, we pro-pose a proac-tive, power-aware re-silience 
@@ -741,7 +741,7 @@ texlive/2013/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive/201
 3/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-di
 st/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/t
 ype1/urw/times/utmri8a.pfb>
-Output written on lazy_shadowing.pdf (10 pages, 753931 bytes).
+Output written on lazy_shadowing.pdf (10 pages, 755322 bytes).
 PDF statistics:
  143 PDF objects out of 1000 (max. 8388607)
  87 compressed objects within 1 object stream
