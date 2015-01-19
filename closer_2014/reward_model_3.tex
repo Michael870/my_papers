@@ -1,0 +1,45 @@
+\noindent 
+Contrary to replication, re-execution initially assigns a single
+process for the execution of a task. If the original task fails, the
+process is re-executed. In the cloud computing execution framework
+this is equivalent to a checkpoint/restart, the checkpoint is
+implicitly taken at the end of each phase and because the tasks are
+loosely coupled they can restart independently. 
+
+Based on the one failure assumption, two cases must be considered to
+calculate the task completion time. If no failure occurs, the task
+completion time is:
+\begin{equation}
+t_c=\frac{W}{\sigma_{max}}
+\end{equation}
+In case of failure, however, the completion time is equal to the sum
+of the time elapsed until failure and the time needed for
+re-execution. Again, we use the expected value
+$t_f^*=\frac{\int_0^{t_c}t \times f_m(t)dt}{\int_0^{t_c}f_m(t)dt}$ to
+approximate the time that successfully completed processes have to
+spend waiting for the last one.
+
+Similar to Shadow Replication, the income for re-execution is the
+weighted average of the two cases:
+\begin{equation}
+E[\text{income}]=(1-P_f) \times r(t_c) + P_f \times r(t_c+t_f^{*})
+\end{equation}
+
+For one task, if no failure occurs then the expected energy consumption can be
+calculated as
+\begin{equation}
+E_5=(1 - \int_0^{t_c} f_m(t)dt) \times (E(\sigma_{max},t_c)+ P_f \times E(0,t_f^{*}))
+\label{eq:energy_first_task}
+\end{equation}
+
+If failure occurs, however, the expected energy consumption can be calculated
+as
+\begin{equation}
+E_6=\int_0^{t_c}(E(\sigma_{max},t) + E(\sigma_{max},t_c)) \times f_m(t) dt
+\label{eq:energy_rexecution_task}
+\end{equation}
+Therefore, the expected energy consumption by re-execution for
+completing a job of $N$ tasks is
+\begin{equation}
+E[energy]=N \times (E_5 + E_6)
+\end{equation}

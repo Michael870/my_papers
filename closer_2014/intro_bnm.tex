@@ -1,0 +1,150 @@
+\noindent 
+Cloud Computing has emerged as an attractive platform for increasingly
+diverse compute- and data-intensive applications, as it allows for
+low-entry costs, on demand resource provisioning and allocation and
+reduced cost of maintaining internal IT
+infrastructure~\cite{tchana_cits_2012}. Cloud computing will continue
+to grow and attract attention from commercial and public market
+segments. Recent studies predict annual growth rate of 17.7 percent by
+2016, making cloud computing the fastest growing segment in the
+software industry.
+
+In its basic form, a cloud computing infrastructure is a large cluster
+of interconnected back-end servers hosted in a datacenter and
+provisioned to deliver on-demand, "pay-as-you-go" services and
+computing resources to customers through a front-end
+interface~\cite{ec2_site}. As the demand for cloud computing
+accelerates, cloud service providers (CSPs) will be faced with the
+need to expand their underlying infrastructure to ensure the expected
+levels of performance, reliability and cost-effectiveness, resulting
+in a multifold increase in the number of computing, storage and
+communication components in their datacenters. The direct implication of large datacenters is increased management complexity and propensity to
+failure. While the likelihood of a server failure is very small, the
+sheer number of computing, storage and communications components that
+can fail, however, is daunting. At such a large scale, failure becomes
+the norm rather than an exception~\cite{schroeder_2010_dsc}.
+
+As the number of users delegating their computing tasks to CSPs
+increases, Service Level Agreements (SLAs) become a critical aspect
+for a sustainable cloud computing business model. In its basic form,
+an SLA is a contract between the CSPs and consumers that specifies the
+terms and conditions under which the service is to be provided,
+including expected response time and reliability. Failure to deliver
+the service as specified in the SLA subjects the CSP to pay a penalty,
+resulting in a loss of revenue.
+
+In addition to penalties resulting from failure to meet the SLA
+requirement, CSPs face rising energy costs of their large-scale
+datacenters.  It is reported that energy costs alone could account
+for 23-50\% of the expenses~\cite{Elnozahy03energyconservation} and
+this bill mounts up to \$30 billion
+worldwide~\cite{Raghavendra:2008:NPS}. This raises the question of how
+fault tolerance might impact power consumption and ultimately the
+expected profit of the service providers.
+
+Current fault tolerance approaches rely upon either time or hardware
+redundancy in order to tolerate failure. The first approach, which
+uses time redundancy, requires the re-execution of the failed task
+after the failure is detected.  Although this can further be optimized
+by the use of checkpointing and roll-back recovery, such an approach
+can result in a significant delay increase subjecting CSPs to penalties, when SLA terms are violated,
+and high energy costs due to re-execution of failing tasks.
+
+%, with two consequences on
+%profit. First, the CSP may be subjected to paying a penalty to the
+%customer for failure to deliver the expected service within the
+%negotiated time constraints. Second, the need to re-execute the
+%failed task increases energy consumption.
+
+
+The second approach exploits hardware redundancy and executes multiple
+instances of the same task in parallel to overcome failure and
+guarantee that at least one task reaches completion.  This approach,
+which has been used extensively to deal with failure in critical
+applications, is currently used in cloud-computing to provide fault
+tolerance while hiding the delay of
+re-execution~\cite{tsai_isads_2011,ko_socc_2010}. This solution,
+however, increases the energy consumption for a given service, which
+in turn might outweigh the profit gained by providing the service.
+The trade-off between profit and fault-tolerance calls for new
+frameworks to take both SLA requirements and energy awareness in
+dealing with failures.
+
+In this paper, we address the above trade-off challenge and propose an
+energy-aware, SLA-based profit maximization framework, referred to as
+``Shadow Replication'', for resilience in cloud computing.  Similar to
+traditional replication, Shadow Replication ensures successful task
+completion by concurrently running multiple instances of the same
+task. Contrary to traditional replication, however, Shadow Replication
+executes the main instance of the task at the speed required to
+maximize profit and uses dynamic voltage and frequency scaling (DVFS)
+to slow down the execution of the replicas, thereby enabling a
+parameterized trade-off between response time, energy consumption and
+hardware redundancy. This allows CSPs to maximize the expected profit
+by accounting for income, potential penalties and energy cost.
+
+%the
+%basic idea of shadow replication is to ensure the completion of a task
+%by concurrently running multiple replicas of a process, but in a much
+%smarter way: it provides fault tolerance by combining replication with
+%dynamic voltage and frequency scaling (DVFS), enabling a parameterized
+%tradeoff between time and hardware redundancy.
+
+The main challenge of Shadow Replication resides in determining
+jointly the execution speeds of all task instances, both before and
+after a failure occurs, with the objective to minimize energy and
+maximize profit.  In this paper, we propose a reward-based analytical
+framework to achieve this objective. The main contributions of this paper
+are as follows:
+
+\begin{itemize}
+%\item A profit-based optimization framework to compute the different speeds of %formalization of shadow replication as 
+%\item The use of Shadow Replication to maximize the economic potential
+%  of cloud computing.
+
+\item An energy-aware, SLA-based, profit maximization execution model, referred to as
+``Shadow Replication'', for resilient cloud computing.
+
+\item A profit-based optimization model to explore the applicability of
+  Shadow Replication to cloud computing, and to determine the optimal
+  speeds of all task instances to maximize profit.
+
+\item In environments where either the specification or
+the detection of failure is hard to achieve, we propose a sub-optimal,
+yet practical resilience scheme, called profit-aware stretched
+replication.
+
+\item An evaluation framework to analyze profit and 
+energy savings achievable by Shadow Replication, compared to existing resilience methods.
+%including a
+%comparative analysis of the different resilience methods, to identify
+%the most profitable technique for various computing environments.
+
+%\item An analysis of the profit gain and energy savings achievable by
+ % using shadow replication.
+%\item A comparative analysis of the different resilience methods, including pure %replication and re-execution, and identification 
+ % of the most profitable technique for a given system configuration and failure %rate.
+\end{itemize}
+
+%The analysis shows that in all cases, shadow replication outperforms
+%traditional replication. Furthermore, the results show that shadow
+%replication is the most efficient fault tolerance method when the rate
+%of system failure is high. It is also observed that when the target
+%response time is stringent, shadow replication converges to
+%traditional replication, as expected.
+
+The analysis shows that in all cases, Shadow Replication outperforms
+existing fault tolerance methods. Furthermore, shadow
+replication would converge to traditional replication, when target response time is stringent, and to re-execution when target response time is relaxed or failure is unlikely, as expected.
+
+The rest of the paper is organized as follows. We begin by describing a
+computing model typically used in cloud computing for compute- and
+data-intensive applications in
+Section \ref{sec:cloud_computing_workload}. We then introduce
+the Shadow Replication framework in
+Section \ref{sec:shadow_replication}. Section
+\ref{sec:reward_model},  \ref{sec:reward_model_2}, and \ref{sec:reward_model_3} present our analytical models and optimization
+problem formalization, followed by experiments and evaluation in
+section \ref{sec:evaluation}. Section \ref{sec:related_work} briefly
+surveys related work. Section \ref{sec:conclusion} concludes this work.
+

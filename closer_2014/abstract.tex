@@ -1,0 +1,64 @@
+As the demand for cloud computing continues to increase, cloud service
+providers face the daunting challenge to meet the negotiated SLA
+agreement, in terms of reliability and timely performance, while
+achieving cost-effectiveness. This challenge is increasingly
+compounded by the increasing likelihood of failure in large-scale
+clouds and the rising cost of energy consumption.  This paper proposes
+Shadow Replication, a novel profit-maximization resiliency model,
+which seamlessly addresses failure at scale, while minimizing energy
+consumption. The basic tenet of the model is to associate a suite of
+shadow processes to execute concurrently with the main process, but
+initially at a much reduced execution speed, to overcome failures as
+they occur. Two computationally-feasible schemes are proposed to
+achieve shadow replication. A performance evaluation framework is
+developed to analyze these schemes and compare their performance to
+traditional replication-based fault tolerance methods, focusing on the
+inherent tradeoff between fault tolerance, the specified SLA and
+profit maximization. The results show Shadow Replication leads to
+significant energy reduction, and is better suited for
+compute-intensive execution models, where up to 30\% more profit
+increase can be achieved.
+
+
+%several experimental studies are carried out to assess the performance
+%of the different resiliency schemes, with respect to profit
+%maximization in different cloud computing environments. 
+
+
+
+
+%The challenge is to derive the
+%execution speed, both before and after failure, of a shadow in order
+%to ensure adherence to the negotiated SLA, while maximizing profit. To
+%this end, we present an optimization model to derive the shadow
+%execution speeds, which takes into consideration a computing node
+%failure rate and the negotiated SLA. Several computationally-feasible
+%methods are then proposed to solve this model. 
+
+
+
+%As companies continue to increase their reliance upon cloud computing
+%services there will be an increasing demand for reliable and timely
+%service. However, as cloud-based systems increase in size and
+%complexity it is expected that reliability will degrade, causing both
+%delays in service and increases in energy consumption. This will cause
+%fault tolerance to be a critical system feature to providing
+%applications at large scale. In this work, we propose ``shadow
+%replication'', a fault tolerance method that makes use of DVFS to
+%provide energy-aware, profit-maximizing system resilience to
+%task-based cloud computing services.  We analyze different resilience
+%methods and identify the system parameters which are most relevant to
+%the tradeoff between fault tolerance and profit, and present results
+%which pinpoint the most profitable method.  We also show that in
+%certain systems shadow replication can achieve 10-30\% more profit
+%than existing fault tolerance methods, i.e. re-execution and
+%traditional replication.
+
+%
+%
+% ``shadow replication'' to
+%provide an energy-aware, profit-optimized method that can result in
+%upto two-times the profit achieved by existing fault tolerance
+%methods. Additionally, we develop analytical models to demonstrate the
+%benefits of our approach at the scale expected in future cloud
+%computing environments.

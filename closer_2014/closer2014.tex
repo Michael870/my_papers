@@ -1,0 +1,101 @@
+\documentclass[a4paper,twoside]{article}
+
+\usepackage{epsfig}
+\usepackage{subfigure}
+\usepackage{calc}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{pslatex}
+\usepackage{apalike}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{SCITEPRESS}
+\usepackage[small]{caption}
+\usepackage{ifthen}
+
+\usepackage{tabularx}
+
+
+\newboolean{blinded}
+\setboolean{blinded}{false}
+
+\input{defs}
+
+\subfigtopskip=0pt
+\subfigcapskip=0pt
+\subfigbottomskip=0pt
+
+\begin{document}
+
+\title{Shadows on the Cloud: An energy-aware, profit maximizing resilience framework for cloud computing }
+
+\ifthenelse{\boolean{blinded}}{%
+\author{\authorname{Anonymized}}
+}
+{
+\author{\authorname{Xiaolong Cui, Bryan Mills, Taieb Znati and Rami Melhem}
+\affiliation{       Department of Computer Science, University of Pittsburgh, Pittsburgh, U.S.A \thanks{This research is based in part upon work supported by the  National Science Foundation under Grant Number CNS12-53218 and CNS12-52306. Any opinions, findings, and conclusions or recommendations  expressed in this material are those of the authors and do not necessarily  reflect the views of the National Science Foundation.} }
+\email{\{mclarencui,bmills,znati,melhem\}@cs.pitt.edu}
+}
+}
+
+\keywords{shadow replication, fault tolerance, scheduling, resilience, energy-aware}
+
+\abstract{
+\input{abstract}
+}
+
+\onecolumn \maketitle \normalsize \vfill
+
+\section{\uppercase{Introduction}}
+\label{sec:introduction}
+\input{intro_bnm}
+
+\section{\uppercase{Cloud Workload Characterization}}
+\label{sec:cloud_computing_workload}
+\input{cloud_computing_workload}
+
+\section{\uppercase{Shadow Replication}}
+\label{sec:shadow_replication}
+\input{shadow_replication}
+
+%\section{\uppercase{Resilient Methods}}
+%\label{sec:resilient_methods}
+%\input{resilient_methods}
+
+\section{\uppercase{Reward Based Optimal shadow replication}}
+\label{sec:reward_model}
+\input{reward_model}
+
+\section{\uppercase{Profit-aware stretched replication}}
+\label{sec:reward_model_2}
+\input{reward_model_2}
+
+\section{\uppercase{Re-execution}}
+\label{sec:reward_model_3}
+\input{reward_model_3}
+
+\section{\uppercase{Evaluation}}
+\label{sec:evaluation}
+\input{evaluation}
+
+\section{\uppercase{Related Work}}
+\label{sec:related_work}
+\input{related_work}
+
+\section{\uppercase{Conclusion}}
+\label{sec:conclusion}
+\input{conclusion}
+
+%\vfill
+\bibliographystyle{apalike}
+{\small
+\bibliography{closer2014}}
+
+
+
+\vfill
+\end{document}

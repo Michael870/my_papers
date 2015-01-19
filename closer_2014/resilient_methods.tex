@@ -1,0 +1,54 @@
+There are two main ways of handling task failures, re-execution or
+replication. In the next section we will define these resilience
+methods and introduce two new profit-optimized replication schemes.
+
+\subsection{Re-execution}
+
+Re-execution simply re-executes the task when a failure occurs until
+the task completes successfully. This will result in delaying the job
+completion because all tasks must complete in order to complete the
+job. This will impact profit in at least two directions, first the
+delay might result in the service provider paying a penelty to the
+client and secondly it might result in increased energy consumption
+because of the extended execution time.
+
+\subsection{Traditional Replication}
+
+Traditional replication is a method in which each task is replicated
+on independent computing nodes, such that if one process fails its
+replica process can continue executing as if the failure did not
+occur. This is also referred to as process replication and has long
+been deployed in mission critical applications. Replication has been
+used extensively in cloud computing
+\cite{tsai_isads_2011,ko_socc_2010} but is often criticized in
+task-based jobs because of the use of additional resources. From a
+profit standpoint this will reduce the liklihood of paying a penelty
+under the SLA but could significanlly increase the energy consumption.
+
+\subsection{Profit-aware Replication}
+
+Service providers want to maximize their revenue and reduce their
+expenses, in the next sections we will introduce two profit-optimized
+resilience methods. These methods seek to strike a balance between
+energy consumption and revenue obtained under the terms of the SLA.
+
+\subsubsection{Optimized Stretched Replication}
+
+Stretched replication works on the assumption that performing work
+slowly can save energy. This is typically done through the use of
+dynamic voltage and frequency scaling (DVFS). Stretched replication
+slows down the execution of all processes to the slowest possible
+speed while maximizing the profit. As we will show in detail in
+Section \ref{sec:stretched_replication_model}, this optimization
+accounts for the energy cost and the terms dictated in the SLA.
+
+\hl{The only reason I can think this is a good idea is if error
+  detection is expensive. This would be an argument for presenting
+  shadow computing first then introduce this as a modiciation if error
+  detection is hard or impossible. I didn't do it this way but think
+  it might be a better way after discussing with Taieb.}
+
+\subsubsection{Optimized Shadow Replication}
+
+\input{shadow_computing}
+

@@ -1,0 +1,54 @@
+\noindent 
+The main motivation of this work stems from the observation that, as systems become larger and more complex, the
+rate of failures is highly-likely to increase significantly.  
+Hence, understanding the interplay between fault-tolerance, energy consumption 
+and profit maximization is critical for the viability of Cloud Computing
+to support future large-scale systems.
+To this end, we propose Shadow Replication as a novel energy-aware, 
+reward-based computational model to achieve fault-tolerance and
+maximize the profit. 
+What differentiates Shadow Replication from other
+methods is its ability to explore a
+parameterized tradeoff between hardware and time redundancy to achieve fault-tolerance, with minimum energy, 
+while meeting SLA requirements. 
+
+To assess the performance of the proposed fault-tolerance computational
+model, an extensive performance evaluation study is carried out. 
+In this study, system properties that affect the
+profitability of fault tolerance methods, namely failure rate,
+targeted response time and static power, are identified. The failure rate is
+affected by the number of tasks and vulnerability of the task
+to failure. The targeted response time represents the 
+clients' desired job completion time, as expressed by the terms of the SLA.  
+Our performance evaluation shows that in all cases, Shadow Replication outperforms
+existing fault tolerance methods. Furthermore, shadow
+replication will converge to traditional replication when target response time is stringent, and to re-execution when target response time is relaxed or failure is unlikely. Furthermore, the study reveals that the system static power plays a critical role in the tradeoff between the 
+desired level of fault-tolerance, profit maximization and energy consumption.
+This stems from the reliance of Shadow Replication upon DVFS to reduce 
+energy costs. If the static power is high, slowing down process 
+execution does not lead to a significant reduction in the total energy 
+needed to complete the task.
+
+%Our proposed fault tolerance method, Shadow Replication, is the
+%preferred method when the system failure rate is high. Shadow
+%replication is also preferred when targeted response times are less
+%than 150\% of the minimum response time. In all cases shadow
+%replication out-performs traditional replication. If fact, when
+%targeted response time is close to the minimum response time, then
+%Shadow Replication converges to traditional replication. Re-execution
+%is the most profitable choice when failure rates are low and the
+%targeted response time is large. Re-execution is also preferred when
+%static power is large, because Shadow Replication relies on DVFS
+%to save energy.
+
+%Our next step is to implement Shadow Replication in task-based cloud
+%computing environments and experimentally measure its effect. We believe this work will led t
+%
+%
+%In the future, we are looking forward to further extending our
+%analytical models with multiple shadow processes whose size may be
+%determined by customer requirement and cloud service
+%statistics. Further, we will implement
+%shadow computing within existing cloud infrastructure to measure its
+%strength and to obtain an in-depth analysis of the cost benefits among
+%all the stake-holders.
