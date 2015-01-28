@@ -1,0 +1,22 @@
+As our reliance on IT continues to increase, the complexity and urgency of the problems our society will face in the future will increase much faster than are our abilities to understand and deal with them. Future IT systems are likely to exhibit a level of interconnected complexity that makes it prone to failure and exceptional behaviors. The high risk of relying on IT systems that are fragile calls for new approaches to enhance their performance and resiliency to failure. Addressing this concern brings about unprecedented resiliency challenges, which put in question the ability of next generation Cloud Computing infrastructure to continue operation in the presence of faults without compromising the requirements of compute- and data-intensive workloads. 
+
+Current fault-tolerance approaches are designed to deal with fail-stop errors, and rely on either time or hardware redundancy for recovery. Checkpoint/restart, which
+uses time redundancy, requires full or partial re-execution when failure occurs. 
+%after the failure is detected. 
+Such an approach
+can incur a significant delay, % subjecting cloud service providers to SLA violations,
+and high energy costs due to extended execution time.
+On the other hand, Process Replication exploits hardware redundancy and executes multiple
+instances of the same task in parallel to guarantee completion without delay.  %This approach,
+%which has been used extensively to deal with failure in time-critical
+%applications, is currently used in Cloud Computing to provide fault
+%tolerance while hiding the delay of
+%re-execution. 
+This solution,
+however, requires additional hardware resources and increases the energy consumption proportionally. 
+
+It is without doubt that our understanding of how to build reliable systems out of unreliable components has led the development of robust and fairly reliable large-scale software and networking systems. The inherent instability of large-scale Cloud Computing systems of the future in terms of the envisioned high-rate and diversity of faults, however, calls for a reconsideration of the fault tolerance problem as a whole. % and the exploration of radically different approaches that go beyond adapting or optimizing well known and proven techniques.
+
+My proposed approach to resiliency goes beyond adapting or optimizing well known and proven techniques, and explores radical methodologies to fault tolerance in large-scale computing infrastructures, in order to promote green and sustainable Cloud Computing. The proposed solutions differ in the type of faults they manage, their design, fault tolerance approach and the fault tolerance protocol they use. It is not just a scale up of  ``point" solutions, but an exploration of innovative and scalable fault tolerance frameworks. When integrated, it will lead to efficient solutions for a ``tunable" resiliency that takes into consideration the nature of the data and the requirements of the application.
+
+The rest of the statement is organized as follows. Section~\ref{sec:progress} introduces current progress in my proposed approach, referred to as ``Shadow Replication", and presents my preliminary results. Section~\ref{sec:future} points out directions for future exploration. Section~\ref{sec:conclusion} concludes this statement.

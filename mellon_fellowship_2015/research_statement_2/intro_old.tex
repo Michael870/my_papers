@@ -1,0 +1,58 @@
+The main motivation of my proposed research stems from the observation that, as Cloud Computing continues to grow, both the failure rate and power consumption are highly-likely to increase significantly, driving the system to extremely lower efficiency while consuming unprecedented amount of energy. Hence, understanding the interplay between fault tolerance, energy consumption and profit maximization is critical for the viability of Cloud Computing. To this end, my research aims at the design and implementation of novel, scalable, and energy-aware fault tolerance frameworks for green and sustainable Cloud Computing. 
+
+
+Cloud Computing has emerged as an attractive platform for %increasingly diverse 
+compute- and data-intensive applications, as it allows for low-entry costs, on demand resource provisioning and reduced cost of infrastructure maintenance. More and more of our daily apps, on both mobile and desktop computers, are moving their back-ends into the ``cloud". 
+%Cloud Computing will continue to grow and attract attention from commercial and public markets. 
+Recent studies predict an annual growth rate of 17.7\% by 2016, making Cloud Computing the fastest growing segment in the IT industry.
+%In its basic form, a Cloud Computing infrastructure is a large cluster
+%of interconnected servers hosted in a datacenter. % that delivers on-demand, ``pay-as-you-go" services and resources to customers. 
+As the demand for Cloud Computing
+accelerates, cloud service providers will 
+need to expand their infrastructure to ensure the expected
+performance, reliability and cost-effectiveness, resulting
+in a multifold increase in the number of computing, storage and
+communication components in their datacenters. 
+
+
+
+Service level agreement (SLA) is a critical aspect for the Cloud Computing business. Basically, SLA is a contract between the cloud service provider and customer that specifies the terms 
+%and conditions 
+under which service is to be provided. %,
+%including expected response time and reliability. 
+Failure to deliver the service as specified 
+%in the SLA 
+not only subjects the cloud service provider to penalties, but also threatens customer' confidence in Cloud Computing. % in the future. 
+Unfortunately, the direct consequence of expanded datacenters is its increased propensity to
+failure. While the likelihood of a server failure is small, the
+sheer number of computing, storage and communication components that
+can fail is daunting. %At such a large scale, failure becomes
+%the norm rather than an exception. 
+In addition, datacenters are fast becoming a major source of global energy consumption, exacerbating the impact of $CO_2$ emission on the environment. It is reported that energy costs alone account
+for 23-50\% of the Cloud Computing expenses and this mounts up to \$30 billion worldwide. %Altogether it raises the question of how fault tolerance might impact energy consumption, the profit of Cloud Computing business, and the environment we live in. %, becomes critical.
+
+Currently there are two fault tolerance approaches. %, both of which fail to answer the question above. 
+Checkpoint/restart, which
+uses time redundancy, requires full or partial re-execution when failure occurs. 
+%after the failure is detected. 
+Such an approach
+can incur a significant delay subjecting cloud service providers to SLA violations,
+and high energy costs due to extended execution time.
+On the other hand, Process Replication exploits hardware redundancy and executes multiple
+instances of the same task in parallel to guarantee that at least one instance completes without delay.  %This approach,
+%which has been used extensively to deal with failure in time-critical
+%applications, is currently used in Cloud Computing to provide fault
+%tolerance while hiding the delay of
+%re-execution. 
+This solution,
+however, requires additional hardware resources and increases the energy consumption proportionally, which
+in turn might outweigh the profit gained by providing the service.
+The trade-off between profit and fault tolerance calls for new
+frameworks to take into account both SLA requirements and energy consumption in
+dealing with failures.
+
+To tackle the above challenge, I propose an energy-aware and scalable fault tolerance framework, referred to as “Shadow Replication”, for profit maximization and energy reduction in Cloud Computing. Similar to Process Replication, Shadow Replication ensures successful task completion by simultaneously running multiple instances. However, Shadow Replication is distinctive in that it differentiates the execution rates of the instances%. Specifically, it 
+%executes the main instance of the task at the rate required for response time constraint, while slowing down the replicas for energy saving, thereby 
+, enabling a parameterized trade-off between response time and energy consumption. This allows cloud service providers to maximize the expected profit by accounting for income, potential penalties, and energy cost, ultimately promoting green and sustainable Cloud Computing.
+
+%The rest of the statement is organized as follows. Section~\ref{sec:progress} introduces current progress and presents our preliminary results. Section~\ref{sec:future} points out directions for future exploration. Section~\ref{sec:conclusion} concludes this statement.
