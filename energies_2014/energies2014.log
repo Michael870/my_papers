@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  30 MAY 2014 21:40
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  10 FEB 2015 14:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -395,6 +395,24 @@ Package footmisc Info: Declaring symbol style lamport* on input line 903.
 Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
 .
 ))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/epstopdf.sty
+Package: epstopdf 2010/02/09 v2.5 Conversion with epstopdf on the fly (HO)
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+)
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+)))
 (/usr/local/texlive/2013/texmf-dist/tex/latex/subfigure/subfigure.sty
 Package: subfigure 2002/03/15 v2.1.5 subfigure package
 \subfigtopskip=\skip64
@@ -415,10 +433,7 @@ Package: subfigure 2002/03/15 v2.1.5 subfigure package
 \subfig@top=\skip68
 \subfig@bottom=\skip69
 )
-\@input{defs.aux}
-\openout2 = `defs.aux'.
-
-(./defs.tex) (/usr/local/texlive/2013/texmf-dist/tex/latex/tools/tabularx.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/tabularx.sty
 Package: tabularx 1999/01/07 v2.07 `tabularx' package (DPC)
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/tools/array.sty
@@ -437,81 +452,101 @@ Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 \TX@cols=\count127
 \TX@ftn=\toks33
 )
+(/usr/local/texlive/2013/texmf-dist/tex/latex/multirow/multirow.sty
+\bigstrutjot=\dimen142
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2005/04/14 v1.61803 publication quality tables
+\heavyrulewidth=\dimen143
+\lightrulewidth=\dimen144
+\cmidrulewidth=\dimen145
+\belowrulesep=\dimen146
+\belowbottomsep=\dimen147
+\aboverulesep=\dimen148
+\abovetopsep=\dimen149
+\cmidrulesep=\dimen150
+\cmidrulekern=\dimen151
+\defaultaddspace=\dimen152
+\@cmidla=\count128
+\@cmidlb=\count129
+\@aboverulesep=\dimen153
+\@belowrulesep=\dimen154
+\@thisruleclass=\count130
+\@lastruleclass=\count131
+\@thisrulewidth=\dimen155
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/soul/soul.sty
+Package: soul 2003/11/17 v2.4 letterspacing/underlining (mf)
+\SOUL@word=\toks34
+\SOUL@lasttoken=\toks35
+\SOUL@cmds=\toks36
+\SOUL@buffer=\toks37
+\SOUL@token=\toks38
+\SOUL@spaceskip=\skip72
+\SOUL@ttwidth=\dimen156
+\SOUL@uldp=\dimen157
+\SOUL@ulht=\dimen158
+) (./defs.tex)
 (./energies2014.aux)
 \openout1 = `energies2014.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 106.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 110.
+LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 110.
+LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 110.
+LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 110.
+LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 110.
+LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 110.
+LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 110.
+LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 110.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
 (/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count128
-\scratchdimen=\dimen142
+\scratchcounter=\count132
+\scratchdimen=\dimen159
 \scratchbox=\box31
-\nofMPsegments=\count129
-\nofMParguments=\count130
-\everyMPshowfont=\toks34
-\MPscratchCnt=\count131
-\MPscratchDim=\dimen143
-\MPnumerator=\count132
-\makeMPintoPDFobject=\count133
-\everyMPtoPDFconversion=\toks35
-) (/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
-Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
-
-(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/grfext.sty
-Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+\nofMPsegments=\count133
+\nofMParguments=\count134
+\everyMPshowfont=\toks39
+\MPscratchCnt=\count135
+\MPscratchDim=\dimen160
+\MPnumerator=\count136
+\makeMPintoPDFobject=\count137
+\everyMPtoPDFconversion=\toks40
 )
-Package grfext Info: Graphics extension search list:
-(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
-G,.JBIG2,.JB2,.eps]
-(grfext)             \AppendGraphicsExtensions on input line 452.
-
-(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
-))
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             http://www.ctan.org/tex-archive/ 
 (lastpage)             macros/latex/contrib/pageslts/ 
 (lastpage)             or
 (lastpage)             http://www.ctan.org/tex-archive/ 
 (lastpage)             install/macros/latex/contrib/pageslts.tds.zip
-(lastpage)             ! on input line 106.
+(lastpage)             ! on input line 110.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: subfigure package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \AtBeginShipoutBox=\box32
-Package hyperref Info: Link coloring ON on input line 106.
-
-(/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/nameref.sty
+Package hyperref Info: Link coloring ON on input line 110.
+ (/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 (/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count134
+\c@section@level=\count138
 )
-LaTeX Info: Redefining \ref on input line 106.
-LaTeX Info: Redefining \pageref on input line 106.
-LaTeX Info: Redefining \nameref on input line 106.
+LaTeX Info: Redefining \ref on input line 110.
+LaTeX Info: Redefining \pageref on input line 110.
+LaTeX Info: Redefining \nameref on input line 110.
 
 (./energies2014.out) (./energies2014.out)
 \@outlinefile=\write3
@@ -520,297 +555,285 @@ LaTeX Info: Redefining \nameref on input line 106.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\@ifnextchar' on input line 106.
+(hyperref)                removing `\@ifnextchar' on input line 110.
 
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 106.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 110.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 106.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 110.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <32> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 106.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 110.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <32> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 106.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 110.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <18> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 106.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 110.
 (./abstract.tex) (./intro_bnm.tex [1
 
-
-
 {/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 2088) in paragraph at lines 73--85
+Underfull \hbox (badness 2088) in paragraph at lines 84--96
 \T1/ptm/m/n/12 profit max-i-miza-tion frame-work, re-ferred to as ``Shadow Repl
 i-ca-tion'', for re-silience in cloud
  []
 
 [2]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 105.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 116.
 
  (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 105.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 116.
 )
 (./cloud_computing_workload.tex
-
-Package natbib Warning: Citation `lin2010data' on page 3 undefined on input lin
-e 72.
-
-
-Package natbib Warning: Citation `Ferdman:2012:CCS:2150976.2150982' on page 3 u
-ndefined on input line 72.
-
-
-Package natbib Warning: Citation `mrbs' on page 3 undefined on input line 75.
-
-<diagrams/system_model_1.pdf, id=117, 450.68375pt x 270.00874pt>
-File: diagrams/system_model_1.pdf Graphic file (type pdf)
-
-<use diagrams/system_model_1.pdf>
-Package pdftex.def Info: diagrams/system_model_1.pdf used on input line 80.
-(pdftex.def)             Requested size: 497.92322pt x 298.3248pt.
-
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [3]) (./shadow_replication.tex
-<diagrams/example1.pdf, id=124, 606.265pt x 383.4325pt>
+<diagrams/example1.pdf, id=132, 606.265pt x 383.4325pt>
 File: diagrams/example1.pdf Graphic file (type pdf)
 
 <use diagrams/example1.pdf>
 Package pdftex.def Info: diagrams/example1.pdf used on input line 7.
 (pdftex.def)             Requested size: 159.33907pt x 100.77248pt.
 
-<diagrams/example3.pdf, id=125, 542.025pt x 382.42876pt>
+<diagrams/example3.pdf, id=133, 542.025pt x 382.42876pt>
 File: diagrams/example3.pdf Graphic file (type pdf)
 
 <use diagrams/example3.pdf>
 Package pdftex.def Info: diagrams/example3.pdf used on input line 12.
 (pdftex.def)             Requested size: 144.39438pt x 101.87415pt.
 
-<diagrams/example2.png, id=126, 1048.27635pt x 719.8092pt>
+<diagrams/example2.png, id=134, 1048.27635pt x 719.8092pt>
 File: diagrams/example2.png Graphic file (type png)
 
 <use diagrams/example2.png>
 Package pdftex.def Info: diagrams/example2.png used on input line 17.
 (pdftex.def)             Requested size: 164.31557pt x 112.82137pt.
- [4 <./diagrams/system_model_1.pdf>]) [5 <./diagrams/example1.pdf> <./diagrams/
-example3.pdf
+ [4] [5 <./diagrams/example1.pdf> <./diagrams/example3.pdf
 
 pdfTeX warning: pdflatex (file ./diagrams/example3.pdf): PDF inclusion: multipl
 e pdfs with page group included in a single page
-> <./diagrams/example2.png>] (./reward_model.tex [6]
-<diagrams/reward.pdf, id=410, 635.37375pt x 296.10625pt>
+> <./diagrams/example2.png>]) (./reward_model.tex [6]
+<diagrams/reward.pdf, id=186, 635.37375pt x 296.10625pt>
 File: diagrams/reward.pdf Graphic file (type pdf)
 
 <use diagrams/reward.pdf>
-Package pdftex.def Info: diagrams/reward.pdf used on input line 120.
+Package pdftex.def Info: diagrams/reward.pdf used on input line 131.
 (pdftex.def)             Requested size: 497.92322pt x 232.05986pt.
- [7 <./diagrams/reward.pdf>] [8] [9]
-Underfull \hbox (badness 1178) in paragraph at lines 377--381
+ [7] [8 <./diagrams/reward.pdf>] [9]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 1178) in paragraph at lines 388--392
 []\T1/ptm/m/n/12 Based on the above for-mal-iza-tion of the op-ti-miza-tion pro
 b-lem, the MAT-LAB Op-ti-miza-tion
  []
 
-) (./reward_model_2.tex [10]) (./reward_model_3.tex) (./evaluation.tex [11]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
+) [10] (./reward_model_2.tex) [11] (./reward_model_3.tex) (./evaluation.tex
+[12]
 Package epstopdf Info: Source file: <diagrams/rho_profit.eps>
-(epstopdf)                    date: 2014-05-30 21:40:10
+(epstopdf)                    date: 2015-02-10 14:03:28
 (epstopdf)                    size: 23129 bytes
 (epstopdf)             Output file: <diagrams/rho_profit-eps-converted-to.pdf>
-(epstopdf)                    date: 2014-05-30 21:40:13
-(epstopdf)                    size: 7296 bytes
+(epstopdf)                    date: 2015-02-10 14:03:31
+(epstopdf)                    size: 7265 bytes
 (epstopdf)             Command: <repstopdf --outfile=diagrams/rho_profit-eps-co
 nverted-to.pdf diagrams/rho_profit.eps>
-(epstopdf)             \includegraphics on input line 114.
+(epstopdf)             \includegraphics on input line 116.
 Package epstopdf Info: Output file is already uptodate.
-<diagrams/rho_profit-eps-converted-to.pdf, id=482, 903.375pt x 505.89pt>
+ <diagrams/rho_profit-eps-converted-to.pdf, id=265, 903.375pt x 505.89pt>
 File: diagrams/rho_profit-eps-converted-to.pdf Graphic file (type pdf)
 
 <use diagrams/rho_profit-eps-converted-to.pdf>
 Package pdftex.def Info: diagrams/rho_profit-eps-converted-to.pdf used on input
- line 114.
+ line 116.
 (pdftex.def)             Requested size: 497.92322pt x 278.84245pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[12] [13 <./diagrams/rho_profit-eps-converted-to.pdf>]
+[13]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 Package epstopdf Info: Source file: <diagrams/t_profit.eps>
-(epstopdf)                    date: 2014-05-30 21:40:10
+(epstopdf)                    date: 2015-02-10 14:03:28
 (epstopdf)                    size: 23561 bytes
 (epstopdf)             Output file: <diagrams/t_profit-eps-converted-to.pdf>
-(epstopdf)                    date: 2014-05-30 21:40:14
-(epstopdf)                    size: 7479 bytes
+(epstopdf)                    date: 2015-02-10 14:03:32
+(epstopdf)                    size: 7446 bytes
 (epstopdf)             Command: <repstopdf --outfile=diagrams/t_profit-eps-conv
 erted-to.pdf diagrams/t_profit.eps>
-(epstopdf)             \includegraphics on input line 214.
+(epstopdf)             \includegraphics on input line 216.
 Package epstopdf Info: Output file is already uptodate.
-
-<diagrams/t_profit-eps-converted-to.pdf, id=502, 903.375pt x 505.89pt>
+<diagrams/t_profit-eps-converted-to.pdf, id=275, 903.375pt x 505.89pt>
 File: diagrams/t_profit-eps-converted-to.pdf Graphic file (type pdf)
 
 <use diagrams/t_profit-eps-converted-to.pdf>
 Package pdftex.def Info: diagrams/t_profit-eps-converted-to.pdf used on input l
-ine 214.
+ine 216.
 (pdftex.def)             Requested size: 497.92322pt x 278.84245pt.
- [14 <./diagrams/t_profit-eps-converted-to.pdf>]
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[14 <./diagrams/rho_profit-eps-converted-to.pdf>] [15 <./diagrams/t_profit-eps-
+converted-to.pdf>]
 Package epstopdf Info: Source file: <diagrams/n_profit.eps>
-(epstopdf)                    date: 2014-05-30 21:40:10
+(epstopdf)                    date: 2015-02-10 14:03:28
 (epstopdf)                    size: 21675 bytes
 (epstopdf)             Output file: <diagrams/n_profit-eps-converted-to.pdf>
-(epstopdf)                    date: 2014-05-30 21:40:15
-(epstopdf)                    size: 6755 bytes
+(epstopdf)                    date: 2015-02-10 14:03:33
+(epstopdf)                    size: 6736 bytes
 (epstopdf)             Command: <repstopdf --outfile=diagrams/n_profit-eps-conv
 erted-to.pdf diagrams/n_profit.eps>
-(epstopdf)             \includegraphics on input line 294.
+(epstopdf)             \includegraphics on input line 296.
 Package epstopdf Info: Output file is already uptodate.
 
-<diagrams/n_profit-eps-converted-to.pdf, id=516, 903.375pt x 505.89pt>
+<diagrams/n_profit-eps-converted-to.pdf, id=300, 903.375pt x 505.89pt>
 File: diagrams/n_profit-eps-converted-to.pdf Graphic file (type pdf)
 
 <use diagrams/n_profit-eps-converted-to.pdf>
 Package pdftex.def Info: diagrams/n_profit-eps-converted-to.pdf used on input l
-ine 294.
+ine 296.
 (pdftex.def)             Requested size: 497.92322pt x 278.84245pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[15]
+ [16 <./diagrams/n_profit-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <diagrams/mtbf_profit.eps>
-(epstopdf)                    date: 2014-05-30 21:40:10
+(epstopdf)                    date: 2015-02-10 14:03:28
 (epstopdf)                    size: 22247 bytes
 (epstopdf)             Output file: <diagrams/mtbf_profit-eps-converted-to.pdf>
 
-(epstopdf)                    date: 2014-05-30 21:40:16
-(epstopdf)                    size: 7397 bytes
+(epstopdf)                    date: 2015-02-10 14:03:34
+(epstopdf)                    size: 7353 bytes
 (epstopdf)             Command: <repstopdf --outfile=diagrams/mtbf_profit-eps-c
 onverted-to.pdf diagrams/mtbf_profit.eps>
-(epstopdf)             \includegraphics on input line 386.
+(epstopdf)             \includegraphics on input line 388.
 Package epstopdf Info: Output file is already uptodate.
- <diagrams/mtbf_profit-eps-converted-to.pdf, id=526, 903.375pt x 505.89pt>
+
+<diagrams/mtbf_profit-eps-converted-to.pdf, id=315, 903.375pt x 505.89pt>
 File: diagrams/mtbf_profit-eps-converted-to.pdf Graphic file (type pdf)
 
 <use diagrams/mtbf_profit-eps-converted-to.pdf>
 Package pdftex.def Info: diagrams/mtbf_profit-eps-converted-to.pdf used on inpu
-t line 386.
+t line 388.
 (pdftex.def)             Requested size: 497.92322pt x 278.84245pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[16 <./diagrams/n_profit-eps-converted-to.pdf>]
-
-Package natbib Warning: Citation `mrbs' on page 17 undefined on input line 406.
-
-
-
-Package natbib Warning: Citation `mrbs' on page 17 undefined on input line 427.
-
-
-
-Package natbib Warning: Citation `mrbs' on page 17 undefined on input line 427.
-
-
-
-Package natbib Warning: Citation `mrbs' on page 17 undefined on input line 431.
-
-
-[17 <./diagrams/mtbf_profit-eps-converted-to.pdf>]
-<diagrams/application_comparison.png, id=552, 362.3136pt x 217.7736pt>
+[17] <diagrams/application_comparison.png, id=330, 362.3136pt x 217.7736pt>
 File: diagrams/application_comparison.png Graphic file (type png)
 
 <use diagrams/application_comparison.png>
 Package pdftex.def Info: diagrams/application_comparison.png used on input line
- 443.
+ 451.
 (pdftex.def)             Requested size: 497.92322pt x 299.28177pt.
- [18 <./diagrams/application_comparison.png>]
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[18 <./diagrams/mtbf_profit-eps-converted-to.pdf>]
+Underfull \hbox (badness 4940) in paragraph at lines 523--524
+[]|\T1/ptm/m/n/10 Tasks are fully-dependent upon other tasks and re-quire con-s
+tant
+ []
+
+
+Underfull \hbox (badness 1803) in paragraph at lines 523--524
+\T1/ptm/m/n/10 com-mu-ni-ca-tion be-tween tasks. This rep-re-sents an ap-pli-ca
+-tion that
+ []
+
+
+Overfull \hbox (36.79996pt too wide) in alignment at lines 517--525
+[][][] 
+ []
+
+[19 <./diagrams/application_comparison.png>]
 Package epstopdf Info: Source file: <diagrams/sr_vs_re_rho.eps>
-(epstopdf)                    date: 2014-05-30 21:40:10
+(epstopdf)                    date: 2015-02-10 14:03:28
 (epstopdf)                    size: 22877 bytes
 (epstopdf)             Output file: <diagrams/sr_vs_re_rho-eps-converted-to.pdf
 >
-(epstopdf)                    date: 2014-05-30 21:40:17
-(epstopdf)                    size: 7409 bytes
+(epstopdf)                    date: 2015-02-10 14:03:35
+(epstopdf)                    size: 7363 bytes
 (epstopdf)             Command: <repstopdf --outfile=diagrams/sr_vs_re_rho-eps-
 converted-to.pdf diagrams/sr_vs_re_rho.eps>
-(epstopdf)             \includegraphics on input line 495.
+(epstopdf)             \includegraphics on input line 540.
 Package epstopdf Info: Output file is already uptodate.
 
-<diagrams/sr_vs_re_rho-eps-converted-to.pdf, id=564, 903.375pt x 505.89pt>
+<diagrams/sr_vs_re_rho-eps-converted-to.pdf, id=357, 903.375pt x 505.89pt>
 File: diagrams/sr_vs_re_rho-eps-converted-to.pdf Graphic file (type pdf)
 
 <use diagrams/sr_vs_re_rho-eps-converted-to.pdf>
 Package pdftex.def Info: diagrams/sr_vs_re_rho-eps-converted-to.pdf used on inp
-ut line 495.
-(pdftex.def)             Requested size: 497.92322pt x 278.84245pt.
-Package epstopdf Info: Source file: <diagrams/sr_vs_tr_rho.eps>
-(epstopdf)                    date: 2014-05-30 21:40:10
-(epstopdf)                    size: 23115 bytes
-(epstopdf)             Output file: <diagrams/sr_vs_tr_rho-eps-converted-to.pdf
->
-(epstopdf)                    date: 2014-05-30 21:40:18
-(epstopdf)                    size: 7403 bytes
-(epstopdf)             Command: <repstopdf --outfile=diagrams/sr_vs_tr_rho-eps-
-converted-to.pdf diagrams/sr_vs_tr_rho.eps>
-(epstopdf)             \includegraphics on input line 504.
-Package epstopdf Info: Output file is already uptodate.
-
-<diagrams/sr_vs_tr_rho-eps-converted-to.pdf, id=569, 903.375pt x 505.89pt>
-File: diagrams/sr_vs_tr_rho-eps-converted-to.pdf Graphic file (type pdf)
-
-<use diagrams/sr_vs_tr_rho-eps-converted-to.pdf>
-Package pdftex.def Info: diagrams/sr_vs_tr_rho-eps-converted-to.pdf used on inp
-ut line 504.
+ut line 540.
 (pdftex.def)             Requested size: 497.92322pt x 278.84245pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-) (./related_work.tex [19 <./diagrams/sr_vs_re_rho-eps-converted-to.pdf>]
-[20 <./diagrams/sr_vs_tr_rho-eps-converted-to.pdf>]) (./conclusion.tex)
-(./energies2014.bbl [21]
-Underfull \hbox (badness 3354) in paragraph at lines 50--54
+Package epstopdf Info: Source file: <diagrams/sr_vs_tr_rho.eps>
+(epstopdf)                    date: 2015-02-10 14:03:28
+(epstopdf)                    size: 23115 bytes
+(epstopdf)             Output file: <diagrams/sr_vs_tr_rho-eps-converted-to.pdf
+>
+(epstopdf)                    date: 2015-02-10 14:03:36
+(epstopdf)                    size: 7357 bytes
+(epstopdf)             Command: <repstopdf --outfile=diagrams/sr_vs_tr_rho-eps-
+converted-to.pdf diagrams/sr_vs_tr_rho.eps>
+(epstopdf)             \includegraphics on input line 549.
+Package epstopdf Info: Output file is already uptodate.
+<diagrams/sr_vs_tr_rho-eps-converted-to.pdf, id=362, 903.375pt x 505.89pt>
+File: diagrams/sr_vs_tr_rho-eps-converted-to.pdf Graphic file (type pdf)
+
+<use diagrams/sr_vs_tr_rho-eps-converted-to.pdf>
+Package pdftex.def Info: diagrams/sr_vs_tr_rho-eps-converted-to.pdf used on inp
+ut line 549.
+(pdftex.def)             Requested size: 497.92322pt x 278.84245pt.
+ [20]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+) (./related_work.tex [21 <./diagrams/sr_vs_re_rho-eps-converted-to.pdf>])
+(./conclusion.tex [22 <./diagrams/sr_vs_tr_rho-eps-converted-to.pdf>])
+(./energies2014.bbl [23]
+Underfull \hbox (badness 3354) in paragraph at lines 75--79
 []\T1/ptm/m/n/12 Gärtner, F.C.  Fun-da-men-tals of fault-tolerant dis-tributed 
 com-put-ing in asyn-chronous
  []
 
-[22]) 
+[24]) 
 AED: lastpage setting LastPage
 
-Underfull \hbox (badness 5924) in paragraph at lines 202--202
+Underfull \hbox (badness 5924) in paragraph at lines 210--210
 \T1/ptm/m/n/12 dis-tributed un-der the terms and con-di-tions of the Cre-ative 
 Com-mons At-tri-bu-tion li-cense
  []
 
-[23]
-
-Package natbib Warning: There were undefined citations.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 202.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 202.
-(./energies2014.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 202.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 202.
+[25]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 210.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 210.
+ (./energies2014.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 210.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 210.
 Package rerunfilecheck Info: File `energies2014.out' has not changed.
-(rerunfilecheck)             Checksum: A68F4349DD0C7D0A772D5265C30AD235;1219.
+(rerunfilecheck)             Checksum: A5672B4C34DE8B27226A1B715244C791;1228.
 
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 202.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 210.
  ) 
 Here is how much of TeX's memory you used:
- 8966 strings out of 493315
- 132582 string characters out of 6137904
- 252243 words of memory out of 5000000
- 12135 multiletter control sequences out of 15000+600000
- 41824 words of font info for 54 fonts, out of 8000000 for 9000
+ 9224 strings out of 493315
+ 136195 string characters out of 6137904
+ 261336 words of memory out of 5000000
+ 12372 multiletter control sequences out of 15000+600000
+ 42591 words of font info for 57 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 43i,15n,45p,1639b,440s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,15n,45p,1639b,455s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/local
@@ -827,10 +850,10 @@ mf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fo
 nts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1
 /urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times
 /utmri8a.pfb>
-Output written on energies2014.pdf (23 pages, 929454 bytes).
+Output written on energies2014.pdf (25 pages, 874521 bytes).
 PDF statistics:
- 705 PDF objects out of 1000 (max. 8388607)
- 544 compressed objects within 6 object streams
- 111 named destinations out of 1000 (max. 500000)
- 213 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 504 PDF objects out of 1000 (max. 8388607)
+ 433 compressed objects within 5 object streams
+ 118 named destinations out of 1000 (max. 500000)
+ 208 words of extra memory for PDF output out of 10000 (max. 10000000)
 
