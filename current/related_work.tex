@@ -1,0 +1,75 @@
+Checkpointing and rollback recovery are frequently used to deal with
+failures in computing systems. The process involves periodically
+saving the current state of the computation in a stable storage, with
+the anticipation that in case of a system failure computation can be
+rolled back to the most recent safely saved state before failure
+occurred \cite{agarwal_ics_2004, chandy_trans_1985, daly_fgcs_2006,
+elnozahy_cs_2002, elnozahy_dsc_2004, geist_reli_1988, yudan_pdp_2008,
+naksinehaboon_ccg_2008, oldfield_msst_2007, oliner_ics_2006}.
+
+Approaches to distributed checkpointing differ in the level of process
+coordination required to construct a consistent global state, the size
+of the state, and the frequency at which checkpointing occurs
+\cite{plank_ftc_1999, strom_tran_1985}. Based on independent checkpointing, 
+processes coordination among processes is not required, thereby
+considerably reducing checkpointing overhead. At the occurrence of a
+failure, all processes resume computation from the most recent
+consistent global state \cite{bhargava_rds_1988, chandy_trans_1985,
+koo_acm_1986, pattabiraman_dsc_2005}.
+
+The major drawback of this approach stems from the potentially high
+computational cost incurred to roll-back to a consistent global state,
+assuming that such a state exists. This process typically requires
+deep analysis of the dependencies among the distributed computations
+to determine the existence of a roll-back state or the need to resume
+computations from their initial states.
+
+Coordinated checkpointing, a widely used technique to deal with
+failures in distributed systems, requires coordination among processes
+to establish a state-wide consistent state
+\cite{chandy_trans_1985}. The major benefit of this approach stems
+from its simplicity and ease of implementation, which lead to its wide
+adoption in high-performance computing environments. However, its
+major drawback is lack of scalability, since it requires concurrent
+checkpointing. Approaches have been proposed to reduce the level of
+coordination depending on the nature of the applications and the
+patterns of communications among processes \cite{koo_acm_1986}.
+
+In communication-induced checkpointing schemes, processes perform
+independent checkpoints to provide the basis for a system-wide
+consistent state \cite{alvisi_ftc_1999, briatico_rdsd_1984}. Although
+it reduces the coordination overhead, the approach may lead processes
+to store useles states that are never used in future rollbacks. To
+address this shortcoming, ``forced checkpoints'' have been proposed
+\cite{helary_rds_1997}. The approach, in most cases, reduces the number of useless
+checkpoints; it may, however, lead to unpredictable checkpointing
+rates.
+
+Despite numerous improvements of the basic checkpointing scheme,
+recent studies show that high failure rates in high-performance
+computing systems, coupled with high checkpointing and restart
+overhead, considerably reduces the practical feasibility of existing
+centralized, hard disk drive centric checkpointing and rollback
+recovery schemes. Additionally, checkpointing techniques produce a
+significant amount of energy overhead \cite{diouri_dsn_2012} and
+therefore exascale computing requires new approaches.
+
+Recently, redundant computing has been proposed as a viable
+alternative to checkpointing to handle fault-tolerance requirements of
+high-performance applications \cite{ferreira_hpc_2011,
+riesen_sandia_2010}. Process replication, however, can be
+prohibitively costly in terms of computing resources and energy
+consumption. To the best of our knowledge, this is the first attempt
+to explore a state-machine-replication based framework to reduce
+energy while meeting the computational requirements of the underlying
+application.
+
+In addition to its significant energy saving, shadow computing has
+potential to significantly increase an application's mean time to
+interrupt (MTTI). This model can be further enhanced to allow for
+diversity through the execution of multiple shadow processes in
+different geographical environments, using different implementations
+of the underlying computation to potentially detect or correct faults
+that do not necessarily lead to abnormal termination of the process,
+but instead cause it to produce incorrect results.
+

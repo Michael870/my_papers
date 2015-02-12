@@ -1,0 +1,175 @@
+As stated previously, the basic idea of shadow computing is to
+associate a number of ``shadow processes'' with each main process. The
+main responsibility of a shadow process is to take over the
+responsibility of a failed main process and bring the computation to a
+successful completion.  In this section, we define a framework for
+evaluating shadow computing and then use this to derive a model for
+representing the expected energy consumed by the system. We then
+describe in terms of this model three different methods for applying
+shadow computing in a high performance computing environment.
+
+%%model that describes and show how it can be used to derive the speed
+%%of execution of the shadow process that minimizes energy
+%%consumption. Without loss of generality, in this section, we focus on
+%%the main process and its first shadow. The model can be easily
+%%extended to deal with multiple shadows.
+
+\subsection{Shadow Computing Framework}
+\label{shadow_computing_framework}
+
+We consider a distributed computing environment executing an
+application carried out by a large number of collaborative tasks. The
+successful execution of the application depends on the successful
+completion of all of these tasks. Therefore the failure of a single
+process delays the entire application, increasing the need for fault
+tolerance. Each task must complete a specified amount of work, $W$, by
+a targeted response time, $R$. The amount of work is expressed in
+terms of the number of cycles required to complete the task. Each
+computing node has a variable speed, $\sigma$, given in cycles per
+second and bounded such that $0\leq\sigma\leq\sigma_{max}$. Therefore
+the minimum response time for a given task is $R_{min}=\sigma_{max}*W$.
+
+In order to achieve our desired fault tolerance a shadow process
+executes in parallel with the main process on a different computing
+node. The main process executes at a single execution speed denoted as
+$\sigma_m$. In contrast the shadow process executes at two different
+speeds, a speed before failure detection, $\sigma_b$, and a speed
+after failure detection, $\sigma_a$. This is depicted in Figure
+\ref{shadow_overview}.
+
+\begin{figure}[hHtb]
+\centering
+\psfig{figure=diagrams/shadow_main_diagram.eps,width=3.5in}
+\caption { Overview of Shadow Computing }
+\label{shadow_overview}
+\end{figure}
+
+Based upon this framework we define some specific time points
+signaling system events. The time at which the main process completes
+a task, $t_c$, is given as $t_c=W/\sigma_m$. The time at which the
+shadow process completes as task, $t_r$, is given as $t_r =(W-\sigma_b
+t_c)/\sigma_a$ related but not necessarily equal is $t_R$ which is the
+time the system reaches the targeted response time for a given
+task. Additionally, we define the time point $t_f$ as the time at which
+a failure in the main process is detected.
+
+Using this framework we formalize our objective as the following
+minimization problem.
+%%% need more horizontal spacing here... not sure the latex-fu
+\begin{equation}
+\label{optimization_problem}
+\begin{split}
+\text{minimize  }   & E(\sigma_m,t_0,t_f,t_c) + E(\sigma_b,t_0,t_f,t_c) + E(\sigma_a,t_f,t_r) \\
+\text{subject to  } & t_c \leq t_R \\
+                  & t_r \leq t_R \\
+                  & \sigma_m t_c \geq W \\
+                  & \sigma_b t_c + \sigma_a (t_R - t_f) \geq W
+\end{split}
+\end{equation}
+Here the function $E(\sigma,t_0,t_1,t_2)$ represents the energy
+consumed by a process running at speed $\sigma$ during the time period
+$t_0$ and $min(t_1,t_2)$. The first two constraints state that both
+the main process and the shadow process must complete by the targeted
+response time. The last constraints ensure that the amount of work
+done by those processes must be greater than or equal to the amount of
+work defined by the task.
+
+It should be noted that it is assumed that node failures and task
+properties are unchangeable system properties therefore the system
+parameters we can change are the execution speeds of the
+processes. Thus the output of this optimization problem is the
+execution speeds, $\sigma_m$, $\sigma_b$ and $\sigma_a$. In the
+proceeding sections we will present a power and failure model for
+individual computing nodes then use these to model the expected energy
+of the shadow computing system. Then in Section
+\ref{application_to_hpc} we then apply this model to the high
+performance computing environment.
+
+\subsection{Power Model}
+\label{power_model}
+
+It is well known that by varying the execution speed of the computing
+nodes one can reduce their power consumption at least quadratically by
+reducing their execution speed linearly. The power consumption of a
+computing node executing at speed $\sigma$ is given by the function
+$p(\sigma)$, represented by a polynomial of at least second degree,
+$p(\sigma)=\sigma^n$ where $n\geq2$. The energy consumed by a
+computing node executing at speed $\sigma$ during an interval of
+length $T$ is given by $E(\sigma,T)=\int_{t=0}^T
+p(\sigma)dt$. Throughout this paper we substitute the energy for a
+particular time interval, t, with the derived value $p(\sigma)t$,
+because $p(\sigma)$ is treated as a constant with respect to time. We
+further assume that the computing node speed is bounded by the
+following equation $0\leq\sigma\leq\sigma_{max}$.
+
+\subsection{Failure Model}
+\label{failure_model}
+
+The failure can occur at any point during the execution of the main
+task and the completed work is unrecoverable. Because the processes
+are executing on different computing nodes we assume failures are
+independent events. We also assume that only a single failure can
+occur during the execution of a task. If the main task fails it is
+therefore implied that the shadow will complete without failure. We
+can make this assumption because we know the failure of any one node
+is a rare event thus the failure of any two specific nodes is very
+unlikely. In order to achieve higher resiliency one
+would make use of multiple shadow processes and this failure model
+will still be valid.
+
+We assume that a probability density function, $f(t)$ ($\int_0^\infty
+f(t)dt=1$), exists which expresses the probability of the main task
+failing at time $t$. It is worth noting, that the model does not
+depend on any specific distribution.
+
+\subsection{Energy Model}
+\label{energy_model}
+
+Given the power model and the failure distribution, the expected
+energy consumed by a shadow computing task can be derived. We start by
+considering the expected energy consumed by the main process and
+derive the following equation:
+\begin{equation}
+\label{energy_for_main}
+\int_{t=0}^{t_c}E(\sigma_m,t)f(t)dt + (1-\int_{t=0}^{t_c}f(t)dt)E(\sigma_m,t_c)
+\end{equation}
+This first term of the equation represents the expected amount of
+energy consumed by the main process if a failure occurs, while the
+second term represents the expected energy consumed if no failure
+occurs.
+
+Similarly, we can calculate the expected energy consumed by the shadow
+process, as follows:
+\begin{equation}
+\label{energy_for_shadow}
+\begin{split}
+&  \int_{t=0}^{t_c}E(\sigma_b,t)f(t)dt \\
++& \int_{t=0}^{t_c}E(\sigma_a,(t_r-t))f(t)dt \\
++& (1-\int_{t=0}^{t_c}f(t)dt)E(\sigma_b,t_c)
+\end{split}
+\end{equation}
+The first term represents the expected energy consumed by the shadow
+executing at $\sigma_b$ up until the main process fails. The middle
+term represents the expected energy consumed when the main process
+fails and the shadow begins to execute at the speed, $\sigma_a$. The
+last term is the expected energy consumed in the event that no failure
+occurs and the shadow executes at $\sigma_b$ the entire duration of
+the main process.
+
+The total energy consumed by a shadow computing task is the summation
+of the energy consumed by the main process and shadow process. To
+expand this model to represent multiple shadows we would multiple the
+energy consumed by the shadow by the total number of shadow
+processes. Given one shadow process we can combine equations
+(\ref{energy_for_main}) and (\ref{energy_for_shadow}) to produce the
+single model representing the total expected energy consumed.
+\begin{equation}
+\label{energy_model}
+\begin{split}
+ & \int_{t=0}^{t_c}(E(\sigma_m,t)+E(\sigma_b,t))f(t)dt \\
++& \int_{t=0}^{t_c}E(\sigma_a,(t_r-t))f(t)dt \\
++& (1-\int_{t=0}^{t_c}f(t)dt)(E(\sigma_m,t_c )+E(\sigma_b,t_c ))
+\end{split}
+\end{equation}
+
+% LocalWords: hpc

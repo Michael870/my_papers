@@ -1,0 +1,169 @@
+
+In this section, we provide an overview of the shadow computing
+execution model, under different failure scenarios. We also discuss
+the mapping of the processes to the computing infrastructure to ensure
+fault-tolerance to failure. Finally, we present the basic data
+structure that enables efficient communication between a main process
+and its associated shadow. The main purpose of this section is to show
+the feasibility of the shadow computing model. The details of how the
+execution model and its associated data structure are implemented is
+outside the scope of this work, and will be the subject of a future
+publication.
+
+
+\subsection{Execution Model} 
+
+Depending on the occurrence of failure during execution, two scenarios
+are possible. The first scenario, depicted in Figure
+\ref{simple_shadow_no_failure}, takes place when no failure
+occurs\footnote{For the purpose of this discussion, only a single
+shadow is considered. The discussion can be easily extended to deal
+with multiple shadow processes}. In this scenario, the main process
+executes at the optimum processor speed, namely the speed necessary to
+achieve the desired level of fault-tolerance, minimize energy
+consumption and meet the target response time of the supported
+application. The figure shows the completion time of the task, in the
+absence of failure. During this time, the main process completes the
+total amount of work required by the underlying application. However,
+the shadow process, executing at a reduced processor speed, only
+completes a significantly smaller amount of the original workload.
+Because the likelihood of an individual node failure is low, this
+scenario is most likely to occur with high frequency, resulting in a
+relatively small amount of additional energy consumption to achieve
+fault-tolerance. The benefits of this scheme clearly outweigh the
+additional energy cost. Furthermore, it is worth noting that the
+failure of the shadow process does not impact the behavior of the main
+process.
+
+\begin{figure}[hHtb]
+\centering
+\subfigure[Shadow Computing \-\- Case of no failure]{
+\label{simple_shadow_no_failure}
+\psfig{figure=diagrams/shadow_simple_no_failure_work.eps,width=3.1in}
+}
+\subfigure[Shadow Computing \-\- Case of failure]{
+\label{simple_shadow_with_failure}
+\psfig{figure=diagrams/shadow_simple_with_failure_work.eps,width=3.1in}
+}
+\end{figure}
+
+The second scenario, depicted in Figure
+\ref{simple_shadow_with_failure}, takes place when failure of the main
+process occurs. Upon failure detection, the shadow process increases
+its processor speed and executes until completion of the task.  The
+processor speed at which the shadow executes after failure is derived
+so that the shadow computing model guarantees that the task still
+completes by the targeted response time,regardless of when the failure
+occurs. Furthermore, shadow computing achieves considerable energy
+saving by taking advantage of the fact that the likelihood of
+individual component failures in exascale computing is small, thereby
+making oblivious the need to execute "duplicate work" unless a failure
+occurs. It is assumed that shadow processes can detect failures
+although the details of this are beyond the scope of this paper.
+
+
+It is worth noting that the interplay between resiliency and power
+management manifests itself in different ways and must be analyzed
+carefully. Operating at lower voltage thresholds, for example, reduces
+power consumption but has an adverse impact on the resiliency of the
+system to handling high error rates in a timely fashion. Our approach
+to deriving optimal execution speed for the main process and its
+associated shadows, both before and after failure, seeks to avoid
+continuous change in voltage and frequency to prevent potential
+thermal and mechanical stresses on the electronic chips and
+board-level electrical connections.
+
+
+% LocalWords: mtbf megawatts exascale gigawatts pre varela
+\subsection{Process Mapping}
+
+In the shadow computing model the execution of a task spawns the
+creation of both a main process and a suite of shadow processes. These
+processes must be carefully mapped to the computing nodes of the
+exascale computing infrastructure to achieve fault-tolerant execution.
+Consequently, the mapping must be done such that the main and shadow
+processes are {\it fault-isolated} from each other, meaning that a
+fault affecting one process does not affect the other. Fault-isolation
+is necessary to minimize the likelihood that both the main and shadow
+processes fail at the same time. In clound computing, fault-isolation
+uses the virtual computing capabilities of the infrastructure to
+assign main processes and shadows in a way such a given shadow process
+can only be run along side an unrelated main process.  Figure
+\ref{process_allocation_diagram} illustrates a feasible assignment
+that satisfies such a constraint, for the case of three main processes
+and their associated shadows.
+
+\begin{figure}[hHtb]
+\centering
+\psfig{figure=diagrams/overview_architecture.eps,width=3.0in}
+\caption { Example Process Mapping }
+\label{process_allocation_diagram}
+\end{figure}
+
+\subsection{Message Passing}
+
+Another important aspect of the shadow computing model is providing
+process communication to achieve synchronization and maintain system
+consistency.  A communication model to ensure these requirements must
+at a minimum support these two properties:
+\begin{itemize}
+\item
+All messages destined for a task must be delivered to both the main
+process and all associated shadow processes.
+\item
+Any message previously sent from a task must not be duplicated by any
+of the running process.
+\end{itemize}
+
+To satisfy the communication and synchronization requirements the
+shadow computing model, the runtime support environment uses a Global
+Message Queue, see Figure \ref{process_allocation_diagram}. All
+inter-task communication will occur through a virtual message queue,
+which is assumed to be resilient to system faults. When a task spawns
+the main and shadow processes the queue is notified of all processes
+created. For scalability reasons we assume the queue is a {\it
+passive-queue}, meaning it only stores messages and waits for them to
+be requested as opposed to forwarding messages to processes. This
+eliminates the need for the queue to notify processes directly and
+instead lets the processes request them when they are ready. This
+allows processes running at a higher execution speed to not interfere
+with the execution of processes running slower.
+
+When a message arrives at the queue for delivery to a task it will
+hold that message until it has been delivered to all associated
+processes\footnote{Any implementation of such a system will have to
+address the issue of growing queue size but for this discussion it is
+assumed we have an infinite queue.}. This is possible because all
+associated processes were registered with the queue when created. An
+example of message delivery is depicted in Figure
+\ref{queue_message_delivery}. While not depicted, messages would also
+also be removed from the queue once the task was completed. This
+scheme ensures that all executing processes will receive all messages
+destined for the task.
+
+\begin{figure}[hHtb]
+\centering
+\psfig{figure=diagrams/message_queue_deliever.eps,width=3.0in}
+\caption { Example Message Delivery }
+\label{queue_message_delivery}
+\end{figure}
+
+\begin{figure}[hHtb]
+\centering
+\psfig{figure=diagrams/message_queue_receive.eps,width=3.0in}
+\caption { Example Message Receiving }
+\label{queue_message_receiving}
+\end{figure}
+
+In order to ensure that messages are not duplicated by shadow
+processes we propose that all messages be assigned a unique sequence
+number per task. When the queue receives a message from a task it will
+determine if that message has already been received by the queue for
+the task. If the message is a duplicate it will simply ignore the
+message, if however it is a new message it will queued for
+delivery. We show an example of the message receiving process in
+Figure \ref{queue_message_receiving}. This allows shadow processes to execute
+slower and not produce duplicate system messages. The other benefit of
+this model is that messages will be processed regardless of their
+source, therefore the queue doesn't need to be aware of process
+failures.

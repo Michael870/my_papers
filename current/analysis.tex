@@ -1,0 +1,144 @@
+Using the energy model and constraints described in the previous
+ sections we compare the energy consumed by the optimal energy shadow,
+ pure replication, stretched replication and delayed re-execution. For
+ the optimal energy shadow we rely upon numerical non-linear
+ optimization techniques to find the speeds, $\sigma_m$ and
+ $\sigma_b$, that minimize the consumed energy. All results presented
+ used the Minimize function available in Mathmatica.
+
+\subsection{Replication vs. Re-execution vs. Optimal Energy Shadow}
+
+Despite improvements in the checkpointing and rollback scheme it has
+been shown to not scale as the probability of failure increases. Given
+this it is has been suggested that pure process replication or process
+re-execution should be used to provide fault tolerance. In this
+section we will compare the energy consumed by pure replication,
+stretched replication, re-execution and optimal energy shadow.
+
+Pure replication is represented in our model by simply letting all the
+speeds equal the maximum speed, $\sigma_m = \sigma_b= \sigma_a
+= \sigma_{max}$. For stretched replication we let all execution speeds
+be equal $\sigma_m=\sigma_b=\sigma_a=W/R$. Process re-execution simply
+re-executes a process if the main process fails. Using our energy
+model this is equivalent to setting $\sigma_b$ to zero, therefore no
+work is done by the shadow until failure. There are several different
+ways of selecting the execution speed of the main process but for our
+analysis we let it be the slowest possible speed that allows for
+re-execution given $\sigma_{max}$. Therefore, for re-execution
+$\sigma_m=W/(R-(W⁄\sigma_{max} ))$.
+
+We find that optimal energy shadow computing consistently out performs
+or matches the energy consumed by all other schemes while continuing
+to deliver the same fault tolerance
+level. Figure \ref{energy_savings_opt_replication_rexecution_grid}
+demonstrates this by showing the energy consumption as a function of
+the rate of failure, $\lambda$. In this analysis we vary the targeted
+response, $R$, specifically we vary $R=\alpha*W/\sigma_{max}$ , where
+$\alpha≥1$. Without loss of generality we let $\sigma_{max}=1$.
+
+The first observation is that when $\alpha=1.00$ all fault tolerant
+schemes consume the same energy. This is expected since all processes
+must work at $\sigma_{max}$ to complete by the targeted response time,
+$R$. However, as we increase $\alpha$, thus increasing the slack, we
+observe that optimal energy shadow saves as much as 58\% of the energy
+consumed by pure replication. The other important observation is that
+stretched replication uses almost the same amount of energy as that of
+the optimal energy shadow. For all values of $\alpha$ optimal energy shadow
+and stretched replication converge as the rate of failure
+increases. The reason for this convergence is that as the likelihood
+of the main process failing increases the optimal shadow’s execution
+speeds evenly spreads the work out, thus approaching the same speed
+used in replication, $W/R$.
+
+Re-execution can only be achieved when the targeted response time
+ allows enough time to re-execute the task. In other words the system
+ must have enough slack to re-execute the task. Because we have fixed
+ $\sigma_{max}=1$, we can only achieve re-execution when $\alpha \ge 2$. It can
+ observed in the last figure that both stretched replication and
+ optimal energy shadow consistently outperforms re-execution.
+
+
+\begin{figure*}[hHtb]
+\centering
+\psfig{figure=diagrams/energy_opt_replication_rexecution_grid.eps,width=\textwidth}
+\caption { Energy comparison between optimal energy, pure replication and re-execution.}
+\label{energy_savings_opt_replication_rexecution_grid}
+\end{figure*}
+
+\subsection{System Slack}
+
+Assuming a fixed amount of work, W, there are two ways of producing
+slack in the system, one is to increase the targeted response time and
+the other is to increase $\sigma_{max}$. The more slack in the system
+the more energy optimal shadow computing can save however when
+compared to replication and re-execution the way slack is generated
+has different effects.
+
+Neither pure replication nor stretched replication can benefit from
+increasing the maximum speed, $\sigma_{max}$, given a targeted
+response time R. This is because replication will always pick a
+consistent speed $\sigma_{max}$ or $\sigma=W/R$. Increasing
+$\sigma_{max}$ has no impact on the speed of execution in replication
+thus it will have no impact on the energy consumed. However,
+increasing $\sigma_{max}$ reduces the energy consumption in optimal
+energy shadow computing. This is directly related to the constraint
+ensuring that in the worst case the shadow will execute at the maximum
+speed possible after failure to achieve the targeted response time. By
+increasing $\sigma_{max}$ it allows the shadow to execute at a slower
+speed before failure because of the ability to execute faster after
+failure. This has the effect of allowing shadow computing to save
+energy as the maximum available speed increases. This can be observed
+in Figure 5, each graph represents the effect of increasing
+$\sigma_{max}$.
+
+\begin{figure*}[hHtb]
+\centering
+\psfig{figure=diagrams/energy_opt_replication_rexecution_grid_vary_alpha.eps,width=\textwidth}
+\caption { Energy comparison between optimal energy, pure replication and re-execution, vary alpha.}
+\label{energy_savings_opt_replication_rexecution_grid}
+\end{figure*}
+
+Similar to shadow computing, re-execution also benefits from having
+faster execution speeds because it can choose a slower execution speed
+for its main process. In all cases optimal energy shadow computing
+outperforms replication and re-execution. However, observe that as the
+rate of failure increases optimal converges to stretched replication
+but as the rate of failure decreases it converges to re-execution.
+
+If the maximum execution speed is increasing but the amount of work
+and targeted response time is the same then one should choose optimal
+energy shadow. This is because it is the only scheme described that
+can take full advantage of slack introduce by increasing the execution
+speed. Thus you can save energy by harnessing the fact that your
+underling architecture can go faster.
+
+
+\subsection{Job Size}
+
+For this analysis we wanted to understand the relationship between
+failure rates and job size as it relates to energy consumption. To do
+this we rewrite lambda as the mean time between failure
+(MTFB). Because we are using the exponential probability distribution
+we know the mean value is given by $1/\lambda$. We then let this
+represent the number of seconds between failure such that the MTFB is
+the number of days between failure. Similarly, we scale the size of
+the job to be number hours/days. This allows us to observe the energy
+savings in a realistic context.
+
+\begin{figure*}[hHtb]
+\centering
+\psfig{figure=diagrams/energy_opt_replication_rexecution_grid_vary_mtbf.eps,width=\textwidth}
+\caption { Energy comparison between optimal energy, pure replication and re-execution, vary alpha.}
+\label{energy_savings_opt_replication_rexecution_grid}
+\end{figure*}
+
+In Figure 5, we show the energy savings using energy optimal shadow
+computing over the energy consumed using pure replication. The first
+observation is that we consistently save 20-50\% energy. We show these
+results for various values of α; again it can be observed that, as the
+slack increases, shadow computing achieves more energy
+saving. Conversely, as the size of the job increases, the savings
+decrease; this is due to a decrease of the slack in the system.
+
+
+% LocalWords: mtbf megawatt

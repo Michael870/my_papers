@@ -1,0 +1,22 @@
+
+In this paper we have introduced shadow computing, an energy efficient
+method to provide fault tolerate execution without the limitations of
+checkpointing. We then compared this to other known methods,
+replication and re-execution, and concluded that shadow computing is
+always more energy efficient. We also observed that the amount of
+energy saving is highly dependent upon the rate of failure and the
+amount of slack present in the system.
+
+Fully harnessing the potential of shadow computing to deal with
+failures brings about several challenging questions that need to be
+addressed: How can this concept be used to improve fault detection and
+layer coordination, understanding faults and silent errors and
+improving situational awareness? What level of synchronization is
+required between the main process and its associated shadow processes
+to minimize impact on other application processes? What state, if any,
+must be saved to ensure “smooth” transition to the primary shadow
+process upon failure of the main process?  Future work will be focused
+on investigating these questions for different types of failure to
+better understand the advantages and limitations of this approach to
+achieve high levels of fault-tolerance in extreme scale cloud
+computing environments.

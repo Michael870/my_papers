@@ -1,0 +1,152 @@
+As stated above, the basic idea of shadow computing is to associate a
+number of “shadow processes” with each main process. The main
+responsibility of a shadow process is to take over the responsibility
+of a failed main process and bring the computation to a successful
+completion.  In this section, we introduce a energy aware reward-based
+model and show how it can be used to derive the speed of execution of
+the shadow process in order to maximize the reward, while minimizing
+energy. This model can be easily be extended to allow the main process
+to vary in speed but by fixing the execution speed of the main process
+a closed form optimization solution can be obtained.
+
+bXXX (true?) - Without loss of generality, in this section, we focus on the
+main process and its first shadow. The model can be easily extended to
+deal with multiple shadows.
+
+\subsection{Tasks and Execution Speeds}
+
+We consider a distributed computing environment that contains a series
+of tightly coupled tasks each executing on independent computing
+nodes. Each task must complete a specified amount of work, W, by a
+targeted response time, R. The amount of work is expressed in terms of
+the number of cycles required to complete the task. Each computing
+node has a variable speed, $\sigma$, given in cycles per second and
+bounded by sigma max. Therefore, the minimum execution speed for a
+task to complete by R is $\sigma=W/R$.
+
+In order to achieve fault tolerance we create a shadow process that
+executes in parallel with the main process on a different computing
+node. The main process executes at the maximum speed the computing
+node can acheive, $\sigma_{max}$. Ensuring that if no failure occurs the
+task will complete as fast as possible. In contrast the shadow process
+executes at two different speeds, a speed before failure, $\sigma_b$,
+and a speed after failure, $\sigma_a$. The objective is to derive the
+execution speeds of the shadow that lead to minimum energy
+consumption, while maximizing the reward discussed in
+\ref{reward_model}. This is depicted in Figure 3.
+
+Based on the above, the time at which the main process completes, $t_c$,
+is given as $t_c=W/\sigma_m$ , and the time at which the shadow process
+completes, $t_r$, is given as $t_r =(W-\sigma_b t_c)/\sigma_a$.
+
+\subsection{Power Model}
+By varying the execution speed of computing nodes one can reduce their
+power consumption at least quadratically by reducing their execution
+speed linearly. The power consumption of a computing node executing at
+speed σ is given by the function $p(\sigma)$, represented by a
+polynomial of at least second degree, $p(\sigma)=\sigma^n$ where
+$n\geq2$. The energy consumed by a computing node executing at speed σ
+during an interval of length T is given by $E(\sigma,T)=\int_{t=0}^T
+p(\sigma)dt$. Throughout this paper we substitute the energy for a
+particular time interval, t, with the derived value $p(\sigma)t$,
+because $p(\sigma)$ is treated as a constant with respect to time. We
+also assume that the computing node speed is bounded by the following
+equation $0\leq\sigma\leq\sigma_{max}$.
+
+\subsection{Failure Model}
+We assume that a failure can occur at any point during the execution
+of the main task and the completed work is unrecoverable. Because the
+processes are executing on different computing nodes we assume
+failures are independent events. Furthermore, we assume that only a
+single failure can occur during the execution of a task. If the main
+task fails it is therefore implied that the shadow will complete
+without failure.
+
+We assume that a probability density function, $f(t)$ ($\int_0^\infty
+f(t)dt=1$), exists which expresses the probability of the main task
+failing at time $t$. It is worth noting, that the model does not
+depend on any specific distribution.
+
+\subsection{Energy Model}
+Given the power model and the failure distribution, the expected
+energy consumed by a shadow computing task can be derived. We start by
+considering the expected energy consumed by the main process and
+derive the following equation:
+
+\begin{equation}
+\int_{t=0}^{t_c}E(\sigma_m,t)f(t)dt + (1-\int_{t=0}^{t_c}f(t)dt)E(\sigma_m,t_c)
+\end{equation}
+
+This first term of the equation is represents the expected amount of
+energy consumed by the main process if a failure occurs, while the
+second term represents tthe expected energy consumed if no failure
+occurs.
+
+Similarly, we can calculate the expected energy consumed by the shadow
+process, as follows:
+
+\begin{equation}
+\begin{split}
+\int_{t=0}^{t_c}E(\sigma_b,t)f(t)dt \\
++& \int_{t=0}^{t_c}E(\sigma_a,(t_r-t))f(t)dt \\
++& (1-\int_{t=0}^{t_c}f(t)dt)E(\sigma_b,t_c)
+\end{split}
+\end{equation}
+
+The two outer terms of the above expression represent respectively the
+expected energy consumed by the shadow process, in case of failure,
+and the expected energy consumed by the shadow in no failure
+occurs. The middle term represents the expected energy consumed if
+failure does occur and the shadow begins to execute at the speed,
+$\sigma_a$.
+
+The total energy consumed by a shadow computing task is the summation
+of the energy consumed by the main process and shadow process. Given
+our expected energy calculations above we can combine these to produce
+the single model representing the total expected energy consumed.
+
+\subsection{Reward Model}
+\label{reward_model}
+
+Given our energy model we can explore the optimization from two
+different directions. One is by fixing the targeted response time and
+selecting execution speeds that optimize energy consumption, this is
+what we did in \cite{shadow_closer2013}. Alternatively, you can define
+a reward function that is based upon the task completion time and
+derive the targeted response time given energy costs. This reward
+could be defined as part of the SLA agreement a user has with the
+cloud provider.
+
+%%In this section we develop a reward based model which allows the
+%%exploration of different fault tolarance levels dependent upon the
+%%reward given for meeting those levels. Our goal is to develop a model
+%%in which the user can dictate how important it is for the system to
+%%complete a task on time given a failure. For example one task might
+%%have a flexible due date and therefore we might choose to not even
+%%start the shadow process until a failure occurs (equalivent to
+%%$\sigma_b=0$). In other case we might choose to run the shadow at the
+%%same speed as the main process ($\sigma_b=\sigma_{max}$). The
+%%interesting cases are those in between... sucks.
+
+We define the reward model to be a function of completion time of the
+task regardless of failures, $reward(t)$. In a typical case the reward
+would be greater the eariler the task completes, $reward(t_1) \geq
+reward(t_2)$ given $t_1 leq t_2$. This is equalivent to paying more
+for a faster completion time. A linear reward function is depicted in
+Figure XXX.
+
+Given our computation model the maximum reward will be
+$reward(W*\sigma_{max})$. The actual reward however will depend upon
+failure and the execution speeds of the shadow process. If there are
+no failures we will always receive the maximum reward however if a
+failure occurs then we are given the freedom to finish later but
+receive less reward.
+
+
+The tradeoff we will explore
+later the amount of the reward versus the energy cost
+
+* Define the reward function.
+* Combine the reward with the energy
+
+We want to define a reward function such that our goal is to maximize the reward yet minimize the energy used.

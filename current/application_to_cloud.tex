@@ -1,0 +1,132 @@
+Cloud computing providers seek to find a balance between the execution
+speed and fault resiliency of a given configuration in order to
+maximize their profit. ``Shadow computing'' provides a mechanism to
+make this tradeoff by optimizing the energy consumption of fault
+tolerance given a task's targeted response time. If the main process
+fails it is assumed that the task has some laxity as to when it will
+complete. The amount of laxity is bounded by the task's targeted
+response time, which is the time at which the task must be completed
+regardless of failure. The targeted response time is typically
+represented as a laxity factor, $\alpha$, of the minimum response
+time. For example if the minimum response time is 100 seconds and the
+targeted response time is 125 seconds, the laxity factor is 1.25.
+
+The remainder of this section presents a solution to finding
+$\sigma_m$, $\sigma_b$ and $\sigma_a$ for energy optimal
+replication. We start by specifying our failure and power model then
+show how we use numerical analysis techniques to find optimal values.
+
+\subsection{Failure Probability}
+
+In our energy model we assume failure is described using any
+probability density function. In the remaining sections we use the
+exponential probability density function because it is widely accepted
+as a model representative of independent node failures, therefore
+$f(t)=e^{-\lambda t}$. This distribution also has the benefit of being
+differentiable allowing us to produce a closed form equation.
+
+\subsection{Energy Function}
+
+In the remainder of this paper we need to select values for our power
+model. In section \ref{power_model} we defined the energy function,
+$E(\sigma, T)$, as the integral of the power function over the
+interval T. In the remaining sections we assume that the power
+function is defined as the squared value of the speed.
+\begin{equation}
+P(\sigma)=\sigma^2
+\end{equation}
+Thus the energy function is defined as the following:
+\begin{equation}
+E(\sigma,T)=\int_{t=0}^T \sigma^2 dt = \sigma^2t
+\end{equation}
+
+\subsection{Optimal Execution Speeds}
+\label{finding_execution_speeds}
+
+Once we have a known failure and power model we can begin to solve the
+optimization problem. We first make the observation that the speed of
+the shadow after failure, $\sigma_a$, is dependent upon the the shadow
+speed before failure, $\sigma_b$, and the time of failure, $t_f$. It
+can trivially be shown that to conserve the most energy one would let
+$\sigma_a$ be the slowest possible speed to finish by the targeted
+response time, R. Therefore $\sigma_a$ is no longer constant with
+respect to the time of failure. From this observation the following
+value of $\sigma_a$ can be derived.
+\begin{equation}
+\label{optimal_sigma_a}
+\sigma_a=(W-\sigma_b*t_f)/(R-t_f)
+\end{equation}
+Substituting this value into the energy model allows us to reduce the
+number of variables in our objective function, specifically this
+reduces the output of our optimization to two variables, $\sigma_m$
+and $\sigma_b$.
+
+In addition to minimizing the objective energy function we also must
+define several constraint functions for our minimization
+problem. These constraints ensure that our model obeys the system
+limitations such as maximum speed but also ensure that the work is
+completed by the targeted response time.  The first set of constraints
+simply bound the values of $\sigma_b$ and $\sigma_m$,
+$0\leq\sigma_b\leq\sigma_{max}$ and $0\leq\sigma_m\leq\sigma_{max}$
+
+
+Next we bound $\sigma_m$ such that the main process will finish at or
+before the targeted response time $R$, 
+\begin{equation}
+\sigma_m≥W/R
+\end{equation}
+
+The one constraint we have not considered in our optimization is that
+if the main process fails the shadow process must be able to complete
+the given work, $W$, by the targeted response time, $R$. This is known
+as the ``work constraint'' and is represented by the following
+inequality.
+\begin{equation}
+\label{work_constraint}
+t_c*\sigma_b+(R-t_c)*\sigma_{max} \geq W 
+\end{equation}
+The intuition for this constraint is that in the worst case the shadow
+will have to execute at the maximum possible speed after failure to
+achieve the targeted response time. This enforces the constraint such
+that if the main process fails at the very last time point, $t_c$,
+then the shadow process will still be able to complete the work by the
+targeted response time. This places a lower bound on the value for
+$\sigma_b$ and as we will later show typically determines the value of
+$\sigma_b$.
+
+\subsection{Optimal Shadow Computing - Solution}
+\label{closed_form}
+
+In the preceding sections we have specified components of our general
+energy model found in Equation \ref{energy_model}. Our optimization
+problem is now well defined as finding a value for $\sigma_m$ and
+$\sigma_b$ that minimizes the following function.
+\begin{equation}
+\label{energy_model_sub_sigma_a}
+\begin{split}
+ & \int_{t=0}^{t_c}(\sigma_m^2t+\sigma_b^2t) e^{-\lambda t}dt \\
++& \int_{t=0}^{t_c}{[(W-\sigma_b*t_f)/(R-t_f)]}^2 (R-t) e^{-\lambda t}dt \\
++& (1-\int_{t=0}^{t_c} e^{-\lambda t} dt)(\sigma_m^2 t_c + \sigma_b^2 t_c)
+\end{split}
+\end{equation}
+Also note that $t_c=W\sigma_m$ because the amount of work, $W$, is
+given and main process execution speed is defined as $\sigma_m$. After
+solving equation
+\ref{energy_model_sub_sigma_a} we use numerical analysis techniques for
+ finding the optimal execution speeds, $\sigma_m$ and $\sigma_b$.
+
+Our optimization outputs the main processes execution speed,
+$\sigma_m$, and the shadows execution speed before failure,
+$\sigma_b$, given the following inputs:
+\begin{itemize}
+\item
+W - The amount of work necessary to complete the task.
+\item
+R - The targeted response time for the task.
+\item
+$\sigma_{max}$ - The maximum possible execution speed.
+\item
+$\lambda$ - Parameter of our probability density function used to model failure.
+\end{itemize}
+
+% LocalWords: mtbf ei dt
