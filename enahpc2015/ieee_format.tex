@@ -1,0 +1,115 @@
+
+\documentclass[final, conference]{IEEEtran}
+%\documentclass[times, 10pt,twocolumn]{article} 
+%%\usepackage{latex8}
+\usepackage{times}
+
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{epsf}
+\usepackage{subfigure}
+\usepackage[boxed]{algorithm2e}
+\usepackage{amsmath,amsthm}
+
+\newcommand{\algcall}[2]{\textsc{#1}(#2)}
+\newcommand{\RETURN}{\STATE {\bf return }}
+\newcommand {\vneg}{\vspace*{-3pt}}
+
+\usepackage{psfig}
+\usepackage[small]{caption}
+\usepackage{tabularx}
+
+\newcommand{\vs}{\vspace{0.1in}}
+\newtheorem{definition}{Definition}
+
+\newcounter{cs}
+\setcounter{cs}{2}
+\newcounter{att}
+\setcounter{att}{4}
+\newcounter{tele}
+\setcounter{tele}{6}
+
+%\addtolength{\abovecaptionskip}{-5pt}
+\def\baselinestretch{0.93}
+\addtolength{\textfloatsep}{-15pt}
+\addtolength{\dbltextfloatsep}{-20pt}
+\renewcommand\arraystretch{1.3}
+
+\makeatletter
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+   {-3.0ex \@plus -1ex \@minus -.2ex}%
+   {1.7ex \@plus.2ex}%
+   {\normalfont\large\sffamily\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+   {-3.0ex\@plus -1ex \@minus -.2ex}%
+   {1ex \@plus .2ex}%
+   {\normalfont\normalsize\sffamily\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+   {1.0ex\@plus 1ex \@minus .2ex}%
+   {-1.5ex \@plus .2ex}%
+   {\normalfont\normalsize\sffamily\bfseries}}
+\renewcommand\paragraph{\@startsection{subsubsection}{4}{\z@}%
+   {1.5ex\@plus 1ex \@minus .2ex}%
+   {-1.5ex \@plus .2ex}%
+   {\normalfont\normalsize\sffamily\bfseries}}
+\setcounter{secnumdepth}{4}
+\makeatother
+
+\begin{document}
+\title{\Large\bf Shadow Computing: Energy-Aware Resiliency Scheme for High Performance Computing
+}
+\author{
+\IEEEauthorblockN{Bryan Mills\IEEEauthorrefmark{2}, Taieb Znati\IEEEauthorrefmark{2} \IEEEauthorrefmark{3}, Rami Melhem\IEEEauthorrefmark{2}}
+\IEEEauthorblockA{\IEEEauthorrefmark{2}Department of Computer Science,\\
+  \IEEEauthorrefmark{3}Telecommunications Program\\
+University of Pittsburgh
+Pittsburgh, PA  15260 \\
+(bmills, znati, melhem)@cs.pitt.edu}
+}
+
+%%$\mbox{Bryan N. Mills}^{\fnsymbol{cs}}$ and 
+%%$\mbox{Taieb F. Znati}^{\fnsymbol{cs},\fnsymbol{tele}}$ \\ 
+%%$^{\fnsymbol{cs}}$Department of Computer Science,\\
+%%$^{\fnsymbol{tele}}$Telecommunications Program \\
+%%$\mbox{University of Pittsburgh}$,
+%%$\mbox{Pittsburgh, PA   15260}$\\ 
+%%$\mbox{\em (bmills, znati)@cs.pitt.edu}$}
+\maketitle
+\thispagestyle{empty}
+
+%%\begin{IEEEkeywords}
+%%shadow computing, fault tolerance, scheduling, resiliency
+%%\end{IEEEkeywords}
+
+\begin{abstract}
+\input{abstract}
+\end{abstract}
+
+\section{Introduction}
+\label{intro}
+\input{intro}
+
+\section{Related Work}
+\label{related_work}
+\input{related_work}
+
+\section{Model}
+\label{model}
+\input{model}
+
+\section{Application to HPC}
+\label{application_to_hpc}
+\input{application_to_hpc}
+
+\section{Analysis}
+\label{analysis}
+\input{analysis}
+
+\section{Conclusion}
+\label{conclusion}
+\input{conclusion}
+
+\bibliographystyle{ieee}
+\bibliography{ics2013}
+
+\end{document}

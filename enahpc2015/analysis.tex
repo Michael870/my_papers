@@ -1,0 +1,198 @@
+Using the energy model and solutions described in the previous
+sections we now compare the energy consumed by optimal energy shadow,
+stretched replication and minimum work replication. Without loss of
+generality, we assume $\sigma_{max}$ is normalized such that
+$\sigma_{max}=1$. Execution speeds will be presented as factors of
+that maximum speed. In addition to comparing energy savings we also
+consider the energy models sensitivity to input variables.
+
+\subsection{Energy Savings}
+
+The first and obvious analysis is to compare the expected energy
+consumption of shadow computing with pure replication. We represent
+``Energy Savings'' as a percentage of the amount of energy saved when
+using shadow computing versus pure replication. This analysis makes use
+of the energy model described in Section \ref{model} to calculate the
+total expected energy of a given task, which is assumed to have a main
+process and one shadow process. To calculate the energy consumed by
+pure replication we let $\sigma_m = \sigma_b = \sigma_a
+=\sigma_{max}$. When evaluating our methods we let the execution
+speeds be determined by the equations derived in Section
+\ref{application_to_hpc}.
+
+\subsubsection{Optimal Shadow}
+
+In figure \ref{energy_savings_pure_vs_optimal_w_12} we show the energy
+savings for a 12 hour task for various targeted response time factors,
+$\alpha$. Recall that $\alpha$ is the laxity we allow our tasks if
+there is failure in the main process. Note that if we let $\alpha=1.0$
+this is equivalent to pure replication and shadow computing provides
+no energy savings. This comparison looks at the savings as a function
+of the mean time between failure, MTBF, of individual computing
+nodes. We vary MTBF from $1/2$ day to 25 days, this is short given
+todays component failure rates, however as the MTBF increases the
+amount of energy savings continue asymptotically to the values presented
+at 25 days.
+
+\begin{figure}[hHtb]
+\centering
+\psfig{figure=diagrams/energy_savings_pure_vs_optimal_w_12.eps,width=3.5in}
+\caption { Energy savings for optimal shadow vs pure replication for a 12 hour task. }
+\label{energy_savings_pure_vs_optimal_w_12}
+\end{figure}
+
+The first observation is that if we allow the task to take twice as
+long upon failure, $\alpha=2.0$, we can approach the maximum possible
+savings of 50\%. Even if we have very little laxity, $\alpha=1.25$,
+optimal shadow still saves upto 21\% compared to pure replication.
+The maximum of 50\% savings is because if the shadow process is given
+twice as much time to finish then optimal replication does little or
+no work until a failure occurs. The shadow will then execute at the
+maximum speed to achieve the targeted response time. If the likelihood
+of failure is high, low MTBF, then the optimal shadow will do more
+work prior to failure therefore expending more energy. You can see
+this effect on $\sigma_b$ in Table
+\ref{table_of_sigma_b}. Observing at the bottom right corner you
+will notice that the shadow does very little if the likelihood of
+failure is low and we have enough time to ``re-execute'' the entire
+task. As we increase the failure rate or decrease laxity the optimal
+energy shadow increases the amount of work done prior to failure.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{c|r r r r} % centered columns (5 columns)
+$\alpha$ / MTFB & 1.25 & 1.50 & 1.75 & 2.00 \\
+\hline 
+0.5  & 0.80 & 0.67 & 0.57 & 0.500 \\ 
+1.0  & 0.80 & 0.67 & 0.57 & 0.500 \\
+5.0  & 0.78 & 0.65 & 0.55 & 0.484 \\
+10.0 & 0.75 & 0.56 & 0.47 & 0.407 \\
+25.0 & 0.75 & 0.50 & 0.30 & 0.251 \\
+1yr  & 0.75 & 0.50 & 0.25 & 0.024 \\
+3yr  & 0.75 & 0.50 & 0.25 & 0.012 \\
+5yr  & 0.75 & 0.50 & 0.25 & 0.005 \\ [1ex]      % [1ex] adds vertical space
+\hline 
+\end{tabular}
+\caption{Optimal energy values of $\sigma_b$, $\sigma_{max}=1.0$.}
+\label{table_of_sigma_b}
+\end{table}
+
+\subsubsection{Stretched Replication}
+
+Recall that stretched replication sets the shadow's to a constant
+execution speed which is the minimum speed necessary to complete the
+job by the targeted response time, $\sigma_b = \sigma_a = W/R$. Figure
+\ref{energy_savings_replication_stretched_optimal_compare_w_12}
+compares this method to the savings achieved by using the energy
+optimal solution. Despite being naive it still provides significant
+energy savings, between 17\%-37\% depending on the system laxity,
+represented by $\alpha$.
+
+\begin{figure}[hHtb]
+\centering
+\psfig{figure=diagrams/energy_savings_pure_vs_stretched_vs_opt_w_12hrs.eps,width=3.2in}
+\caption { Energy savings for stretched and optimal replication. W=12 hours }
+\label{energy_savings_replication_stretched_optimal_compare_w_12}
+\end{figure}
+
+The important observation is that the energy savings of stretched
+replication nearly matches energy optimal replication. When MTBF is
+low, stretched replication matches the optimal performance. This is
+because the optimal solution drives the shadow to complete as much
+work as possible because failure is very likely to occur, thus
+producing the same execution speeds as stretched replication. As MTBF
+increases the optimal will begin to perform better than stretched
+replication, this is because the optimal solution will reduce the
+amount of work done before failure. This ``gap'' in energy savings
+reaches a stable distance as MTBF increases. Also, note that the
+decrease in $\alpha$ and the ``gap'' are correlated, demonstrated in Figure
+\ref{stacked_bar_streteched_replication_gap}.  The ``gap'' shrinks
+from 13\% at $\alpha=2.0$ to less than 1\% at $\alpha=1.10$.
+
+\begin{figure}[hHtb]
+\centering
+\psfig{figure=diagrams/stacked_bar_stretched_vs_opt_w_12hrs_mtbf_10.eps,width=2.8in}
+\caption { Energy savings ``gap'' between stretched and optimal. W=12 hours, MTBF=10days }
+\label{stacked_bar_streteched_replication_gap}
+\end{figure}
+
+\subsubsection{Minimum Work Replication}
+
+As described in detail in Section \ref{minium_work_replication}
+minimum-work replication is motivated by the assumption that the task
+size will typically be much less than the MTBF of individual
+nodes. When this is the case the optimal energy replication ``hits''
+the work constraint because the likelihood of failure is low. Even
+when the task size is significantly larger than the individual nodes
+MTBF optimal replication is only slightly better than minimum work
+replication, see Figure
+\ref{stacked_bar_min_work_replication_gap}.
+
+\begin{figure}[hHtb]
+\centering
+\psfig{figure=diagrams/stacked_bar_minimum_vs_opt_w_48hrs_mtbf_half_day.eps,width=2.8in}
+\caption { Energy savings ``gap'' between minimum-work and optimal replication. W=48 hours, MTBF=0.5days }
+\label{stacked_bar_min_work_replication_gap}
+\end{figure}
+
+\subsection{Sensitivity to Alpha}
+
+The amount of energy savings achieved by either stretched or optimal
+shadow is highly dependent upon the amount of laxity the system has in
+the event of failure, represented by $\alpha$. To see this effect we
+fix the MTBF and then observe the energy savings as a function of
+$\alpha$, see Figure
+\ref{energy_savings_optimal_vs_pure_vary_alpha}. The major observation
+here is that increasing $\alpha$ has largely a linear effect on the
+energy savings up until $\alpha=2.0$ at which point the gain minimally
+increases to the maximum of 50\% savings. While the job size does have
+an effect on actual energy savings, the trend is the same.
+
+\begin{figure}[hHtb]
+\centering
+\psfig{figure=diagrams/energy_savings_pure_vs_opt_mtbf_1day.eps,width=3.2in}
+\caption { Energy savings for optimal shadow vs pure replication as a function of $\alpha$. MTBF=1day}
+\label{energy_savings_optimal_vs_pure_vary_alpha}
+\end{figure}
+
+\subsection{Sensitivity to Task Size}
+\label{job_size_vs_energy_savings}
+
+The task size has little effect on the trends observed; however, it
+does change the individual values and inflection points. Due to space
+reasons we omitted additional figures that demonstrate this however
+you can observe the behavior in Figure
+\ref{energy_savings_optimal_vs_pure_vary_alpha}, which shows that the effect
+task size has on the energy savings is minimal as we vary
+$\alpha$. Intuitively, there should be some impact because the longer a
+task runs the more likely it will be interrupted by a component
+failure. In Figure
+\ref{energy_savings_pure_vs_optimal_MTBF_10} we look at this in more
+detail by considering energy savings for a fixed MTBF and vary the
+task size. As expected when task size approaches the MTBF the energy
+savings also decreases, due to the optimal replication adjusting to
+account for the increased likelihood of task interruption by
+increasing the speed of the shadow before failure. Once the task size
+exceeds the MTBF, then the energy savings begin to increase again. If
+the main process is going to fail, it will do so more quickly and
+therefore will consume less energy. Our current model only assumes one
+node failure which is why the energy savings continues to increase
+beyond the MTBF, we discuss this as a potential future work in our
+conclusion.
+
+%% removed for space reasons
+%%\begin{figure*}[hHtb]
+%%\centering
+%%\psfig{figure=diagrams/energy_savings_pure_vs_opt_high_gear.eps,width=\textwidth}
+%%\caption { Energy savings for optimal shadow vs pure replication. }
+%%\label{energy_savings_pure_vs_optimal_4up}
+%%\end{figure*}
+
+\begin{figure}[hH]
+\centering
+\psfig{figure=diagrams/energy_savings_pure_vs_optimal_mtbf_10.eps,width=3.2in}
+\caption { Energy savings for optimal shadow vs pure replication. MTBF = 10days}
+\label{energy_savings_pure_vs_optimal_MTBF_10}
+\end{figure}
+
+% LocalWords: mtbf megawatt
