@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  18 MAR 2014 10:10
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  24 FEB 2015 20:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -511,11 +511,11 @@ e pdfs with page group included in a single page
 > <./diagrams/example2.png>] [5 <./diagrams/reward.pdf>] [6])
 (./reward_model_2.tex) (./reward_model_3.tex) (./evaluation.tex [7]
 Package epstopdf Info: Source file: <diagrams/rho_profit.eps>
-(epstopdf)                    date: 2014-03-18 10:10:41
+(epstopdf)                    date: 2015-02-24 20:42:30
 (epstopdf)                    size: 23129 bytes
 (epstopdf)             Output file: <diagrams/rho_profit-eps-converted-to.pdf>
-(epstopdf)                    date: 2014-03-18 10:10:44
-(epstopdf)                    size: 7296 bytes
+(epstopdf)                    date: 2015-02-24 20:42:33
+(epstopdf)                    size: 7265 bytes
 (epstopdf)             Command: <repstopdf --outfile=diagrams/rho_profit-eps-co
 nverted-to.pdf diagrams/rho_profit.eps>
 (epstopdf)             \includegraphics on input line 113.
@@ -533,11 +533,11 @@ Package pdftex.def Info: diagrams/rho_profit-eps-converted-to.pdf used on input
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 Package epstopdf Info: Source file: <diagrams/t_profit.eps>
-(epstopdf)                    date: 2014-03-18 10:10:41
+(epstopdf)                    date: 2015-02-24 20:42:30
 (epstopdf)                    size: 23561 bytes
 (epstopdf)             Output file: <diagrams/t_profit-eps-converted-to.pdf>
-(epstopdf)                    date: 2014-03-18 10:10:45
-(epstopdf)                    size: 7479 bytes
+(epstopdf)                    date: 2015-02-24 20:42:34
+(epstopdf)                    size: 7446 bytes
 (epstopdf)             Command: <repstopdf --outfile=diagrams/t_profit-eps-conv
 erted-to.pdf diagrams/t_profit.eps>
 (epstopdf)             \includegraphics on input line 213.
@@ -551,11 +551,11 @@ ine 213.
 (pdftex.def)             Requested size: 213.41443pt x 119.50941pt.
  [8 <./diagrams/rho_profit-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <diagrams/n_profit.eps>
-(epstopdf)                    date: 2014-03-18 10:10:41
+(epstopdf)                    date: 2015-02-24 20:42:30
 (epstopdf)                    size: 21675 bytes
 (epstopdf)             Output file: <diagrams/n_profit-eps-converted-to.pdf>
-(epstopdf)                    date: 2014-03-18 10:10:46
-(epstopdf)                    size: 6755 bytes
+(epstopdf)                    date: 2015-02-24 20:42:35
+(epstopdf)                    size: 6736 bytes
 (epstopdf)             Command: <repstopdf --outfile=diagrams/n_profit-eps-conv
 erted-to.pdf diagrams/n_profit.eps>
 (epstopdf)             \includegraphics on input line 293.
@@ -575,12 +575,12 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [9 <./diagrams/t_profit-eps-converted-to.pdf> <./diagrams/n_profit-eps-converte
 d-to.pdf>]
 Package epstopdf Info: Source file: <diagrams/mtbf_profit.eps>
-(epstopdf)                    date: 2014-03-18 10:10:41
+(epstopdf)                    date: 2015-02-24 20:42:30
 (epstopdf)                    size: 22247 bytes
 (epstopdf)             Output file: <diagrams/mtbf_profit-eps-converted-to.pdf>
 
-(epstopdf)                    date: 2014-03-18 10:10:47
-(epstopdf)                    size: 7397 bytes
+(epstopdf)                    date: 2015-02-24 20:42:36
+(epstopdf)                    size: 7353 bytes
 (epstopdf)             Command: <repstopdf --outfile=diagrams/mtbf_profit-eps-c
 onverted-to.pdf diagrams/mtbf_profit.eps>
 (epstopdf)             \includegraphics on input line 385.
@@ -637,7 +637,7 @@ msy10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/symbol/usyr.pfb><
 /texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2
 013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb></usr/local/texlive/2013/texmf
 -dist/fonts/type1/urw/zapfchan/uzcmi8a.pfb>
-Output written on closer2014.pdf (12 pages, 846386 bytes).
+Output written on closer2014.pdf (12 pages, 846258 bytes).
 PDF statistics:
  363 PDF objects out of 1000 (max. 8388607)
  225 compressed objects within 3 object streams
