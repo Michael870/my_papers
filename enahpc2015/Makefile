@@ -1,5 +1,5 @@
 
-PREFIX    = ics2013
+PREFIX    = enahpc2015
 TEX_FILES = $(PREFIX).tex
 DVI_FILES = $(PREFIX).dvi
 PS_FILES  = $(PREFIX).ps
