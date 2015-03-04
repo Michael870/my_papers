@@ -57,7 +57,7 @@ anticipated in extreme-scale environments. Given the increase in system failure 
 required to checkpoint large-scale compute- and data-intensive applications, it is very likely
 that the time spent on checkpointing and recovery
 %required to periodically checkpoint an application and restart it upon failure 
-may exceed the system mean time between failures \cite{riesen_sandia_2010}, %. Consequently, applications may achieve
+may exceed the system mean time between failures, %. Consequently, applications may achieve
 %very little computing progress, 
 thereby reducing considerably the overall performance of the
 system. %Figure~\ref{fig:exe_faults} illustrates this fact and shows that, using coordinated 
@@ -66,7 +66,7 @@ Furthermore, the nature and frequency of errors in extreme-scale computing are s
 checkpoint-restart may not be an adequate approach to handle the diverse types of faults in
 these environments. 
 Several studies have shown the same concern and proposed process replication as a
-possible solution [49, 55]. 
+possible solution~\cite{fiala_2012_sdc,riesen_sandia_2010}. 
 %Unfortunately, in so far as performance is concerned, resilience to failures and adherence to 
 %power budget constraints are two conflicting objectives, as achieving high performance may push
 %the system’s components past their thermal limit and increase their likelihood of failure.

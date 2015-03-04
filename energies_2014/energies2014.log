@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  25 FEB 2015 15:00
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  3 MAR 2015 10:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -633,10 +633,10 @@ b-lem, the MAT-LAB Op-ti-miza-tion
 ) [10] (./reward_model_2.tex) [11] (./reward_model_3.tex) (./evaluation.tex
 [12]
 Package epstopdf Info: Source file: <diagrams/rho_profit.eps>
-(epstopdf)                    date: 2015-02-25 15:00:25
+(epstopdf)                    date: 2015-03-03 10:23:37
 (epstopdf)                    size: 23129 bytes
 (epstopdf)             Output file: <diagrams/rho_profit-eps-converted-to.pdf>
-(epstopdf)                    date: 2015-02-25 15:00:28
+(epstopdf)                    date: 2015-03-03 10:23:40
 (epstopdf)                    size: 7265 bytes
 (epstopdf)             Command: <repstopdf --outfile=diagrams/rho_profit-eps-co
 nverted-to.pdf diagrams/rho_profit.eps>
@@ -658,10 +658,10 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 Package epstopdf Info: Source file: <diagrams/t_profit.eps>
-(epstopdf)                    date: 2015-02-25 15:00:25
+(epstopdf)                    date: 2015-03-03 10:23:37
 (epstopdf)                    size: 23561 bytes
 (epstopdf)             Output file: <diagrams/t_profit-eps-converted-to.pdf>
-(epstopdf)                    date: 2015-02-25 15:00:29
+(epstopdf)                    date: 2015-03-03 10:23:41
 (epstopdf)                    size: 7446 bytes
 (epstopdf)             Command: <repstopdf --outfile=diagrams/t_profit-eps-conv
 erted-to.pdf diagrams/t_profit.eps>
@@ -681,10 +681,10 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [14 <./diagrams/rho_profit-eps-converted-to.pdf>] [15 <./diagrams/t_profit-eps-
 converted-to.pdf>]
 Package epstopdf Info: Source file: <diagrams/n_profit.eps>
-(epstopdf)                    date: 2015-02-25 15:00:25
+(epstopdf)                    date: 2015-03-03 10:23:37
 (epstopdf)                    size: 21675 bytes
 (epstopdf)             Output file: <diagrams/n_profit-eps-converted-to.pdf>
-(epstopdf)                    date: 2015-02-25 15:00:30
+(epstopdf)                    date: 2015-03-03 10:23:42
 (epstopdf)                    size: 6736 bytes
 (epstopdf)             Command: <repstopdf --outfile=diagrams/n_profit-eps-conv
 erted-to.pdf diagrams/n_profit.eps>
@@ -700,11 +700,11 @@ ine 296.
 (pdftex.def)             Requested size: 497.92322pt x 278.84245pt.
  [16 <./diagrams/n_profit-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <diagrams/mtbf_profit.eps>
-(epstopdf)                    date: 2015-02-25 15:00:25
+(epstopdf)                    date: 2015-03-03 10:23:37
 (epstopdf)                    size: 22247 bytes
 (epstopdf)             Output file: <diagrams/mtbf_profit-eps-converted-to.pdf>
 
-(epstopdf)                    date: 2015-02-25 15:00:31
+(epstopdf)                    date: 2015-03-03 10:23:43
 (epstopdf)                    size: 7353 bytes
 (epstopdf)             Command: <repstopdf --outfile=diagrams/mtbf_profit-eps-c
 onverted-to.pdf diagrams/mtbf_profit.eps>
@@ -752,11 +752,11 @@ Overfull \hbox (36.79996pt too wide) in alignment at lines 517--525
 
 [19 <./diagrams/application_comparison.png>]
 Package epstopdf Info: Source file: <diagrams/sr_vs_re_rho.eps>
-(epstopdf)                    date: 2015-02-25 15:00:25
+(epstopdf)                    date: 2015-03-03 10:23:37
 (epstopdf)                    size: 22877 bytes
 (epstopdf)             Output file: <diagrams/sr_vs_re_rho-eps-converted-to.pdf
 >
-(epstopdf)                    date: 2015-02-25 15:00:32
+(epstopdf)                    date: 2015-03-03 10:23:45
 (epstopdf)                    size: 7363 bytes
 (epstopdf)             Command: <repstopdf --outfile=diagrams/sr_vs_re_rho-eps-
 converted-to.pdf diagrams/sr_vs_re_rho.eps>
@@ -775,11 +775,11 @@ ut line 540.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 Package epstopdf Info: Source file: <diagrams/sr_vs_tr_rho.eps>
-(epstopdf)                    date: 2015-02-25 15:00:25
+(epstopdf)                    date: 2015-03-03 10:23:37
 (epstopdf)                    size: 23115 bytes
 (epstopdf)             Output file: <diagrams/sr_vs_tr_rho-eps-converted-to.pdf
 >
-(epstopdf)                    date: 2015-02-25 15:00:33
+(epstopdf)                    date: 2015-03-03 10:23:46
 (epstopdf)                    size: 7357 bytes
 (epstopdf)             Command: <repstopdf --outfile=diagrams/sr_vs_tr_rho-eps-
 converted-to.pdf diagrams/sr_vs_tr_rho.eps>
@@ -850,7 +850,7 @@ mf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fo
 nts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1
 /urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times
 /utmri8a.pfb>
-Output written on energies2014.pdf (25 pages, 874522 bytes).
+Output written on energies2014.pdf (25 pages, 874520 bytes).
 PDF statistics:
  504 PDF objects out of 1000 (max. 8388607)
  433 compressed objects within 5 object streams

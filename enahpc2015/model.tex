@@ -17,10 +17,10 @@ representing the expected energy consumed by the system. %We then
 \subsection{Shadow Computing Framework}
 \label{shadow_computing_framework}
 
-We consider a distributed computing environment executing an
-application composed of a large number of collaborative tasks. The
+The focus of this paper is on non-interactive batch jobs, such as scientific applications, financial analytics and image processing running on a cloud computing infrastructure. This class of applications is typically defined in terms of their workload, maximum resource consumption, and completion time, which varies from several hours to several days. They are usually delay tolerant and can be run anytime, as long as the target deadline is met. Each
+application is composed of a large number of collaborative tasks. The
 successful execution of the application depends on the successful
-completion of all of these tasks. Therefore the failure of a single
+completion of all of these tasks. Therefore, the failure of a single
 process delays the entire application, increasing the need for fault
 tolerance. Each task must complete a specified amount of work, $W$, by
 a targeted response time, $R$. The amount of work is expressed in
