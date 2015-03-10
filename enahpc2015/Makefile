@@ -6,35 +6,24 @@ PS_FILES  = $(PREFIX).ps
 PDF_FILES = $(PREFIX).pdf
 BIB_FILES = $(PREFIX).bib
 
-all: $(PDF_FILES) tidy_up
-
-test:
-	echo $(PDF_FILES)
-
-pdf: $(PDF_FILES) tidy_up
-
-ps: $(PS_FILES) tidy_up
-
-dvi: $(DVI_FILES)
-
-$(DVI_FILES): $(TEX_FILES) $(BIB_FILES)
-	rm -f $(DVI_FILES) *.aux
-	sh -c 'latex $(TEX_FILES)'
-	sh -c 'latex $(TEX_FILES)'
+all: 
+	pdflatex $(PREFIX)
 	bibtex $(PREFIX)
-	sh -c 'latex $(TEX_FILES)'
-	sh -c 'latex $(TEX_FILES)'
+	pdflatex $(PREFIX)
+	pdflatex $(PREFIX)
 
-%.ps: %.dvi
-	rm -f $@
-	dvips -t letter $< -o $@
+plots:
+	#rm diagrams/*.eps
+	cd gp; gnuplot *.gp; 
+	#rm diagrams/*converted*.pdf
+	#cd gp: gnuplot mtbf_profit.gp
+	#cd gp: gnuplot rho_speed.gp
+	#cd gp: gnuplot rho
 
-%.pdf: %.dvi
-	rm -f $@
-	dvipdf $< $@
-
-tidy_up:
-	rm -f *.dvi *.aux *.bbl *.blg *.log *.toc
-
-clean: tidy_up
-	rm -f $(DVI_FILES) $(PS_FILES) $(PDF_FILES)
+clean: 
+	rm -f $(DVI_FILES) $(PS_FILES) *.aux *.blg *.pdf
+	rm -f diagrams/*converted*.pdf
+	rm -f diagrams/rho_*.eps
+	rm -f diagrams/mtbf_*.eps
+	rm -f diagrams/t_*.eps
+	rm -f diagrams/n_*.eps
