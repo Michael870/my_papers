@@ -1,20 +1,19 @@
-Current fault-tolerance frameworks are designed to deal with both
+Current fault-tolerance approaches are designed to deal with both
 physical and logical fail stop errors and typically rely on the
-classic checkpoint-restart approach for recovery. The proposed
+classic checkpoint-restart technique for recovery. The proposed
 solutions differ in their design, the type of faults they manage and
 the fault tolerance protocol they use.  The major shortcoming of
 checkpoint-restart stems from the potentially prohibitive costs, in
 terms of execution time and energy consumption. Since faults are both
 voluminous and diverse, the inherent instability of future large-scale
-high performance computing infrastructure calls for a wholesale
+high performance computing infrastructures calls for a wholesale
 reconsideration of the fault tolerance problem and the exploration of
 radically different approaches that go beyond adapting or optimizing
 existing checkpointing and rollback techniques. To this end, we
-propose Shadow Computing, a novel energy-aware computational model to
+propose Lazy Shadowing, a novel energy-aware computational model to
 support scalable fault-tolerance in future large-scale
-high-performance computing infrastructure. We present three techniques
-for applying shadow computing to high performance computing: energy
-optimal replication, stretched replication, and minimum work
-replication. All of the proposed schemes provide the same
-fault-tolerance as pure replication while providing significant energy
+high-performance computing infrastructure. We present two schemes
+for applying lazy shadowing to high performance computing: energy
+optimal shadowing and stretched shadowing. All of the proposed schemes provide the same
+level of fault-tolerance as state machine replication while achieving significant energy
 savings.

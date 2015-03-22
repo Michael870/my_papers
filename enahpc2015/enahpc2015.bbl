@@ -1,0 +1,205 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{DOI~\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{DOI~\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem{agarwal_ics_2004}
+Agarwal, S., Garg, R., Gupta, M.S., Moreira, J.E.: Adaptive incremental
+  checkpointing for massively parallel systems.
+\newblock In: Proceedings of the 18th annual international conference on
+  Supercomputing, ICS '04, pp. 277--286. ACM, New York, NY, USA (2004).
+\newblock \doi{10.1145/1006209.1006248}.
+\newblock \urlprefix\url{http://doi.acm.org/10.1145/1006209.1006248}
+
+\bibitem{alvisi_ftc_1999}
+Alvisi, L., Elnozahy, E., Rao, S., Husain, S., de~Mel, A.: An analysis of
+  communication induced checkpointing.
+\newblock In: Fault-Tolerant Computing, 1999. Digest of Papers. Twenty-Ninth
+  Annual International Symposium on, pp. 242 --249 (1999).
+\newblock \doi{10.1109/FTCS.1999.781058}
+
+\bibitem{bhargava_rds_1988}
+Bhargava, B., Lian, S.R.: Independent checkpointing and concurrent rollback for
+  recovery in distributed systems-an optimistic approach.
+\newblock In: Reliable Distributed Systems, 1988. Proceedings., Seventh
+  Symposium on, pp. 3 --12 (1988).
+\newblock \doi{10.1109/RELDIS.1988.25775}
+
+\bibitem{briatico_rdsd_1984}
+Briatico, D., Ciuffoletti, A., Simoncini, L.: {A Distributed Domino-Effect Free
+  Recovery Algorithm}.
+\newblock In: 4th IEEE Symposyum on Reliability in Distributed Software and
+  Database Systems (1984)
+
+\bibitem{chandy_trans_1985}
+Chandy, K.M., Lamport, L.: Distributed snapshots: determining global states of
+  distributed systems.
+\newblock ACM Trans. Comput. Syst. \textbf{3}(1), 63--75 (1985).
+\newblock \doi{10.1145/214451.214456}.
+\newblock \urlprefix\url{http://doi.acm.org/10.1145/214451.214456}
+
+\bibitem{daly_fgcs_2006}
+Daly, J.T.: A higher order estimate of the optimum checkpoint interval for
+  restart dumps.
+\newblock Future Gener. Comput. Syst. \textbf{22}(3), 303--312 (2006).
+\newblock \doi{10.1016/j.future.2004.11.016}.
+\newblock \urlprefix\url{http://dx.doi.org/10.1016/j.future.2004.11.016}
+
+\bibitem{elnozahy_dsc_2004}
+Elnozahy, E., Plank, J.: Checkpointing for peta-scale systems: a look into the
+  future of practical rollback-recovery.
+\newblock Dependable and Secure Computing, IEEE Transactions on \textbf{1}(2),
+  97 -- 108 (2004).
+\newblock \doi{10.1109/TDSC.2004.15}
+
+\bibitem{elnozahy_cs_2002}
+Elnozahy, E.N.M., Alvisi, L., Wang, Y.M., Johnson, D.B.: A survey of
+  rollback-recovery protocols in message-passing systems.
+\newblock ACM Comput. Surv. \textbf{34}(3), 375--408 (2002).
+\newblock \doi{10.1145/568522.568525}.
+\newblock \urlprefix\url{http://doi.acm.org/10.1145/568522.568525}
+
+\bibitem{ferreira_hpc_2011}
+Ferreira, K., Stearley, J., Laros III, J.H., Oldfield, R., Pedretti, K.,
+  Brightwell, R., Riesen, R., Bridges, P.G., Arnold, D.: Evaluating the
+  viability of process replication reliability for exascale systems.
+\newblock In: Proceedings of 2011 International Conference for High Performance
+  Computing, Networking, Storage and Analysis, SC '11, pp. 44:1--44:12. ACM,
+  New York, NY, USA (2011).
+\newblock \doi{10.1145/2063384.2063443}.
+\newblock \urlprefix\url{http://doi.acm.org/10.1145/2063384.2063443}
+
+\bibitem{firouzi2010reliability}
+Firouzi, F., Salehi, M.E., Wang, F., Fakhraie, S.M., Safari, S.:
+  Reliability-aware dynamic voltage and frequency scaling.
+\newblock In: VLSI (ISVLSI), 2010 IEEE Computer Society Annual Symposium on,
+  pp. 304--309. IEEE (2010)
+
+\bibitem{flautner_2002_APS}
+Flautner, K., Reinhardt, S., Mudge, T.: Automatic performance setting for
+  dynamic voltage scaling.
+\newblock Wirel. Netw. \textbf{8}(5), 507--520 (2002).
+\newblock \doi{10.1023/A:1016546330128}.
+\newblock \urlprefix\url{http://dx.doi.org/10.1023/A:1016546330128}
+
+\bibitem{geist_reli_1988}
+Geist, R., Reynolds, R., Westall, J.: Selection of a checkpoint interval in a
+  critical-task environment.
+\newblock Reliability, IEEE Transactions on \textbf{37}(4), 395 --400 (1988).
+\newblock \doi{10.1109/24.9847}
+
+\bibitem{helary_rds_1997}
+Helary, J.M., Mostefaoui, A., Netzer, R., Raynal, M.: Preventing useless
+  checkpoints in distributed computations.
+\newblock In: Reliable Distributed Systems, 1997. Proceedings., The Sixteenth
+  Symposium on, pp. 183 --190 (1997).
+\newblock \doi{10.1109/RELDIS.1997.632814}
+
+\bibitem{koo_acm_1986}
+Koo, R., Toueg, S.: Checkpointing and rollback-recovery for distributed
+  systems.
+\newblock In: Proceedings of 1986 ACM Fall joint computer conference, ACM '86,
+  pp. 1150--1158. IEEE Computer Society Press, Los Alamitos, CA, USA (1986).
+\newblock \urlprefix\url{http://dl.acm.org/citation.cfm?id=324493.325074}
+
+\bibitem{yudan_pdp_2008}
+Liu, Y., Nassar, R., Leangsuksun, C., Naksinehaboon, N., Paun, M., Scott, S.:
+  An optimal checkpoint/restart model for a large scale high performance
+  computing system.
+\newblock In: Parallel and Distributed Processing, 2008. IPDPS 2008. IEEE
+  International Symposium on, pp. 1 --9 (2008).
+\newblock \doi{10.1109/IPDPS.2008.4536279}
+
+\bibitem{diouri_dsn_2012}
+el~Mehdi~Diouri, M., Gluck, O., Lefevre, L., Cappello, F.: Energy
+  considerations in checkpointing and fault tolerance protocols.
+\newblock In: Dependable Systems and Networks Workshops (DSN-W), 2012 IEEE/IFIP
+  42nd International Conference on, pp. 1 --6 (2012).
+\newblock \doi{10.1109/DSNW.2012.6264670}
+
+\bibitem{naksinehaboon_ccg_2008}
+Naksinehaboon, N., Liu, Y., Leangsuksun, C., Nassar, R., Paun, M., Scott, S.:
+  Reliability-aware approach: An incremental checkpoint/restart model in hpc
+  environments.
+\newblock In: Cluster Computing and the Grid, 2008. CCGRID '08. 8th IEEE
+  International Symposium on, pp. 783 --788 (2008).
+\newblock \doi{10.1109/CCGRID.2008.109}
+
+\bibitem{oldfield_msst_2007}
+Oldfield, R., Arunagiri, S., Teller, P., Seelam, S., Varela, M., Riesen, R.,
+  Roth, P.: Modeling the impact of checkpoints on next-generation systems.
+\newblock In: Mass Storage Systems and Technologies, 2007. MSST 2007. 24th IEEE
+  Conference on, pp. 30 --46 (2007).
+\newblock \doi{10.1109/MSST.2007.4367962}
+
+\bibitem{oliner_ics_2006}
+Oliner, A.J., Rudolph, L., Sahoo, R.K.: Cooperative checkpointing: a robust
+  approach to large-scale systems reliability.
+\newblock In: Proceedings of the 20th annual international conference on
+  Supercomputing, ICS '06, pp. 14--23. ACM, New York, NY, USA (2006).
+\newblock \doi{10.1145/1183401.1183406}.
+\newblock \urlprefix\url{http://doi.acm.org/10.1145/1183401.1183406}
+
+\bibitem{pattabiraman_dsc_2005}
+Pattabiraman, K., Vick, C., Wood, A.: Modeling coordinated checkpointing for
+  large-scale supercomputers.
+\newblock In: Proceedings of the 2005 International Conference on Dependable
+  Systems and Networks, DSN '05, pp. 812--821. IEEE Computer Society,
+  Washington, DC, USA (2005).
+\newblock \doi{10.1109/DSN.2005.67}.
+\newblock \urlprefix\url{http://dx.doi.org/10.1109/DSN.2005.67}
+
+\bibitem{pillai_2001_sosp}
+Pillai, P., Shin, K.G.: Real-time dynamic voltage scaling for low-power
+  embedded operating systems.
+\newblock In: Proc. of the $18^{th}$ ACM Symp. on Operating systems principles,
+  SOSP, pp. 89--102 (2001).
+\newblock \doi{10.1145/502034.502044}.
+\newblock \urlprefix\url{http://doi.acm.org/10.1145/502034.502044}
+
+\bibitem{plank_ftc_1999}
+Plank, J., Thomason, M.: The average availability of parallel checkpointing
+  systems and its importance in selecting runtime parameters.
+\newblock In: Fault-Tolerant Computing, 1999. Digest of Papers. Twenty-Ninth
+  Annual International Symposium on, pp. 250 --257 (1999).
+\newblock \doi{10.1109/FTCS.1999.781059}
+
+\bibitem{plank1995compressed}
+Plank, J.S., Xu, J., Netzer, R.H.: Compressed differences: An algorithm for
+  fast incremental checkpointing.
+\newblock University of Tennessee, Tech. Rep. CS-95-302  (1995)
+
+\bibitem{riesen_sandia_2010}
+Riesen, R., Ferreira, K., Stearley, J.R., Oldfield, R., III, J.H.L., Pedretti,
+  K.T., Brightwell, R.: Redundant computing for exascale systems (2010)
+
+\bibitem{sachs_ascr_2011}
+Sachs, S.R.: Tools for exascale computing: Challenges and strategies (2011)
+
+\bibitem{srinivasan_dsn_2004}
+Srinivasan, J., Adve, S., Bose, P., Rivers, J.: The impact of technology
+  scaling on lifetime reliability.
+\newblock In: Dependable Systems and Networks, 2004 International Conference
+  on, pp. 177 -- 186 (2004).
+\newblock \doi{10.1109/DSN.2004.1311888}
+
+\bibitem{strom_tran_1985}
+Strom, R., Yemini, S.: Optimistic recovery in distributed systems.
+\newblock ACM Trans. Comput. Syst. \textbf{3}(3), 204--226 (1985).
+\newblock \doi{10.1145/3959.3962}.
+\newblock \urlprefix\url{http://doi.acm.org/10.1145/3959.3962}
+
+\bibitem{torrellas2009architectures}
+Torrellas, J.: Architectures for extreme-scale computing.
+\newblock Computer (11), 28--35 (2009)
+
+\bibitem{zhu2004effects}
+Zhu, D., Melhem, R., Moss{\'e}, D.: The effects of energy management on
+  reliability in real-time embedded systems.
+\newblock In: Computer Aided Design, 2004. ICCAD-2004. IEEE/ACM International
+  Conference on, pp. 35--40. IEEE (2004)
+
+\end{thebibliography}

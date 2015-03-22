@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: enahpc2015.aux
+The style file: spmpsci.bst
+Database file #1: enahpc2015.bib
+Warning--entry type for "sachs_ascr_2011" isn't style-file defined
+--line 561 of file enahpc2015.bib
+Warning--entry type for "riesen_sandia_2010" isn't style-file defined
+--line 615 of file enahpc2015.bib
+Warning--there's a number but no volume in torrellas2009architectures
+You've used 29 entries,
+            2946 wiz_defined-function locations,
+            815 strings with 11862 characters,
+and the built_in function-call counts, 28388 in all, are:
+= -- 3489
+> -- 573
+< -- 17
++ -- 372
+- -- 206
+* -- 1246
+:= -- 2648
+add.period$ -- 66
+call.type$ -- 29
+change.case$ -- 226
+chr.to.int$ -- 0
+cite$ -- 30
+duplicate$ -- 3133
+empty$ -- 1720
+format.name$ -- 232
+if$ -- 6024
+int.to.chr$ -- 0
+int.to.str$ -- 29
+missing$ -- 315
+newline$ -- 154
+num.names$ -- 58
+pop$ -- 1063
+preamble$ -- 1
+purify$ -- 161
+quote$ -- 0
+skip$ -- 1828
+stack$ -- 0
+substring$ -- 1391
+swap$ -- 2707
+text.length$ -- 17
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 116
+warning$ -- 1
+while$ -- 139
+width$ -- 31
+write$ -- 366
+(There were 3 warnings)

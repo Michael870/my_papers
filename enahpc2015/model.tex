@@ -1,12 +1,12 @@
-As stated previously, the basic idea of shadow computing is to
+As stated previously, the basic idea of lazy shadowing is to
 associate a number of ``shadow processes'' with each main process. The
 main responsibility of a shadow process is to take over the
 responsibility of a failed main process and bring the computation to a
 successful completion.  In this section, we define a framework for
-evaluating shadow computing and then use this to derive a model for
+evaluating lazy shadowing and then use this to derive a model for
 representing the expected energy consumed by the system. %We then
 %describe in terms of this model three different methods for applying
-%shadow computing in a high performance computing environment.
+%lazy shadowing in a high performance computing environment.
 
 %%model that describes and show how it can be used to derive the speed
 %%of execution of the shadow process that minimizes energy
@@ -14,10 +14,10 @@ representing the expected energy consumed by the system. %We then
 %%the main process and its first shadow. The model can be easily
 %%extended to deal with multiple shadows.
 
-\subsection{Shadow Computing Framework}
+\subsection{Lazy Shadowing Framework}
 \label{shadow_computing_framework}
 
-The focus of this paper is on non-interactive batch jobs, such as scientific applications, financial analytics and image processing running on a cloud computing infrastructure. This class of applications is typically defined in terms of their workload, maximum resource consumption, and completion time, which varies from several hours to several days. They are usually delay tolerant and can be run anytime, as long as the target deadline is met. Each
+The focus of this paper is on non-interactive batch jobs, such as scientific applications, financial analytics and image processing running on a large-scale HPC infrastructure. This class of applications is typically defined in terms of their workload, maximum resource consumption, and completion time, which varies from several hours to several days. They are usually delay tolerant and can be run anytime, as long as the target deadline is met. Each
 application is composed of a large number of collaborative tasks. The
 successful execution of the application depends on the successful
 completion of all of these tasks. Therefore, the failure of a single
@@ -39,8 +39,9 @@ after failure detection, $\sigma_a$. This is depicted in Figure
 
 \begin{figure}[hHtb]
 \centering
-\psfig{figure=diagrams/shadow_main_diagram.eps,width=3.5in}
-\caption { Overview of Shadow Computing }
+\includegraphics[width=\columnwidth]{figures/shadow_main_diagram.pdf}
+%\psfig{figure=diagrams/shadow_main_diagram.eps,width=3.5in}
+\caption { Overview of lazy shadowing.}
 \label{shadow_overview}
 \end{figure}
 
@@ -106,7 +107,7 @@ within our framework as $\lambda(\sigma) = \lambda_0 10^{1-\sigma/\sigma_{max}}$
 \label{energy_model}
 
 Given the power model and the failure distribution, the expected
-energy consumed by a shadow computing task can be derived as the weighted
+energy consumed by a lazy shadowing task can be derived as the weighted
 average considering all possible cases. 
 First consider the case where no failure occurs and the main process
 successfully completes the task at time $t_c^m$.
@@ -156,7 +157,7 @@ and that of shadow process after main's failure, all of which depend
 on the failure occurrence time. 
 
 By summing these three parts we will have
-the expected energy consumed by shadow computing for completing a
+the expected energy consumed by lazy shadowing for completing a
 task.
 \begin{equation}
 E[\text{energy}]= (E_1 + E_2 + E_3)

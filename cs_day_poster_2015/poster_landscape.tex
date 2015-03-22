@@ -1,0 +1,310 @@
+\documentclass[landscape,final,a0paper,fontscale=0.285]{baposter}
+
+\usepackage{calc}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{relsize}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{bm}
+\usepackage{url}
+\usepackage{shadowtext}
+%\usepackage{subfigure}
+
+\usepackage{graphicx}
+\usepackage{multicol}
+
+%\usepackage{times}
+%\usepackage{helvet}
+%\usepackage{bookman}
+\usepackage{palatino}
+
+\newcommand{\captionfont}{\footnotesize}
+
+\graphicspath{{images/}{../images/}}
+\usetikzlibrary{calc}
+
+\newcommand{\SET}[1]  {\ensuremath{\mathcal{#1}}}
+\newcommand{\MAT}[1]  {\ensuremath{\boldsymbol{#1}}}
+\newcommand{\VEC}[1]  {\ensuremath{\boldsymbol{#1}}}
+\newcommand{\Video}{\SET{V}}
+\newcommand{\video}{\VEC{f}}
+\newcommand{\track}{x}
+\newcommand{\Track}{\SET T}
+\newcommand{\LMs}{\SET L}
+\newcommand{\lm}{l}
+\newcommand{\PosE}{\SET P}
+\newcommand{\posE}{\VEC p}
+\newcommand{\negE}{\VEC n}
+\newcommand{\NegE}{\SET N}
+\newcommand{\Occluded}{\SET O}
+\newcommand{\occluded}{o}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Some math symbols used in the text
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Multicol Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\columnsep}{1.5em}
+\setlength{\columnseprule}{0mm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Save space in lists. Use this after the opening of the list
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\compresslist}{%
+\setlength{\itemsep}{1pt}%
+\setlength{\parskip}{0pt}%
+\setlength{\parsep}{0pt}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Begin of Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Here starts the poster
+%%%---------------------------------------------------------------------------
+%%% Format it to your taste with the options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define some colors
+
+%\definecolor{lightblue}{cmyk}{0.83,0.24,0,0.12}
+\definecolor{lightblue}{rgb}{0.145,0.6666,1}
+
+% Draw a video
+\newlength{\FSZ}
+\newcommand{\drawvideo}[3]{% [0 0.25 0.5 0.75 1 1.25 1.5]
+   \noindent\pgfmathsetlength{\FSZ}{\linewidth/#2}
+   \begin{tikzpicture}[outer sep=0pt,inner sep=0pt,x=\FSZ,y=\FSZ]
+   \draw[color=lightblue!50!black] (0,0) node[outer sep=0pt,inner sep=0pt,text width=\linewidth,minimum height=0] (video) {\noindent#3};
+   \path [fill=lightblue!50!black,line width=0pt] 
+     (video.north west) rectangle ([yshift=\FSZ] video.north east) 
+    \foreach \x in {1,2,...,#2} {
+      {[rounded corners=0.6] ($(video.north west)+(-0.7,0.8)+(\x,0)$) rectangle +(0.4,-0.6)}
+    }
+;
+   \path [fill=lightblue!50!black,line width=0pt] 
+     ([yshift=-1\FSZ] video.south west) rectangle (video.south east) 
+    \foreach \x in {1,2,...,#2} {
+      {[rounded corners=0.6] ($(video.south west)+(-0.7,-0.2)+(\x,0)$) rectangle +(0.4,-0.6)}
+    }
+;
+   \foreach \x in {1,...,#1} {
+     \draw[color=lightblue!50!black] ([xshift=\x\linewidth/#1] video.north west) -- ([xshift=\x\linewidth/#1] video.south west);
+   }
+   \foreach \x in {0,#1} {
+     \draw[color=lightblue!50!black] ([xshift=\x\linewidth/#1,yshift=1\FSZ] video.north west) -- ([xshift=\x\linewidth/#1,yshift=-1\FSZ] video.south west);
+   }
+   \end{tikzpicture}
+}
+
+\hyphenation{resolution occlusions}
+%%
+\begin{poster}%
+  % Poster Options
+  {
+  % Show grid to help with alignment
+  grid=false,
+  % Column spacing
+  colspacing=1em,
+  % Color style
+  bgColorOne=white,
+  bgColorTwo=white,
+  borderColor=lightblue,
+  headerColorOne=black,
+  headerColorTwo=lightblue,
+  headerFontColor=white,
+  boxColorOne=white,
+  boxColorTwo=lightblue,
+  % Format of textbox
+  textborder=roundedleft,
+  % Format of text header
+  eyecatcher=true,
+  headerborder=closed,
+  headerheight=0.1\textheight,
+%  textfont=\sc, An example of changing the text font
+  headershape=roundedright,
+  headershade=shadelr,
+  headerfont=\Large\bf\textsc, %Sans Serif
+  textfont={\setlength{\parindent}{1.5em}},
+  boxshade=plain,
+%  background=shade-tb,
+  background=plain,
+  linewidth=2pt
+  }
+  % Eye Catcher
+  {\includegraphics[height=7em]{images/shadow.jpg}} 
+  % Title
+  {\bf\textsc{Lazy Shadowing: A scalable, energy-aware resilience
+  framework for large scale systems}\vspace{0.5em}}
+  % Authors
+  {\textsc{Xiaolong Cui, Rami Melhem, and Taieb Znati}}
+  % University logo
+  {% The makebox allows the title to flow into the logo, this is a hack because of the L shaped logo.
+    \includegraphics[height=7.0em]{images/logo.jpg}
+  }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Now define the boxes that make up the poster
+%%%---------------------------------------------------------------------------
+%%% Each box has a name and can be placed absolutely or relatively.
+%%% The only inconvenience is that you can only specify a relative position 
+%%% towards an already declared box. So if you have a box attached to the 
+%%% bottom, one to the top and a third one which should be in between, you 
+%%% have to specify the top and bottom boxes before you specify the middle 
+%%% box.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %
+    % A coloured circle useful as a bullet with an adjustably strong filling
+    \newcommand{\colouredcircle}{%
+      \tikz{\useasboundingbox (-0.2em,-0.32em) rectangle(0.2em,0.32em); \draw[draw=black,fill=lightblue,line width=0.03em] (0,0) circle(0.18em);}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{Problem}{name=problem,column=0,row=0,span=2}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  As the demand for computing capability continues to increase, there will be a multifold increase in the number of computing, storage and communication components in large scale systems, such as HPC supercomputers and cloud data centers. This increase has two direct implications:
+
+   \begin{enumerate}\compresslist
+      \item Increased failure rate
+      \item Increased energy consumption
+   \end{enumerate}
+   \vspace{-0.2em}
+  \begin{multicols}{2}
+     \includegraphics[width=0.4\textwidth]{images/failure.png}
+     \vspace{-1em}
+     \begin{center}
+      Failure
+     \end{center}
+     \includegraphics[width=0.4\textwidth]{images/energy.png}
+     \vspace{-1em}
+     \begin{center}
+      Energy
+     \end{center}
+  \end{multicols}
+ }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  \headerbox{Contributions}{name=contribution,column=1,row=0,bottomaligned=problem}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Our main contributions are
+%   \begin{enumerate}\compresslist
+%   \item A formal definition of Shadow Replication, which is a scalable, energy-aware fault tolerance approach for large-scale systems.
+%   \item A reward-based optimization model to explore the applicability of Shadow Replication to cloud computing.
+%   \item An evaluation framework to analyze profit and energy savings achievable by Shadow Replication, compared to existing resilience methods.
+%   \end{enumerate}
+%   \vspace{0.3em}
+%  }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\headerbox{Implementation}{name=analytical model,column=2,span=2,row=0,bottomaligned=problem}{
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+      \begin{multicols}{2}
+      \textbf{Collocation} is used to achieve the desired execution rates of the shadow processes. %When multiple processes collocate on the same core, they execute in a time-sharing manner. Collocation reduces the number of cores to be used, thus reduces energy consumption corrrespondingly.
+      \vspace{10pt}
+
+       \includegraphics[width=0.45\textwidth]{images/sc_mapping.pdf}
+       \vspace{-1.8em}
+        \begin{center}
+          An example of collocation.
+        \end{center}
+       \vspace{5pt}
+
+       \textbf{Leaping Shadows} is an optimization for tightly-coupled parallel applications. %During the recovery time after a failure, the shadows leap forward by aligning with their corresponding mains to achive forward progress.
+
+       \includegraphics[width=0.32\textwidth]{images/jump.pdf}
+       %\vspace{-1.8em}
+        \begin{center}
+          Leaping shadows.
+        \end{center}
+      \end{multicols}
+      \vspace{-0.6em}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{Future Work}{name=references,column=0,above=bottom}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    There are two directions:
+
+    \begin{enumerate}\compresslist
+      \item Build a simulator to validate the model
+      \item Implement a prototype for Lazy Shadowing and evaluate the performance
+      \vspace{0.3em}
+   \end{enumerate}
+  }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{Conclusion}{name=questions,column=1,span=2,aligned=references,above=bottom}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{multicols}{2}
+    Understanding the interplay between fault-tolerance and energy consumption is critical for the viability of future large scale systems. To this end, we propose Lazy Shadowing as a scalable, energy-aware fault-tolerance approach. The beauty of Lazy Shadowing is its ability to explore a parameterized tradeoff between hardware and time redundancy to tolerate failures and balance between response time and energy consumption.
+  \end{multicols}
+   \vspace{0.3em}
+  }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{Acknowledgement}{name=references,column=3,aligned=references,above=bottom}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  This research is based in part upon work supported by the National Science Foundation under Grant Number CNS12-53218 and CNS12-52306.
+   \vspace{0.3em}
+  }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\headerbox{Evaluation}{name=speed,column=2,span=2,row=0,below=analytical model,above=references}{
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  Compared to existing fault tolerance methods, Lazy Shadowing can achieve 20\% energy saving with reduced solution time at scale.
+  \vspace{-2pt}
+    \begin{multicols}{2}
+        %\begin{tabular}
+        \includegraphics[width=0.35\textwidth]{images/t32.png} 
+        
+        \vspace{3pt}
+        %\includegraphics[width=0.4\textwidth]{images/fcount.png} 
+        
+
+        \includegraphics[width=0.35\textwidth]{images/ne5.png} 
+        
+        \includegraphics[width=0.35\textwidth]{images/e32.png} 
+        \vspace{3pt}
+
+        %\includegraphics[width=0.4\textwidth]{images/fcount.png} 
+        
+        \includegraphics[width=0.35\textwidth]{images/s_power_5.png} 
+        
+    \end{multicols}
+   \vspace{0.0em}
+  }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{Method}{name=method,column=0,span=2,below=problem,bottomaligned=speed}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  The basic tenet of Lazy Shadowing is to associate with each main process a suite of shadow processes, whose size depends on the criticality of the application and the reliability of the underlying system. The shadows execute simultaneously with the mains, but at a slower speed to save energy. 
+    \begin{multicols}{2}
+     \includegraphics[width=0.45\textwidth]{images/succ_new.pdf}
+     \vspace{-1em}
+     \begin{center}
+      Main process successful completion
+     \end{center}
+     \includegraphics[width=0.45\textwidth]{images/fail_new.pdf}
+     \vspace{-1em}
+     \begin{center}
+      Main process failure
+     \end{center}
+  \end{multicols}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  \headerbox{Illustration}{name=illustration,column=1,below=problem,bottomaligned=speed}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \noindent\center\includegraphics[width=0.8\textwidth]{images/example1.pdf}\\
+% \vspace{-1.3em}
+% \center{Without failure}
+% \center\includegraphics[width=0.85\textwidth]{images/example2.png}\\
+% \vspace{-1.3em}
+%  \center{With failure}
+%  }
+
+\end{poster}
+
+\end{document}

@@ -25,7 +25,7 @@ Response time is always an important factor to consider in HPC as system efficie
 			\includegraphics[width=\columnwidth]{figures/alpha_2.png}
 		}
 	\end{center}
-	\caption{Energy consumption comparison for various response time laxity. W=240 hours, MTBF=5 years.}
+	\caption{Normalized energy consumption for various response time laxities. W=240 hours, MTBF=5 years.}
 	\label{fig:alpha}
 \end{figure}
 
@@ -39,11 +39,11 @@ The objective of lazy shadowing is to minimize the expected energy consumption, 
 	\begin{center}
 		\includegraphics[width=\columnwidth]{figures/vulnerability.png}
 	\end{center}
-	\caption{Energy consumption consumption for various task vulnerabilities. W=240 hours, $\rho$=0.5.}
+	\caption{Normalized energy consumption for various task vulnerabilities. $\rho$=0.5.}
 	\label{fig:vulnerability}
 \end{figure}
 
-The results of the sensitivity study to task vulnerability, when $W=240$ hours and $\rho=0.5$, are shown in Figure~\ref{fig:vulnerability}. From left to right, the task vulnerability decreases, meaning that the likelyhood of failure decreases. We can see that for all task vulnerabilities considered, both lazy shadowing and stretched replication can achieve significant energy savings over state machine replication. This indicates that the proposed approaches are scalable to future large-scale and failure-prone HPC environments. As task vulnerability decreases, lazy shadowing and stretched replication gains more energy savings. This is because the probability that the main process can complete the task without failure increases when task vulnerability decreases, increasing the probability that the shadow process can be terminated early to save energy. Again, lazy shadowing outperforms stretched replication because of its more flexibility in controling the execution rate of its shadow process.
+The results of the sensitivity study to task vulnerability, when $\rho=0.5$, are shown in Figure~\ref{fig:vulnerability}. From left to right, the task vulnerability decreases, meaning that the likelyhood of failure decreases. We can see that for all task vulnerabilities considered, both lazy shadowing and stretched replication can achieve significant energy savings over state machine replication. This indicates that the proposed approaches are scalable to future large-scale and failure-prone HPC environments. As task vulnerability decreases, lazy shadowing and stretched replication gains more energy savings. This is because the probability that the main process can complete the task without failure increases when task vulnerability decreases, increasing the probability that the shadow process can be terminated early to save energy. Again, lazy shadowing outperforms stretched replication because of its more flexibility in controling the execution rate of its shadow process.
 
 \subsection{Static power ratio}
 The computing nodes of each supercomputers have different power consumption characteristics, depending on the various computer organization and architecture technologies. Since our approaches are based on DVFS to control the process execution rates, the power consumption is partitioned into dynamic power, which has a superlinear relationship with the execution rate, and static power, which is unaffected by the execution rate. Static power ratio is an effecitve way to abstract the power saving ability of the proposed approaches on different machines.
@@ -52,7 +52,7 @@ The computing nodes of each supercomputers have different power consumption char
 	\begin{center}
 		\includegraphics[width=\columnwidth]{figures/rho.png}
 	\end{center}
-	\caption{Energy consumption consumption for various static power ratios. W=240 hours, $\alpha$=2, MTBF=5 years.}
+	\caption{Normalized energy consumption for various static power ratios. W=240 hours, $\alpha$=2, MTBF=5 years.}
 	\label{fig:rho}
 \end{figure}
 

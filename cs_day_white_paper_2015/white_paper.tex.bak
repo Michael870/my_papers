@@ -1,0 +1,233 @@
+% Use only LaTeX2e, calling the article.cls class and 12-point type.
+
+\documentclass[11pt]{article}
+
+% Users of the {thebibliography} environment or BibTeX should use the
+% scicite.sty package, downloadable from *Science* at
+% www.sciencemag.org/about/authors/prep/TeX_help/ .
+% This package should properly format in-text
+% reference calls and reference-list numbers.
+
+%\usepackage{scicite}
+
+% Use times if you have the font installed; otherwise, comment out the
+% following line.
+
+%\usepackage{times}
+\usepackage{cite}
+%\usepackage{epsfig}
+\usepackage[tight,footnotesize]{subfigure}
+\usepackage{calc}
+\usepackage{amstext}
+\usepackage[cmex10]{amsmath}
+%\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{pslatex}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage[small]{caption}
+\usepackage{booktabs}
+\usepackage{epstopdf}
+\usepackage{float}
+\usepackage[margin=1.0in]{geometry}
+%\usepackage{flushend}
+
+% The preamble here sets up a lot of new/revised commands and
+% environments.  It's annoying, but please do *not* try to strip these
+% out into a separate .sty file (which could lead to the loss of some
+% information when we convert the file to other formats).  Instead, keep
+% them in the preamble of your main LaTeX source file.
+
+
+% The following parameters seem to provide a reasonable page setup.
+
+%\topmargin -1.5cm
+%\oddsidemargin 0.2cm
+%\textwidth 16cm 
+%\textheight 22cm
+%\footskip 0.0cm
+
+
+%The next command sets up an environment for the abstract to your paper.
+
+\newenvironment{sciabstract}{%
+\begin{quote} \bf}
+{\end{quote}}
+
+
+% If your reference list includes text notes as well as references,
+% include the following line; otherwise, comment it out.
+
+\renewcommand\refname{References}
+
+% The following lines set up an environment for the last note in the
+% reference list, which commonly includes acknowledgments of funding,
+% help, etc.  It's intended for users of BibTeX or the {thebibliography}
+% environment.  Users who are hand-coding their references at the end
+% using a list environment such as {enumerate} can simply add another
+% item at the end, and it will be numbered automatically.
+
+\newcounter{lastnote}
+\newenvironment{scilastnote}{%
+\setcounter{lastnote}{\value{enumiv}}%
+\addtocounter{lastnote}{+1}%
+\begin{list}%
+{\arabic{lastnote}.}
+{\setlength{\leftmargin}{.22in}}
+{\setlength{\labelsep}{.5em}}}
+{\end{list}}
+
+
+% Include your paper's title here
+%\vskip -2in
+\title{Energy-aware Resilience Approaches for Large-scale Systems} 
+
+
+% Place the author information here.  Please hand-code the contact
+% information and notecalls; do *not* use \footnote commands.  Let the
+% author contact information appear immediately below the author names
+% as shown.  We would also prefer that you don't change the type-size
+% settings shown here.
+
+\author
+{Xiaolong Cui\\
+\normalsize{mclarencui@cs.pitt.edu}\\
+%\\
+%\normalsize{$^\ast$To whom correspondence should be addressed; E-mail:  jsmith@wherever.edu.}
+}
+
+% Include the date command, but leave its argument blank.
+
+\date{}
+
+
+
+%%%%%%%%%%%%%%%%% END OF PREAMBLE %%%%%%%%%%%%%%%%
+
+
+
+\begin{document} 
+
+% Double-space the manuscript.
+
+%\baselineskip24pt
+
+% Make the title.
+
+\maketitle 
+
+
+
+% Place your abstract within the special {sciabstract} environment.
+
+%\begin{sciabstract}
+%  This document presents a number of hints about how to set up your
+%  {\it Science\/} paper in \LaTeX\ .  We provide a template file,
+%  \texttt{scifile.tex}, that you can use to set up the \LaTeX\ source
+%  for your article.  An example of the style is the special
+%  \texttt{\{sciabstract\}} environment used to set up the abstract you
+%  see here.
+%\end{sciabstract}
+
+
+
+% In setting up this template for *Science* papers, we've used both
+% the \section* command and the \paragraph* command for topical
+% divisions.  Which you use will of course depend on the type of paper
+% you're writing.  Review Articles tend to have displayed headings, for
+% which \section* is more appropriate; Research Articles, when they have
+% formal topical divisions at all, tend to signal them with bold text
+% that runs into the paragraph, for which \paragraph* is the right
+% choice.  Either way, use the asterisk (*) modifier, as shown, to
+% suppress numbering.
+
+\section{Introduction}
+\label{sec:intro}
+\input{intro}
+
+\section{Methodology}
+\label{sec:progress}
+\input{progress}
+
+%\section{Future directions}
+%\label{sec:future}
+%\input{future}
+
+\section{Conclusion}
+\label{sec:conclusion}
+\input{conclusion}
+
+\section*{Acknowledgement}
+
+
+The author would like to thank Dr. Bryan Mills for developing the initial analytical model (modeling of a single task) for Shadow Computing with DVFS. For clarification, the author performed all the other work presented in this paper.
+
+\bibliography{white_paper}
+
+\bibliographystyle{IEEEtran}
+
+
+
+% Following is a new environment, {scilastnote}, that's defined in the
+% preamble and that allows authors to add a reference at the end of the
+% list that's not signaled in the text; such references are used in
+% *Science* for acknowledgments of funding, help, etc.
+
+%\begin{scilastnote}
+%\item We've included in the template file \texttt{scifile.tex} a new
+%environment, \texttt{\{scilastnote\}}, that generates a numbered final
+%citation without a corresponding signal in the text.  This environment
+%can be used to generate a final numbered reference containing
+%acknowledgments, sources of funding, and the like, per {\it Science\/}
+%style.
+%\end{scilastnote}
+
+
+
+
+% For your review copy (i.e., the file you initially send in for
+% evaluation), you can use the {figure} environment and the
+% \includegraphics command to stream your figures into the text, placing
+% all figures at the end.  For the final, revised manuscript for
+% acceptance and production, however, PostScript or other graphics
+% should not be streamed into your compliled file.  Instead, set
+% captions as simple paragraphs (with a \noindent tag), setting them
+% off from the rest of the text with a \clearpage as shown  below, and
+% submit figures as separate files according to the Art Department's
+% instructions.
+
+
+%\clearpage
+
+%\noindent {\bf Fig. 1.} Please do not use figure environments to set
+%up your figures in the final (post-peer-review) draft, do not include graphics in your
+%source code, and do not cite figures in the text using \LaTeX\
+%\verb+\ref+ commands.  Instead, simply refer to the figure numbers in
+%the text per {\it Science\/} style, and include the list of captions at
+%the end of the document, coded as ordinary paragraphs as shown in the
+%\texttt{scifile.tex} template file.  Your actual figure files should
+%be submitted separately.
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
