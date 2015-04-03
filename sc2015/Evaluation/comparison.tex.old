@@ -1,0 +1,100 @@
+To study the efficiency of Lazy Shadowing in terms of completion time and energy consumption, we compare Lazy Showing with traditional process replication using the analytical models developed in Section~\ref{sec:analytical}. Our models are generic with no assumption about failure probability distribution. However, since failures happen randomly attributing to multiple complex factors, the expectation of the combined effect of all failures on an application's execution is like that they are uniformly distributed~\cite{daly_fgcs_2006}. Specifically, each $\Delta_i = w/(k+1)$, and $T_c$ can be rewritten as $w + w*(1-\sigma_s)*\frac{k}{k+1}$ for Lazy Shadowing. Further, we assume that each shadow process on a shadow core gets a fair share of the core's execution rate so that $\sigma_s = \frac{1}{\alpha}$. One may argue that the execution speed of the shadows
+should be degraded because of increased memory pressure or communication overhead. Agreeing with that, however, we argue that 
+time sharing, which is the basic mechanism of multi-programming OS, is able to overlap computation and communication and improve system efficiency. For completeness, though, we have also studied this effect using a penalty model, to be discussed later. 
+
+To calculate the expected energy consumption for Lazy Shadowing with Equation~\ref{eq:exp_energy2}, we assume that the dynamic power during shadow leaping is twice of that during normal execution, i.e., $p_{l}=2*p_d$, and the time for shadow leaping through RDMA is half of the time required for recovery, i.e., $E[T_l]=0.5*(E[T_c] - w)$.
+
+The expected energy consumption and completion time with different application failure probabilities are shown in Figure~\ref{fig:comp_vary_fail}, when there are 10,000 cores and total workload of 10,000 hours. Figure~\ref{fig:energy_local} and \ref{fig:energy_global} show the expected energy consumption of Lazy Shadowing, with low and high application failure probabilities considered respectively. 
+The reason that we do not consider application failure probabilities higher than 50\% is that, under the protection of Lazy Shadowing, even extreme scale applications are not likely to encounter application failures (Figure~\ref{fig:app_fail_prob}). 
+%From Figure~\ref{fig:app_fail_prob} we have seen that even with extreme scale applications the failure probability is still under 50\%, so we do not study the cases with higher probabilities. 
+Although main to shadow ratio $\alpha$ has little effect on the application failure probability, it largely impacts the completion time and energy consumption. To study the sensitivity to $\alpha$, we vary $\alpha$ from 1 to 9 with the understanding that it is unrealistic to collocate too many shadows on each shadow core. In both Figure~\ref{fig:energy_local} and \ref{fig:energy_global}, we plot 4 lines corresponding to 4 values of $\alpha$, each normalized to expected energy consumption (or completion time) of process replication, which is equivalent to Lazy Shadowing with $\alpha=1$. It is clear that the energy saving by Lazy Shadowing increases with $\alpha$. 6\%-9\% of energy saving compared to process replication can be achieved when $\alpha=3$, while 20\% can be achieved when $\alpha=9$. The main reason is that increasing $\alpha$ effectively leads to allocation of more cores for main processes and reduction of the workload per each process, thus allowing the application to complete earlier, as shown in Figure~\ref{fig:time_local} and \ref{fig:time_global}. 
+
+\begin{figure*}[t]
+	\begin{center}
+		\subfigure[Normalized expected energy with low failure probability.]
+		{
+			\label{fig:energy_local}
+			\includegraphics[width=0.45\textwidth]{Figures/energy_local.pdf}
+		}
+		\subfigure[Normalized expected energy with high failure probability.]
+		{
+			\label{fig:energy_global}
+			\includegraphics[width=0.45\textwidth]{Figures/energy_global.pdf}
+		}
+		\subfigure[Normalized expected time with low failure probability.]
+		{
+			\label{fig:time_local}
+			\includegraphics[width=0.45\textwidth]{Figures/time_local.pdf}
+		}
+		\subfigure[Normalized expected time with high failure probability.]
+		{
+			\label{fig:time_global}
+			\includegraphics[width=0.45\textwidth]{Figures/time_global.pdf}
+		}
+	\end{center}
+	\caption{Comparison to process replication. $W$=10000 hours, $N$=10000, $\rho$=0.5.}
+	\label{fig:comp_vary_fail}
+\end{figure*}
+
+It may seem that Lazy Shadowing achieves energy saving at the cost of completion time. A careful look at Figure~\ref{fig:time_local}, however, reflects that Lazy Shadowing can also achieve faster completion time than process replication when $\alpha=9$ and application failure probability is low. Furthermore, we can conclude from Figure~\ref{fig:app_fail_prob} that most applications are expected to have low failure probabilities when Lazy Shadowing is used.
+At the same time, Figure~\ref{fig:time_global} shows that Lazy Shadowing has good scalability even though it may need more completion time than process replication. Especially, When setting $\alpha=9$, Lazy Shadowing is able to keep the delay below 5\% compared to process replication. The reason is that the shadows can recover failures efficiently, and maintain an upper bound on the incurred delay, as discussed in Section~\ref{anal_time}. To see this more clearly, we plot in Figure~\ref{fig:time_k} the completion time of Lazy Shadowing normalized to that of process replication for different number of failures during the execution. When failures are rare, Lazy Shadowing has the potential to complete earlier than process replication. Although Lazy Shadowing loses to process replication as the number of failures increase, it flattens out quickly and keeps the difference within a negligible percentage.  
+
+\begin{figure}[t]
+	\begin{center}
+		\includegraphics[width=\columnwidth]{Figures/time_k.pdf}
+	\end{center}
+	\caption{Normalized completion time for different number of failures.}
+	\label{fig:time_k}
+\end{figure}
+
+We have also tested other values for $W$ and $N$ for the comparison between Lazy Shadowing and process replication. Especially, we fix $N=10,000$ and vary $W$ such that the workload per process are increased to 10 hours and 24 hours. In addition, we increase $N$ to 1 million for the consideration of extreme scale computing. However, it turns out that the results are similar to those shown in Figure~\ref{fig:comp_vary_fail}, with the largest difference being within 2\%. This again shows the excellent scalability of Lazy Shadowing, attributing to the techniques of collocation and shadow leaping. 
+
+With various architectures and organizations, servers deployed at
+different supercomputers have different characteristics in terms of
+power consumption. The static power ratio $\rho$ is used to abstract the
+amount of static power consumed versus dynamic power. In our comparison,
+$\rho$ does not impact the completion time, but power and energy consumption.
+Considering modern systems, we vary $\rho$ from 0.3 to 0.7 and study its effect
+on the expected energy consumption. The results are shown in 
+Figure~\ref{fig:power_ratio}. As expected, Lazy Shadowing can achieve
+more energy saving when static power ratio is low, since it saves dynamic 
+power but not static power. When static power ratio is low ($\rho=0.3$), Lazy Shadowing
+is able to save 26\%-29\% of energy. The savings decreases to 10\%-13\% when $\rho$ reaches 0.7. Although the comparison at high application
+failure probabilities are not shown, it follows the same characteristics as shown in 
+Figure~\ref{fig:comp_vary_fail} because of Lazy Shadowing's scalability.
+
+\begin{figure}[t]
+	\begin{center}
+		\includegraphics[width=\columnwidth]{Figures/power_ratio}
+	\end{center}
+	\caption{The impact of static power ratio on energy consumption. $W$=10000 hours, $N$=10000, $\alpha$=9.}
+	\label{fig:power_ratio}
+\end{figure}
+
+The last study, as shown in Figure~\ref{fig:comp_vary_fail_speed}, is conducted to capture the impact on the 
+performance of Lazy Shadowing brought by 
+collocation overhead. We re-model the speed of shadows as $\sigma_s=\frac{1}{\alpha^{1.5}}$ to simulate the 
+cache miss rate effect. As expected, both completion time and energy consumption are penalized because
+of slowing down of the shadows. It is surprising, however, that Lazy Shadowing with $\alpha=3$ is impacted by the 
+most, while when $\alpha=9$, which means collocating more shadows on each shadow core, is slightly influenced. After careful analysis,
+we realize that the reason is $\alpha=3$ had the largest values for completion time and energy consumption. Even the percentage of increase after adding the penalty is the smallest, the absolute increase is still the largest. 
+When $\alpha=9$, Lazy Shadowing can still achieve 15\%-20\% energy saving with less than 7\% increase in completion time. 
+
+\begin{figure*}[t]
+	\begin{center}
+		\subfigure[Normalized expected energy with low failure probability.]
+		{
+			\label{fig:energy_local_speed}
+			\includegraphics[width=0.45\textwidth]{Figures/energy_local_speed.pdf}
+		}
+		\subfigure[Normalized expected time with low failure probability.]
+		{
+			\label{fig:energy_global_speed}
+			\includegraphics[width=0.45\textwidth]{Figures/time_local_speed.pdf}
+		}
+	\end{center}
+	\caption{Simulating the impact of collocation on shadow execution speed with $\sigma_s=\frac{1}{\alpha^{1.5}}$. $W$=10000 hours, $N$=10000, $\rho$=0.5.}
+	\label{fig:comp_vary_fail_speed}
+\end{figure*}
+
+

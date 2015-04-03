@@ -1,0 +1,72 @@
+Application failure, which forces the execution to start over, is inevitable even when every process is replicated. Lazy Shadowing is able to 
+tolerate one failure in each shadowed set, and the second failure in any shadowed set implies the need to restarting the execution from the very beginning. However, Lazy Shadowing is orthogonal to checkpointing in 
+the sense that we can combine the two, to avoid rolling the execution back to the very beginning when application failure occurs.
+
+Since each process is replicated with a shadow, Lazy Shadowing has the potential to significantly 
+increase the Mean Number of Failures To Interrupt (MNFTI), i.e., the average number of core failures until application failure occurs, and Mean Time To Interrupt (MTTI), i.e., the average time elapsed until application failure occurs. 
+Therefore, the checkpointing interval should be increased to a large extent when checkpointing is combined with Lazy Shadowing. Furthermore, if the resulted checkpointing interval is 
+larger than the completion time of the application, then checkpointing may not be used at
+all. 
+%Therefore, in this subsection, we study the reliability benefits that Lazy Shadowing could 
+%introduce. Specifically, we study the application's MNFTI (and MTTI) with Lazy Shadowing.
+In the following, the first question to study is the new MNFTI when Lazy Shadowing is used. 
+
+
+The impact of process replication on MNFTI has been studied in~\cite{casanova_inria_2012}. Our problem
+is equivalent with the difference that our work can tolerate one failure in each shadowed 
+set while~\cite{casanova_inria_2012} can tolerate one failure in each replica-group, when each process
+is replicated once. 
+Therefore, we can directly apply the methodology in~\cite{casanova_inria_2012} to our case, and the MNFTI
+with Lazy Shadowing for different number of shadowed sets ($S$) is shown in Table~\ref{tbl:mnfti}. 
+%The MTTI with Lazy Shadowing is not shown here because it depends not only on the number of cores, but also on the shadowed set size chosen. However, results in \cite{casanova_inria_2012} reflect that the MTTI can be increased to the order of tens of hours from ten minutes (without use of replication) assuming the core level MTTI is 25 years. This 
+%confirms our previous prediction that Lazy Shadowing can significantly 
+%increase the application's MNFTI and MTTI, and also implies that shadowed set rejuvenation may not be necessary.
+Note that when processes are not replicated, every failure would interrupt the application, i.e., MNFTI=1, so MNFTI can be significantly increased by Lazy Shadowing. 
+At the same time, it is projected that an extreme-scale application's MTTI can be increased to tens of hours from minutes assuming each core's MTBF is 25 years.
+
+\begin{table}[b!]
+	\caption{Application's MNFTI when Lazy Shadowing is used. Results are independent of $\alpha$. }
+	\centering
+	\small
+	\begin{tabular}{|c|c|c|c|c|c|c|c|}
+		\hline
+		$S$ & $2^{0}$ & $2^{1}$ & $2^{2}$ & $2^{3}$ & $2^{4}$ & $2^{5}$ & $2^{6}$ \\
+		\hline
+		MNFTI & 3.0 & 3.7 & 4.7 & 6.1 & 8.1 & 11.1 & 15.2\\
+		\hline\hline
+		$S$ & $2^{7}$ & $2^{8}$ & $2^{9}$ & $2^{10}$ & $2^{11}$ & $2^{12}$ & $2^{13}$ \\
+		\hline
+		MNFTI & 21.1 & 29.4 & 41.1 & 57.7 & 81.2 & 114.4 & 161.4 \\
+		\hline\hline
+		$S$ & $2^{14}$ & $2^{15}$ & $2^{16}$ & $2^{17}$ & $2^{18}$ & $2^{19}$ & $2^{20}$ \\
+		\hline
+		MNFTI & 227.9 & 321.8 & 454.7 & 642.7 & 908.5 & 1284.4 & 1816.0 \\
+		\hline
+	\end{tabular}
+	\label{tbl:mnfti}
+\end{table}
+
+
+Even though the above results imply that checkpointing may not be necessary when Lazy Shadowing is used, it is important to quantify the probability that an application failure would occur during the application's execution, defined as ``application failure probability". Let $f(t)$ denotes the failure probability density function of each core, and $F(t)$ be the corresponding cumulative distribution function, i.e., $F(t) = \int_0^tf(\tau)d\tau$ is the probability that a core fails in the next $t$ time. 
+Since each shadowed set can tolerate one failure, 
+then the probability that a shadowed set with $\alpha$ main cores and 1 shadow core does not fail by time $t$ is the probability of no failure plus the probability of one failure, i.e., 
+%\begin{equation}
+%	G(t, \alpha) = \Big(1-F(t)\Big)^{\alpha+1} + {{\alpha+1} \choose 1}F(t)\times \Big(1-F(t)\Big)^{\alpha}
+%\end{equation}
+\begin{equation}
+	P_g = \Big(1-F(t)\Big)^{\alpha+1} + {{\alpha+1} \choose 1}F(t)\times \Big(1-F(t)\Big)^{\alpha}
+\end{equation}
+and the probability that the application using $N$ cores fails within $t$ time is the complement of the probability that
+none of the shadowed sets fails, i.e.,
+%\begin{equation}
+%	R(t, N, \alpha) = 1 - \Big(G(t, \alpha)\Big)^{\frac{N}{\alpha+1}}
+%\end{equation}
+\begin{equation}
+	P_a = 1 - ({P_g})^{S}
+\end{equation}
+where $S=\frac{N}{\alpha+1}$ is the number of shadowed sets.
+
+Since the application only fails during its execution, we can calculate the application failure probability using $t$ equal to the expected completion time of the application. We will develop the model for the expected completion time in the next subsection.
+%that $T_c$ is a function of $W$, $N$, $\alpha$. As a result, the application failure probability can be expressed as $R'(W, N, \alpha)$.
+
+%With $R(W, N, \lambda, S)$, we can study the behavior of lazy shadowing under a configuration of ($W$, $N$, application failure probability), for any failure distribution $f(t)$, e.g., exponential or weibull. However, there are two problems now: 1) The computation involved is so complicated that MatLab cannot give accurate results; 2) we don't have the analytical model of expected completion time $T_c$ assuming exponential or weibull failure distribution. 

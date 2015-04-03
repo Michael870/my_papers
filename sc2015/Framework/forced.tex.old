@@ -1,0 +1,48 @@
+
+
+Shadow leaping induced by a failure release the buffer storage dedicated for holding the messages that will be consumed by the slow shadows. However, in the absence of failures, the size of the message buffers continuously increases.   
+One method for working with limited buffer capacities is to set a lower bound on the speed of
+the shadows. This bound forces the shadows to consume messages at a
+rate that prevents buffer overflow.
+Another approach is to force the shadows to leap and catch up with their mains when the buffer utilization reaches a certain threshold.   
+We call this technique forced shadow leaping, which applies a mechanism similar to failure induced shadow leaping, but is invoked only if no failure occurs for an extended period of time. 
+
+\begin{table}%{r}{6.0cm}
+	\begin{center}
+		\begin{tabular}{|c|c|}
+			\hline
+			Application & Message Rate(Bps) \\
+			\hline
+			CTH	& $5.42\times10^{7}$\\
+			miniFE	& $2.58\times10^6$\\
+			LAMMPS	& $2.16\times10^6$\\
+			AMG     & $9.66\times10^5$\\
+			HPCCG	& $7.43\times10^5$\\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{HPC workloads maximum message rates.}
+	\label{tab:mesglog}
+\end{table} 
+
+To evaluate the buffer size constraints, we ran a number of representative HPC workloads
+and used the rMPI replication library to collect the mean message logging growth rate
+of the application.  These workloads include the production
+applications CTH~\cite{Hertel:93:CTH}, a shock physics code,
+LAM\-MPS~\cite{Plimpton:95:Fast}, the molecular dynamic code, and
+the algebraic multi-grid solver AMG~\cite{LLNL:13:AMG}.  We also include results
+from two of the mini-applications from Sandia's mantevo suite
+\cite{SNL:10:Mantevo}: HPCCG (a conjugate gradient solver) and miniFE
+(an implicit finite element method).  These applications represent a
+range of computational techniques, which are frequently run at very large
+scales on leadership class systems, and represent key simulation
+workloads for the U.~S.~DoE.  
+We measured the maximum
+message log growth rate for each application, shown
+in Table~\ref{tab:mesglog}.  From this table, we see that message log growth
+rates can vary dramatically.  For example, CTH, which does a good deal
+of bulk data transfer, has the largest growth rate of the applications
+tested, a measured $54$MB/sec, while AMG, which does much less
+communication, has a log growth rate of less than $1$MB/sec.  
+The message log rate increases at $1-\sigma_s$ of the HPC message rate.
+
