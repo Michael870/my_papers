@@ -43,9 +43,9 @@ Assuming that each task is assigned to execute on a core at a maximum speed $\si
 
 
 
-\subsection {Leaping Shadows model}
+\subsection {Leaping Shadows}
 
-The execution of an application can be carried out by simultaneously running all main and shadow processes for all the tasks. Let $M(i)$ denote the main process executing the $i^{th}$ task $T(i)$ of the application, and $S(i)$ its associated shadow. The task execution is divided into a set of execution phases, each extending over a synchronization interval. In the absence of failure, the behavior of a main  and its leaping shadow is identical to the behavior of a main and its lazy shadow, depicted in Figure \ref{fig:sync}. Figure~\ref{fig:leap} shows the behavior of the main processes and their associated leaping shadows, upon the occurrence of a failure at time $t_f$. Figure~\ref{fig:leap}(a) depicts the execution dynamics of a failing main and its associated shadow. Upon failure of the main process, the associated shadow continues execution, but at a higher rate, until it reaches its synchronization barrier at time $t_r$. 
+The execution of an application can be carried out by simultaneously running all main and shadow processes for all the tasks. Let $M(i)$ denote the main process executing the $i^{th}$ task $T(i)$ of the application, and $S(i)$ its associated shadow. The task execution is divided into a set of execution phases, each extending over a synchronization interval. In the absence of failure, the behavior of a main  and its leaping shadow is identical to the behavior of a main and its lazy shadow, depicted in Figure \ref{fig:sync}. Figure~\ref{fig:leap} shows the behavior of the main processes and their associated leaping shadows, assuming a failure occurrence at time $t_f$. 
 
 
 \begin{figure}[!t]
@@ -57,7 +57,8 @@ The execution of an application can be carried out by simultaneously running all
 	\label{fig:leap}
 \end{figure}
 
-Figure~\ref{fig:leap}(b) illustrates the behavior of the remaining main processes and their associated shadows. Unaware of the failed process, the remaining main processes continue executing until they reach their synchronization barriers at time $t_{sync}$. While the shadow of the failed main process progresses toward its synchronization barrier, all remaining main processes become idle until time $t_r$. It is worth noting that, given the tightly-coupled and strongly-scaled nature of the application,  synchronization points occur frequently. Consequently, the time between synchronization points is very small relative to the total execution time of the application. Therefore, if one main, M(i), fails at 
+Figure~\ref{fig:leap}(a) depicts the execution dynamics of a failing main and its associated shadow. Upon failure of the main process, the associated shadow continues execution, but at a higher rate, until it reaches its synchronization barrier at time $t_r$. 
+Figure~\ref{fig:leap}(b) illustrates the behavior of the remaining main processes and their associated shadows. Unaware of the failed process, the remaining main processes continue executing until they reach their synchronization barriers at time $t_{sync}$. While the shadow of the failed main process progresses toward its synchronization barrier, all remaining main processes become idle until time $t_r$. It is worth noting that, given the tightly-coupled and strongly-scaled nature of the application, synchronization points occur frequently. Consequently, the time between synchronization points is very small relative to the total execution time of the application. Therefore, if one main, M(i), fails at 
 time $t_f$, the remaining main processes will reach their synchronization point, shortly after the failure, specifically at at time $t_{sync} = t_f +\epsilon$, 
 where $\epsilon \approxeq 0$. The Leaping Shadows model opportunistically take advantage of the idle time, induced by the failure recovery process, to {\it leap forward} all shadows to their associated non-failing main processes, thereby saving execution time and energy, and guaranteeing forward progress. 
 After the shadow of the failing main reaches its synchronization barrier, all processes resume execution from a consistent synchronization point. This process continues until the completion of all tasks. 

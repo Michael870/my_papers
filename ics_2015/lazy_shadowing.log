@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  4 MAR 2015 11:07
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  3 APR 2015 13:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -561,7 +561,7 @@ Package pdftex.def Info: Figures/fail_new.pdf used on input line 40.
 (pdftex.def)             Requested size: 192.00073pt x 120.74559pt.
 )
 Overfull \hbox (3.909pt too wide) in paragraph at lines 187--187
-[]\secfnt EXTREME-SCALE FAULT TOL-ER-ANCE
+[]\secfnt EXTREME-SCALE FAULT TOL-ER-ANCE 
  []
 
 (./framework.tex
@@ -581,16 +581,16 @@ Package pdftex.def Info: Figures/jump.pdf used on input line 53.
 File: Figures/sc_mapping.pdf Graphic file (type pdf)
 
 <use Figures/sc_mapping.pdf>
-Package pdftex.def Info: Figures/sc_mapping.pdf used on input line 72.
+Package pdftex.def Info: Figures/sc_mapping.pdf used on input line 73.
 (pdftex.def)             Requested size: 240.0pt x 128.85925pt.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 75.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 76.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 75.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 76.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 90.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 91.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <6.25002> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 90.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 91.
 
 Underfull \vbox (badness 7504) has occurred while \output is active []
 
@@ -607,7 +607,7 @@ Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                 on input line 57.
 
 ) (./Analytical/time.tex
-<Figures/progress.png, id=69, 665.48625pt x 406.51875pt>
+<Figures/progress.png, id=68, 665.48625pt x 406.51875pt>
 File: Figures/progress.png Graphic file (type png)
 
 <use Figures/progress.png>
@@ -712,39 +712,41 @@ File: Figures/s_power_5.png Graphic file (type png)
 <use Figures/s_power_5.png>
 Package pdftex.def Info: Figures/s_power_5.png used on input line 15.
 (pdftex.def)             Requested size: 240.0pt x 141.74081pt.
-) (./Evaluation/collocation.tex [8 <./Figures/nt5.png> <./Figures/ne5.png>]
-<Figures/collocation.png, id=96, 433.62pt x 257.46187pt>
+) (./Evaluation/collocation.tex
+<Figures/collocation.png, id=93, 433.62pt x 257.46187pt>
 File: Figures/collocation.png Graphic file (type png)
 
 <use Figures/collocation.png>
 Package pdftex.def Info: Figures/collocation.png used on input line 16.
 (pdftex.def)             Requested size: 240.0pt x 142.50017pt.
-)) (./conclusion.tex)
+)) [8 <./Figures/nt5.png> <./Figures/ne5.png>]
+(./conclusion.tex)
 Overfull \hbox (6.07605pt too wide) in paragraph at lines 3--211
 []\T1/ptm/m/n/9 To this end, we pro-pose a proac-tive, power-aware re-silience 
 model,
  []
 
-(./lazy_shadowing.bbl
-Underfull \vbox (badness 2409) has occurred while \output is active []
-
- [9 <./Figures/nt25.png> <./Figures/ne25.png> <./Figures/wt25.png> <./Figures/w
-e25.png> <./Figures/s_power_5.png>])
-Extra height:0.0pt when 609.8965pt
-(2)Left:609.8965pt Right:609.39285pt Output:609.8965pt
-- LAST -
-Extra skip:0.0pt
-Left:609.8965pt
-Right:609.39285pt
-Output:609.8965pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
+
+(./lazy_shadowing.bbl [9 <./Figures/nt25.png> <./Figures/ne25.png> <./Figures/w
+t25.png> <./Figures/we25.png> <./Figures/s_power_5.png>])
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:0.0pt when 587.29851pt
+(2)Left:587.29851pt Right:587.89685pt Output:587.29851pt
+(2)Left:587.89685pt Right:587.89685pt Output:587.89685pt
+- LAST -
+Extra skip:0.0pt
+Left:587.89685pt
+Right:587.89685pt
+Output:587.89685pt
  [10 <./Figures/collocation.png>] (./lazy_shadowing.aux) ) 
 Here is how much of TeX's memory you used:
  6144 strings out of 493315
  88170 string characters out of 6137904
- 185491 words of memory out of 5000000
+ 184491 words of memory out of 5000000
  9378 multiletter control sequences out of 15000+600000
  80266 words of font info for 117 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -762,7 +764,7 @@ t/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts
 urw/symbol/usyr.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/u
 tmb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
 </usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on lazy_shadowing.pdf (10 pages, 755308 bytes).
+Output written on lazy_shadowing.pdf (10 pages, 754373 bytes).
 PDF statistics:
  143 PDF objects out of 1000 (max. 8388607)
  87 compressed objects within 1 object stream
