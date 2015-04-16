@@ -13,4 +13,12 @@ Lazy Shadowing has the potential to save power compared to process replication, 
 En = N * p_s * T_{total} + N * p_d * w + S * p_{l} * T_l.
 \label{eq:exp_energy2}
 \end{equation}
-with $p_{l}$ denoting the dynamic power consumption during shadow leaping of each core and $T_l$ denoting the expected total time spent on leaping during the execution of the application. 
+with $p_{l}$ denoting the dynamic power consumption during shadow leaping of each core and $T_l$ denoting the expected total time spent on leaping during the execution of the application. Based on Equation~\ref{eq:exp_energy2} and Corrollary 1.1, we can also establish an upper bound on the expected energy consumption for lazy shadowing:
+
+\begin{theorem}
+If no subsequent failure happens before the recovery of the previous failure, then using lazy shadowing, the upper bound on expected energy onsumption is
+$(2N * p_s + N * p_d + S * p_{l})*w$.
+\end{theorem}
+\begin{proof}
+From Corrollary 1.1 we know that the delay is at most $(1-\sigma_s^b)w \le w$, so $T_{total} \le 2w$. Also, since the leaping time overlaps with the recovery time (delay), $T_l \le (1-\sigma_s^b)w \le w$. Therefore, $En = N * p_s * T_{total} + N * p_d * w + S * p_{l} * T_l \le N * p_s * (2w) + N * p_d * w + S * p_{l} * w = (2N * p_s + N * p_d + S * p_{l})*w$.
+\end{proof}

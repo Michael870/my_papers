@@ -18,7 +18,9 @@ Assuming a single failure, Lazy Shadowing can be described as follows:
 	\item A shadow process, $P_s(<\sigma_s^b$ , $\sigma_s^a>$, $w$, $t_s)$, that executes at $\sigma_s^b$ before failure, and $\sigma_s^a$ after failure, to complete a task of size $w$ at time $t_s$.% where $\sigma_s^b$ represents the execution rate before failure, $\sigma_s^a$ the execution rate after failure, $w$ is the task size, and $t_s$ is the completion time.%, which has the same workload $w$. It starts execution simultaneously with the main process at rate $\sigma_b  \le \sigma_m$, but on a different core. Upon failure of the main process, the shadow process will be designated as the new main process, with its rate switched to $\sigma_a$ to catch up. In this case, the completion time is denoted as $t_s$. 
 \end{itemize}
 
-The main process and its shadow start executing simultaneously on two different cores. The main process executes at rate $\sigma_m$, while the shadow initially executes at rate $\sigma_s^b \le \sigma_m$. %To avoid simultaneous failure, they are deployed on different cores.
+In order to deal with both permanent and temporary failures, the shadow process starts simultaneously with its associated main process, on a different node. Lazy Shadowing is able to tolerate any failure confined to a single node, including socket failure, CPU logical errors, bus errors, errors in the attached accelerators (e.g., GPUs), and even memory bit flips that exceed ECC's capacity. 
+
+The main process executes at rate $\sigma_m$, while the shadow initially executes at rate $\sigma_s^b \le \sigma_m$. %To avoid simultaneous failure, they are deployed on different cores.
 %with the main running at  
 %a rate $\sigma_m$ and the lazy shadow at a lower rate $\sigma_s \le \sigma_m$. 
 In the absence of failure, the main process completes execution at time 

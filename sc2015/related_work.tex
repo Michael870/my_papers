@@ -45,21 +45,19 @@ Furthermore, it may complicate the checkpoint writing process and requires that 
 current location of all process's checkpoints.
 
 
-Process and state machine replication have long been used to provide fault tolerance in distributed and mission critical systems. % \cite{schneider_1990_tutorial,bartlett_1981_nonstop}. 
-To ensure consistent system state, all process messages must
-be delivered to all nodes running a given process, typically done by using a message ordering protocol 
-\cite{lamport_trans_1998}. Replication can be used to detect and correct system failures that are otherwise undetectable,
-such as silent data failures \cite{ni_2013_acr} and Byzantine faults \cite{fiala_2012_sdc}. %Replication was proposed as a
-%viable alternative to checkpointing in HPC \cite{riesen_sandia_2010,lefray_2013_rsd,Cappello:09:Fault}. 
-Full and partial
-replication have also been proposed, to augment existing checkpointing techniques, and to guard
-against silent data corruption \cite{stearly_2012_partial,elliott_2012_cpr}. %There are several different implementations of
-%replication in the widely used MPI library, each with their different tradeoffs and overheads. The
-%overhead can be negligible or up to 70\% depending upon the communication patterns of the
-%application [25]. Moreover, replication alone is not enough to guarantee fault tolerance since
+Our work is based on process replication, or state machine replication, which has long been used to provide fault tolerance in distributed and mission critical systems\cite{schneider_1990_tutorial,bartlett_1981_nonstop}. Replication can be used to detect and correct system failures that are otherwise undetectable,
+such as silent data corruption \cite{ni_2013_acr} and Byzantine faults \cite{fiala_2012_sdc}. Recently, replication is proposed as a
+viable alternative to checkpointing in HPC \cite{riesen_sandia_2010,lefray_2013_rsd,Cappello:09:Fault}. 
+In addition, full and partial
+replication have also been used to augment existing checkpointing techniques, and to guard
+against silent data corruption \cite{stearly_2012_partial,elliott_2012_cpr}. There are several different implementations of
+replication in the widely used MPI library, each with their different tradeoffs and overheads. The
+overhead can be negligible or up to 70\% depending upon the communication patterns of the
+application \cite{engelmann2011redundant}. %Moreover, replication alone is not enough to guarantee fault tolerance since
 %it is possible that all nodes executing a given process could fail simultaneously, thus
 %replication is typically paired with some form of checkpointing. 
+The most relavent works to ours is redundant multi-threading (RMT) whereby one leading thread of execution is running ahead of trailing threads \cite{reinhardt2000transient,Wadden:2014:RDE:2665671.2665686}. However, our approach is different in that it tunes the execution rates of the leading and trailing threads in a finer grain, in order to achieve a "parameterized" trade-off between completion time and energy consumption. Further, we take advantage of the recovery time after each failure and "leap" the trailing threads to achieve forward progress, largely improving performance in terms of both completion time and energy consumption. This differs from RMT, of which the "leaping" of the trailing thread results in extra overhead.
 To the best of our knowledge,
 Lazy Shadowing is the first attempt to explore a state-machine replication based framework
-that provides a tradeoff between time and hardware redundancy while meeting resilience and
+that achieves a fine-grained tradeoff between time and hardware redundancy while meeting resilience and
 power requirements.
