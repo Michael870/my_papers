@@ -11,16 +11,16 @@ We use the term core to represent the computing resource allocation unit%(e.g., 
 %CPU core, a multi-core CPU, or a cluster node)
 ~\cite{casanova_inria_2012}. 
 We further use $P(\sigma$, $w$, $t)$ to denote a process executing at rate $\sigma$ to complete a workload $w$ by time $t$.
-The basic tenet of the Lazy Shadowing resilience model is the concept of shadowing, whereby each process is associated with a {\it lazy} replica. %This guarantees that if one process fails, the other one can still complete the task. 
+The basic tenet of Lazy Shadowing is the concept of shadowing, whereby each process is associated with a {\it lazy} replica. %This guarantees that if one process fails, the other one can still complete the task. 
 Assuming a single failure, Lazy Shadowing can be described as follows:
 \begin{itemize}
 	\item A main process, $P_m(\sigma_m$, $w$, $t_m)$, that executes at the rate of $\sigma_m$ to complete a task of size $w$ at time $t_m$.
-	\item A shadow process, $P_s(<\sigma_s^b$ , $\sigma_s^a>$, $w$, $t_s)$, that executes at $\sigma_s^b$ before failure, and $\sigma_s^a$ after failure, to complete a task of size $w$ at time $t_s$.% where $\sigma_s^b$ represents the execution rate before failure, $\sigma_s^a$ the execution rate after failure, $w$ is the task size, and $t_s$ is the completion time.%, which has the same workload $w$. It starts execution simultaneously with the main process at rate $\sigma_b  \le \sigma_m$, but on a different core. Upon failure of the main process, the shadow process will be designated as the new main process, with its rate switched to $\sigma_a$ to catch up. In this case, the completion time is denoted as $t_s$. 
+	\item A shadow process, $P_s(<\sigma_s^b$ , $\sigma_s^a>$, $w$, $t_s)$, that executes at $\sigma_s^b$ before the main process' failure, and $\sigma_s^a$ after failure, to complete a task of size $w$ at time $t_s$.% where $\sigma_s^b$ represents the execution rate before failure, $\sigma_s^a$ the execution rate after failure, $w$ is the task size, and $t_s$ is the completion time.%, which has the same workload $w$. It starts execution simultaneously with the main process at rate $\sigma_b  \le \sigma_m$, but on a different core. Upon failure of the main process, the shadow process will be designated as the new main process, with its rate switched to $\sigma_a$ to catch up. In this case, the completion time is denoted as $t_s$. 
 \end{itemize}
 
 In order to deal with both permanent and temporary failures, the shadow process starts simultaneously with its associated main process, on a different node. Lazy Shadowing is able to tolerate any failure confined to a single node, including socket failure, CPU logical errors, bus errors, errors in the attached accelerators (e.g., GPUs), and even memory bit flips that exceed ECC's capacity. 
 
-The main process executes at rate $\sigma_m$, while the shadow initially executes at rate $\sigma_s^b \le \sigma_m$. %To avoid simultaneous failure, they are deployed on different cores.
+Initially, the main process executes at rate $\sigma_m$, while the shadow executes at rate $\sigma_s^b \le \sigma_m$. %To avoid simultaneous failure, they are deployed on different cores.
 %with the main running at  
 %a rate $\sigma_m$ and the lazy shadow at a lower rate $\sigma_s \le \sigma_m$. 
 In the absence of failure, the main process completes execution at time 
@@ -30,15 +30,15 @@ The execution dynamics of Lazy Shadowing are depicted in Figure~\ref{fig:sync}.
 
 \begin{figure}[!t]
 	\begin{center}
-		\subfigure[Main process sucessful completion.]
+		\subfigure[Main process successful completion.]
 		{
 			\label{fig:succ}
-			\includegraphics[width=0.8\columnwidth]{Figures/succ_new.pdf}
+			\includegraphics[width=\columnwidth]{Figures/succ_new.pdf}
 		}
 		\subfigure[Main process failure.]
 		{
 			\label{fig:fail}
-			\includegraphics[width=0.8\columnwidth]{Figures/fail_new.pdf}
+			\includegraphics[width=\columnwidth]{Figures/fail_new.pdf}
 		}
 	\end{center}
 	%\vskip -0.25in 

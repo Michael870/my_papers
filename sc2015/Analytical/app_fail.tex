@@ -13,10 +13,9 @@ In the following, the first question to study is the new MNFTI and MTTI when Laz
 
 
 The impact of process replication on MNFTI has been studied in~\cite{casanova_inria_2012}. Our problem
-is equivalent with the difference that our work can tolerate one failure in each shadowed 
-set while~\cite{casanova_inria_2012} can tolerate one failure in each replica-group, when each process
-is replicated once. 
-Therefore, we can directly apply the methodology in~\cite{casanova_inria_2012} to our case, and the MNFTI
+is equivalent to that, with the difference that our work can tolerate one failure in each shadowed 
+set while~\cite{casanova_inria_2012} can tolerate one failure in each replica-group of size 2. 
+Therefore, we can apply the methodology in~\cite{casanova_inria_2012} to our case, and the MNFTI
 with Lazy Shadowing for different number of shadowed sets ($S$) is shown in Table~\ref{tbl:mnfti}. 
 %The MTTI with Lazy Shadowing is not shown here because it depends not only on the number of cores, but also on the shadowed set size chosen. However, results in \cite{casanova_inria_2012} reflect that the MTTI can be increased to the order of tens of hours from ten minutes (without use of replication) assuming the core level MTTI is 25 years. This 
 %confirms our previous prediction that Lazy Shadowing can significantly 

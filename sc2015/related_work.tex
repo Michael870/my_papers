@@ -33,7 +33,7 @@ in HPC environments, due to its dependency on applications \cite{zheng_2004_ftcc
 One of the largest overheads in any checkpointing process is the time necessary to write the checkpointing 
 to stable storage, during which the application pause its execution. Incremental checkpointing attempts
 to address this shortcoming by only writing the changes since the previous checkpoint \cite{nam_ftc_1997,Agarwal:04:Adaptive}. This
-can be achieved using dirty-bit page flags \cite{plank_ftcs_1994,elnozahy_1992_manetho}. Hash based incremental checkpointing, on the
+can be achieved using dirty-bit page flags \cite{plank_ftcs_1994,elnozahy_1992_manetho}. Hash based incremental checkpointing, on the other
 hand, makes use of hashes to detect changes \cite{nam_ftc_1997,Agarwal:04:Adaptive}. Another proposed scheme, known as copy-on-write,
 offloads the checkpointing process to a secondary task and only writes incremental checkpoints \cite{li_trans_1994}.
 The main concern of these techniques is that some applications would require increase in their
@@ -56,7 +56,7 @@ overhead can be negligible or up to 70\% depending upon the communication patter
 application \cite{engelmann2011redundant}. %Moreover, replication alone is not enough to guarantee fault tolerance since
 %it is possible that all nodes executing a given process could fail simultaneously, thus
 %replication is typically paired with some form of checkpointing. 
-The most relavent works to ours is redundant multi-threading (RMT) whereby one leading thread of execution is running ahead of trailing threads \cite{reinhardt2000transient,Wadden:2014:RDE:2665671.2665686}. However, our approach is different in that it tunes the execution rates of the leading and trailing threads in a finer grain, in order to achieve a "parameterized" trade-off between completion time and energy consumption. Further, we take advantage of the recovery time after each failure and "leap" the trailing threads to achieve forward progress, largely improving performance in terms of both completion time and energy consumption. This differs from RMT, of which the "leaping" of the trailing thread results in extra overhead.
+The most relevant works to ours is redundant multi-threading (RMT) whereby one leading thread of execution is running ahead of trailing threads \cite{reinhardt2000transient,Wadden:2014:RDE:2665671.2665686}. However, our approach is different in that it tunes the execution rates of the leading and trailing threads in a finer grain, in order to achieve a "parameterized" trade-off between completion time and energy consumption. Further, we take advantage of the recovery time after each failure and "leap" the trailing threads to achieve forward progress, largely improving performance in terms of both completion time and energy consumption. This differs from RMT, of which the "leaping" of the trailing thread results in extra overhead.
 To the best of our knowledge,
 Lazy Shadowing is the first attempt to explore a state-machine replication based framework
 that achieves a fine-grained tradeoff between time and hardware redundancy while meeting resilience and

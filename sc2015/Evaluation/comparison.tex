@@ -1,5 +1,5 @@
 To study the efficiency of Lazy Shadowing in terms of reliability, completion time, and energy consumption, we compare with traditional process replication using the analytical models developed in Section~\ref{sec:analytical}. We also compare to checkpointing, of which the completion time is calculated with Daly's model~\cite{daly_fgcs_2006} assuming the recovery time and checkpointing time are both 10 minutes, and then the energy consumption is derived using Equation~\ref{eq:exp_energy1}. 
-It is clear from Equation~\ref{eq:time_k} that the total recovery delay $\sum_{i=1}^k\tau_i$ is determined by the execution time $\sum_{i=1}^k\Delta_i$, independent of the distribution of failures which determines 
+It is clear from THEOREM 1 that the total recovery delay $\sum_{i=1}^k\tau_i$ is determined by the execution time $\sum_{i=1}^k\Delta_i$, independent of the distribution of failures which determines 
 the individual value of $\Delta_i$. 
 Therefore, our models are generic with no assumption about failure probability distribution, and the expectation of the total delay from all failures is the same as the failures are uniformly distributed~\cite{daly_fgcs_2006}. Specifically, $\Delta_i = w/(k+1)$, and $T_c^k$ can be rewritten as $w + w*(1-\sigma_s^b)*\frac{k}{k+1}$ for Lazy Shadowing. Further, we assume that each shadow process gets a fair share of its shadow core's execution rate so that $\sigma_s^b = \frac{1}{\alpha}$. One may argue that the execution rate of the shadows
 should be degraded because of increased memory pressure or communication overhead. %Agreeing with that, however, we argue that 
@@ -15,26 +15,26 @@ For Lazy Shadowing we varied $\alpha$ from 1 to 10, with the understanding that 
 		\subfigure[Application failure probability]
 		{
 			\label{fig:f3}
-			\includegraphics[width=0.8\columnwidth]{Figures/f3}
+			\includegraphics[width=\columnwidth]{Figures/f3}
 		} 
 		\subfigure[Expected completion time]
 		{
 			\label{fig:t31}
-			\includegraphics[width=0.8\columnwidth]{Figures/t31}
+			\includegraphics[width=\columnwidth]{Figures/t31}
 		} 
 		\subfigure[Expected completion time with checkpointing removed]
 		{
 			\label{fig:t32}
-			\includegraphics[width=0.8\columnwidth]{Figures/t32}
+			\includegraphics[width=\columnwidth]{Figures/t32}
 		} 
-		\subfigure[Expected energy consumption with checkpoting removed]
+		\subfigure[Expected energy consumption with checkpointing removed]
 		{
 			\label{fig:e32}
-			\includegraphics[width=0.8\columnwidth]{Figures/e32}
+			\includegraphics[width=\columnwidth]{Figures/e32}
 		} 
 	\end{center}
 	%\vskip -0.22in 
-	\caption{Comparision to process replication and checkpointing. $W=10^6$ hours, $N=10^6$, $\rho=0.5$.}
+	\caption{Comparison to process replication and checkpointing. $W=10^6$ hours, $N=10^6$, $\rho=0.5$.}
 	\label{fig:3}
 \end{figure}
 
