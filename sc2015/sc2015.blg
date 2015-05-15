@@ -1,0 +1,63 @@
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: sc2015.aux
+The style file: abbrv.bst
+Database file #1: sc2015.bib
+Warning--entry type for "doe_ascr_exascale_2011" isn't style-file defined
+--line 853 of file sc2015.bib
+Warning--entry type for "riesen_sandia_2010" isn't style-file defined
+--line 859 of file sc2015.bib
+Warning--empty booktitle in Albers:2011:MSS:1989493.1989539
+Warning--empty booktitle in chen_2011_hystor
+Warning--empty booktitle in elliott_2012_cpr
+Warning--empty booktitle in fiala_2012_sdc
+Warning--can't use both volume and number fields in hargrove2006berkeley
+Warning--empty booktitle in Kling:2013:PSM:2486159.2486183
+Warning--empty booktitle in lefray_2013_rsd
+Warning--empty booktitle in ni_2013_acr
+Warning--can't use both volume and number fields in reinhardt2000transient
+Warning--empty booktitle in Sarood2014
+Warning--empty booktitle in Villa2014
+Warning--empty booktitle in Wadden:2014:RDE:2665671.2665686
+You've used 40 entries,
+            2118 wiz_defined-function locations,
+            743 strings with 10158 characters,
+and the built_in function-call counts, 16005 in all, are:
+= -- 1642
+> -- 595
+< -- 28
++ -- 238
+- -- 192
+* -- 1021
+:= -- 2398
+add.period$ -- 127
+call.type$ -- 40
+change.case$ -- 215
+chr.to.int$ -- 0
+cite$ -- 52
+duplicate$ -- 708
+empty$ -- 1331
+format.name$ -- 192
+if$ -- 3597
+int.to.chr$ -- 0
+int.to.str$ -- 40
+missing$ -- 38
+newline$ -- 201
+num.names$ -- 80
+pop$ -- 264
+preamble$ -- 1
+purify$ -- 176
+quote$ -- 0
+skip$ -- 588
+stack$ -- 0
+substring$ -- 1127
+swap$ -- 256
+text.length$ -- 28
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 158
+warning$ -- 12
+while$ -- 159
+width$ -- 42
+write$ -- 459
+(There were 14 warnings)
