@@ -1,9 +1,13 @@
-The last study is conducted to capture the impact on the 
-performance of Lazy Shadowing brought by 
-collocation overhead. We re-model the speed of shadows as $\sigma_s^b=\frac{1}{\alpha^{1.5}}$ to simulate the 
-effect of memory thrashing and context switch. 
+%The last study is conducted to capture the impact on the 
+%performance of Lazy Shadowing brought by 
+%collocation overhead. We re-model the speed of shadows as $\sigma_s^b=\frac{1}{\alpha^{1.5}}$ to simulate the 
+%effect of memory thrashing and context switch. 
+
+Lazy Shadowing increases memory requirement\footnote{Note that this problem is not intrinsic to Lazy Shadowing, as in-memory checkpointing also requires extra memory.} when multiple shadows are collocated. Moreover, this may have an impact on the execution rate of the shadows due to cache contention and context switch. 
+To capture this effect,  
+we re-model the rate of shadows as $\sigma_s^b=\frac{1}{\alpha^{1.5}}$.
 Figure~\ref{fig:comp_vary_fail_speed} shows the impact of collocation overhead on expected energy consumption for Lazy Shadowing with $\alpha=5$, with all the values normalized to that of process replication. The results for other values of $\alpha$ have similar behavior and thus are not shown. As expected, energy consumption is penalized because
-of slowing down of the shadows. It is surprising, however, that the impact is negligible, with the largest difference being 4.4\%. The reason is that Lazy Shadowing can take advantage of the recovery time after each failure and achieve forward progress for shadow processes that fall behind. When $\alpha=10$, the largest difference further decreases to 2.5\%. 
+of slowing down of the shadows. It is surprising, however, that the impact is quite small, with the largest difference being 4.4\%. The reason is that Lazy Shadowing can take advantage of the recovery time after each failure and achieve forward progress for shadow processes that fall behind. When $\alpha=10$, the largest difference further decreases to 2.5\%. 
 
 %As expected, both completion time and energy consumption are penalized because
 %of slowing down of the shadows. It is surprising, however, that Lazy Shadowing with $\alpha=3$ is impacted by the 
@@ -13,9 +17,9 @@ of slowing down of the shadows. It is surprising, however, that the impact is ne
 
 \begin{figure}[t]
 	\begin{center}
-		\includegraphics[width=\columnwidth]{Figures/collocation}
+		\includegraphics[width=0.7\columnwidth]{Figures/tcollocation}
 	\end{center}
 	%\vskip -0.22in 
-	\caption{Impact of collocation overhead on normalized energy consumption. $W=10^6$ hours, $N=10^6$, $\rho$=0.5, $\alpha$=5.}
+	\caption{Impact of collocation overhead on energy consumption. $W=10^6$ hours, $N=10^6$, $\rho$=0.5, $\alpha$=5.}
 	\label{fig:comp_vary_fail_speed}
 \end{figure}

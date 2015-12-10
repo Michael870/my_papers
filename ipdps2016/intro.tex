@@ -4,32 +4,37 @@
 The system scale needed to address our future computing needs will come at the cost of increasing complexity. As a result, the behavior of future computing and information systems will be increasingly difficult to specify, predict and manage.
 This upward trend, in terms of scale and complexity, has a direct negative effect on the overall system reliability. 
 %The increase in the number of system components significantly increases the propensity of the system to faults, while driving power consumption to unprecedented heights. 
-Even with the expected improvement in the reliability of future computing technology, the rate of system level failures will dramatically increase with the number of computing and storage components, possibly by several orders of magnitude. This can be clearly seen in Figure~\ref{fig:exe_failure}. A system with 200,000 nodes is expected to experience hundreds of failures every day, even when the Mean Time Between Failures (MTBF) of an individual node is as large as 5 years. 
+Even with the expected improvement in the reliability of future computing technology, 
+the rate of system level failures will dramatically increase with the number of 
+components, possibly by several orders of magnitude~\cite{ferreira_sc_2011}. 
+%This can be clearly seen in Figure~\ref{fig:exe_failure}. A system with 200,000 nodes is 
+%expected to experience hundreds of failures every day, even when the Mean Time Between 
+%Failures (MTBF) of an individual node is as large as 5 years. 
+%
+%\begin{figure}[!t]
+%	\begin{center}
+%		\includegraphics[width=0.9\columnwidth]{Figures/sandia_system_failure_rate_increase_nodes}
+%	\end{center}
+%	%\vskip -0.25in 
+%	\caption{Impact of system size on system resilience.}
+%	\label{fig:exe_failure}
+%\end{figure}
 
-\begin{figure}[!t]
-	\begin{center}
-		\includegraphics[width=0.9\columnwidth]{Figures/sandia_system_failure_rate_increase_nodes}
-	\end{center}
-	%\vskip -0.25in 
-	\caption{Impact of system size on system resilience.}
-	\label{fig:exe_failure}
-\end{figure}
-
-Another direct consequence of the increase in system scale is the dramatic increase in power consumption. Recent studies show a steady rise in system power consumption to 1-3MW in 2008, followed by a sharp increase to 10-20MW in subsequent years, with the expectation that power consumption could surpass 50MW by 2016~\cite{doe_ascr_exascale_2011}. The US Department of Energy has recognized this trend and established a power limit of 20MW, challenging the research community to provide a 1000x improvement in performance with only a 10x increase in power~\cite{doe_ascr_exascale_2011}. %It is reported in~\cite{elnozahy2003energy} that energy cost in data centers accounts for 23-50\% of the overall expenses, making system power a leading design constraint in future extreme-scale computing infrastructure.
+Another direct consequence of the increase in system scale is the dramatic increase in power consumption. Recent studies show a steady rise in system power consumption to 1-3MW in 2008, followed by a sharp increase to 10-20MW, with the expectation of surpassing 50MW soon~\cite{doe_ascr_exascale_2011}. The US Department of Energy has recognized this trend and set a power limit of 20MW, challenging the research community to provide a 1000x improvement in performance with only a 10x increase in power~\cite{doe_ascr_exascale_2011}. %It is reported in~\cite{elnozahy2003energy} that energy cost in data centers accounts for 23-50\% of the overall expenses, making system power a leading design constraint in future extreme-scale computing infrastructure.
 This huge imbalance makes system power a leading design constraint in future extreme-scale computing infrastructure~\cite{Sarood2014,Villa2014}.
 
 
-Fault tolerance and power management have been studied extensively, although only recently have researchers begun to study the combination of these two competing goals. In today's systems the response to faults mainly consists of restarting the application, including all related software components that have been affected by the fault. To avoid full re-execution of the original task, systems often checkpoint the execution periodically. Upon the occurrence of a hardware or software failure, recovery is then achieved by restarting the computation from a known checkpoint. Given the anticipated increase in system-level failure rates and the time required to checkpoint large-scale compute-intensive and data-intensive applications, it is predicted that, in extreme scale computing environments, the time required to periodically checkpoint an application and restart its execution will approach the system's MTBF. Consequently, applications will make little forward progress, thereby reducing considerably the overall performance of the system~\cite{riesen_sandia_2010}.% Given this limitation, several large-scale application designers avoid checkpointing and rely on re-execution, upon failure, to achieve fault-tolerance. 
+Fault tolerance and power management have been studied extensively, although only recently have researchers begun to study the combination of these two competing goals. In today's systems the response to faults mainly consists of restarting the application. To avoid full re-execution, systems often checkpoint the execution periodically. Upon the occurrence of a hardware or software failure, recovery is then achieved by restarting the computation from a known checkpoint. Given the anticipated increase in system-level failure rates and the time required to checkpoint large-scale compute-intensive and data-intensive applications, it is predicted that the time required to periodically checkpoint an application and restart its execution will approach the system's MTBF. Consequently, applications will make little forward progress, thereby reducing considerably the overall efficiency of the system~\cite{ferreira_sc_2011}.% Given this limitation, several large-scale application designers avoid checkpointing and rely on re-execution, upon failure, to achieve fault-tolerance. 
 
-More recently, process replication, either fully or partially, has been proposed as an alternative to checkpointing, in order to scale to the resilience requirements of large distributed and mission-critical systems~\cite{fiala_2012_sdc,riesen_sandia_2010}. Based on this technique, each process is replicated across independent computing
+More recently, process replication, either fully or partially, has been proposed as an alternative to checkpointing, in order to scale to the resilience requirements of large distributed and mission-critical systems~\cite{fiala_2012_sdc}. Based on this technique, each process is replicated across independent computing
 nodes. When the original process fails, one of the replicas takes over the computation task. Replication 
 requires at least doubling the number of computing resources, since each process must have at least one replica, thereby 
 limiting the system efficiency to at most 50\%.
 
-There is a delicate interplay between fault tolerance and energy consumption. Checkpointing and replication require additional energy to achieve fault tolerance. Conversely, it has been shown that lowering supply voltages, a commonly used technique to conserve energy, increases the probability of transient faults~\cite{chandra2008defect,zhu2004fail}. The tradeoffs between fault free operation and optimal energy consumption has been explored in the literature. Limited insights have emerged, however, with respect to how adherence to application's desired QoS requirements affects and is affected by the fault tolerance and energy consumption dichotomy. For example, it has been shown that, at scale, coordinated and uncoordinated checkpointing may lead to cascading delays. %Similarly, the overhead of reexcution and replication-based techniques is a dominant factor of the computation and may lead to excessive delay and energy consumption in large-scale computing environments. 
+There is a delicate interplay between fault tolerance and energy consumption. Checkpointing and replication require additional energy to achieve fault tolerance. Conversely, it has been shown that lowering supply voltages, a commonly used technique to conserve energy, increases the probability of transient faults~\cite{chandra2008defect}. The tradeoffs between fault free operation and optimal energy consumption has been explored in the literature. Limited insights have emerged, however, with respect to how adherence to application's desired QoS requirements affects and is affected by the fault tolerance and energy consumption dichotomy. For example, it has been shown that, at scale, coordinated and uncoordinated checkpointing may lead to cascading delays. %Similarly, the overhead of reexcution and replication-based techniques is a dominant factor of the computation and may lead to excessive delay and energy consumption in large-scale computing environments. 
 In addition, abrupt and unpredictable changes in system behavior may lead to unexpected fluctuations in performance, which can be detrimental to applications' QoS requirements. The inherent instability of extreme-scale computing systems, in terms of the envisioned high-rate and diversity of their faults, together with the demanding power constraints under which these systems will be designed to operate, calls for a reconsideration of the fault tolerance problem.
 
-To this end, we propose an adaptive and power-aware resilience algorithm, referred to as \textit{Lazy
+To this end, we propose an adaptive and power-aware algorithm, referred to as \textit{Lazy
 Shadowing}, as an efficient and scalable alternative to achieve high-levels of resilience, through
 forward progress, in extreme-scale, failure-prone computing environments. In the proposed
 approach, each process (referred to as main) is associated with a lazy replica (referred to as shadow) to improve resilience. The shadow executes the same code as its
@@ -45,8 +50,8 @@ the whole system, it is very likely that, most of the main processes complete th
 successfully. %Consequently, the coupled execution of a main process and its associated shadow 
 Consequently, the high probability that shadows never have to complete the full task, coupled with the fact that 
 they initially only consume a minimal amount of energy, 
-dramatically increases a power-constrained system's tolerance to failure, at a significantly reduced
-energy consumption.
+dramatically increases a power-constrained system's tolerance to failure.
+%, at a significantly reduced energy consumption.
 
 Conceptually, Lazy Shadowing can be viewed as a class of stochastically competitive algorithms, which 
 achieve high level of resilience with a small relative performance penalty.
@@ -55,17 +60,18 @@ One gets different algorithms depending upon the main and shadow processes' exec
 
 The main contributions of this paper are as follows:
 \begin{itemize}
-	\item An adaptive, scalable, and power-aware algorithm, referred to as Lazy Shadowing, for fault tolerance in future extreme-scale, failure-prone computing systems.
-	\item An evaluation framework composed of three analytical models to analyze the performance of Lazy Shadowing, compared to existing fault tolerance protocols.
-	\item A thorough comparative study that shows the performance of Lazy Shadowing with different system characteristics and application requirements.
+	\item An adaptive and power-aware algorithm for fault tolerance in future extreme-scale computing systems.
+%	\item An evaluation framework composed of three analytical models to analyze the performance of Lazy Shadowing, compared to existing fault tolerance protocols.
+    \item An analytical model based evaluation framework for performance assessment.
+	\item A thorough comparative study that explores the performance of Lazy Shadowing with different system characteristics and application requirements.
 \end{itemize}
 
 
 The rest of the paper is organized as follows. We begin with a survey on related work in Section 
-\ref{sec:related_work}. Section \ref{sec:frame_model} introduces the Lazy Shadowing algorithm and Section \ref{frame_multiple} discusses how Lazy Shadowing can be used in 
-extreme-scale computing environments for efficient fault tolerance. 
+\ref{sec:related_work}. Section \ref{sec:frame_model} introduces the basic Lazy Shadowing algorithm and Section \ref{frame_multiple} discusses how Lazy Shadowing can be applied to 
+extreme-scale computing environments. 
 We then introduce three analytical models for performance assessment
 in Section \ref{sec:analytical}, 
 followed by experiments and evaluation in
-section \ref{sec:evaluation}. Section \ref{sec:conclusion} concludes this work and points out 
-future research directions.
+section \ref{sec:evaluation}. Section \ref{sec:conclusion} concludes this work.% and points out 
+%future research directions.
