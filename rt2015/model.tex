@@ -1,0 +1,22 @@
+\subsection{Task and processor model}
+We consider a single periodic real-time task $\tau$. The task has a Worst Case Execution Time (WCET) of $c$ under the maximum available CPU frequency $\sigma_{max}$. The deadline of the task is equal to its period of $P$. Under the maximum frequency, the utilization $U$ is defined as $\frac{c}{P}$. 
+
+%The task is replicated and the resulted two replicas run on two cores. 
+With DVFS, each core can operate at a frequency between $\sigma_{min}$ and $\sigma_{max}$. 
+Without loss of generality, we normalize the frequency with respect to the maximum frequency (i.e., $\sigma_{max} = 1$). At frequency $
+\sigma$, a task instance needs up to $\frac{c}{\sigma}$ time to complete. 
+
+
+\subsection{Power model}
+The power consumption of each core consists of both static and dynamic parts. The dynamic power is CPU frequency dependent while the static power is not. The mathematical formulation is $P_{active} = P_s + P_d$. Furthermore, the dynamic power is approximately proportional to the power 3 of frequency. Therefore, we can re-write the power model as  $P_{active} = P_s + C_e \sigma^3$, where $\sigma$ is the CPU frequency and $C_e$ is a system-dependent constant. 
+With this power model, we can calculate the energy consumption of a task instance as integral of power over the task's execution time. 
+
+\subsection{Failure model}
+We consider transient failures in this work, and exponential distribution is assumed. The failure density function is $f(t) = \lambda e^{-\lambda t}$, where $\lambda$ is the average failure rate. Some research works have shown that using DVFS has a negtive effect on reliability. Suppose the average failure rate at the maximum frequency is denoted by $\lambda_0$, then the failure rate at frequency $\lambda$ can be expressed as $\lambda(\sigma) = \lambda_0 10^{\frac{d(1-\sigma)}{1-\sigma_{min}}}$. $d$ is called the sensitivity factor which measures how quickly the transient failure rate increases when frequency is reduced. 
+As a result, the failure density function is a function of time $t$ and frequency $\sigma$, $f(t, \sigma) = \lambda(\sigma) e^{-\lambda(\sigma)t}$.
+
+
+The reliability of a single instance of a task is defined as the probability of completing the task successfully. For a task instance with WCET of $c$ and running at frequency $\sigma$, its reliability can be calcuated as $r(\sigma) = \int_0^{\frac{c}{\sigma}} f(t)dt=e^{-\lambda(\sigma)\frac{c}{\sigma}}$.
+Conversely, the probability of failure of a task instance is $\phi(\sigma) = 1 - r(\sigma)$
+
+

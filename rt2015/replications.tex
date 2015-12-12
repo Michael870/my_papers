@@ -1,0 +1,20 @@
+In order to provide fault tolerance in real-time systems, replication is used that each task has multiple instances that running in parallel on different cores. We say that the task is successfully completed as long as one of the instances is completed without failure and before its deadline. In this work, we only consider two replicas of each task running on two cores. 
+Task reliability $R$ is defined as the probability that as least one task instance can complete without failure.
+
+There are multiple replication techniques. The most naive approach is to have the two replicas running at the maximum frequency. If there is slack in the real-time system, we can slow down both replicas using DVFS to save energy. Furthermore, it is possible to run the two replicas at differernt frequency, which may lead to further energy saving. In the following subsections, we will describe each of the replication techniques in more details, as well as deducing their reliablity and energy consumption.
+
+\subsection{Naive replication}
+With the naive replication, both replicas will execute at the maximum frequency which result in the least response time $T=c$.  
+Also, since both replicas run with the same frequency, the two task replicas have the same repliability of $r(\sigma_{max})$, and the task reliability is $R=1 - \phi(\sigma_{max})^2$. Since reliability decreases with frequency, it is clear that naive replication will have the highest task reliability. In other words, naive replication has the highest guarantee that at least one task instance will complete without failure. However, this technique is likely to consume the most energy since all cores are always running at the maximum frequency. The energy consumption can be calculated as $E=2P_{active}(\sigma_{max}) * T$.
+
+\subsection{Stretched replication}
+From above power model we can see that by reducing the execution frequency we can reduce the dynamic power and reduce the total power. If there is enough slack in the system that allows the task to slow down, we can ``stretch" the task execution and still meet the task's deadline, while providing some energy saving. With stretched replication at frequency $\sigma_r$, the response time of the task is equal to the response time of each task instance, and the value is $T=\frac{c}{\sigma_r}$. Similar to naive replication, the task reliability can be calcuated as $R=1 - \phi(\sigma_r)^2$, and the energy consumption is $E=2P_{active}(\sigma_r) * T$.
+
+\subsection{Shadow replication}
+Instead of running both replicas at the same frequency, we can run them with different frequencies. Inspired by this, we applied shadow computing to this, i.e., we designate one replica as the main one that runs at a high frequency and one replica as the shadow that runs at a lower frequency. As soon as the main completes, we can terminate the shadow for energy saving. If the main fails, however, we speed up the shadow to complete the task by its deadline. In this technique, there are three frequencies, one is the frequency of the main, $\sigma_m$, one is the frequency of the shadow before failure of the main, $\sigma_b$, and the last one is the frequency of the shadow after failure of the main, $\sigma_a$. 
+
+According to our previous definition of task reliability, the reliability of the shadow is intractable as the shadow may change frequency if the main fails. Therefore, we approximate the reliability of the shadow as if it only uses $\sigma_b$. This is a pessimistic approximation because $sigma_a$ should be larger than $\sigma_b$ and should result in higher reliability. With this approximation, the task reliability is modeled as $R = 1 - \phi(\sigma_m)*\phi(\sigma_b)$.
+
+Dependeing on whether the main would fail or not, the task may have two response time. The response is $T=\frac{c}{\sigma_m}$ if the main does not fail; otherwise, the response time is $T=t_f + \frac{c - \sigma_b*t_f}{\sigma_a}$, where $t_f$ if the time when the main fails. The energy consumption can be calcualted as $E = (P_{active}(\sigma_m) +P_{active}(\sigma_b))*T$. Since $T$ is failure dependent, energy consumption
+also depends on failure.  
+
