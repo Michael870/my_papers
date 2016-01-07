@@ -190,13 +190,13 @@ State consistency is required both during normal execution and following a failu
 all outgoing messages from shadows are suppressed. 
 A shadow process, however, will typically lag behind its main process during execution. Therefore, it is necessary to ensure that the shadow's state is consistent with that of its associated main. %, to successfully complete its associated task in case of failure. 
 To this end, a message-logging protocol is used, % to ensure consistency~\cite{Marz}. These protocols 
-which typically use a minimum amount of meta-information to store and replicate the non-deterministic decisions~\cite{Marz}. %in the execution of an application.  These meta-data, also called determinants, are exchanged through system-level messages. 
+which typically uses a minimum amount of meta-information to store and replicate the non-deterministic decisions~\cite{Marz}. %in the execution of an application.  These meta-data, also called determinants, are exchanged through system-level messages. 
 
 To provide correct recovery after failure, 
 a mechanism is required to guarantee that every shadow process follows the same computation and communication steps as its main process. 
 After a main process $m_i$ fails, $s_i$ will take over $m_i$'s role to recover from this failure. If there are other shadows sharing the same core with $s_i$, they will be terminated and $s_i$ will start consuming the messages in its receiver-side message log at a faster speed. The message logging protocol will ensure that shadow $s_i$ reaches a consistent state with the rest of the system. 
 
-Upon failure of a main processes, shadow processes will update their address space to ``catch up" with their associated non-failing main processes. A technology, such as remote direct memory access (RDMA), can be used to roll-forward the state of the shadow to be consistent with that of its associated main. Rather than copying data to the buffers of the operating system, RDMA allows to transfer data directly from the main process to its shadow. The zero-copy feature of RDMA considerably reduces latency, thereby enabling fast transfer of data between the main and its shadow.
+Upon failure of a main process, shadow processes will update their address space to ``catch up" with their associated non-failing main processes. A technology, such as remote direct memory access (RDMA), can be used to roll-forward the state of the shadow to be consistent with that of its associated main. Rather than copying data to the buffers of the operating system, RDMA allows to transfer data directly from the main process to its shadow. The zero-copy feature of RDMA considerably reduces latency, thereby enabling fast transfer of data between the main and its shadow.
 
  
 

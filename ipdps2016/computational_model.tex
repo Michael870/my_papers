@@ -25,7 +25,7 @@ granularity of the hardware platform~\cite{casanova_inria_2012}.
 Furthermore, we adopt the
 fail-stop failure model, where a core stops execution once a failure
 occurs and failure can be detected by other
-processes\cite{gartner_faults_1999,cristian_comm_1991}.
+processes~\cite{gartner_faults_1999,cristian_comm_1991}.
 In order to deal with both permanent and temporary failures, the shadow process starts simultaneously with its associated main process, on a different node. Lazy Shadowing is able to tolerate any failure confined to a single node, including socket failure, CPU logical errors, bus errors, errors in the attached accelerators (e.g., GPUs), and even memory bit flips that exceed ECC's capacity. 
 
 Initially, the main process executes at rate $\sigma_m$, while the shadow executes at $\sigma_s^b \le \sigma_m$. %To avoid simultaneous failure, they are deployed on different cores.
