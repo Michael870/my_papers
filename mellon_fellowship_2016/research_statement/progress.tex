@@ -1,0 +1,60 @@
+I have collaborated with Bryan Mills in coming up with and refining the initial idea of Shadow Replication. Then Bryan studies the application of Shadow Replication to a single task~\cite{mills2014shadow}, while my focus is on large-scale distributed systems where a job is composed of multiple parallel tasks~\cite{cui_en7085151,cui_closer_2014}. Specifically, I model and study the performance of Shadow Replication in both Cloud Computing and High Performance Computing environments, and come up with techniques for optimization specific to each targeted environment. 
+%Two papers have been accepted on this work~\cite{cui_en7085151,cui_closer_2014},
+%and my third paper is currently under review.
+%Specifically, 
+
+I have accomplished the following goals:
+\begin{itemize}
+	\item Design of a novel, scalable, and energy-aware fault tolerance framework, referred to as Shadow Replication;
+
+	\item Development of a profit-based analytical model to explore the feasibility of
+	  Shadow Replication, and to determine the optimal
+	  execution rates to minimize energy and maintain quality of service (QoS);
+
+%	\item Development of an event-driven simulator to verify the above analytical model;
+
+    \item Design of a performance optimization technique, referred to as Leaping Shadows, for High Performance Computing jobs.
+	\item A comprehensive evaluation using both the analytical model and simulator to analyze the
+	energy savings achievable by Shadow Replication, compared to existing approaches.
+\end{itemize}
+
+%I have submitted three papers on this work. \cite{cui_en7085151} is published in Energies 7, no. 8 (2014) and \cite{cui_closer_2014} is accepted to CLOSER 2014. Our third paper is currently under review.
+
+\subsection{Shadow Replication}
+The basic tenet of Shadow Replication is to associate with each main instance a suite of ``shadows" whose size depends on the criticality of the application and its performance requirements. Each instance is executed using a process. 
+If the main process fails, a shadow process can continue and finish the task.
+
+The novelty of Shadow Replication lies in its differentiation of the execution rates. Specifically, it 
+executes the main process at the rate required for response time constraint, while slowing down the shadows for energy saving, thereby enabling a parameterized trade-off between response time and energy consumption.
+A closer look at the model reveals that Shadow
+Replication is a generalization of existing fault tolerance
+approaches. %, namely Checkpoint/restart and Process Replication. 
+Specifically, if the
+QoS allows for flexible completion time, Shadow
+Replication would slow down the shadow processes and trade time
+redundancy for energy savings, mimicking Checkpoint/restart. %It is clear, therefore, that for a
+If the target response time is
+stringent, however, %Shadow Replication converges to process replication,
+the shadows would execute simultaneously with the main at high
+rates, mimicking Process Replication. The flexibility of Shadow Replication provides the
+basis for the design of a fault tolerance strategy that strikes a
+balance between task completion time and energy saving.%, thereby
+%maximizing profit.
+
+\subsection{Analytical model and simulator}
+
+One challenge of Shadow Replication resides in determining
+jointly the execution rates of all processes, %both before and
+%after a fault occurs, 
+with the objective to minimize energy while satisfying QoS requirements. To achieve this, I propose an analytical
+model, from which an optimization problem is formulated to derive the optimal execution rates. The model considers the time and energy needed for a job, %which is composed of multiple parallel tasks, 
+under different system specifics and fault distributions. %The profit is modeled as the difference between the payment from customers, which depends on the completion time, and expenses for running the cloud job, which are mainly energy costs. %Afterwards, an optimization problem is formulated to derive the optimal execution rates. 
+%For more details please refer to~\cite{cui_en7085151}. 
+
+To verify the correctness of the analytical model, I build an event-driven simulator that simulates the behaviors of Shadow Replication under various configurations. It can report all necessary statistics, such as number of faults encountered, time to completion, and energy consumption. The statistics can then be used to compare with the results from the analytical model.
+
+\subsection{Preliminary results}
+Several important parameters are identified that impact the energy consumption of Shadow Replication. Correspondingly, I conduct a series of sensitivity studies where Shadow Replication is compared to state-of-the-art approaches. %The influential parameters can be classified into three categories, i.e., system specifics, SLA specifics, and job specifics. Further, the system specifics includes static power/dynamic power ratio and fault distribution, the job specifics includes workload and number of tasks, and SLA specifics is mainly targeted job completion time 
+The results from both the analytical model and simulator show that Shadow Replication can achieve significant energy savings, without violating the QoS constraints. %Specifically, I conducted 4  sensitivity studies. 
+Specifically, Shadow Replication can achieve 15\%-30\% energy savings under normal configurations. Furthermore, Shadow Replication would converge to Process Replication, when target response time is stringent, and to Checkpoint/restart when target response time is relaxed or when fault is unlikely~\cite{cui_closer_2014}.
+
