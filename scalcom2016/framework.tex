@@ -1,0 +1,203 @@
+%Enabling Lazy Shadowing for resiliency in extreme-scale computing 
+%brings about a number of challenges and design decisions that need to be addressed, including the applicability of this concept to a large number of 
+%tasks executing in parallel, and the runtime mechanisms and 
+%communications support to ensure efficient interaction between a 
+%main and its shadow.
+%In the following, we first introduce the basic Lazy Shadowing resilience model. We then %focus on resilience in extreme-scale computing environments, where a large number of %communicating tasks execute in parallel to complete a job. 
+%To achieve high tolerance to failure and reduce energy consumption in these environments, we %propose \emph{leaping shadows}, an instance of Lazy Shadowing. The main property of the %leaping shadows resilience model is its ability to sustain forward progress in the presence %of failures.
+%. referred to as \emph{leaping shadows}, 
+%a technique referred to as \emph{shadowed set rejuvenation} to reduce application failure probability, and 
+%\emph{leaping shadows}, 
+%as an 
+%efficient, forward-progress preserving model to achieve high tolerance to failure, while reducing energy consumption, in these environments. 
+
+ %We also discuss the runtime design issues
+%related to enabling runtime support to efficiently achieve 
+%the expected levels of resilience in extreme-scale systems. 
+
+%This is to test referring Subsection \ref{frame_single}.
+
+
+
+%\subsection{Application characteristics}
+%\label{frame_app}
+%\input{Framework/application}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%\input{Framework/multiple}
+Lazy Shadowing provides the basis for the design of efficient energy- and power-aware fault-tolerance solutions for extreme-scale computing environments. %The resulting model, referred to as {\it leaping shadows}, 
+Taking into consideration the main characteristics of compute-intensive and highly-scalable applications, we design a novel technique, referred to as {\it leaping shadows}, in order to achieve high-tolerance to failure while minimizing delay and energy consumption. In the following, we first introduce the execution and communication model of the targeted applications. We then describe the dynamics of Lazy Shadowing when boosted with leaping shadows. Lastly, we discuss important aspects of its implementation. 
+
+%Lazy shadowing provides the basis for the design of efficient energy- and power-aware fault-tolerance solution for extreme-scale computing environments. The resulting model, referred to as {\it leaping shadows}, takes into consideration the main characteristics of compute-intensive and highly-scalable applications to achieve high-tolerance to failure, while minimizing energy consumption. In the following, we first introduce the execution and communication model of the targeted applications. We then describe the dynamics of the {\it leaping shadows} resilience model. Lastly, we discuss important aspects of its implementation. 
+\subsection {Application model}
+
+We consider the class of compute-intensive and strongly-scaled applications, executing on a large-scale multi-core computing infrastructure~\cite{doe_ascr_exascale_2011}. %Communication between cores is achieved using low-latency, high-bandwidth interconnect networks, such as Infiniband. 
+We use $W$ to denote the size of an application workload, and assume that the workload is split  arbitrarily into a set of tasks, $\tau$, which execute in parallel and are synchronized using barriers. Given the prominence of MPI in HPC environments, we assume message passing as the communication mechanism between tasks. %Based on this model, each pair of communicating tasks is associated with a logical first-in-first-out (FIFO) channel, which guarantees ordered delivery of messages.
+
+The execution of an application can be carried out by simultaneously running all tasks, each with a pair of main and shadow processes. Let $m_i$ denote the main process executing the $i^{th}$ task $task_i$, and $s_i$ its associated shadow. The execution is divided into a set of phases by synchronization barriers. 
+Assuming the maximum rate of a core is $\sigma_{max}=1$, the failure-free completion time of the application is $W/|\tau|$. %If a failure occurs, however, the non-failing tasks would become idle when they reach their synchronization barrier. These tasks remain idle until the failure recovery is complete. 
+%resulting in performance hiccups~\cite{muller2010}, especially for tightly-coupled applications. 
+Failures, however, will incur delay as the shadows execute at a lower rate. This problem deteriorates sharply because synchronization barriers would propagate the delay of one task to other tasks of the application.  
+The main objective of leaping shadows is to minimize the delay induced by failures, 
+%mitigate the impact of performance hiccups, 
+and ensure forward progress by opportunistically rolling-forward the shadows during failure recovery. In Section~\ref{anal_time}, we will show that the delay is well bounded even for tightly-coupled applications.
+
+
+%\subsection{Shadow collocation}
+
+
+
+
+\subsection {Leaping shadows}
+\label{sec:leaping_shadows}
+
+In the absence of failure, the behavior of a main  and its leaping shadow is identical to the behavior depicted in Figure \ref{fig:sync}. Assuming a failure occurrence at time $t_f$, Figure~\ref{fig:leap} shows the concept of shadow leaping. 
+%Figure~\ref{fig:jump1} depicts the execution dynamics of the failing main and its associated shadow. 
+Upon failure of a main process, its associated shadow speeds up to minimize the impact of failure recovery on the application's progress, as illustrated in Figure~\ref{fig:jump1}. 
+%Figure~\ref{fig:jump2} illustrates the behavior of the remaining main processes and their associated shadows. 
+At the same time, as shown in Figure~\ref{fig:jump2}, the remaining main processes continue execution towards the barrier at time $t_{sync}$, and then become idle until $t_r$, when the shadow of the failed main process also reaches the barrier. %It is worth noting that, given the tightly-coupled and strongly-scaled nature of the application, synchronization points occur frequently. Consequently, the time between synchronization points is very small relative to the total execution time of the application. Therefore, if one main, $m_i$, fails at 
+%time $t_f$, the remaining main processes will reach their synchronization point, shortly after the failure, specifically at at time $t_{sync} = t_f +\epsilon$, 
+%where $\epsilon \approxeq 0$. 
+Leaping shadows opportunistically takes advantage of this idle time to {\it leap forward} the shadows by copying state from their main processes, so that  
+all processes, including shadows, can resume execution from a consistent synchronization point afterwards. This process continues until the completion of all tasks. Forward leaping increases the shadow's rate of progress, at a minimal energy cost. Consequently, it reduces significantly the likelihood of a shadow falling excessively behind, thereby ensuring fast recovery while minimizing energy consumption.
+
+
+
+\begin{figure}[!t]
+	\begin{center}
+        \subfigure[Faulty task behavior.]
+		{
+			\label{fig:jump1}
+			\includegraphics[width=0.7\columnwidth]{Figures/jump1}
+		}
+		\subfigure[Non-faulty task behavior.]
+		{
+			\label{fig:jump2}
+			\includegraphics[width=0.7\columnwidth]{Figures/jump2}
+		}
+	\end{center}
+	%\vskip -0.25in
+	\caption{The illustration of shadow leaping.}
+	\label{fig:leap}
+\end{figure}
+
+%Collocation is used to control the execution rates. To execute an application with $M$ tasks, $N=M+S$ cores are required, where $M$ is a multiple of $S$. Each main process is allocated one core (referred to as main core), while $\alpha=M/S$ shadows are collocated on a core (shadow core). 
+%The $N$ cores are grouped into $S$ sets, which we call \emph{shadowed sets}, each containing $\alpha$ main cores and 1 shadow core.
+%% $\alpha$ is referred to as shadowing ratio. For example, if $M=9$ and $S=3$, then the 9 shadows share 3 cores, with every $\alpha=3$ shadows collocated on each core, as shown in Figure~\ref{fig:sc_mapping}.
+%This is illustrated in Figure~\ref{fig:sc_mapping}.  
+%Collocation has an important ramification with respect to the resilience of the system. Specifically, 
+%one failure can be tolerated in each shadowed set. If a shadow core fails, the main processes can continue
+%execution, but will have no shadows any more. On the other hand, 
+%to speed up a shadow 
+%of a failed main to the maximum rate, all other collocated shadows must be terminated. Consequently, a second failure in any of the mains in the shadowed set cannot be tolerated. After the first failure, a shadowed set becomes \emph{vulnerable}\footnote{Rejuvenation techniques, such as restarting the lost shadows from the state of current mains on spare cores, can be used to eliminate vulnerability.}. 
+%
+%\begin{figure}[!t]
+%  \begin{center}
+%    \includegraphics[width=\columnwidth]{Figures/sc_mapping.pdf}
+%  \end{center}
+%  %\vskip -0.25in 
+%  \caption{An example of collocation. $N=12$, $M=9$, $S=3$.}
+%  \label{fig:sc_mapping}
+%\end{figure}
+
+%Collocation also increases memory requirement. However, this is not intrinsic to Lazy Shadowing, as checkpointing/restart also requires additional memory capacity. We acknowledge the fact that compute kernels in existing HPC environments were simplified significantly by placing a number of restrictions, including eliminating virtual paging and limiting support for OS (Linux) to a handful of system calls. It became clear, however, that strategies designed to work around the capabilities of the hardware cannot scale to extreme-scale computing. Consequently, the research focus has been on new paradigms focused on co-design of hardware with system software to leverage the advantages associated with dynamic, asynchronous mechanisms, such as demand paging and cache tuning, against the design principles and choices of current HPC systems. Support of efficient demand paging, through co-design, is particularly critical as it is expected that the data of future exascale applications may not fit entirely in memory. %Finally, in comparison to checkpointing/restart and process replication, Lazy Shadowiing has the capability to control memory usage, based on the nature of failure and existing memory capacity, albeit at a loss of performance. 
+
+
+
+\begin{algorithm}[t]
+  \SetKwInOut{Input}{input}
+  \SetKwInOut{Output}{output}
+  \caption{Lazy Shadowing}
+  \Input{$W, M, S$}
+  \Output{Application execution status}
+  \BlankLine
+  split $W$ into $M$ tasks\; \nllabel{line:split} 
+  assign $M$ tasks to $S$ shadowed sets\; \nllabel{line:cluster} 
+  %$T_l \leftarrow T+t_{now}$\;%, $C_{vul} \gets 0$
+  %start $m_i$ and $s_i$ for each $task_i$\;
+  start a pair of main and shadow for each task\;
+    \While{execution not done}
+    {
+  %      \If{failure detected in $ss_j$} %\nllabel{line:if_start_1} 
+        \If{failure detected in a shadowed set}
+        {
+            \nllabel{line:if_start_1} 
+            %\eIf{$ss_j$ is vulnerable}
+            \eIf{the shadowed set is vulnerable}
+            {
+                notify ``Application failure"\;
+                terminate all mains and shadows\;
+                repair all failures\;
+                restart execution\; %\Comment{re-execution}
+            }
+            {
+                mark the shadowed set as vulnerable\;
+                %\State $C_{vul} \gets C_{vul} + 1$
+                %\If{$C_{vul} == V$}
+                %    \State perform shadowed set rejuvenation   
+                %\EndIf 
+                \If{failure happened to a main} 
+                {
+                    promote its shadow to new main\;
+                    perform shadow leaping\; %failure induced shadow leaping
+                    %$T_l \leftarrow T+t_{now}$\;
+                }
+            }
+        }  
+        \nllabel{line:if_end_1}
+        %\If{$t_{now} \ge T_l$} %
+        %{
+        %    \nllabel{line:if_start_2} 
+        %    perform shadow leaping\;
+        %    $T_l \leftarrow T+t_{now}$\;
+        %    \nllabel{line:if_end_2}
+        %} % 
+        %\nllabel{line:if_end_2}
+    }
+    output ``Application completes"\;
+  \label{al:ls}
+\end{algorithm}
+
+The steps of applying Lazy Shadowing with leaping shadows are depicted in Algorithm 1.
+To use $M+S$ cores to execute an application, the total workload is split into $M$ parallel tasks (line~\ref{line:split}), %, which are executed simultaneously by $M$ main processes and $M$ shadow processes. 
+ which are then assigned to $S$ shadowed sets, each with $\alpha=M/S$ cores for $\alpha$ main processes and 1 core for all the associated shadow processes (line 2).  
+%The $M$ shadows are then clustered into $S$ groups, each containing $\alpha=M/S$ shadows. 
+The execution starts by simultaneously running all the main and shadow processes (line 3).
+During the execution,
+the system runs a failure monitor (out of scope of this work) that triggers corresponding actions when a failure is detected (line~\ref{line:if_start_1} to~\ref{line:if_end_1}). %A failure may trigger different actions, depending on its type and precedence with respect to other failures.  A shadowed set becomes {\it vulnerable} after the occurrence of the first failure in the set. 
+A failure occurring in a vulnerable shadowed set (e.g., $ss_j$) results in an application failure %. In response, the system terminates all running 
+%processes, initiates a recovery phase, either by rebooting or replacing failing cores,  and restarts execution (line 8 to 10). %(this assumes that checkpointing is not used). 
+ and forces a re-execution (line 7 to 10).
+On the other hand, failure in a non-vulnerable shadowed set
+does not translate into an application failure, but would mark the shadowed set in question as vulnerable (line 12). In this case, failure of a main process has different impact from that of a  shadow process.  While a shadow 
+failure does not impact the normal execution and thus can be ignored, failure of a main process %forces the remaining main processes to suspend execution after they reach their synchronization point.  The shadow process, $s_k$, associated with the failing process, $m_k$,  becomes the primary process of the associated task and increases its execution to the maximum rate 
+(e.g., $m_k$) triggers promotion of its shadow process, $s_k$, to a new main process (line 14). Simultaneously, a shadow leaping is undertaken by all remaining shadows to align their states with those of their associated mains (line 15).  
+This process continues until all tasks of the application are successfully completed.
+
+\subsection{Implementation issues}
+
+%\subsection{Shadowed set rejuvenation}
+%\label{frame_reju}
+%\input{Framework/reju}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+We implemented an Open MPI based prototype of Lazy Shadowing, which can be used to execute existing HPC workloads without any change of user code. Since the focus of this paper is to introduce
+algorithmic perspectives of the Lazy Shadowing paradigm by discussing novel concepts of shadow collocation and forward leaping, we only give a brief discussion of the implementation issues. 
+
+State consistency is required both during normal execution and following a failure of a main process to roll-forward the shadows. During normal execution, shadows remain mute, in the sense that 
+all outgoing messages from shadows are suppressed. 
+A shadow process, however, will typically lag behind its main process during execution. Therefore, it is necessary to ensure that the shadow's state is consistent with that of its associated main. %, to successfully complete its associated task in case of failure. 
+To this end, a message-logging protocol is used, % to ensure consistency~\cite{Marz}. These protocols 
+which typically uses a minimum amount of meta-information to store and replicate the non-deterministic decisions~\cite{Marz}. %in the execution of an application.  These meta-data, also called determinants, are exchanged through system-level messages. 
+
+To provide correct recovery after failure, 
+a mechanism is required to guarantee that every shadow process follows the same computation and communication steps as its main process. 
+After a main process $m_i$ fails, $s_i$ will take over $m_i$'s role to recover from this failure. If there are other shadows sharing the same core with $s_i$, they will be terminated and $s_i$ will start consuming the messages in its receiver-side message log at a faster speed. The message logging protocol will ensure that shadow $s_i$ reaches a consistent state with the rest of the system. 
+
+Upon failure of a main process, shadow processes will update their address space to ``catch up" with their associated non-failing main processes. A technology, such as remote direct memory access (RDMA), can be used to roll-forward the state of the shadow to be consistent with that of its associated main. Rather than copying data to the buffers of the operating system, RDMA allows to transfer data directly from the main process to its shadow. The zero-copy feature of RDMA considerably reduces latency, thereby enabling fast transfer of data between the main and its shadow.
+
+ 
+
+
