@@ -52,8 +52,10 @@ however, may lead to increased failure rates of individual nodes and complicate 
 
 Process replication, or state machine replication, has long been used for reliability and availability in distributed and mission critical systems \cite{schneider_1990_tutorial}. %Replication can be used to detect and correct system failures that are otherwise undetectable,
 %such as silent data corruption and Byzantine faults \cite{fiala_2012_sdc}. 
-This approach is baredly used in HPC systems, primarily due to its high cost and low efficiency.
-However, upcoming extreme-scale systems are expected to require a more challenging level of fault tolerance to deal with the grow in both frequency and diversity of faults.
+This approach is barely used in HPC systems, primarily due to its high cost and low efficiency.
+However, upcoming extreme-scale systems are expected to 
+%require a more challenging level of fault tolerance to deal with the 
+confront a dramatic growth in both the frequency and diversity of faults.
 As a result,
 replication has recently been proposed as a
 viable alternative to checkpointing in HPC \cite{engelmann09case,Cappello:09:Fault}. 
