@@ -1,6 +1,6 @@
 %Extreme-scale computing presents some unique challenges to fault tolerance as faults are no longer 
 %an exceptional event \cite{ferreira_sc_2011}. 
-Rollback and recovery is the dominate mechanism to achieve fault
+Rollback and recovery is the dominant mechanism to achieve fault
 tolerance in current HPC environments~\cite{Elnozahy:02:Survey}. In the most general form, rollback and recovery 
 involves the periodic saving of the current system state, with the anticipation that
 in the case of a failure, computation can be restarted from the most recently saved state. % \cite{Elnozahy:02:Survey}. %The identification of an error, before or during a checkpoint,
@@ -68,11 +68,14 @@ detect or correct silent data corruption \cite{stearly_2012_partial,elliott_2012
 %it is possible that all nodes executing a given process could fail simultaneously, thus
 %replication is typically paired with some form of checkpointing. 
 Our approach differs from classical process replication in that we dynamically configure the execution rates of main and shadow processes, so that less resource/energy is required while reliability is still assured.  
-Dynamic rate is also explored in Simultaneous and Redundantly Threaded (SRT) processor whereby one leading thread of execution is running ahead of trailing threads \cite{reinhardt2000transient}. However, 
+
+
+Replication with dynamic execution rate is also explored in Simultaneous and Redundantly Threaded (SRT) processor whereby one leading thread of execution is running ahead of trailing threads \cite{reinhardt2000transient}. However, 
 the focus of \cite{reinhardt2000transient} is on transient faults within CPU while we aim at tolerating both permanent and transient faults across all systems components.
+This work is closely related to our previous works \cite{mills_2014_icnc,cui_en7085151,cui_2014_closer} where single or loosely-coupled application is considered. Instead, in this paper we explore novel ideas of shadow collocation and shadow leaping in order to satisfy the requirements of future extreme-scale HPC systems. 
 %our approach is different in that it tunes the execution rates of the leading and trailing threads in a finer grain, in order to achieve a ``parameterized" trade-off between completion time and energy consumption. 
-Further, we take advantage of the idle time during failure recovery and ``leap" the trailing replicas to achieve forward progress%, largely improving performance in terms of both completion time and energy consumption. 
-. This differs from \cite{reinhardt2000transient}, of which the ``leaping" of the trailing replica results in extra overhead.
+%Further, we take advantage of the idle time during failure recovery and ``leap" the trailing replicas to achieve forward progress%, largely improving performance in terms of both completion time and energy consumption. 
+%. This differs from \cite{reinhardt2000transient}, of which the ``leaping" of the trailing replica results in extra overhead.
 %To the best of our knowledge,
 %Lazy Shadowing is the first attempt to explore a state-machine replication based framework
 %that achieves a fine-grained tradeoff between time and hardware redundancy while meeting resilience and

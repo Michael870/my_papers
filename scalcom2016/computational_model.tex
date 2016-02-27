@@ -11,57 +11,71 @@
 %CPU core, a multi-core CPU, or a cluster node)
 %~\cite{casanova_inria_2012}. 
 %We further use $P(\sigma$, $w$, $t)$ to denote a process executing at rate $\sigma$ to complete a workload $w$ by time $t$.
-The basic tenet of Lazy Shadowing is the concept of shadowing, whereby each process is associated with a {\it lazy} replica that executes at a reduced rate. We only use one replica since the probability that failure occurs to both the original process and the replica is negligible~\cite{casanova_inria_2012}. %This guarantees that if one process fails, the other one can still complete the task. 
-If necessary, however, this can be easily extended to use a suit of replicas. Assuming a single failure, Lazy Shadowing can be described as follows:
+The basic tenet of Lazy Shadowing is the concept of shadowing, whereby each process (\textit{main})is associated with a ``lazy" replica (\textit{shadow}) that executes at a reduced rate. 
+This idea has been studied in~\cite{mills_2014_icnc} for single task and in~\cite{cui_en7085151,cui_2014_closer} for loosely-coupled MapReduce applications in the cloud environment. 
+Since the target of this paper is the upcoming extreme-scale HPC systems, we introduce novel ideas that achieve efficient and scalable fault tolerance for more 
+tightly coupled HPC applications (more details in Section~\ref{sec:app_model}). By carefully analyzing the characteristics of HPC applications, we devise novel ideas 
+of shadow collocation and shadow leaping, and integrate them with the basic concept of shadowing, which together form a complete algorithm that we call Lazy Shadowing. 
+To make it easy to follow and integrate, we first re-emphasize important details of shadowing, with minor changes of symbols.
+
+We assume the
+fail-stop failure model, where a process stops execution once a failure
+occurs and failure can be detected by other
+processes~\cite{gartner_faults_1999,cristian_comm_1991}.
+%In order to deal with both permanent and temporary failures, the shadow process starts simultaneously with its associated main process, on a different node. Lazy Shadowing is able to tolerate any failure confined to a single node, including socket failure, CPU logical errors, bus errors, errors in the attached accelerators (e.g., GPUs), and even memory bit flips that exceed ECC's capacity. 
+Under this failure model, Lazy Shadowing is able to tolerate failures in hardware, such as power supply, CPU, attached accelerators (e.g., GPU), memory bit flips that exceed ECC's capacity, and software, such as OS and runtime. 
+%We only use one replica since the probability that failure occurs to both the original process and the replica is negligible~\cite{casanova_inria_2012}. %This guarantees that if one process fails, the other one can still complete the task. 
+%If necessary, however, this can be easily extended to use a suit of replicas. Assuming a single failure, Lazy Shadowing can be described as follows:
+The concept of Shadowing can be described as follows:
 \begin{itemize}
 	\item A main process, $P_m(\sigma_m$, $w$, $t_m)$, that executes at the rate of $\sigma_m$ to complete a task of size $w$ at time $t_m$.
 	\item A shadow process, $P_s(<\sigma_s^b$ , $\sigma_s^a>$, $w$, $t_s)$, that initially executes at $\sigma_s^b$, and increases to $\sigma_s^a$ if its main process fails, to complete a task of size $w$ at time $t_s$.% where $\sigma_s^b$ represents the execution rate before failure, $\sigma_s^a$ the execution rate after failure, $w$ is the task size, and $t_s$ is the completion time.%, which has the same workload $w$. It starts execution simultaneously with the main process at rate $\sigma_b  \le \sigma_m$, but on a different core. Upon failure of the main process, the shadow process will be designated as the new main process, with its rate switched to $\sigma_a$ to catch up. In this case, the completion time is denoted as $t_s$. 
 \end{itemize}
+We only use one shadow since the probability that failures occur to both the original process and the replica is negligible~\cite{casanova_inria_2012}. 
+If necessary, however, this can be easily extended to use a suit of shadows. 
 
 
-We use the term core to represent the resource allocation unit (e.g., a
-CPU core, a multi-core CPU, or a cluster node), so that our algorithm is agnostic to the
-granularity of the hardware platform~\cite{casanova_inria_2012}.
-Furthermore, we adopt the
-fail-stop failure model, where a core stops execution once a failure
-occurs and failure can be detected by other
-processes~\cite{gartner_faults_1999,cristian_comm_1991}.
-In order to deal with both permanent and temporary failures, the shadow process starts simultaneously with its associated main process, on a different node. Lazy Shadowing is able to tolerate any failure confined to a single node, including socket failure, CPU logical errors, bus errors, errors in the attached accelerators (e.g., GPUs), and even memory bit flips that exceed ECC's capacity. 
+%Furthermore, we adopt the
+%fail-stop failure model, where a core stops execution once a failure
+%occurs and failure can be detected by other
+%processes~\cite{gartner_faults_1999,cristian_comm_1991}.
+%In order to deal with both permanent and temporary failures, the shadow process starts simultaneously with its associated main process, on a different node. Lazy Shadowing is able to tolerate any failure confined to a single node, including socket failure, CPU logical errors, bus errors, errors in the attached accelerators (e.g., GPUs), and even memory bit flips that exceed ECC's capacity. 
 
-Initially, the main process executes at rate $\sigma_m$, while the shadow executes at $\sigma_s^b \le \sigma_m$. %To avoid simultaneous failure, they are deployed on different cores.
+Initially, the main executes at rate $\sigma_m$, while the shadow executes at $\sigma_s^b \le \sigma_m$. %To avoid simultaneous failure, they are deployed on different cores.
 %with the main running at  
 %a rate $\sigma_m$ and the lazy shadow at a lower rate $\sigma_s \le \sigma_m$. 
-In the absence of failure, the main process completes execution at time 
+In the absence of failure, the main completes at time 
 $t_m = w/\sigma_m$, which immediately triggers the termination of the
-shadow. However, if at time $t_f < t_m$ the main process fails, the shadow, which has completed an amount of work $w_b=\sigma_s^b * t_f$, increases its execution rate to $\sigma_s^a$ to complete the task by $t_s$. %, as depicted in Figure~\ref{fig:fail}. More specifically, the shadow completes $\sigma_s * t_f$ work by $t_f$, and finishes the remaining $(w-\sigma_s * t_f)$ work at $\sigma_a$. %The expected completion time, $T$, of the task can be easily computed by integrating $t_s(t_f) * f(t_f)$, where $f(t_f)$ is the probability of a failure occurring at time $t_f$.
-The execution dynamics are depicted in Figure~\ref{fig:sync}.
+shadow. However, if at time $t_f < t_m$ the main fails, the shadow, which has completed an amount of work $w_b=\sigma_s^b * t_f$, increases its execution rate to $\sigma_s^a$ to complete the task by $t_s$. %, as depicted in Figure~\ref{fig:fail}. More specifically, the shadow completes $\sigma_s * t_f$ work by $t_f$, and finishes the remaining $(w-\sigma_s * t_f)$ work at $\sigma_a$. %The expected completion time, $T$, of the task can be easily computed by integrating $t_s(t_f) * f(t_f)$, where $f(t_f)$ is the probability of a failure occurring at time $t_f$.
+The execution dynamics are depicted in Figure 1 in \cite{cui_en7085151}. %~\ref{fig:sync}.
 
-\begin{figure}[!t]
-	\begin{center}
-		\subfigure[Main process successful completion.]
-		{
-			\label{fig:succ}
-			\includegraphics[width=0.7\columnwidth]{Figures/succ_new.pdf}
-		}
-		\subfigure[Main process failure.]
-		{
-			\label{fig:fail}
-			\includegraphics[width=0.7\columnwidth]{Figures/fail_new.pdf}
-		}
-	\end{center}
-	%\vskip -0.25in 
-	\caption{Lazy Shadowing execution dynamics.}
-	\label{fig:sync}
-\end{figure}
+%\begin{figure}[!t]
+%	\begin{center}
+%		\subfigure[Main process successful completion.]
+%		{
+%			\label{fig:succ}
+%			\includegraphics[width=0.7\columnwidth]{Figures/succ_new.pdf}
+%		}
+%		\subfigure[Main process failure.]
+%		{
+%			\label{fig:fail}
+%			\includegraphics[width=0.7\columnwidth]{Figures/fail_new.pdf}
+%		}
+%	\end{center}
+%	%\vskip -0.25in 
+%	\caption{Lazy Shadowing execution dynamics.}
+%	\label{fig:sync}
+%\end{figure}
 
 %The execution rate of the shadow before and , 
 
 %For simplicity, we assume the maximum execution rate of a core is 1. 
-In HPC, throughput consideration requires that the rate of the main process, $\sigma_m$, be set to the maximum. 
-The execution rates of the shadow, $\sigma_s^b$ and $\sigma_s^a$, however, can be derived by balancing the tradeoffs between delay and energy.
+In HPC, throughput consideration requires that the rate of the main, $\sigma_m$, and the rate of the shadow after failure, 
+$\sigma_s^a$, be set to the maximum. 
+The initial execution rate of the shadow, $\sigma_s^b$, however, can be derived by balancing the trade-offs between delay and energy.
 %are determined based on the tolerance of the application to completion time.
 For a delay-tolerant, energy-stringent application, $\sigma_s^b$ is set to 0, and the shadow starts executing only upon failure of the main process. %, for maximum energy saving. %, which guarantees additional energy is consumed only upon failure
-For a delay-stringent, energy-tolerant application, the shadow starts executing at $\sigma_s^b=\sigma_m$ to guarantee the completion of the task at the specified time $t_m$, regardless of when the failure occurs. Therefore, Lazy Shadowing has the flexibility to converge to checkpointing/restart or process replication, if preferred. In addition,  
+For a delay-stringent, energy-tolerant application, the shadow starts executing at $\sigma_s^b=\sigma_m$ to guarantee the completion of the task at the specified time $t_m$, regardless of when the failure occurs. Therefore, Lazy Shadowing has the flexibility to converge to re-execution or process replication, if preferred. In addition,  
 a broad spectrum of delay and energy tradeoffs in between can be explored either empirically or by using optimization frameworks for delay and energy tolerant applications.
 %For elastic applications, the delay-energy product can be used to derive the execution rate  
 %For other applications, $\sigma_s^b$ and $\sigma_s^a$ can be derived by balancing trade-offs between completion time and energy consumption
@@ -74,33 +88,6 @@ a broad spectrum of delay and energy tradeoffs in between can be explored either
 
 %In terms of execution rates, this can be expressed as $\sigma_m=\sigma_a=1$ and $\sigma_s \le 1$.  
 
-%There are multiple ways to control the execution rates of the processes. The most straightforward solution is to allocate a dedicated core for each process while using 
-%Dynamic Voltage and Frequency Scaling (DVFS) is a commonly used power management technique 
-To control the shadow's execution rate, Dynamic Voltage and Frequency Scaling (DVFS), a commonly used power management technique, can be applied. 
-The effectiveness of DVFS, however, may be markedly reduced in computational platforms that exhibit saturation of the processor clock frequencies, large static power consumption, or small power dynamic range. An alternative is to collocate multiple processes on a single core, while keeping the core at maximum rate. Time sharing can then be used to achieve the desired execution rates of the processes. Given our focus on extreme-scale, multi-core computing infrastructure, we will use collocation for execution rate control.  
-%Recent development in processor and memory technology which results in the saturation of the processor clock frequencies, larger static power consumption, and smaller power dynamic range can markedly reduce the effectiveness of DVFS
-
- %to tune the frequency of the core. An alternative is to collocate multiple processes on a core, which runs at the maximum rate, and execute the processes in a time sharing manner. In the rest of this paper, we will focus on the idea of collocation in the discussion of applying Lazy Shadowing to HPC applications.  
-
-To execute an application with $M$ tasks, $N=M+S$ cores are required, where $M$ is a multiple of $S$. Each main process is allocated one core (referred to as main core), while $\alpha=M/S$ shadows are collocated on a core (shadow core). 
-The $N$ cores are grouped into $S$ sets, which we call \emph{shadowed sets}, each containing $\alpha$ main cores and 1 shadow core.
-% $\alpha$ is referred to as shadowing ratio. For example, if $M=9$ and $S=3$, then the 9 shadows share 3 cores, with every $\alpha=3$ shadows collocated on each core, as shown in Figure~\ref{fig:sc_mapping}.
-This is illustrated in Figure~\ref{fig:sc_mapping}.  
-Collocation has an important ramification with respect to the resilience of the system. Specifically, 
-one failure can be tolerated in each shadowed set. If a shadow core fails, the main processes can continue
-execution, but will have no shadows any more. On the other hand, 
-to speed up a shadow 
-of a failed main to the maximum rate, all other collocated shadows must be terminated. Consequently, a second failure in any of the mains in the shadowed set cannot be tolerated. After the first failure, a shadowed set becomes \emph{vulnerable}\footnote{Rejuvenation techniques, such as restarting the lost shadows from the state of current mains on spare cores, can be used to eliminate vulnerability.}. 
-As will be shown in Section~\ref{anal_app_fail} and Section~\ref{sec:evaluation}, this should not be a concern as the provided reliability is more than enough.
- 
-\begin{figure}[!t]
-  \begin{center}
-    \includegraphics[width=\columnwidth]{Figures/sc_mapping.pdf}
-  \end{center}
-  %\vskip -0.25in 
-  \caption{An example of collocation. $N=12$, $M=9$, $S=3$.}
-  \label{fig:sc_mapping}
-\end{figure}
 
 
 
