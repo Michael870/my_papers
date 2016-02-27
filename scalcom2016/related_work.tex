@@ -37,7 +37,7 @@ to stable storage. Incremental checkpointing attempts
 to address this by only writing the changes since previous checkpoint \cite{Agarwal:04:Adaptive}. %,elnozahy_1992_manetho,li_trans_1994}. %This
 %can be achieved using dirty-bit page flags \cite{plank_ftcs_1994,elnozahy_1992_manetho}. Hash based incremental checkpointing, on the other
 %hand, makes use of hashes to detect changes \cite{nam_ftc_1997,Agarwal:04:Adaptive}. 
-Another proposed scheme, known as in-memory checkpointing, minimizes the overhead of disk access~\cite{zheng_2004_ftccharm}.
+Another proposed scheme, known as in-memory checkpointing, minimizes the overhead of disk access~\cite{zheng_2004_ftccharm,6264677}.
 %offloads the checkpointing process to a secondary task and only writes incremental checkpoints \cite{li_trans_1994}.
 The main concern of these techniques is the increase in
 memory requirement to support the simultaneous execution of the checkpointing and the application. It has been suggested that nodes in extreme-scale systems should be configured with fast local storage~\cite{doe_ascr_exascale_2011}. 
@@ -72,7 +72,7 @@ Our approach differs from classical process replication in that we dynamically c
 
 Replication with dynamic execution rate is also explored in Simultaneous and Redundantly Threaded (SRT) processor whereby one leading thread of execution is running ahead of trailing threads \cite{reinhardt2000transient}. However, 
 the focus of \cite{reinhardt2000transient} is on transient faults within CPU while we aim at tolerating both permanent and transient faults across all systems components.
-This work is closely related to our previous works \cite{mills_2014_icnc,cui_en7085151,cui_2014_closer} where single or loosely-coupled application is considered. Instead, in this paper we explore novel ideas of shadow collocation and shadow leaping in order to satisfy the requirements of future extreme-scale HPC systems. 
+This work is closely related to our previous works \cite{mills_2014_icnc,cui_en7085151,cui_2014_closer} where single or loosely-coupled tasks is considered. Instead, in this paper we explore novel ideas of shadow collocation and shadow leaping in order to satisfy the requirements of future extreme-scale HPC systems. 
 %our approach is different in that it tunes the execution rates of the leading and trailing threads in a finer grain, in order to achieve a ``parameterized" trade-off between completion time and energy consumption. 
 %Further, we take advantage of the idle time during failure recovery and ``leap" the trailing replicas to achieve forward progress%, largely improving performance in terms of both completion time and energy consumption. 
 %. This differs from \cite{reinhardt2000transient}, of which the ``leaping" of the trailing replica results in extra overhead.
