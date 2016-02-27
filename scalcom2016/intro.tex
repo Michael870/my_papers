@@ -43,14 +43,16 @@ In addition, abrupt and unpredictable changes in system behavior may lead to une
 To this end, we propose an adaptive and power-aware algorithm, referred to as \textit{Lazy
 Shadowing}, as an efficient and scalable alternative to achieve high-levels of resilience, through
 forward progress, in extreme-scale, failure-prone computing environments. In the proposed
-approach, each process (referred to as \textit{main}) is associated with a ``lazy" replica (referred to as \textit{shadow}) to improve resilience. The shadow executes the same code as its
-associated main process, but at a reduced CPU rate to save power and energy. %The rate
+approach, each process (referred to as a \textit{main}) is associated with a ``lazy" replica (referred to as a \textit{shadow}) to improve resilience. %The shadow executes the same code as its
+%associated main process, but at a reduced CPU rate to save power and energy. %The rate
 %at which the shadow runs is derived based on the expected time-to-solution of the supported
 %application, the power constraints imposed by the underlying computing infrastructure, and the
 %likelihood of failure. 
-Upon failure of the main process, the shadow increases its 
-execution rate to complete the task, thereby reducing the impact of such a failure on the progress of
-the remaining tasks. Successful completion of the main process, however, results in immediate
+Different from classical process replication, we dynamically and separately control the execution rates
+of the mains and the shadows to save resources and improve efficiency.
+The shadows initially execute at a reduced rate so that less hardware and power/energy are required.
+Upon failure of a main, its associated shadow increases its rate to recover and complete the task, thereby reducing the impact of such a failure on the progress of
+the remaining tasks. Successful completion of a main, however, results in immediate
 termination of the associated shadow. Since the failure rate of an individual component is much lower than that of 
 the whole system, it is very likely that, most of the main processes complete their execution
 successfully. %Consequently, the coupled execution of a main process and its associated shadow 
@@ -62,8 +64,8 @@ dramatically increases a power-constrained system's tolerance to failure.
 Conceptually, Lazy Shadowing can be viewed as a class of stochastically\footnote{We consider faults as stochastic events} competitive algorithms, which 
 achieve high level of resilience with a small relative performance penalty.
 %guarantee small relative error with respect to the optimal expected cost, in terms of completion time and energy consumption. 
-Lazy Shadowing is adaptive and flexible in that it enables a configurable trade-off between re-execution (time redundancy) and replication (hardware redundancy) by adjusting the main and shadow processes' execution rates.
-The optimal execution rates can be derived either analytical or empirically, in order to achieve the desired balance among two important objectives, namely, the expected completion time of the supported application, and the power constraints imposed by the underlying computing infrastructure. %, can be derived either analytical or empirically. %At the same time, we minimize the proposed algorithms' adaptivity to stochastic events by changing the shadow's execution rate only in response to a failure, in order to keep the algorithms simple as well as to reduce implementation overhead. 
+Lazy Shadowing is adaptive and flexible in that it enables a configurable trade-off between re-execution (time redundancy) and replication (hardware redundancy) by dynamically adjusting the main and shadow processes' execution rates.
+Optimal execution rates can be derived either analytical or empirically, in order to achieve the desired balance among two important objectives, namely, the expected completion time of the supported application, and the power constraints imposed by the underlying computing infrastructure. %, can be derived either analytical or empirically. %At the same time, we minimize the proposed algorithms' adaptivity to stochastic events by changing the shadow's execution rate only in response to a failure, in order to keep the algorithms simple as well as to reduce implementation overhead. 
 Furthermore, the distinction between main and shadow's execution rates provides a unique opportunity %to roll forward the shadows without incurring extra time overhead. 
 that allows the lagging shadows to benefit from the faster execution of the mains without extra time overhead.
 Specifically, when a failure occurs, Lazy Shadowing takes advantage of the recovery time and synchronizes the states of the lagging shadows to those of mains. This technique not only assures forward progress with minimized time and energy, but also reduces recovery time for subsequent failures.  

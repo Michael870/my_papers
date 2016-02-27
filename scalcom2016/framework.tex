@@ -98,18 +98,24 @@ Quantitative study of this effect using probability theory is presented in Secti
 As the shadows execute at a lower rate, failures will incur delay for recovery. This problem deteriorates as dependencies incurred by messages and synchronization barriers would propagate the delay of one task to others.  
 %The main objective of shadow leaping shadows is to minimize the delay induced by failures, 
 %mitigate the impact of performance hiccups, 
-Fortunately, slowing down the shadows provides an opportunity for the shadows to benefit from the faster execution of their mains. By copying the state of each main to its shadow, which is similar to the process of storing a checkpoint in a buddy in \cite{6264677}, forward progress is achieve for the shadows with minimized time and energy. The so called \textit{shadow leaping} effectively limits the distance in progress between main and shadow, which simultaneously reduces the recovery time for failures.
-and ensure forward progress by opportunistically rolling-forward the shadows during failure recovery. In Section~\ref{anal_time}, we will show that the delay is well bounded even for tightly-coupled applications.
+Fortunately, slowing down the shadows provides an opportunity for the shadows to benefit from the faster execution of their mains. By copying the state of each main to its shadow, which is similar to the process of storing a checkpoint in a buddy in \cite{zheng_2004_ftccharm}, forward progress is achieved for the shadows with minimized time and energy. This technique, referred to as \textit{shadow leaping}, effectively limits the distance between main and shadow in progress. 
+%, which simultaneously reduces the recovery time for failures. 
+As a result, the recovery time after a failure, which depends on the distance between the failing main 
+and its shadow, is also reduced. 
+More importantly, shadow leaping does not necessarily require the stoping of all the mains during normal execution, which will incur extra overhead even for failure-free execution. 
+Instead, we opportunistically overlap shadow leaping with failure recovery. 
+%and ensure forward progress by opportunistically rolling-forward the shadows during failure recovery. In Section~\ref{anal_time}, we will show that the delay is well bounded even for tightly-coupled applications.
 
-In the absence of failure, the behavior of a main  and its leaping shadow is identical to the behavior depicted in Figure \ref{fig:sync}. Assuming a failure occurrence at time $t_f$, Figure~\ref{fig:leap} shows the concept of shadow leaping. 
+%In the absence of failure, the behavior of a main  and its leaping shadow is identical to the behavior depicted in Figure \ref{fig:sync}. 
+Assuming a failure occurrence at time $t_f$, Figure~\ref{fig:leap} shows the concept of shadow leaping. 
 %Figure~\ref{fig:jump1} depicts the execution dynamics of the failing main and its associated shadow. 
-Upon failure of a main process, its associated shadow speeds up to minimize the impact of failure recovery on the application's progress, as illustrated in Figure~\ref{fig:jump1}. 
+Upon failure of a main process, its associated shadow speeds up to minimize the impact of failure recovery on the other tasks' progress, as illustrated in Figure~\ref{fig:jump1}. 
 %Figure~\ref{fig:jump2} illustrates the behavior of the remaining main processes and their associated shadows. 
-At the same time, as shown in Figure~\ref{fig:jump2}, the remaining main processes continue execution towards the barrier at time $t_{sync}$, and then become idle until $t_r$, when the shadow of the failed main process also reaches the barrier. %It is worth noting that, given the tightly-coupled and strongly-scaled nature of the application, synchronization points occur frequently. Consequently, the time between synchronization points is very small relative to the total execution time of the application. Therefore, if one main, $m_i$, fails at 
+At the same time, as shown in Figure~\ref{fig:jump2}, the remaining main processes continue execution towards the barrier at time $t_{sync}$, and then become idle until $t_r$, when the shadow of the failed main also reaches the barrier. %It is worth noting that, given the tightly-coupled and strongly-scaled nature of the application, synchronization points occur frequently. Consequently, the time between synchronization points is very small relative to the total execution time of the application. Therefore, if one main, $m_i$, fails at 
 %time $t_f$, the remaining main processes will reach their synchronization point, shortly after the failure, specifically at at time $t_{sync} = t_f +\epsilon$, 
 %where $\epsilon \approxeq 0$. 
-Leaping shadows opportunistically takes advantage of this idle time to {\it leap forward} the shadows by copying state from their main processes, so that  
-all processes, including shadows, can resume execution from a consistent synchronization point afterwards. This process continues until the completion of all tasks. Forward leaping increases the shadow's rate of progress, at a minimal energy cost. Consequently, it reduces significantly the likelihood of a shadow falling excessively behind, thereby ensuring fast recovery while minimizing energy consumption.
+Shadow leaping opportunistically takes advantage of this idle time to {\it leap forward} the shadows by copying state from their mains, so that  
+all processes, including shadows, can resume execution from a consistent point afterwards. This process continues until the completion of all tasks. Shadow leaping increases the shadow's rate of progress, at a minimal energy cost. Consequently, it reduces significantly the likelihood of a shadow falling excessively behind, thereby ensuring fast recovery while minimizing energy consumption.
 
 
 
@@ -208,7 +214,8 @@ all processes, including shadows, can resume execution from a consistent synchro
   \label{al:ls}
 \end{algorithm}
 
-The steps of applying Lazy Shadowing with leaping shadows are depicted in Algorithm 1.
+%The steps of applying Lazy Shadowing with leaping shadows are depicted in Algorithm 1.
+We summarize the integration of shadow collocation and shadow leaping with basic shadowing in Algorithm 1.
 To use $M+S$ cores to execute an application, the total workload is split into $M$ parallel tasks (line~\ref{line:split}), %, which are executed simultaneously by $M$ main processes and $M$ shadow processes. 
  which are then assigned to $S$ shadowed sets, each with $\alpha=M/S$ cores for $\alpha$ main processes and 1 core for all the associated shadow processes (line 2).  
 %The $M$ shadows are then clustered into $S$ groups, each containing $\alpha=M/S$ shadows. 
