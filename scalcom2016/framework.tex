@@ -164,26 +164,28 @@ all processes, including shadows, can resume execution from a consistent point a
   \SetKwInOut{Input}{input}
   \SetKwInOut{Output}{output}
   \caption{Lazy Shadowing}
-  \Input{$W, M, S$}
+  %\Input{$W, M, S$}
+  \Input{$M, S$}
   \Output{Application execution status}
   \BlankLine
-  split $W$ into $M$ tasks\; \nllabel{line:split} 
-  assign $M$ tasks to $S$ shadowed sets\; \nllabel{line:cluster} 
+  %split $W$ into $M$ tasks\; \nllabel{line:split} 
+  %assign $M$ tasks to $S$ shadowed sets\; \nllabel{line:cluster} 
   %$T_l \leftarrow T+t_{now}$\;%, $C_{vul} \gets 0$
   %start $m_i$ and $s_i$ for each $task_i$\;
-  start a pair of main and shadow for each task\;
+  start $M$ pairs of main and shadow\;
+  map processes to cores\;
     \While{execution not done}
     {
   %      \If{failure detected in $ss_j$} %\nllabel{line:if_start_1} 
-        \If{failure detected in a shadowed set}
+        \If{failure detected}
         {
             \nllabel{line:if_start_1} 
             %\eIf{$ss_j$ is vulnerable}
-            \eIf{the shadowed set is vulnerable}
+            \eIf{shadowed set is vulnerable}
             {
-                notify ``Application failure"\;
-                terminate all mains and shadows\;
-                repair all failures\;
+                notify ``Application fatal failure"\;
+                %terminate all mains and shadows\;
+                %repair all failures\;
                 restart execution\; %\Comment{re-execution}
             }
             {
@@ -195,7 +197,7 @@ all processes, including shadows, can resume execution from a consistent point a
                 \If{failure happened to a main} 
                 {
                     promote its shadow to new main\;
-                    perform shadow leaping\; %failure induced shadow leaping
+                    triggers shadow leaping\; %failure induced shadow leaping
                     %$T_l \leftarrow T+t_{now}$\;
                 }
             }
@@ -216,19 +218,21 @@ all processes, including shadows, can resume execution from a consistent point a
 
 %The steps of applying Lazy Shadowing with leaping shadows are depicted in Algorithm 1.
 We summarize the integration of shadow collocation and shadow leaping with basic shadowing in Algorithm 1.
-To use $M+S$ cores to execute an application, the total workload is split into $M$ parallel tasks (line~\ref{line:split}), %, which are executed simultaneously by $M$ main processes and $M$ shadow processes. 
- which are then assigned to $S$ shadowed sets, each with $\alpha=M/S$ cores for $\alpha$ main processes and 1 core for all the associated shadow processes (line 2).  
+User needs to specify $M$ for the number of parallel tasks, and $S$ for the number of shadow cores. These two parameters jointly determine the collocation ratio $\alpha=M/S$. The execution starts by simultaneously launching $2M$ processes, of which one main is associated with one shadow for each task (line 1). 
+All processes are then grouped into $S$ shadowed sets. Accordingly, the processes are mapped to cores so that each shadowed set has $\alpha$ cores for $\alpha$ mains and 1 core for all the associated shadows (line 2). 
+%To use $M+S$ cores to execute an application, the total workload is split into $M$ parallel tasks (line~\ref{line:split}), %, which are executed simultaneously by $M$ main processes and $M$ shadow processes. 
+% which are then assigned to $S$ shadowed sets, each with $\alpha=M/S$ cores for $\alpha$ main processes and 1 core for all the associated shadow processes (line 2).  
 %The $M$ shadows are then clustered into $S$ groups, each containing $\alpha=M/S$ shadows. 
-The execution starts by simultaneously running all the main and shadow processes (line 3).
+%The execution starts by simultaneously running all the main and shadow processes (line 3).
 During the execution,
-the system runs a failure monitor (out of scope of this work) that triggers corresponding actions when a failure is detected (line~\ref{line:if_start_1} to~\ref{line:if_end_1}). %A failure may trigger different actions, depending on its type and precedence with respect to other failures.  A shadowed set becomes {\it vulnerable} after the occurrence of the first failure in the set. 
-A failure occurring in a vulnerable shadowed set (e.g., $ss_j$) results in an application failure %. In response, the system terminates all running 
+the system runs a failure monitor (e.g., by using heartbeat protocol~\cite{1004595}) that triggers corresponding actions when a failure is detected (line~\ref{line:if_start_1} to~\ref{line:if_end_1}). %A failure may trigger different actions, depending on its type and precedence with respect to other failures.  A shadowed set becomes {\it vulnerable} after the occurrence of the first failure in the set. 
+A failure occurring in a vulnerable shadowed set results in an application fatal failure %. In response, the system terminates all running 
 %processes, initiates a recovery phase, either by rebooting or replacing failing cores,  and restarts execution (line 8 to 10). %(this assumes that checkpointing is not used). 
- and forces a re-execution (line 7 to 10).
+ and forces a re-execution (line 7).
 On the other hand, failure in a non-vulnerable shadowed set
-does not translate into an application failure, but would mark the shadowed set in question as vulnerable (line 12). In this case, failure of a main process has different impact from that of a  shadow process.  While a shadow 
-failure does not impact the normal execution and thus can be ignored, failure of a main process %forces the remaining main processes to suspend execution after they reach their synchronization point.  The shadow process, $s_k$, associated with the failing process, $m_k$,  becomes the primary process of the associated task and increases its execution to the maximum rate 
-(e.g., $m_k$) triggers promotion of its shadow process, $s_k$, to a new main process (line 14). Simultaneously, a shadow leaping is undertaken by all remaining shadows to align their states with those of their associated mains (line 15).  
+can be tolerated while making the target shadowed set vulnerable (line 9). In this case, failure of a main need to be treated differently from failure of a shadow. While a failure of shadow 
+does not impact the normal execution and thus can be ignored, failure of a main %forces the remaining main processes to suspend execution after they reach their synchronization point.  The shadow process, $s_k$, associated with the failing process, $m_k$,  becomes the primary process of the associated task and increases its execution to the maximum rate 
+triggers promotion of its shadow to a new main, which increases its rate to recover the failure and complete the task (line 11). Simultaneously, a shadow leaping is undertaken by all other shadows to align their states with those of their associated mains (line 12).  
 This process continues until all tasks of the application are successfully completed.
 
 \subsection{Implementation issues}
@@ -238,18 +242,45 @@ This process continues until all tasks of the application are successfully compl
 %\input{Framework/reju}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-We implemented an Open MPI based prototype of Lazy Shadowing, which can be used to execute existing HPC workloads without any change of user code. Since the focus of this paper is to introduce
-algorithmic perspectives of the Lazy Shadowing paradigm by discussing novel concepts of shadow collocation and forward leaping, we only give a brief discussion of the implementation issues. 
+%We implemented an Open MPI based prototype of Lazy Shadowing, which can be used to execute existing HPC workloads without any change of user code. 
+We implement a MPI based library for Lazy Shadowing, referred to as lsMPI. Inserted as a layer between application and MPI, lsMPI uses the MPI profiling hooks to intercept every MPI call. Currently, lsMPI 
+delegates failure detection to ULFM, which guarantees that an error code is returned if failure prevents 
+an MPI operation from completion
+~\cite{Bland:2012:EUF:2404033.2404064,bland2013post}. 
+lsMPI should be portable across all MPI implementations once extensions by ULFM are added to MPI standard.
+Since the focus of this paper is to introduce
+algorithmic perspectives of the Lazy Shadowing paradigm by discussing novel concepts of shadow collocation and shadow leaping, we only give a brief discussion of the implementation issues. 
 
-State consistency is required both during normal execution and following a failure of a main process to roll-forward the shadows. During normal execution, shadows remain mute, in the sense that 
-all outgoing messages from shadows are suppressed. 
-A shadow process, however, will typically lag behind its main process during execution. Therefore, it is necessary to ensure that the shadow's state is consistent with that of its associated main. %, to successfully complete its associated task in case of failure. 
-To this end, a message-logging protocol is used, % to ensure consistency~\cite{Marz}. These protocols 
-which typically uses a minimum amount of meta-information to store and replicate the non-deterministic decisions~\cite{Marz}. %in the execution of an application.  These meta-data, also called determinants, are exchanged through system-level messages. 
+State consistency is required both during normal execution and following a failure. % of a main process to roll-forward the shadows. 
+We design a consistency protocol in Figure~\ref{fig:cons_protocol} to assure 
+that the shadows see the same message order and MPI results as mains. In this figure, A and B represent two mains, and A' and B' are their shadows. For each message, the main sender sends a copy to each of the main and shadow receivers. After getting the message, the main receiver sends an ACK to the shadow sender, so that the shadow sender can safely suppress sending the message and proceed. If the main sender fails,
+the shadow sender will become the new main and start sending out messages. The ACK messages, plus one NAK message after the failure, guarantee that the new main is always consistent with the main receiver. 
+%We bare the risk of temporarily losing consistency between the new main and the shadow receiver, 
+Although the shadow receiver may temporarily be inconsistent with the new main after the failure, shadow leaping will bring the shadow receiver back to a consistent state.
+%Since MPI implements reliable network transportation, the shadow receiver will eventually get the same message as its main, unless a failure occurs. We don't require the shadow receiver to sends ACK to the shadow sender during normal execution. If the main sender fails, the shadow sender will become a new main and start sending out messages. To avoid duplicate messages, the main receiver will use a NAK message to tell the new main the next message it needs. Since previously we require the shadow sender to get an ACK before suppressing a message, the shadow sender will never suppress a message that the main receiver would need, even in the cases of failure. Without using ACK, the shadow receiver may become inconsistent with the new main. However, by aligning the state of the shadow receiver with that of its main we assure that the shadow receiver will be in a consistent state after shadow leaping. 
 
-To provide correct recovery after failure, 
-a mechanism is required to guarantee that every shadow process follows the same computation and communication steps as its main process. 
-After a main fails, its associated shadow will become a new main to recover from this failure. If there are other shadows sharing the same core, they will be terminated and the new main will start consuming the messages in its receiver-side message log at a faster speed. The message logging protocol will ensure that after recovery the new main reaches a consistent state with the rest of the system. 
+\begin{figure}[!t]
+  \begin{center}
+      \includegraphics[width=0.7\columnwidth]{Figures/cons_protocol}
+  \end{center}
+  %\vskip -0.25in
+  \caption{Consistency protocol for lsMPI.}
+  \label{fig:cons_protocol}
+\end{figure}
+
+We assume that only MPI operations can introduce non-determinism. MPI\_ANY\_SOURCE receives may result in different message orders between the main and shadow. To deal with this, we always let the main receive a message ahead of the shadow and then forward the message source to its shadow (SYNC message in Figure~\ref{fig:cons_protocol}). The shadow then issues a receive with the specific source. Other operations, such as MPI\_Wtime() and MPI\_Probe(), can be dealt with by always forwarding the result from the main to the shadow.
+
+Same as \cite{engelmann2011redundant,ferreira_hpc_2011}, consistency protocol introduces runtime overhead due to extra messages. The overhead has been experimentally evaluated to be negligible for most real large-scale applications. Therefore, we believe our protocol, which reduces both message count and bandwidth requirement, should be scalable. Currently, collectives in lsMPI use linear point-to-point operations internal to lsMPI. We plan to optimize its performance by using binomial tree topology and multi-level hierarchical topologies considering hardware locality~\cite{herault2015practical}.
+
+%During normal execution, shadows remain mute, in the sense that 
+%all outgoing messages from shadows are suppressed. 
+%A shadow process, however, will typically lag behind its main process during execution. Therefore, it is necessary to ensure that the shadow's state is consistent with that of its associated main. %, to successfully complete its associated task in case of failure. 
+%To this end, a message-logging protocol is used, % to ensure consistency~\cite{Marz}. These protocols 
+%which typically uses a minimum amount of meta-information to store and replicate the non-deterministic decisions~\cite{Marz}. %in the execution of an application.  These meta-data, also called determinants, are exchanged through system-level messages. 
+
+%To provide correct recovery after failure, 
+%a mechanism is required to guarantee that every shadow process follows the same computation and communication steps as its main process. 
+%After a main fails, its associated shadow will become a new main to recover from this failure. If there are other shadows sharing the same core, they will be terminated and the new main will start consuming the messages in its receiver-side message log at a faster speed. The message logging protocol will ensure that after recovery the new main reaches a consistent state with the rest of the system. 
 
 Upon failure of a main process, shadow processes will update their address space to ``catch up" with their associated non-failing main processes. A technology, such as remote direct memory access (RDMA), can be used to roll-forward the state of the shadow to be consistent with that of its associated main. Rather than copying data to the buffers of the operating system, RDMA allows to transfer data directly from the main process to its shadow. The zero-copy feature of RDMA considerably reduces latency, thereby enabling fast transfer of data between the main and its shadow.
 
