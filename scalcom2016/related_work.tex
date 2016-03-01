@@ -2,8 +2,8 @@
 %an exceptional event \cite{ferreira_sc_2011}. 
 Rollback recovery is the dominant mechanism to achieve fault
 tolerance in current HPC environments~\cite{Elnozahy:02:Survey}. In the most general form, rollback recovery 
-involves the periodic saving of the current system state, with the anticipation that
-in the case of a failure, computation can be restarted from recently saved state. % \cite{Elnozahy:02:Survey}. %The identification of an error, before or during a checkpoint,
+involves the periodic saving of the execution state (checkpoint), with the anticipation that
+in the case of a failure, computation can be restarted from a previously saved checkpoint. % \cite{Elnozahy:02:Survey}. %The identification of an error, before or during a checkpoint,
 %requires that the application rollback to the previously completed checkpoint. 
 Coordinated checkpointing is a popular approach for
 its ease of implementation.
@@ -71,7 +71,7 @@ Our approach differs from classical process replication in that we dynamically c
 
 Replication with dynamic execution rate is also explored in Simultaneous and Redundantly Threaded (SRT) processor whereby one leading thread of execution is running ahead of trailing threads \cite{reinhardt2000transient}. However, 
 the focus of \cite{reinhardt2000transient} is on transient faults within CPU while we aim at tolerating both permanent and transient faults across all systems components.
-This work is closely related to our previous works \cite{mills_2014_icnc,cui_en7085151,cui_2014_closer} where single or loosely-coupled tasks is considered. Instead, in this paper we explore novel ideas of shadow collocation and shadow leaping in order to satisfy the requirements of future extreme-scale HPC systems. 
+This work is closely related to our previous works \cite{mills_2014_icnc,cui_en7085151,cui_2014_closer} where shadow replication with DVFS is studied for single or loosely-coupled tasks. Instead, in this paper we explore novel ideas of shadow collocation and shadow leaping in order to satisfy the requirements of future extreme-scale HPC systems. 
 %our approach is different in that it tunes the execution rates of the leading and trailing threads in a finer grain, in order to achieve a ``parameterized" trade-off between completion time and energy consumption. 
 %Further, we take advantage of the idle time during failure recovery and ``leap" the trailing replicas to achieve forward progress%, largely improving performance in terms of both completion time and energy consumption. 
 %. This differs from \cite{reinhardt2000transient}, of which the ``leaping" of the trailing replica results in extra overhead.

@@ -1,4 +1,4 @@
-The power consumption of one core consists of two parts, dynamic power, $p_d$, which exists only when the core is executing, and static power, $p_s$, which is constant as long as the machine is on. This can be modeled as $p = p_d + p_s$. Note that in addition to CPU leakage, other components, such as memory and disk, also contribute to static power. 
+Power consumption consists of two parts, dynamic power, $p_d$, which exists only when a core is executing, and static power, $p_s$, which is constant as long as the machine is on. This can be modeled as $p = p_d + p_s$. Note that in addition to CPU leakage, other components, such as memory and disk, also contribute to static power. 
 
 %For checkpointing and process replication, all cores are running all the time until the application is complete. Therefore, the energy consumption is proportional to the total execution time, and the expected energy consumption when using $M$ cores to execute an application is calculated as 
 For process replication, all cores are running all the time until the application is complete. Therefore, the expected energy consumption, $En$, is proportional to the expected execution time $T_{total}$: 
@@ -9,7 +9,7 @@ En = N \times p \times T_{total}
 \end{equation} 
 %Although the failed components should not consume any power, we ignore this since the number of failures is negligible compared to the total number of cores.
 
-Lazy Shadowing has the potential to save power compared to process replication, since main cores are idle during the recovery time after each failure, and the shadows can achieve forward progress through shadow leaping. During the normal execution time, all the cores consume static power as well as dynamic power. During recovery time, however, the main cores are idle and consume only static power, while the shadow cores first perform shadow leaping and then become idle. Altogether, the expected energy consumption for Lazy Shadowing can be modeled as 
+Even using the same amount of cores, Lazy Shadowing can save power and energy, since main cores are idle during the recovery time after each failure, and the shadows can achieve forward progress through shadow leaping. During normal execution, all the cores consume static power as well as dynamic power. During recovery time, however, the main cores are idle and consume only static power, while the shadow cores first perform shadow leaping and then become idle. Altogether, the expected energy consumption for Lazy Shadowing can be modeled as 
 \begin{equation}
 En = N \times p_s \times T_{total} + N \times p_d \times w + S \times p_{l} \times T_l.
 %En = N * p_s * T_{total} + N * p_d * w + S * p_{l} * T_l.

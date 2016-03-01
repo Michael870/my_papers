@@ -7,7 +7,7 @@ Lazy Shadowing increases memory requirement\footnote{Note that this problem is n
 To capture this effect,  
 we re-model the rate of shadows as $\sigma_s^b=\frac{1}{\alpha^{1.5}}$.
 Figure~\ref{fig:comp_vary_fail_speed} shows the impact of collocation overhead on expected energy consumption for Lazy Shadowing with $\alpha=5$, with all the values normalized to that of process replication. The results for other values of $\alpha$ have similar behavior and thus are not shown. As expected, energy consumption is penalized because
-of slowing down of the shadows. It is surprising, however, that the impact is quite small, with the largest difference being 4.4\%. The reason is that Lazy Shadowing can take advantage of the recovery time after each failure and achieve forward progress for shadow processes that fall behind. When $\alpha=10$, the largest difference further decreases to 2.5\%. 
+of slowing down of the shadows. It is surprising, however, that the impact is quite small, with the largest difference being 4.4\%. The reason is that shadow leaping can take advantage of the recovery time after each failure and achieve forward progress for shadow processes that fall behind. When $\alpha=10$, the largest difference further decreases to 2.5\%. 
 
 %As expected, both completion time and energy consumption are penalized because
 %of slowing down of the shadows. It is surprising, however, that Lazy Shadowing with $\alpha=3$ is impacted by the 

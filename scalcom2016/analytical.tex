@@ -1,8 +1,9 @@
-Three important metrics for assessing the quality of an application's execution are 1) reliability; 2) completion time; and 3) energy consumption. In the following we develop mathematical models to analyze the expected performance of Lazy Shadowing, as well as prove the bound on performance compared to non-failure case, with the understanding
-that process replication is a special case of Lazy Shadowing where $\alpha=1$. 
+Two important metrics for assessing an application's execution are completion time and energy consumption. In the following we develop analytical models to quantify the expected performance of Lazy Shadowing, as well as prove the bound on performance loss due to failures. %, with the understanding
+%that process replication is a special case of Lazy Shadowing where $\alpha=1$. 
 All the analysis below is under the assumption that there are a total of $N$ cores, and $W$ is the application workload.  
-$M$ of the $N$ cores are allocated for main processes, each having a workload of $w=\frac{W}{M}$, and the rest $S$ cores are for collocated shadow processes. For process replication,
-$M=S=\frac{N}{2}$, and $w=\frac{2W}{N}$. 
+$M$ of the $N$ cores are allocated for main processes, each having a workload of $w=\frac{W}{M}$, and the rest $S$ cores are for the collocated shadow processes. %For process replication,
+Note that process replication is a special case of Lazy Shadowing where $\alpha=1$, so 
+$M=S=\frac{N}{2}$ and $w=\frac{2W}{N}$. 
 
 
 \subsection{Application fatal failure probability}

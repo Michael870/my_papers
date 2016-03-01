@@ -1,6 +1,5 @@
-To a large extent, workload determines the time exposed to failure. With other factors being the same, an application with a larger workload is likely to encounter more failures during its execution. Hence, it is intuitive that workload would impact the performance comparison. 
-
-Fixing $N$ at 1,000,000, we increase $W$ from 1,000,000 hours to 12,000,000 hours. Figure~\ref{fig:w25} assumes a MTBF of 25 years and shows both the time and energy. Checkpointing has the worst performance in all cases. In terms of completion time, process replication is more efficient than Lazy Shadowing when workload reaches 6,000,000 hours. Considering energy consumption, however, Lazy Shadowing is able to achieve the most energy saving in all cases. %When MTBF of 5 years is used, the difference is that process replication consumes less energy than Lazy Shadowing when $W$ reaches 6,000,000.
+To a large extent, workload determines the time exposed to failures. With other factors being the same, an application with a larger workload is likely to encounter more failures during its execution. %Hence, it is intuitive that workload would impact the performance comparison. 
+Fixing $N$ at 1,000,000, we increase $W$ from 1,000,000 hours to 12,000,000 hours. Figure~\ref{fig:w25} assumes a MTBF of 25 years and shows both the time and energy. Checkpointing has the worst performance in all cases. In terms of completion time, process replication is more efficient when workload reaches 6,000,000 hours. Considering energy consumption, however, Lazy Shadowing is able to achieve the most saving in all cases. %When MTBF of 5 years is used, the difference is that process replication consumes less energy than Lazy Shadowing when $W$ reaches 6,000,000.
 
 \begin{figure}[!t]
 	\begin{center}

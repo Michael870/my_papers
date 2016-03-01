@@ -1,22 +1,23 @@
 %One of the major performance metrics of interest to end-users, is the application's completion time. 
 %To evaluate this, we develop 
-An analytical model is developed for the expected completion time. For simplicity, we assume that no subsequent failure happens during the recovery of the previous failure. 
+%An analytical model is developed for the expected completion time. For simplicity, we assume that no subsequent failure happens during the recovery of the previous failure. 
 %Since we are comparing between Lazy Shadowing and process replication, the overhead of failure detection and consistency protocols are ignored as they are the same for the two approaches.
 %Our models focus on one 
 %checkpointing interval of the application, since the whole execution is just a repetition of multiple such intervals. As a consequence, we assume the execution with checkpointing starts right after the previous checkpoint and ends right before the next checkpoint, and the execution with Lazy Shadowing and process replication will not experience any application fatal failure. For fairness, we assume that the three alternatives have the same amount of workload, 
 %$W$, to execute, and total number of available cores, $M$. The maximal execution rate at each core, $\sigma_{max}$, is normalized to 1 so that the time to complete without failures is equal to the workload to execute on each core. In addition, we assume that the three alternatives will encounter the same number of failures, which is $k$, as they will execute the same amount of workload using the same amount of resources.
 %\subsubsection{Expected completion time}
-First we discuss the case of $k$ failures, which separate the execution into $k+1$ intervals. 
-Denote by $\Delta_i$ ($1\le i \le k+1$) the $i^{th}$ continuous execution interval, and $\tau_i$ ($1\le i \le k$) the recovery time after $\Delta_i$. 
+There are two types of delay due to failures. If a failure does not lead to an application fatal failure, the delay corresponds to the catching up of the shadow of the failing main (see Figure~\ref{fig:jump1}). Otherwise, a possible larger (rollback) delay will be introduced by an application fatal failure. In the following we consider both delays step by step. 
+First we discuss the case of $k$ failures without application fatal failure. Should a failure occur during the recovery of a previous failure, its recovery would overlap with the ongoing recovery. To study the worst case behavior, we assume failures do not overlap, so that the execution is split into $k+1$ intervals, as illustrated in Figure~\ref{fig:progress}. 
+$\Delta_i$ ($1\le i \le k+1$) represents the $i^{th}$ execution interval, and $\tau_i$ ($1\le i \le k$) is the recovery time after $\Delta_i$. 
 %between the $(i-1)^{th}$ and $i^{th}$ failures (assuming the $0^{th}$ failure happens right before the execution begins, and the $(k+1)^{th}$ failure happens right after the execution ends), and $\tau_i$ ($1\le i \le k$) the recovery time after the $i^{th}$ failure. 
-The application's progress with delay incurred by failures is illustrated in Figure~\ref{fig:progress}.
+%The application's progress with delay incurred by failures is illustrated in Figure~\ref{fig:progress}.
 
 \begin{figure}[!t]
 	\begin{center}
 		\includegraphics[width=0.7\columnwidth]{Figures/progress}
 	\end{center}
 	%\vskip -0.22in 
-	\caption{Application's progress with failure incurred delays.}
+	\caption{Application's progress with shadow catching up delays.}
 	\label{fig:progress}
 \end{figure}
 
@@ -25,18 +26,21 @@ The application's progress with delay incurred by failures is illustrated in Fig
 The following theorem expresses the completion time, $T_c^k$, as a function of $k$.
 
 \begin{theorem}
-Assuming that no failure occurs during the recovery of a failure, then using Lazy Shadowing, 
+Assuming that failures do not overlap and no application fatal failure occurs, then using Lazy Shadowing, 
 	$$T_c^k = w + (1-\sigma_s^b)\sum_{i=1}^k\Delta_i$$
 \end{theorem}
 \begin{IEEEproof}
-The recovery time $\tau_i$ is the time needed for the lazy shadow of the failed main to catch up. Lazy Shadowing guarantees that all the shadows reach the same execution point as the mains (See Figure~\ref{fig:leap}) after the previous recovery, so every recovery time is proportional to its previous continuous execution length, which is $\Delta_i$. That is, $\tau_i = \Delta_i \times (1 - \sigma_s^b)$ (The value of $\Delta_i$ can be obtained given a failure probability distribution, as will be demonstrated in Section~\ref{sec:evaluation}). The total delay induced by all $k$ failures is $\sum_{i=1}^k\tau_i$.
+%The recovery time $\tau_i$ is the time needed for the lazy shadow of the failed main to catch up. 
+Lazy Shadowing guarantees that all the shadows reach the same execution point as the mains (See Figure~\ref{fig:leap}) after a previous recovery, so every recovery time is proportional to its previous execution interval. %, which is $\Delta_i$. 
+That is, $\tau_i = \Delta_i \times (1 - \sigma_s^b)$. % (The value of $\Delta_i$ can be obtained given a failure probability distribution, as will be demonstrated in Section~\ref{sec:evaluation}). 
+%The total delay induced by all $k$ failures is $\sum_{i=1}^k\tau_i$.
 %$\Delta_{k+1}$ is the failure free execution interval until the workload is complete, i.e., $\Delta_{k+1} = w - \sum_{i=1}^{k}\Delta_i$. 
-Finally, according to Figure~\ref{fig:progress}, the completion time with $k$ failures is 
+According to Figure~\ref{fig:progress}, the completion time with $k$ failures is 
 	$T_c^k = \sum_{i=1}^{k+1}\Delta_i + \sum_{i=1}^k\tau_i = w + (1-\sigma_s^b)\sum_{i=1}^k\Delta_i$
 \end{IEEEproof}
 
-Although it may seem that the delay would keep growing as the number of failures increases, 
-it turns out to be well bounded, as a benefit of forward leaping: 
+Although it may seem that the delay would keep growing with the number of failures, 
+it turns out to be well bounded, as a benefit of shadow leaping: 
 
 \begin{corollary}
 The delay induced by failures is bounded by $(1-\sigma_s^b)w$.
@@ -46,7 +50,7 @@ From above theorem we can see the delay from $k$ failures is $(1-\sigma_s^b)\sum
 $\sum_{i=1}^{k}\Delta_i = w - \Delta_{k+1} \le w$. Therefore, $(1-\sigma_s^b)\sum_{i=1}^k\Delta_i \le (1-\sigma_s^b)w$.
 \end{IEEEproof}
 
-Typically, the number of failures to be encountered will not be known. Given a failure distribution, however, we can calculate the probability for a specific value of $k$. We assume that failures do not occur during recovery, so the failure probability of a core during the execution can be estimated as $P_c = F(w)$. Then the probability that there are $k$ failures among the $N$ cores is 
+Typically, the number of failures to be encountered is stochastic. Given a failure distribution, however, we can calculate the probability for a specific value of $k$. We assume that failures do not occur during recovery, so the failure probability of a core during the execution can be calculated as $P_c = F(w)$. Then the probability that there are $k$ failures among the $N$ cores is 
 \begin{equation}
 \begin{split}
 P_s^{k}= & \dbinom{N}{k}{P_c}^k(1-P_c)^{N-k} \\
@@ -54,14 +58,14 @@ P_s^{k}= & \dbinom{N}{k}{P_c}^k(1-P_c)^{N-k} \\
 \end{split}
 \end{equation}
 
-The following theorem gives an expression for the expected completion time, $T_{total}$, considering all possible cases of failures. 
+The following theorem expresses the expected completion time, $T_{total}$, considering all possible cases of failures. 
 
 \begin{theorem}
-Assuming that no failure occurs during recovery of a failure, then using Lazy Shadowing,
+Assuming that failures do not overlap, then using Lazy Shadowing,
 $T_{total} = T_{c} / (1 - P_a)$, where $T_{c} = \sum_{i} T_{c}^{i} \cdot P_s^{i}$.
 \end{theorem}
 \begin{IEEEproof}
-If application fatal failure does not happen, the completion time considering all possible failures can be averaged as $T_{c} = \sum_{i} T_{c}^{i} \cdot P_s^{i}$. If application fatal failure occurs, however, the application needs to restart from the beginning. Considering the possibility of re-execution, the total expected completion time is $T_{total} = T_{c} / (1 - P_a)$.
+Without application fatal failure, the completion time considering all possible valuse of $k$ can be averaged as $T_{c} = \sum_{i} T_{c}^{i} \cdot P_s^{i}$. If an application fatal failure occurs, however, the application needs to roll back to the beginning. With the probability of rollback calculated as $P_a$ in Section~\ref{anal_app_fail}, the total expected completion time is $T_{total} = T_{c} / (1 - P_a)$.
 \end{IEEEproof}
 
 Process replication is a special case of Lazy Shadowing where $\alpha=1$, so we can use the above theorem to derive the expected completion time for process replication using the same amount of cores:
@@ -70,7 +74,8 @@ Process replication is a special case of Lazy Shadowing where $\alpha=1$, so we 
 The expected completion time for process replication is $T_{total} = 2W/N / (1 - P_a)$.
 \end{corollary}
 \begin{IEEEproof}
-Using process replication, half of the available cores are dedicated to replicas so that the workload assigned to each task is significantly increased, i.e., $w=2W/N$. Different from the case of $\alpha \ge 2$, failures do not incur any delay unless application fatal failure occurs, since the replicas are executing at the same rate as the main processes. As a result, the completion time of process replication without application fatal failure is constant regardless of the number of failures, i.e., $T_c=T_c^k=w=2W/N$. Finally, the expected completion time considering the possibility of re-execution is $T_{total} = T_c / (1 - P_a) = 2W/N / (1 - P_a)$.
+Using process replication, half of the available cores are dedicated to shadows so that the workload assigned to each task is significantly increased, i.e., $w=2W/N$. Different from the cases of $\alpha \ge 2$, failures do not incur any delay except for application fatal failures. %, since the replicas are executing at the same rate as the main processes. 
+As a result, without application fatal failure the completion time under process replication is constant regardless of the number of failures, i.e., $T_c=T_c^k=w=2W/N$. Finally, the expected completion time considering the possibility of rollback is $T_{total} = T_c / (1 - P_a) = 2W/N / (1 - P_a)$.
 \end{IEEEproof}
 
 %A closer look at the above analysis one can realize that Lazy Shadowing has both advantage and disadvantage compared to traditional process replication. When collocating multiple shadow processes on each core, more than half of the available cores will be dedicated to main processes, leading to less workload per process. At the same time, collocation slows down the shadow processes, which incurs delays when failures occur. We will discuss more about the conflicting effects in Section~\ref{sec:evaluation}.
