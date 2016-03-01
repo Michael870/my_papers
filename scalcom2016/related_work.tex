@@ -1,9 +1,9 @@
 %Extreme-scale computing presents some unique challenges to fault tolerance as faults are no longer 
 %an exceptional event \cite{ferreira_sc_2011}. 
-Rollback and recovery is the dominant mechanism to achieve fault
-tolerance in current HPC environments~\cite{Elnozahy:02:Survey}. In the most general form, rollback and recovery 
+Rollback recovery is the dominant mechanism to achieve fault
+tolerance in current HPC environments~\cite{Elnozahy:02:Survey}. In the most general form, rollback recovery 
 involves the periodic saving of the current system state, with the anticipation that
-in the case of a failure, computation can be restarted from the most recently saved state. % \cite{Elnozahy:02:Survey}. %The identification of an error, before or during a checkpoint,
+in the case of a failure, computation can be restarted from recently saved state. % \cite{Elnozahy:02:Survey}. %The identification of an error, before or during a checkpoint,
 %requires that the application rollback to the previously completed checkpoint. 
 Coordinated checkpointing is a popular approach for
 its ease of implementation.
@@ -57,9 +57,8 @@ However, upcoming extreme-scale systems are expected to
 %require a more challenging level of fault tolerance to deal with the 
 confront a dramatic growth in both the frequency and diversity of faults.
 As a result,
-replication has recently been proposed as a
-viable alternative to checkpointing in HPC \cite{engelmann09case,Cappello:09:Fault}. 
-In addition, full and partial
+replication has recently been proposed to addresses the deficiencies of checkpointing in HPC \cite{Cappello:09:Fault,engelmann2011redundant}. 
+Full and partial
 replication have also been studied to augment existing checkpointing techniques, and to  
 detect or correct silent data corruption \cite{stearly_2012_partial,elliott_2012_cpr,ferreira_sc_2011,fiala_2012_sdc}. % There are several different implementations of
 %replication in the widely used MPI library, each with their different tradeoffs and overheads. The
