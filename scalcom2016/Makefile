@@ -5,11 +5,14 @@ BLGFILE=$(PREFIX).blg
 LOGFILE=$(PREFIX).log
 BBLFILE=$(PREFIX).bbl
 
-all:	
+all: plots	
 	pdflatex $(PREFIX)
 	bibtex   $(PREFIX)
 	pdflatex $(PREFIX)
 	pdflatex $(PREFIX)
+
+plots: 
+	cd GP; gnuplot *.gp
 
 clean:
 	rm -f $(AUXFILE) $(BLGFILE) $(LOGFILE) $(BBLFILE);
