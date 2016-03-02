@@ -50,16 +50,17 @@ set datafile missing "-"
 
 set ytics (        "0.0"       0, \
                    "0.5"      0.5, \
+                   "0.6"      0.6, \
+                   "0.7"      0.7, \
+                   "0.8"      0.8, \
+                   "0.9"      0.9, \
                    "1.0"      1.0, \
-                   "1.5"      1.5, \
-                   "2.0"      2.0, \
-		           "2.5"      2.5, \
-		           "3.0"      3.0 \
+                   "1.1"      1.1 \
           )		 
 
 
 
-set ylabel "Time"
+set ylabel "Energy"
 set xlabel "MTBF (year)"
 
 set key right top
