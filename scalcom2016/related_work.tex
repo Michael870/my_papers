@@ -30,7 +30,7 @@ checkpointing, aims at reducing coordination overhead \cite{alvisi_ftc_1999}. Th
 cause processes to store useless states. To address this 
 shortcoming, ``forced checkpoints" have been proposed \cite{helary_rds_1997}. This approach, however,  may lead to unpredictable
 checkpointing rates. Although well-explored, uncoordinated checkpointing has not been widely adopted
-in HPC environments, mainly due to its complexity. 
+in HPC environments for its complexities. 
 %its dependency on applications \cite{guermouche_2011_ipdps}.
 
 
@@ -54,15 +54,16 @@ however, may lead to increased failure rates of individual nodes and complicate 
 
 Process replication, or state machine replication, has long been used for reliability and availability in distributed and mission critical systems \cite{schneider_1990_tutorial}. %Replication can be used to detect and correct system failures that are otherwise undetectable,
 %such as silent data corruption and Byzantine faults \cite{fiala_2012_sdc}. 
-This approach is barely used in HPC systems, primarily due to its low efficiency.
-However, upcoming extreme-scale systems are expected to 
+%This approach is barely used in HPC systems, primarily due to its low efficiency.
+%However, upcoming extreme-scale systems are expected to 
 %require a more challenging level of fault tolerance to deal with the 
-confront a dramatic growth in both the frequency and diversity of faults.
-As a result,
-replication has recently been proposed to address the deficiencies of checkpointing in HPC \cite{Cappello:09:Fault,engelmann2011redundant}. 
+%confront a dramatic growth in both the frequency and diversity of faults.
+%As a result,
+Although it is initially rejected in HPC communities, 
+replication has recently been proposed to address the deficiencies of checkpointing for upcoming extreme-scale systems \cite{Cappello:09:Fault,engelmann2011redundant}. 
 Full and partial
-replication have also been studied to augment existing checkpointing techniques, and to  
-detect or correct silent data corruption \cite{stearly_2012_partial,elliott_2012_cpr,ferreira_sc_2011,fiala_2012_sdc}. % There are several different implementations of
+process replication have also been studied to augment existing checkpointing techniques, and to  
+detect and correct silent data corruption \cite{stearly_2012_partial,elliott_2012_cpr,ferreira_sc_2011,fiala_2012_sdc}. % There are several different implementations of
 %replication in the widely used MPI library, each with their different tradeoffs and overheads. The
 %overhead can be negligible or up to 70\% depending upon the communication patterns of the
 %application \cite{engelmann2011redundant}. %Moreover, replication alone is not enough to guarantee fault tolerance since

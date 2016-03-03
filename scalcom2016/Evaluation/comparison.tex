@@ -1,6 +1,6 @@
 %To study the performance of Lazy Shadowing, we compare with process replication using the analytical models in Section~\ref{sec:analytical}. We also compare to checkpointing, of which the completion time is calculated with Daly's model~\cite{daly_fgcs_2006} and the energy consumption is then derived using Equation~\ref{eq:exp_energy1}. 
-We compare with both process replication and checkpointing, assuming the same number of cores to use. The completion time with checkpointing is calculated with Daly's model~\cite{daly_fgcs_2006} assuming 10 minutes for both checkpointing and restart. The energy consumption is then derived with Equation~\ref{eq:exp_energy1}. It is important to point out that we always assume the same number of cores. 
-
+We compare with both process replication and checkpointing. %, assuming the same number of cores to use. 
+The completion time with checkpointing is calculated with Daly's model~\cite{daly_fgcs_2006} assuming 10 minutes for both checkpointing and restart. The energy consumption is then derived with Equation~\ref{eq:exp_energy1}. It is important to point out that we always assume the same number of cores, so that process replication and Lazy Shadowing do not use extra cores for the replicas. 
 
 It is clear from THEOREM 1 that the total recovery delay $\sum_{i=1}^k\tau_i$ is determined by the execution time $\sum_{i=1}^k\Delta_i$, independent of the distribution of failures. 
 % which determines the individual value of $\Delta_i$. 
@@ -53,7 +53,7 @@ Our results show that at extreme-scale, the completion time and energy consumpti
 %so large that the comparison between process replication and Lazy Shadowing is invisible. Therefore, we re-plot the comparison between Lazy Shadowing and process replication in Figure~\ref{fig:t32} and~\ref{fig:e32}, with checkpointing removed. 
 Figure~\ref{fig:t32} reveals that the most time efficient choice largely depends on MTBF. 
 %More specifically, process replication consumes less time when MTBF is low while otherwise Lazy Shadowing is more efficient.
-When MTBF is high, Lazy Shadowing requires less time as more cores are used for main processes and less workload is assigned to each process. As MTBF decreases, process replication outperforms Lazy Shadowing as a result of the increased likelyhood of rollback for Lazy Shadowing.
+When MTBF is high, Lazy Shadowing requires less time as more cores are used for main processes and less workload is assigned to each process. As MTBF decreases, process replication outperforms Lazy Shadowing as a result of the increased likelihood of rollback for Lazy Shadowing.
 %This is because of the increased probability of re-execution for Lazy Shadowing when failure rate is high. 
 In terms of energy consumption, Lazy Shadowing has much more advantage over process replication. For MTBF from 2 to 25 years, Lazy Shadowing with $\alpha=5$ can achieve 9.6-17.1\% energy saving, while the saving increases to 13.1- 23.3\% for $\alpha=10$. The only exception is when MTBF is extremely low (1 year), Lazy Shadowing with $\alpha=10$ consumes more energy because of extended execution time.
 

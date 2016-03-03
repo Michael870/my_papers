@@ -18,7 +18,6 @@
 By carefully analyzing the characteristics of HPC applications, we devise novel ideas 
 of shadow collocation and shadow leaping, and integrate them with the basic concept of shadowing, which jointly form a complete algorithm that we call Lazy Shadowing. 
 To make it easy to follow, we first re-emphasize important details of shadowing, with minor changes of symbols.
-
 Assuming the fail-stop failure model, where a process stops execution once a failure
 occurs and failure can be detected by other
 processes~\cite{gartner_faults_1999,cristian_comm_1991}, 
@@ -32,8 +31,8 @@ the concept of Shadowing can be described as follows:
 \end{itemize}
 
 Under fail-stop model, Lazy Shadowing is able to tolerate failures in hardware, such as power supply, CPU, attached accelerators (e.g., GPU), memory bit flips that exceed ECC's capacity, as well as software, such as OS and runtime. 
-We only use one shadow since the probability that failures occur to both the original process and the replica is negligible~\cite{casanova_inria_2012}. 
-If necessary, however, this can be easily extended to use a suit of shadows. 
+%We only use one shadow since the probability that failures occur to both the original process and the replica is negligible~\cite{casanova_inria_2012}. 
+%If necessary, however, this can be easily extended to use a suit of shadows. 
 
 
 %Furthermore, we adopt the
@@ -76,8 +75,8 @@ $\sigma_s^a$, be set to the maximum.
 The initial execution rate of the shadow, $\sigma_s^b$, however, can be derived by balancing the trade-offs between delay and energy.
 %are determined based on the tolerance of the application to completion time.
 For a delay-tolerant, energy-stringent application, $\sigma_s^b$ is set to 0, and the shadow starts executing only upon failure of the main process. %, for maximum energy saving. %, which guarantees additional energy is consumed only upon failure
-For a delay-stringent, energy-tolerant application, the shadow starts executing at $\sigma_s^b=\sigma_m$ to guarantee the completion of the task at the specified time $t_m$, regardless of when the failure occurs. Therefore, Lazy Shadowing has the flexibility to converge to re-execution or process replication, if preferred. In addition,  
-a broad spectrum of delay and energy tradeoffs in between can be explored either empirically or by using optimization frameworks for delay and energy tolerant applications.
+For a delay-stringent, energy-tolerant application, the shadow starts executing at $\sigma_s^b=\sigma_m$ to guarantee the completion of the task at the specified time $t_m$, regardless of when the failure occurs. %In a word, Lazy Shadowing has the flexibility to converge to either rollback or process replication, if preferred,  
+In addition, a broad spectrum of delay and energy trade-offs in between can be explored either empirically or by using optimization frameworks for delay and energy tolerant applications.
 %For elastic applications, the delay-energy product can be used to derive the execution rate  
 %For other applications, $\sigma_s^b$ and $\sigma_s^a$ can be derived by balancing trade-offs between completion time and energy consumption
 %however, may still be tuned to manage the trade-offs between completion time and energy consumption. Smaller $\sigma_b$ corresponds to lazier shadowing of the main process.

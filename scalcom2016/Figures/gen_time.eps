@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0 EPSF-2.0
 %%Title: ../Figures/gen_time.eps
-%%Creator: gnuplot 5.0 patchlevel 1
-%%CreationDate: Thu Mar  3 00:18:18 2016
+%%Creator: gnuplot 5.0 patchlevel 3
+%%CreationDate: Thu Mar  3 14:40:38 2016
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 950 554
 %%EndComments
@@ -48,7 +48,7 @@ gnudict begin
   } if
 } def
 %
-% Gnuplot Prolog Version 5.0 (Dec 2014)
+% Gnuplot Prolog Version 5.1 (Oct 2015)
 %
 %/SuppressPDFMark true def
 %
@@ -97,8 +97,9 @@ gnudict begin
 /LC7 {1 0.3 0} def
 /LC8 {0.5 0.5 0.5} def
 % Default dash patterns (version 5.0)
+/LTB {BL [] LCb DL} def
 /LTw {PL [] 1 setgray} def
-/LTb {BL [] LCb DL} def
+/LTb {PL [] LCb DL} def
 /LTa {AL [1 udl mul 2 udl mul] 0 setdash LCa setrgbcolor} def
 /LT0 {PL [] LC0 DL} def
 /LT1 {PL [2 dl1 3 dl2] LC1 DL} def
@@ -465,15 +466,14 @@ systemdict /pdfmark known not {
 SDict begin [
   /Title (../Figures/gen_time.eps)
   /Subject (gnuplot plot)
-  /Creator (gnuplot 5.0 patchlevel 1)
-  /Author (Yangzi)
+  /Creator (gnuplot 5.0 patchlevel 3)
+  /Author (Michael)
 %  /Producer (gnuplot)
 %  /Keywords ()
-  /CreationDate (Thu Mar  3 00:18:18 2016)
+  /CreationDate (Thu Mar  3 14:40:38 2016)
   /DOCINFO pdfmark
 end
 } ifelse
-end
 %
 % Support for boxed text - Ethan A Merritt May 2005
 %
@@ -499,6 +499,10 @@ end
 /Boxing false def
 /textshow { ExtendTextBox Gshow } def
 %
+% redundant definitions for compatibility with prologue.ps older than 5.0.2
+/LTB {BL [] LCb DL} def
+/LTb {PL [] LCb DL} def
+end
 %%EndProlog
 %%Page: 1 1
 gnudict begin
@@ -814,7 +818,7 @@ stroke
 1.000 UL
 LTb
 0.10 0.10 0.10 C 1.000 UL
-LTb
+LTB
 0.10 0.10 0.10 C 1998 9628 M
 0 -8125 V
 13839 0 V
@@ -1189,7 +1193,7 @@ stroke
 LTb
 LCb setrgbcolor
 1.000 UL
-LTb
+LTB
 0.10 0.10 0.10 C 1998 9628 M
 0 -8125 V
 13839 0 V

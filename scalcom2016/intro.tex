@@ -70,7 +70,7 @@ dramatically increases a power-constrained system's tolerance to failure.
 %achieve high level of resilience with a small relative performance penalty.
 %guarantee small relative error with respect to the optimal expected cost, in terms of completion time and energy consumption. 
 Lazy Shadowing is adaptive in that it enables a configurable trade-off between rollback (time redundancy) and replication (hardware redundancy) by dynamically adjusting the main and shadow processes' execution rates.
-Optimal execution rates can be derived either analytical or empirically, in order to achieve the desired balance between two important objectives, namely, the expected completion time of the supported application, and the power constraints imposed by the underlying computing infrastructure. 
+Optimal execution rates can be derived either analytically or empirically, in order to achieve the desired balance between two important objectives, namely, the expected completion time of the supported application, and the power constraints imposed by the underlying computing infrastructure. 
 %Furthermore, the distinction between main and shadow's execution rates provides a unique opportunity 
 %that allows the lagging shadows to benefit from the faster execution of the mains without extra time overhead.
 %Specifically, when a failure occurs, Lazy Shadowing takes advantage of the recovery time and synchronizes the states of the lagging shadows to those of mains. This technique not only assures forward progress with minimized time and energy, but also reduces recovery time for subsequent failures.  

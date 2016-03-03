@@ -12,8 +12,8 @@ all: plots
 	pdflatex $(PREFIX)
 
 plots: 
-	cd GP; gnuplot *.gp
-	cd Figures; ./epstopdf.sh
+#	cd GP; gnuplot *.gp
+#	cd Figures; ./epstopdf.sh
 
 clean:
 	rm -f $(AUXFILE) $(BLGFILE) $(LOGFILE) $(BBLFILE);

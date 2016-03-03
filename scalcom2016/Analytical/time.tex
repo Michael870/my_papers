@@ -65,7 +65,7 @@ Assuming that failures do not overlap, then using Lazy Shadowing,
 $T_{total} = T_{c} / (1 - P_a)$, where $T_{c} = \sum_{i} T_{c}^{i} \cdot P_s^{i}$.
 \end{theorem}
 \begin{IEEEproof}
-Without application fatal failure, the completion time considering all possible valuse of $k$ can be averaged as $T_{c} = \sum_{i} T_{c}^{i} \cdot P_s^{i}$. If an application fatal failure occurs, however, the application needs to roll back to the beginning. With the probability of rollback calculated as $P_a$ in Section~\ref{anal_app_fail}, the total expected completion time is $T_{total} = T_{c} / (1 - P_a)$.
+Without application fatal failure, the completion time considering all possible values of $k$ can be averaged as $T_{c} = \sum_{i} T_{c}^{i} \cdot P_s^{i}$. If an application fatal failure occurs, however, the application needs to roll back to the beginning. With the probability of rollback calculated as $P_a$ in Section~\ref{anal_app_fail}, the total expected completion time is $T_{total} = T_{c} / (1 - P_a)$.
 \end{IEEEproof}
 
 Process replication is a special case of Lazy Shadowing where $\alpha=1$, so we can use the above theorem to derive the expected completion time for process replication using the same amount of cores:
@@ -74,7 +74,7 @@ Process replication is a special case of Lazy Shadowing where $\alpha=1$, so we 
 The expected completion time for process replication is $T_{total} = 2W/N / (1 - P_a)$.
 \end{corollary}
 \begin{IEEEproof}
-Using process replication, half of the available cores are dedicated to shadows so that the workload assigned to each task is significantly increased, i.e., $w=2W/N$. Different from the cases of $\alpha \ge 2$, failures do not incur any delay except for application fatal failures. %, since the replicas are executing at the same rate as the main processes. 
+Using process replication, half of the available cores are dedicated to shadows so that the workload assigned to each task is significantly increased, i.e., $w=2W/N$. Different from cases where $\alpha \ge 2$, failures do not incur any delay except for application fatal failures. %, since the replicas are executing at the same rate as the main processes. 
 As a result, without application fatal failure the completion time under process replication is constant regardless of the number of failures, i.e., $T_c=T_c^k=w=2W/N$. Finally, the expected completion time considering the possibility of rollback is $T_{total} = T_c / (1 - P_a) = 2W/N / (1 - P_a)$.
 \end{IEEEproof}
 
