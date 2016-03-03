@@ -25,50 +25,56 @@ This huge imbalance makes system power a leading design constraint in future ext
 
 
 %Fault tolerance and power management have been studied extensively, although only recently have researchers begun to study the combination of these two competing goals. 
-In today's HPC systems the response to faults mainly consists of restarting the application. 
+In today's HPC systems the response to faults mainly consists of rolling back the execution. 
 For long-running jobs, such as scientific applications, %To avoid complete re-execution, %systems often checkpoint the execution periodically. 
-checkpoint of the execution is periodically saved to stable storage to avoid complete re-execution.
-Upon the occurrence of a hardware or software failure, recovery is then achieved by restarting the computation from a saved checkpoint. Given the anticipated increase in system-level failure rates and the time required to checkpoint large-scale compute-intensive and data-intensive applications, it is predicted that the time required to periodically checkpoint an application and restart its execution will approach the system's Mean Time Between Failures (MTBF). Consequently, applications will make little forward progress, thereby reducing considerably the overall efficiency of the system~\cite{ferreira_sc_2011}.% Given this limitation, several large-scale application designers avoid checkpointing and rely on re-execution, upon failure, to achieve fault-tolerance. 
+checkpoint of the execution is periodically saved to stable storage to avoid complete rollback.
+Upon the occurrence of a hardware or software failure, recovery is then achieved by restarting from a saved checkpoint. Given the anticipated increase in system-level failure rates and the time to checkpoint large-scale compute-intensive and data-intensive applications, it is predicted that the time required to periodically checkpoint an application and restart its execution will approach the system's Mean Time Between Failures (MTBF). Consequently, applications will make little forward progress, thereby reducing considerably the overall system efficiency~\cite{ferreira_sc_2011}.% Given this limitation, several large-scale application designers avoid checkpointing and rely on re-execution, upon failure, to achieve fault-tolerance. 
 
-More recently, process replication, either fully or partially, has been proposed to augment checkpointing and scale to the resilience requirements of future extreme-scale systems. %~\cite{fiala_2012_sdc}. 
+More recently, process replication, either fully or partially, has been proposed to %augment checkpointing and 
+scale to the resilience requirements of future extreme-scale systems. %~\cite{fiala_2012_sdc}. 
 Based on this technique, each process is replicated across independent computing
 nodes. When the original process fails, one of the replicas takes over the computation task. Replication 
-requires a tremendous increase in the number of computing resources to host the replicas%, since each process must have at least one replica, thereby 
+requires a tremendous increase in the number of computing resources% to host the replicas%, since each process must have at least one replica, thereby 
 %limiting the system efficiency to at most 50\%.
 , thereby constantly wasting a significant portion of system capacity. 
 
-There is a delicate interplay between fault tolerance and energy consumption. Checkpointing and replication require additional energy to achieve fault tolerance. Conversely, it has been shown that lowering supply voltages, a commonly used technique to conserve energy, increases the probability of transient faults~\cite{chandra2008defect}. The trade-off between fault free operation and optimal energy consumption has been explored in the literature. Limited insights have emerged, however, with respect to how adherence to application's desired QoS requirements affects and is affected by the fault tolerance and energy consumption dichotomy. For example, it has been shown that, at scale, coordinated and uncoordinated checkpointing may lead to cascading delays. %Similarly, the overhead of reexcution and replication-based techniques is a dominant factor of the computation and may lead to excessive delay and energy consumption in large-scale computing environments. 
+There is a delicate interplay between fault tolerance and energy consumption. Checkpointing and replication require additional energy to achieve fault tolerance. Conversely, it has been shown that lowering supply voltages, a commonly used technique to conserve energy, increases the probability of transient faults~\cite{chandra2008defect}. The trade-off between fault free operation and optimal energy consumption has been explored in the literature. Limited insights have emerged, however, with respect to how adherence to application's desired QoS requirements affects and is affected by the fault tolerance and energy consumption dichotomy. %For example, it has been shown that, at scale, coordinated and uncoordinated checkpointing may lead to cascading delays. %Similarly, the overhead of reexcution and replication-based techniques is a dominant factor of the computation and may lead to excessive delay and energy consumption in large-scale computing environments. 
 In addition, abrupt and unpredictable changes in system behavior may lead to unexpected fluctuations in performance, which can be detrimental to applications' QoS requirements. The inherent instability of extreme-scale computing systems, in terms of the envisioned high-rate and diversity of their faults, together with the demanding power constraints under which these systems will be designed to operate, calls for a reconsideration of the fault tolerance problem.
 
 To this end, we propose an adaptive and power-aware algorithm, referred to as \textit{Lazy
 Shadowing}, as an efficient and scalable alternative to achieve high-levels of resilience, through
-forward progress, in extreme-scale, failure-prone computing environments. In the proposed
-approach, each process (referred to as a \textit{main}) is associated with a ``lazy" replica (referred to as a \textit{shadow}) to improve resilience. %The shadow executes the same code as its
-%associated main process, but at a reduced CPU rate to save power and energy. %The rate
-%at which the shadow runs is derived based on the expected time-to-solution of the supported
-%application, the power constraints imposed by the underlying computing infrastructure, and the
-%likelihood of failure. 
-Different from classical process replication, we dynamically and separately control the execution rates
-of the mains and the shadows to save resources and improve efficiency.
-The shadows initially execute at a reduced rate so that less hardware and power/energy are required.
-Upon failure of a main, its associated shadow increases its rate to recover and complete the task, thereby reducing the impact of such a failure on the progress of
-the remaining tasks. Successful completion of a main, however, results in immediate
-termination of the associated shadow. Since the failure rate of an individual component is much lower than that of 
-the whole system, it is very likely that, most of the main processes complete their execution
-successfully. %Consequently, the coupled execution of a main process and its associated shadow 
-Consequently, the high probability that shadows never have to complete the full task, coupled with the fact that 
+forward progress, in extreme-scale, failure-prone computing environments. 
+%In the proposed approach, each process (referred to as a \textit{main}) is associated with a ``lazy" replica (referred to as a \textit{shadow}) to improve resilience. 
+%Different from classical process replication, we dynamically and separately control the execution rates
+%of the mains and the shadows to save resources and improve efficiency.
+%The shadows initially execute at a reduced rate so that less hardware and power/energy are required.
+%Upon failure of a main, its associated shadow increases its rate to recover and complete the task, thereby reducing the impact of such a failure on the progress of
+%the remaining tasks. Successful completion of a main, however, results in immediate
+%termination of the associated shadow. Since the failure rate of an individual component is much lower than that of 
+%the whole system, it is very likely that, most of the main processes complete their execution
+%successfully. 
+%Consequently, the high probability that shadows never have to complete the full task, coupled with the fact that 
+%they initially only consume a minimal amount of energy, 
+%dramatically increases a power-constrained system's tolerance to failure.
+Lazy Shadowing extends the idea of shadowing from~\cite{mills_2014_icnc,cui_en7085151,cui_2014_closer} with novel concepts of \textit{shadow collocation} and \textit{shadow leaping}. 
+In the basic idea of shadowing, each process (referred to as a \textit{main}) is associated with a replica (referred to as a \textit{shadow}) to improve resilience. %, while dynamic execution rate control is applied to minimize resource requirement. 
+The shadows initially execute at a reduced rate. % so that less hardware and power/energy are required.
+Upon failure of a main, its associated shadow increases its rate to complete the task, thereby reducing the impact of such a failure on the progress of other tasks.
+Instead of using Dynamic Voltage and Frequency Scaling (DVFS) for execution rate control as in \cite{mills_2014_icnc,cui_en7085151,cui_2014_closer}, we explore the applicability of collocating shadows to simultaneously save power/energy and computing resources. Furthermore, we identify a unique opportunity %to roll forward the shadows without incurring extra time overhead. 
+that allows the lagging shadows to benefit from the faster execution of the mains, without incurring extra  overhead.
+Specifically, when a failure occurs, Lazy Shadowing takes advantage of the recovery time and leaps forward the shadows by copying states from the mains. Consequently, the high probability that shadows never have to complete the full task, coupled with the fact that 
 they initially only consume a minimal amount of energy, 
 dramatically increases a power-constrained system's tolerance to failure.
-%, at a significantly reduced energy consumption.
 
-Conceptually, Lazy Shadowing can be viewed as a class of stochastically\footnote{We consider faults as stochastic events} competitive algorithms, which 
-achieve high level of resilience with a small relative performance penalty.
+%Conceptually, Lazy Shadowing can be viewed as a class of stochastically\footnote{We consider faults as stochastic events} competitive algorithms, which 
+%achieve high level of resilience with a small relative performance penalty.
 %guarantee small relative error with respect to the optimal expected cost, in terms of completion time and energy consumption. 
-Lazy Shadowing is adaptive and flexible in that it enables a configurable trade-off between re-execution (time redundancy) and replication (hardware redundancy) by dynamically adjusting the main and shadow processes' execution rates.
-Optimal execution rates can be derived either analytical or empirically, in order to achieve the desired balance among two important objectives, namely, the expected completion time of the supported application, and the power constraints imposed by the underlying computing infrastructure. %, can be derived either analytical or empirically. %At the same time, we minimize the proposed algorithms' adaptivity to stochastic events by changing the shadow's execution rate only in response to a failure, in order to keep the algorithms simple as well as to reduce implementation overhead. 
-Furthermore, the distinction between main and shadow's execution rates provides a unique opportunity %to roll forward the shadows without incurring extra time overhead. 
-that allows the lagging shadows to benefit from the faster execution of the mains without extra time overhead.
-Specifically, when a failure occurs, Lazy Shadowing takes advantage of the recovery time and synchronizes the states of the lagging shadows to those of mains. This technique not only assures forward progress with minimized time and energy, but also reduces recovery time for subsequent failures.  
+Lazy Shadowing is adaptive in that it enables a configurable trade-off between rollback (time redundancy) and replication (hardware redundancy) by dynamically adjusting the main and shadow processes' execution rates.
+Optimal execution rates can be derived either analytical or empirically, in order to achieve the desired balance between two important objectives, namely, the expected completion time of the supported application, and the power constraints imposed by the underlying computing infrastructure. 
+%Furthermore, the distinction between main and shadow's execution rates provides a unique opportunity 
+%that allows the lagging shadows to benefit from the faster execution of the mains without extra time overhead.
+%Specifically, when a failure occurs, Lazy Shadowing takes advantage of the recovery time and synchronizes the states of the lagging shadows to those of mains. This technique not only assures forward progress with minimized time and energy, but also reduces recovery time for subsequent failures.  
+
 %One gets different algorithms depending upon the main and shadow processes' execution rates, which are adaptive to the desired balance among three important objectives, namely, the expected completion time of the supported application, the power constraints imposed by the underlying computing infrastructure, and the tolerance of failure. %At the same time, we minimize the proposed algorithms' adaptivity to stochastic events by changing the shadow's execution rate only in response to a failure, in order to keep the algorithms simple as well as to reduce implementation overhead. 
 %The optimal execution rates to achieve the desired balance among two important objectives, namely, the expected completion time of the supported application, and the power constraints imposed by the underlying computing infrastructure, can be derived either analytical or empirically. %At the same time, we minimize the proposed algorithms' adaptivity to stochastic events by changing the shadow's execution rate only in response to a failure, in order to keep the algorithms simple as well as to reduce implementation overhead. 
 
@@ -85,9 +91,9 @@ The main contributions of this paper are as follows:
 
 
 The rest of the paper is organized as follows. We begin with a survey on related work in Section 
-\ref{sec:related_work}. Section \ref{sec:frame_model} introduces the basic Lazy Shadowing algorithm and Section \ref{frame_multiple} discusses how Lazy Shadowing can be applied to 
-extreme-scale computing environments. 
-We then introduce analytical models for performance assessment
+\ref{sec:related_work}. Section \ref{sec:frame_model} introduces Lazy Shadowing algorithm and Section \ref{frame_multiple} discusses how it can be applied to 
+extreme-scale systems. 
+We then present a performance modeling framework
 in Section \ref{sec:analytical}, 
 followed by experiments and evaluation in
 section \ref{sec:evaluation}. Section \ref{sec:conclusion} concludes this work.% and points out 

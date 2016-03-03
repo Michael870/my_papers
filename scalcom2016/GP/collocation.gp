@@ -55,12 +55,24 @@ set ytics (        "0.0"       0, \
                    "0.8"      0.8, \
                    "0.9"      0.9, \
                    "1.0"      1.0, \
-                   "1.1"      1.1 \
+                   "1.1"      1.1, \
+                   "1.2"      1.2 \
           )		 
+
+set y2tics (    "0\%%"  0, \
+                "5\%%"  5, \
+                "10\%%"  10, \
+                "15\%%"  15, \
+                "20\%%"  20, \
+                "25\%%"  25, \
+                "30\%%"  30, \
+                "35\%%"  35 \
+            )
 
 
 
 set ylabel "Energy"
+set y2label "Difference"
 set xlabel "MTBF (year)"
 
 set key right top
@@ -68,6 +80,7 @@ set key right top
 c5= "#7C7FB3"
 
 set yrange[ 0.5: 1.2 ]
+set y2range[ 0: 35 ]
 set xrange[ 1 : 25]
 # removing 'transparent' to print correctly;
 # image gets distored when printing in black&white
@@ -99,11 +112,11 @@ set xtics (   "1" 1, \
 )
 #set logscale x 10
 
-unset y2tics
 
 set output "../Figures/collocation.eps"
 
 plot "../Data/collocation.dat" using 1:2 title "With collocation overhead" smooth bezier linestyle 1, \
-     "" using 1:3 title "Without collocation overhead" smooth bezier ls 2
+     "" using 1:3 title "Without collocation overhead" smooth bezier ls 2, \
+     "" using 1:4 title "Difference" axes x1y2  smooth bezier linestyle 3
 
 

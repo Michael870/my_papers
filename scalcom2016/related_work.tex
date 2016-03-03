@@ -22,14 +22,16 @@ lack of scalability, as it requires global coordination
 
 In uncoordinated checkpointing, processes checkpoint their states independently and postpone creating a 
 globally consistent view until the recovery phase. The major advantage is the reduced overhead during fault free operation. However, the scheme requires that
-each process maintains multiple checkpoints and message logs, necessary to construct a consistent 
-state during recovery. It can also suffer the well-known domino effect 
+each process maintains multiple checkpoints %and message logs, necessary to construct a consistent 
+%state during recovery. It 
+and can also suffer the well-known domino effect 
  \cite{randell_domino_effect}. One hybrid approach, known as communication induced 
 checkpointing, aims at reducing coordination overhead \cite{alvisi_ftc_1999}. The approach, however, may 
 cause processes to store useless states. To address this 
 shortcoming, ``forced checkpoints" have been proposed \cite{helary_rds_1997}. This approach, however,  may lead to unpredictable
 checkpointing rates. Although well-explored, uncoordinated checkpointing has not been widely adopted
-in HPC environments, due to its dependency on applications \cite{guermouche_2011_ipdps}.
+in HPC environments, mainly due to its complexity. 
+%its dependency on applications \cite{guermouche_2011_ipdps}.
 
 
 One of the largest overheads in any checkpointing process is the time necessary to write the checkpointing 
@@ -52,7 +54,7 @@ however, may lead to increased failure rates of individual nodes and complicate 
 
 Process replication, or state machine replication, has long been used for reliability and availability in distributed and mission critical systems \cite{schneider_1990_tutorial}. %Replication can be used to detect and correct system failures that are otherwise undetectable,
 %such as silent data corruption and Byzantine faults \cite{fiala_2012_sdc}. 
-This approach is barely used in HPC systems, primarily due to its high cost and low efficiency.
+This approach is barely used in HPC systems, primarily due to its low efficiency.
 However, upcoming extreme-scale systems are expected to 
 %require a more challenging level of fault tolerance to deal with the 
 confront a dramatic growth in both the frequency and diversity of faults.
@@ -66,12 +68,12 @@ detect or correct silent data corruption \cite{stearly_2012_partial,elliott_2012
 %application \cite{engelmann2011redundant}. %Moreover, replication alone is not enough to guarantee fault tolerance since
 %it is possible that all nodes executing a given process could fail simultaneously, thus
 %replication is typically paired with some form of checkpointing. 
-Our approach differs from classical process replication in that we dynamically configure the execution rates of main and shadow processes, so that less resource/energy is required while reliability is still assured.  
+Our approach is largely different from classical process replication in that we dynamically configure the execution rates of main and shadow processes, so that less resource/energy is required while reliability is still assured.  
 
 
-Replication with dynamic execution rate is also explored in Simultaneous and Redundantly Threaded (SRT) processor whereby one leading thread of execution is running ahead of trailing threads \cite{reinhardt2000transient}. However, 
-the focus of \cite{reinhardt2000transient} is on transient faults within CPU while we aim at tolerating both permanent and transient faults across all systems components.
-This work is closely related to our previous works \cite{mills_2014_icnc,cui_en7085151,cui_2014_closer} where shadow replication with DVFS is studied for single or loosely-coupled tasks. Instead, in this paper we explore novel ideas of shadow collocation and shadow leaping in order to satisfy the requirements of future extreme-scale HPC systems. 
+Replication with dynamic execution rate is also explored in Simultaneous and Redundantly Threaded (SRT) processor whereby one leading thread is running ahead of trailing threads \cite{reinhardt2000transient}. However, 
+the focus of \cite{reinhardt2000transient} is on transient faults within CPU while we aim at tolerating both permanent and transient faults across all system components.
+Also, this work differs from \cite{mills_2014_icnc,cui_en7085151,cui_2014_closer}, where shadowing with DVFS is studied for single or loosely-coupled tasks. %Instead, in this paper we explore novel ideas of shadow collocation and shadow leaping in order to satisfy the requirements of future extreme-scale HPC systems. 
 %our approach is different in that it tunes the execution rates of the leading and trailing threads in a finer grain, in order to achieve a ``parameterized" trade-off between completion time and energy consumption. 
 %Further, we take advantage of the idle time during failure recovery and ``leap" the trailing replicas to achieve forward progress%, largely improving performance in terms of both completion time and energy consumption. 
 %. This differs from \cite{reinhardt2000transient}, of which the ``leaping" of the trailing replica results in extra overhead.
