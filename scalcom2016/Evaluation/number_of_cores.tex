@@ -3,6 +3,7 @@ The system scale, measured in number of cores, has a direct impact on the failur
 When MTBF is changed to 25 years, the performance of checkpointing improves a lot, but is still much worse than that of the other two approaches. As with the trend in Figure~\ref{fig:3}, Lazy Shadowing benefits much more than process replication from the increased MTBF. As a result, Lazy Shadowing is able to achieve shorter completion time than process replication when $N$ reaches 1,000,000.
 
 \begin{figure}[!t]
+	\captionsetup{justification=centering}
 	\begin{center}
 		\subfigure[Expected completion time]
 		{
@@ -16,7 +17,7 @@ When MTBF is changed to 25 years, the performance of checkpointing improves a lo
 		} 
 	\end{center}
 	%\vskip -0.22in 
-	\caption{Sensitivity to number of cores. $W=N$, MTBF=5 years, $\rho=0.5$.}
+	\caption{Comparison of time and energy for different number of cores. $W=N$, MTBF=5 years, $\rho=0.5$.}
 	\label{fig:n5}
 \end{figure}
 
