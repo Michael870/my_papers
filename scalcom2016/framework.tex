@@ -36,10 +36,11 @@ Taking into consideration the main characteristics of compute-intensive and high
 \label{sec:app_model}
 
 We consider the class of compute-intensive and strongly-scaled applications, executing on a large-scale multi-core computing infrastructure~\cite{doe_ascr_exascale_2011}. %Communication between cores is achieved using low-latency, high-bandwidth interconnect networks, such as Infiniband. 
-We use $W$ to denote the size of an application workload, and assume that the workload is split arbitrarily into a set of tasks, $T$, which execute in parallel. % and are synchronized using barriers. 
+We use $W$ to denote the size of an application workload, and assume that the workload is split into a set of tasks, $T$, which execute in parallel. % and are synchronized using barriers. 
 Assuming the maximum execution rate is $\sigma_{max}=1$, the failure-free completion time of the application is $W/|T|$. 
 Given the prominence of MPI in HPC environments, we assume message passing as the communication mechanism between tasks. %Based on this model, each pair of communicating tasks is associated with a logical first-in-first-out (FIFO) channel, which guarantees ordered delivery of messages.
-The execution is divided into a set of phases by synchronization barriers. 
+The execution is composed of a set of iterations separated by synchronization barriers. 
+%The execution is divided into a set of phases by synchronization barriers. 
 
 
  %If a failure occurs, however, the non-failing tasks would become idle when they reach their synchronization barrier. These tasks remain idle until the failure recovery is complete. 
@@ -77,7 +78,7 @@ On the other hand, if a main core fails, the associated shadow will be promoted 
 the other collocated shadows will be terminated to speed up the new main.
 %to speed up a shadow 
 %of a failed main to the maximum rate, all other collocated shadows must be terminated. 
-Consequently, a failure, either in main or shadow core, will result in losing all the shadows in the shadowed set, thereby losing the tolerance of any other failures. After the first failure, a shadowed set becomes \emph{vulnerable}\footnote{Rejuvenation techniques, such as restarting the lost shadows from the state of current mains on spare cores, can be used to eliminate vulnerability.}. 
+Consequently, a failure, either in main or shadow core, will result in losing all the shadows in the shadowed set, thereby losing the tolerance to any other failures. %After the first failure, a shadowed set becomes \emph{vulnerable}\footnote{Rejuvenation techniques, such as restarting the lost shadows from the state of current mains on spare cores, can be used to eliminate vulnerability.}. 
 Quantitative study of this effect using probability theory is presented in Section~\ref{anal_app_fail}. %, this should not be a concern as the provided reliability is more than enough.
  
 \begin{figure}[!t]
@@ -102,8 +103,9 @@ Fortunately, slowing down the shadows provides an opportunity for the shadows to
 %, which simultaneously reduces the recovery time for failures. 
 As a result, the recovery time after a failure, which depends on the distance between the failing main 
 and its shadow, is also reduced. 
-More importantly, shadow leaping does not necessarily require the stopping of all the mains during normal execution, which will incur extra overhead even for failure-free execution. 
-Instead, we opportunistically overlap shadow leaping with failure recovery. 
+More importantly, %shadow leaping does not necessarily require the stopping of all the mains during normal execution, which will incur extra overhead even for failure-free execution. 
+%Instead, 
+we opportunistically overlap shadow leaping with failure recovery to avoid extra overhead. 
 %and ensure forward progress by opportunistically rolling-forward the shadows during failure recovery. In Section~\ref{anal_time}, we will show that the delay is well bounded even for tightly-coupled applications.
 
 %In the absence of failure, the behavior of a main  and its leaping shadow is identical to the behavior depicted in Figure \ref{fig:sync}. 
@@ -111,7 +113,7 @@ Assuming a failure occurrence at time $t_f$, Figure~\ref{fig:leap} shows the con
 %Figure~\ref{fig:jump1} depicts the execution dynamics of the failing main and its associated shadow. 
 Upon failure of a main process, its associated shadow speeds up to minimize the impact of failure recovery on the other tasks' progress, as illustrated in Figure~\ref{fig:jump1}. 
 %Figure~\ref{fig:jump2} illustrates the behavior of the remaining main processes and their associated shadows. 
-At the same time, as shown in Figure~\ref{fig:jump2}, the remaining main processes continue execution towards the barrier at time $t_{sync}$, and then become idle until $t_r$, when the shadow of the failed main also reaches the barrier. %It is worth noting that, given the tightly-coupled and strongly-scaled nature of the application, synchronization points occur frequently. Consequently, the time between synchronization points is very small relative to the total execution time of the application. Therefore, if one main, $m_i$, fails at 
+At the same time, as shown in Figure~\ref{fig:jump2}, the remaining main processes continue execution until the barrier at $W_{syn}$, and then become idle until $t_r$. %, when the shadow of the failed main also reaches the barrier. %It is worth noting that, given the tightly-coupled and strongly-scaled nature of the application, synchronization points occur frequently. Consequently, the time between synchronization points is very small relative to the total execution time of the application. Therefore, if one main, $m_i$, fails at 
 %time $t_f$, the remaining main processes will reach their synchronization point, shortly after the failure, specifically at at time $t_{sync} = t_f +\epsilon$, 
 %where $\epsilon \approxeq 0$. 
 Shadow leaping opportunistically takes advantage of this idle time to {\it leap forward} the shadows by copying state from their mains, so that  
@@ -125,12 +127,12 @@ Shadow leaping increases the shadow's rate of progress, at a minimal energy cost
         \subfigure[Faulty task behavior.]
 		{
 			\label{fig:jump1}
-			\includegraphics[width=0.7\columnwidth]{Figures/jump1}
+			\includegraphics[width=0.7\columnwidth]{Figures/jump1.pdf}
 		}
 		\subfigure[Non-faulty task behavior.]
 		{
 			\label{fig:jump2}
-			\includegraphics[width=0.7\columnwidth]{Figures/jump2}
+			\includegraphics[width=0.7\columnwidth]{Figures/jump2.pdf}
 		}
 	\end{center}
 	%\vskip -0.25in
@@ -244,34 +246,37 @@ This process continues until all tasks of the application are successfully compl
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %We implemented an Open MPI based prototype of Lazy Shadowing, which can be used to execute existing HPC workloads without any change of user code. 
-We implement a MPI based library for Lazy Shadowing, referred to as lsMPI. Inserted as a layer between application and MPI, lsMPI uses the MPI profiling hooks to intercept every MPI call. Currently, lsMPI 
+We are implementing a MPI based library for Lazy Shadowing, referred to as lsMPI. Inserted as a layer between application and MPI, lsMPI uses the MPI profiling hooks to intercept every MPI call. Currently, lsMPI 
 delegates failure detection to ULFM, which guarantees that an error code is returned if failure prevents 
 an MPI operation from completion
 ~\cite{Bland:2012:EUF:2404033.2404064,bland2013post}. 
 lsMPI should be portable across all MPI implementations once extensions by ULFM are added to MPI standard.
-Since the focus of this paper is to introduce
-algorithmic perspectives of the Lazy Shadowing paradigm by discussing novel concepts of shadow collocation and shadow leaping, we only give a brief discussion of the implementation issues. 
+%Since the focus of this paper is to introduce
+%algorithmic perspectives of the Lazy Shadowing paradigm by discussing novel concepts of shadow collocation and shadow leaping, we only give a brief discussion of the implementation issues. 
 
 State consistency is required both during normal execution and following a failure. % of a main process to roll-forward the shadows. 
-We design a consistency protocol in Figure~\ref{fig:cons_protocol} to assure 
-that the shadows see the same message order and MPI results as mains. In this figure, A and B represent two mains, and A' and B' are their shadows. For each message, the main sender sends a copy of the message to each of the main and shadow receivers. After getting the message, the main receiver sends an ACK to the shadow sender, so that the shadow sender can safely suppress sending the message and proceed. If a main fails,
+We design a consistency protocol %in Figure~\ref{fig:cons_protocol}
+to assure 
+that the shadows see the same message order and MPI results as mains. %In this figure, A and B represent two mains, and A' and B' are their shadows. 
+For each message, the main sender sends a copy of the message to each of the main and shadow receivers. After getting the message, the main receiver sends an ACK to the shadow sender, so that the shadow sender can safely suppress sending the message and proceed. If a main fails,
 its associated shadow will become a new main and start sending out messages. The ACK messages, plus one NAK message after the failure, guarantee that the new main is always consistent with the other mains. 
 %We bare the risk of temporarily losing consistency between the new main and the shadow receiver, 
 Although the remaining shadows may temporarily be inconsistent with the new main after the failure, shadow leaping will bring them back to a consistent state.
 %Since MPI implements reliable network transportation, the shadow receiver will eventually get the same message as its main, unless a failure occurs. We don't require the shadow receiver to sends ACK to the shadow sender during normal execution. If the main sender fails, the shadow sender will become a new main and start sending out messages. To avoid duplicate messages, the main receiver will use a NAK message to tell the new main the next message it needs. Since previously we require the shadow sender to get an ACK before suppressing a message, the shadow sender will never suppress a message that the main receiver would need, even in the cases of failure. Without using ACK, the shadow receiver may become inconsistent with the new main. However, by aligning the state of the shadow receiver with that of its main we assure that the shadow receiver will be in a consistent state after shadow leaping. 
 
-\begin{figure}[!t]
-  \begin{center}
-      \includegraphics[width=0.7\columnwidth]{Figures/cons_protocol}
-  \end{center}
-  %\vskip -0.25in
-  \caption{Consistency protocol for lsMPI.}
-  \label{fig:cons_protocol}
-\end{figure}
+%\begin{figure}[!t]
+%  \begin{center}
+%      \includegraphics[width=0.7\columnwidth]{Figures/cons_protocol}
+%  \end{center}
+%  %\vskip -0.25in
+%  \caption{Consistency protocol for lsMPI.}
+%  \label{fig:cons_protocol}
+%\end{figure}
 
-We assume that only MPI operations can introduce non-determinism. MPI\_ANY\_SOURCE receives may result in different message orders between the main and shadow. To deal with this, we always let the main receive a message ahead of the shadow and then forward the message source to its shadow (SYNC message in Figure~\ref{fig:cons_protocol}). The shadow then issues a receive with the specific source. Other operations, such as MPI\_Wtime() and MPI\_Probe(), can be dealt with by always forwarding the result from the main to the shadow.
+We assume that only MPI operations can introduce non-determinism. MPI\_ANY\_SOURCE receives may result in different message orders between the main and shadow. To deal with this, we always let the main receive a message ahead of the shadow and then forward the message source to its shadow. %(SYNC message in Figure~\ref{fig:cons_protocol}). 
+The shadow then issues a receive with the specific source. Other operations, such as MPI\_Wtime() and MPI\_Probe(), can be dealt with by always forwarding the result from the main to the shadow.
 
-Same as \cite{engelmann2011redundant,ferreira_sc_2011}, consistency protocol introduces runtime overhead due to extra messages. The overhead has been experimentally evaluated to be negligible for most real large-scale applications. Therefore, we believe our protocol, which reduces both message count and bandwidth requirement, should be acceptable. Currently, collectives in lsMPI use linear point-to-point operations internal to lsMPI. We plan to optimize its performance by using binomial tree topology and multi-level hierarchical topology considering hardware locality~\cite{herault2015practical}.
+%Same as \cite{engelmann2011redundant,ferreira_sc_2011}, consistency protocol introduces runtime overhead due to extra messages. The overhead has been experimentally evaluated to be negligible for most real large-scale applications. Therefore, we believe our protocol, which reduces both message count and bandwidth requirement, should be acceptable. Currently, collectives in lsMPI use linear point-to-point operations internal to lsMPI. We plan to optimize its performance by using binomial tree topology and multi-level hierarchical topology considering hardware locality~\cite{herault2015practical}.
 
 %During normal execution, shadows remain mute, in the sense that 
 %all outgoing messages from shadows are suppressed. 
@@ -285,7 +290,7 @@ Same as \cite{engelmann2011redundant,ferreira_sc_2011}, consistency protocol int
 
 %Upon failure of a main process, shadow processes will update their address space to ``catch up" with their associated non-failing main processes. A technology, such as remote direct memory access (RDMA), can be used to roll-forward the state of the shadow to be consistent with that of its associated main. Rather than copying data to the buffers of the operating system, RDMA allows to transfer data directly from the main process to its shadow. The zero-copy feature of RDMA considerably reduces latency, thereby enabling fast transfer of data between the main and its shadow.
 
-Remote Direct Memory Access (RDMA) is used to leap forward the state of the shadow to be consistent with that of its associated main. Rather than copying data to the buffers of the OS, RDMA allows to transfer data directly from the main process to its shadow. The zero-copy feature of RDMA considerably reduces latency, thereby enabling fast transfer of data between the main and its shadow.
+%Remote Direct Memory Access (RDMA) is used to leap forward the state of the shadow to be consistent with that of its associated main. Rather than copying data to the buffers of the OS, RDMA allows to transfer data directly from the main process to its shadow. The zero-copy feature of RDMA considerably reduces latency, thereby enabling fast transfer of data between the main and its shadow.
 
  
 

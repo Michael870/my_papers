@@ -8,7 +8,7 @@ Therefore, our models are generic with no assumption about failure probability d
 %should be degraded because of increased memory pressure or communication overhead. %Agreeing with that, however, we argue that 
 %time sharing, which is the basic mechanism of multi-programming OS, is able to overlap computation and communication and improve system efficiency. For completeness, though, 
 %To take that into account, we have also studied the slowing down effect using a penalty model, to be discussed later. 
-To calculate Equation~\ref{eq:exp_energy2}, we assume that the dynamic power during shadow leaping is twice of that during normal execution, i.e., $p_{l}=2*p_d$, and the time for shadow leaping through RDMA is half of the recovery time, i.e., $T_l=0.5*(T_{total} - w)$. %The static power ratio $\rho$ is fixed at 0.5 for our first study, other values are also studied in this section.
+To calculate Equation~\ref{eq:exp_energy2}, we assume that the dynamic power during shadow leaping is twice of that during normal execution, i.e., $p_{l}=2*p_d$, and the time for shadow leaping is half of the recovery time, i.e., $T_l=0.5*(T_{total} - w)$. %The static power ratio $\rho$ is fixed at 0.5 for our first study, other values are also studied in this section.
 
 The first study uses $N=1$ million cores, %effectively simulating the future extreme-scale computing environment, and assumes that $W=1$ million hours. 
 $W=1$ million hours, and static power ratio $\rho=0.5$.

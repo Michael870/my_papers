@@ -47,7 +47,7 @@ Initially, the main executes at rate $\sigma_m$, while the shadow executes at $\
 In the absence of failure, the main completes at time 
 $t_m = w/\sigma_m$, which immediately triggers the termination of the
 shadow. However, if at time $t_f < t_m$ the main fails, the shadow, which has completed an amount of work $w_b=\sigma_s^b * t_f$, increases its execution rate to $\sigma_s^a$ to complete the task by $t_s$. %, as depicted in Figure~\ref{fig:fail}. More specifically, the shadow completes $\sigma_s * t_f$ work by $t_f$, and finishes the remaining $(w-\sigma_s * t_f)$ work at $\sigma_a$. %The expected completion time, $T$, of the task can be easily computed by integrating $t_s(t_f) * f(t_f)$, where $f(t_f)$ is the probability of a failure occurring at time $t_f$.
-The execution dynamics are depicted in Figure 1 in \cite{cui_en7085151}. %~\ref{fig:sync}.
+%The execution dynamics are depicted in Figure 1 in \cite{cui_en7085151}. %~\ref{fig:sync}.
 
 %\begin{figure}[!t]
 %	\begin{center}
