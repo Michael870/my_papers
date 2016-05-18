@@ -17,10 +17,11 @@
 %tightly coupled HPC applications (more details in Section~\ref{sec:app_model}). 
 By carefully analyzing the characteristics of HPC applications, we devise novel ideas 
 of shadow collocation and shadow leaping, and integrate them with the basic concept of shadowing, which jointly form a complete algorithm that we call Lazy Shadowing. 
-To make it easy to follow, we first re-emphasize important details of shadowing, with minor changes of symbols.
-Assuming the fail-stop failure model, where a process stops execution once a failure
-occurs and failure can be detected by other
-processes~\cite{gartner_faults_1999,cristian_comm_1991}, 
+To make it easy to follow, we first re-emphasize important details of shadowing. %, with minor changes of symbols.
+Assuming the fail-stop failure model%, where a process stops execution once a failure
+%occurs and failure can be detected by other
+%processes
+~\cite{gartner_faults_1999,cristian_comm_1991}, 
 %In order to deal with both permanent and temporary failures, the shadow process starts simultaneously with its associated main process, on a different node. Lazy Shadowing is able to tolerate any failure confined to a single node, including socket failure, CPU logical errors, bus errors, errors in the attached accelerators (e.g., GPUs), and even memory bit flips that exceed ECC's capacity. 
 %We only use one replica since the probability that failure occurs to both the original process and the replica is negligible~\cite{casanova_inria_2012}. %This guarantees that if one process fails, the other one can still complete the task. 
 %If necessary, however, this can be easily extended to use a suit of replicas. Assuming a single failure, Lazy Shadowing can be described as follows:

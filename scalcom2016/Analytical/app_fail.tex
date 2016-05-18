@@ -4,8 +4,8 @@ study the probability of application fatal failure. In this work we assume that 
 beginning. 
 %Lazy Shadowing is able to 
 %tolerate one failure in each shadowed set. %, and the second failure in any shadowed set implies the need to restarting the execution from the very beginning. 
-However, Lazy Shadowing is orthogonal to checkpointing in 
-the sense that we can combine the two, to roll back to an intermediate state. 
+%However, Lazy Shadowing is orthogonal to checkpointing in 
+%the sense that we can combine the two, to roll back to an intermediate state. 
 
 %Since each process is replicated with a shadow, Lazy Shadowing has the potential to significantly 
 %increase the Mean Number of Failures To Interrupt (MNFTI). % and Mean Time To Interrupt (MTTI).
@@ -27,7 +27,7 @@ for different numbers of shadowed sets ($S$).
 %confirms our previous prediction that Lazy Shadowing can significantly 
 %increase the application's MNFTI and MTTI, and also implies that shadowed set rejuvenation may not be necessary.
 Note that when processes are not shadowed, every failure would interrupt the application, i.e., MNFTI=1. %, so MNFTI can be significantly increased by Lazy Shadowing. 
-It is projected that the Mean Time To Interrupt (MTTI) of an extreme-scale application can be increased to tens of hours from minutes assuming each core's MTBF is 25 years.
+%It is projected that the Mean Time To Interrupt (MTTI) of an extreme-scale application can be increased to tens of hours from minutes assuming each core's MTBF is 25 years.
 %\begin{table}[b!]
 %	\caption{Application's MNFTI when Lazy Shadowing is used. Results are independent of $\alpha$. }
 %	\centering
