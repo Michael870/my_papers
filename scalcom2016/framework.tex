@@ -82,9 +82,9 @@ the other collocated shadows will be terminated to speed up the new main.
 Consequently, a failure, either in main or shadow core, will result in losing all the shadows in the shadowed set, thereby losing the tolerance to any other failures. %After the first failure, a shadowed set becomes \emph{vulnerable}\footnote{Rejuvenation techniques, such as restarting the lost shadows from the state of current mains on spare cores, can be used to eliminate vulnerability.}. 
 Quantitative study of this effect using probability theory is presented in Section~\ref{anal_app_fail}. %, this should not be a concern as the provided reliability is more than enough.
  
-\begin{figure}[!t]
+\begin{figure}[!b]
   \begin{center}
-    \includegraphics[width=\columnwidth]{Figures/sc_mapping.pdf}
+    \includegraphics[width=0.8\columnwidth]{Figures/sc_mapping.pdf}
   \end{center}
   %\vskip -0.25in 
   \caption{An example of collocation. $N=12$, $M=9$, $S=3$.}
@@ -181,11 +181,11 @@ Shadow leaping increases the shadow's rate of progress, at a minimal energy cost
     \While{execution not done}
     {
   %      \If{failure detected in $ss_j$} %\nllabel{line:if_start_1} 
-        \If{failure detected}
+        \If{failure detected in shadowed set $SS_i$}
         {
             \nllabel{line:if_start_1} 
             %\eIf{$ss_j$ is vulnerable}
-            \eIf{shadowed set is vulnerable}
+            \eIf{$SS_i$ is vulnerable}
             {
                 notify ``Application fatal failure"\;
                 %terminate all mains and shadows\;
@@ -193,7 +193,7 @@ Shadow leaping increases the shadow's rate of progress, at a minimal energy cost
                 restart execution\; %\Comment{re-execution}
             }
             {
-                mark the shadowed set as vulnerable\;
+                mark $SS_i$ as vulnerable\;
                 %\State $C_{vul} \gets C_{vul} + 1$
                 %\If{$C_{vul} == V$}
                 %    \State perform shadowed set rejuvenation   
