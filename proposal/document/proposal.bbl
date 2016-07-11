@@ -1,0 +1,661 @@
+\begin{thebibliography}{106}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Achour and Rinard(2015)]{OOPSLA15:topaz}
+Achour, S. and Rinard M.~C.
+\newblock Approximate computation with outlier detection in {Topaz}.
+\newblock In \emph{OOPLSA}, pages 711--730, 2015.
+
+\bibitem[Agrawal et~al.(2014)Agrawal, Ansari, and Torrellas]{HPCA14:mosaic}
+Agrawal, A., Ansari A., and Torrellas J.
+\newblock Mosaic: Exploiting the spatial locality of process variation to
+  reduce refresh energy in on-chip {eDRAM} modules.
+\newblock In \emph{HPCA}, pages 84--95, 2014.
+
+\bibitem[Ahn et~al.(2015)Ahn, Yoo, Mutlu, and Choi]{ISCA15:pim}
+Ahn, J., Yoo S., Mutlu O., and Choi K.
+\newblock {PIM}-enabled instructions: A low-overhead, locality-aware
+  processing-in-memory architecture.
+\newblock In \emph{ISCA}, pages 336--348, 2015.
+
+\bibitem[Ahn et~al.(2009)Ahn, Jouppi, Kozyrakis, Leverich, and
+  Schreiber]{SC09:mcdimm}
+Ahn, J.~H., Jouppi N.~P., Kozyrakis C., Leverich J., and Schreiber R.~S.
+\newblock Future scaling of processor-memory interfaces.
+\newblock In \emph{SC}, pages 1--12, 2009.
+
+\bibitem[Arnab et~al.(2015)Arnab, Jayakumar, Sutar, and
+  Raghunathan]{CASES15:appro}
+Arnab, R., Jayakumar H., Sutar S., and Raghunathan V.
+\newblock Quality-aware data allocation in approximate {DRAM}.
+\newblock In \emph{CASES}, pages 89--98, 2015.
+
+\bibitem[Ayoub et~al.(2013)Ayoub, Nath, and Rosing]{TODAES13:hot_page}
+Ayoub, R., Nath R., and Rosing T.~S.
+\newblock {CoMETC}: Coordinated management of energy/thermal/cooling in
+  servers.
+\newblock \emph{ACM Transactions on Design Automation of Electronic Systems
+  (TODAES)}, 19\penalty0 (1):\penalty0 1--28, 2013.
+
+\bibitem[Baek and Chilimbi(2010)]{PLDI10:green}
+Baek, W. and Chilimbi T.~M.
+\newblock Green: a framework for supporting energy-conscious programming using
+  controlled approximation.
+\newblock In \emph{PLDI}, pages 198--209, 2010.
+
+\bibitem[Balasubramonian et~al.(2014)Balasubramonian, Chang, Manning, Moreno,
+  Murphy, Nair, and Swanson]{JMicro:ndp}
+Balasubramonian, R., Chang J., Manning T., Moreno J.~H., Murphy R., Nair R.,
+  and Swanson S.
+\newblock Near-data processing: Insights from a {MICRO-46} workshop.
+\newblock \emph{IEEE Micro}, pages 36--42, 2014.
+
+\bibitem[Bhati et~al.(2015{\natexlab{a}})Bhati, Chang, Chishti, Lu, and
+  Jacob]{TC15:refresh}
+Bhati, I., Chang M., Chishti Z., Lu~S., and Jacob B.
+\newblock {DRAM} refresh mechanisms, penalties, and trade-offs.
+\newblock \emph{TC}, 64, 2015{\natexlab{a}}.
+
+\bibitem[Bhati et~al.(2015{\natexlab{b}})Bhati, Chishti, Lu, and
+  Jacob]{ISCA15:reflex}
+Bhati, I., Chishti Z., Lu~S.-L., and Jacob B.
+\newblock Flexible auto-refresh: enabling scalable and energy-efficient {DRAM}
+  refresh reductions.
+\newblock In \emph{ISCA}, pages 235--246, 2015{\natexlab{b}}.
+
+\bibitem[Bhattacharjee and Martonosi(2009)]{ISCA09:hot_page}
+Bhattacharjee, A. and Martonosi M.
+\newblock Thread criticality predictors for dynamic performance, power and
+  resource management in chip multiprocessors.
+\newblock In \emph{ISCA}, pages 290--301, 2009.
+
+\bibitem[Cacti(2009)]{URL:cacti}
+Cacti, .
+\newblock {CACTI 5.3}: An integrated cache timing, power and area model.
+\newblock \url{http://www.hpl.hp.com/research/cacti/}, 2009.
+
+\bibitem[Chakrapani et~al.(2006)Chakrapani, Akgul, Cheemalavagu, Korkmaz,
+  Palem, and Seshasayee]{DATE06:cmos}
+Chakrapani, L.~N., Akgul B.~E.~S., Cheemalavagu S., Korkmaz P., Palem K.~V.,
+  and Seshasayee B.
+\newblock Ultra-efficient (embedded) {SOC} architectures based on probabilistic
+  {CMOS (PCMOS)} technology.
+\newblock In \emph{DATE}, pages 1110--1115, 2006.
+
+\bibitem[Chandrasekar et~al.(2014)Chandrasekar, Goossens, Weis, Koedam,
+  Akesson, Wehn, and Goossens]{DATE14:margin}
+Chandrasekar, K., Goossens S., Weis C., Koedam M., Akesson B., Wehn N., and
+  Goossens K.
+\newblock Exploiting expendable process-margins in {DRAMs} for run-time
+  performance optimization.
+\newblock In \emph{DATE}, pages 1--6, 2014.
+
+\bibitem[Chatterjee et~al.(2012)Chatterjee, Balasubramonian, Shevgoor, Pugsley,
+  Udipi, Shafiee, Sudan, Awathi, and Chishti]{SIMU:usimm}
+Chatterjee, N., Balasubramonian R., Shevgoor M., Pugsley S.~H., Udipi A.~N.,
+  Shafiee A., Sudan K., Awathi M., and Chishti Z.
+\newblock {USIMM}: the utah simulated memory module.
+\newblock Technical report, Univ of Utah, 2012.
+
+\bibitem[Childers et~al.(2015)Childers, Yang, and Zhang]{MEMSYS15:twr}
+Childers, B.~R., Yang J., and Zhang Y.
+\newblock Achieving yield, density and performance effective {DRAM} at extreme
+  technology sizes.
+\newblock In \emph{MEMSYS}, pages 78--84, 2015.
+
+\bibitem[Choi et~al.(2015)Choi, Shin, Jang, Suh, Kwon, Moon, and
+  Kim]{ISCA15:mcr}
+Choi, J., Shin W., Jang J., Suh J., Kwon Y., Moon Y., and Kim L.-S.
+\newblock Multiple clone row {DRAM}: a low latency and area optimized {DRAM}.
+\newblock In \emph{ISCA}, pages 223--234, 2015.
+
+\bibitem[Cong et~al.(2011)Cong, Jiang, Liu, and Zou]{TODAES11:partition}
+Cong, J., Jiang W., Liu B., and Zou Y.
+\newblock Automatic memory partitioning and scheduling for throughput and power
+  optimization.
+\newblock \emph{ACM Transactions on Design Automation of Electronic Systems
+  (TODAES)}, 16\penalty0 (2):\penalty0 1--25, Mar 2011.
+
+\bibitem[Consortium(2015)]{HMC:spec2}
+Consortium, .
+\newblock Hybrid memory cube specification 2.0.
+\newblock \url{http://www.jedec.org}, 2015.
+
+\bibitem[d.~Kruijf et~al.(2010)d.~Kruijf, Nomura, and
+  Sankaralingam]{ISCA10:relax}
+Kruijf, M.d.~, Nomura S., and Sankaralingam K.
+\newblock Relax: an architectural framework for software recovery of hardware
+  faults.
+\newblock In \emph{ISCA}, pages 497--508, 2010.
+
+\bibitem[D.~Lee et~al.(2013)D.~Lee, Seshadri, Liu, Subramanian, and
+  Mutlu]{HPCA13:tldram}
+D.~Lee, Y.~Kim, Seshadri V., Liu J., Subramanian L., and Mutlu O.
+\newblock Tiered-latency {DRAM}: A low latency and low cost {DRAM}
+  architecture.
+\newblock In \emph{HPCA}, pages 615--626, 2013.
+
+\bibitem[Demone(2011)]{PATENT11:dram}
+Demone, P.
+\newblock High speed {DRAM} architecture with uniform access latency.
+\newblock United States Patent, 2011.
+
+\bibitem[Eckert et~al.(2014)Eckert, Jayasena, and Loh]{WONDP14:thermal}
+Eckert, Y., Jayasena N., and Loh G.~H.
+\newblock Thermal feasibility of die-stacked processing in memory.
+\newblock In \emph{WoNDP}, 2014.
+
+\bibitem[Esmaeilzadeh et~al.(2012{\natexlab{a}})Esmaeilzadeh, Sampson, Ceze,
+  and Burger]{ASPLOS12:disciplined}
+Esmaeilzadeh, H., Sampson A., Ceze L., and Burger D.
+\newblock Architecture support for disciplined approximate programming.
+\newblock In \emph{ASPLOS}, pages 301--312, 2012{\natexlab{a}}.
+
+\bibitem[Esmaeilzadeh et~al.(2012{\natexlab{b}})Esmaeilzadeh, Sampson, Ceze,
+  and Burger]{MICRO12:neural}
+Esmaeilzadeh, H., Sampson A., Ceze L., and Burger D.
+\newblock Neural acceleration for general-purpose approximate programs.
+\newblock In \emph{MICRO}, pages 449--460, 2012{\natexlab{b}}.
+
+\bibitem[Flautner et~al.(2002)Flautner, Kim, Martin, Blaauw, and
+  Mudge]{ISCA02:drowsy}
+Flautner, K., Kim N.~S., Martin S., Blaauw D., and Mudge T.
+\newblock Drowsy caches: simple techniques for reducing leakage power.
+\newblock In \emph{ISCA}, pages 148--157, 2002.
+
+\bibitem[Ghosh and Lee(2010)]{MICRO10:smart_refresh}
+Ghosh, M. and Lee H.-H.~S.
+\newblock Smart refresh: An enhanced memory controller design for reducing
+  energy in conventional and {3D} die-stacked {DRAMs}.
+\newblock In \emph{MICRO}, pages 134--145, 2010.
+
+\bibitem[h.~Wassel et~al.(2013)h.~Wassel, Gao, Oberg, Huffmire, Kastner, Chong,
+  and Sherwood]{ISCA13:surfnoc}
+Wassel, h.~, Gao Y., Oberg J.~K., Huffmire T., Kastner R., Chong F.~T., and
+  Sherwood T.
+\newblock {SurfNoC}: a low latency and provably non-interfering approach to
+  secure networks-on-chip.
+\newblock In \emph{ISCA}, pages 583--594, 2013.
+
+\bibitem[Hamamoto et~al.(1998)Hamamoto, Sugiura, and Sawada]{ED98:ret_dist}
+Hamamoto, T., Sugiura S., and Sawada S.
+\newblock On the retention time distribution of dynamic random access memory
+  ({DRAM}).
+\newblock \emph{IEEE Trans. Electron Devices}, 45\penalty0 (6):\penalty0
+  1300--1309, 1998.
+
+\bibitem[Hoffmann et~al.(2011)Hoffmann, Sidiroglous, Carbin, Misailovic,
+  Agarwal, and Rinard]{ASPLOS11:knob}
+Hoffmann, H., Sidiroglous S., Carbin M., Misailovic S., Agarwal A., and Rinard
+  M.
+\newblock Dynamic knobs for responsive power-aware computing.
+\newblock In \emph{ASPLOS}, pages 199--212, 2011.
+
+\bibitem[Hong(2010)]{IEDM10:scaling}
+Hong, S.
+\newblock Memory technology trend and future challenges.
+\newblock In \emph{IEDM}, pages 12.4.1--12.4.4, 2010.
+
+\bibitem[Hong et~al.(2002)Hong, Kim, Wee, and Lee]{JSSC02:sense}
+Hong, S., Kim S., Wee J.-K., and Lee S.
+\newblock Low-voltage {DRAM} sensing scheme with offset-cancellation sense
+  amplifier.
+\newblock \emph{IEEE J. Solid-State Circuits}, 37\penalty0 (10), 2002.
+
+\bibitem[Hynix(2010)]{hynix:ddr3}
+Hynix, .
+\newblock 2gb ddr3 sdram data sheet.
+\newblock Hynix Semiconductor, 2010.
+
+\bibitem[Jacob et~al.(2007)Jacob, Ng, and Wang]{BOOK:jacob}
+Jacob, B., Ng~S., and Wang D.
+\newblock \emph{Memory systems: Cache, {DRAM}, disk}.
+\newblock Morgan Kaufmann, 2007.
+
+\bibitem[JEDEC(2000)]{JEDEC:ddr}
+JEDEC, .
+\newblock Double data rate ({DDR}) {SDRAM} specification, 2000.
+
+\bibitem[JEDEC(2009{\natexlab{a}})]{JEDEC:ddr2}
+JEDEC, .
+\newblock {DDR2 SDRAM} specification, 2009{\natexlab{a}}.
+
+\bibitem[JEDEC(2009{\natexlab{b}})]{JEDEC:ddr3}
+JEDEC, .
+\newblock {DDR3 SDRAM} specification, 2009{\natexlab{b}}.
+
+\bibitem[JEDEC(2012)]{JEDEC:ddr4}
+JEDEC, .
+\newblock {DDR4 SDRAM}, 2012.
+
+\bibitem[JWAC-3(2012)]{SIMU:msc}
+JWAC-3, .
+\newblock {MSC} workloads.
+\newblock \url{http://www.cs.utah.edu/~rajeev/jwac12/}, 2012.
+
+\bibitem[Kang et~al.(2014)Kang, s.~Yu, Park, Zheng, Halbert, Bains, Jang, and
+  Choi]{MEM14:twr}
+Kang, U., Yu~H.s.~, Park C., Zheng H., Halbert J., Bains K., Jang S., and Choi
+  J.~S.
+\newblock Co-architecting controllers and {DRAM} to enhance {DRAM} process
+  scaling.
+\newblock In \emph{The Memory Forum}, 2014.
+
+\bibitem[Karnik et~al.(2004)Karnik, Borkar, and De]{ICICDT:weight}
+Karnik, T., Borkar S., and De~V.
+\newblock Statistical design for variation tolerance: Key to continued
+  {Moore's} law.
+\newblock In \emph{ICICDT}, pages 175--176, 2004.
+
+\bibitem[Khan et~al.(2014)Khan, Lee, Kim, Alameldeen, Wilkerson, and
+  Mutlu]{SIGMETRICS14:vrt}
+Khan, S., Lee D., Kim Y., Alameldeen A.~R., Wilkerson C., and Mutlu O.
+\newblock The efficacy of error mitigation techniques for {DRAM} retention
+  failures: A comparative experimental study.
+\newblock In \emph{SIGMETRICS}, pages 519--532, 2014.
+
+\bibitem[Khurshid and Lipasti(2013)]{ICCD13:temp}
+Khurshid, M.~J. and Lipasti M.
+\newblock Data compression for thermal mitigation in the hybrid memory cube.
+\newblock In \emph{ICCD}, pages 185--192, 2013.
+
+\bibitem[Kim and Lee(2009)]{EDL09:ret}
+Kim, K. and Lee J.
+\newblock A new investigation of data retention time in truly nanoscaled
+  {DRAMs}.
+\newblock \emph{IEEE Electron Device Lett.}, 30\penalty0 (8):\penalty0
+  846--848, 2009.
+
+\bibitem[Kim et~al.(2014)Kim, Daly, Kim, Fallin, Lee, Lee, Wilkerson, Lai, and
+  Mutlu]{ISCA14:disturbance}
+Kim, Y., Daly R., Kim J., Fallin C., Lee J.~H., Lee D., Wilkerson C., Lai K.,
+  and Mutlu O.
+\newblock Flipping bits in memory without accessing them: An experimental study
+  of {DRAM} disturbance errors.
+\newblock In \emph{ISCA}, pages 361--372, 2014.
+
+\bibitem[Kirihata et~al.(1996)Kirihata, Watanabe, Wong, DeBrosse, Yoshida,
+  Katoh, Fujii, Wordeman, Poechmueller, Parke, and Asao]{SSC96:spare}
+Kirihata, T., Watanabe Y., Wong H., DeBrosse J., Yoshida M., Katoh D., Fujii
+  S., Wordeman M., Poechmueller P., Parke S., and Asao Y.
+\newblock Fault-tolerant designs for 256{Mb DRAM}.
+\newblock \emph{IEEE J. Solid-State Circuits}, 31\penalty0 (4):\penalty0
+  558--566, 1996.
+
+\bibitem[Koren and Krishna(2010)]{BOOK:fault}
+Koren, I. and Krishna C.~M.
+\newblock \emph{Fault-tolerant systems}.
+\newblock Morgan Kaufmann, 2010.
+
+\bibitem[Kultursay et~al.(2013)Kultursay, Kandemir, Sivasubramaniam, and
+  Mutlu]{ISPASS13:stt}
+Kultursay, E., Kandemir M., Sivasubramaniam A., and Mutlu O.
+\newblock Evaluating {STT-RAM} as an energy-efficient main memory alternative.
+\newblock In \emph{ISPASS}, pages 256--267, 2013.
+
+\bibitem[Kurinec and Iniewski(2013)]{BOOK13:sharing}
+Kurinec, S.~K. and Iniewski K.
+\newblock \emph{Nanoscale semiconductor memories: Technology and applications}.
+\newblock CRC Press, 2013.
+
+\bibitem[Lee et~al.(2009{\natexlab{a}})Lee, Ipek, Mutlu, and
+  Burger]{ISCA09:pcm}
+Lee, B.~C., Ipek E., Mutlu O., and Burger D.
+\newblock Architecting phase change memory as a scalable {DRAM} alternative.
+\newblock In \emph{ISCA}, pages 2--13, 2009{\natexlab{a}}.
+
+\bibitem[Lee et~al.(2009{\natexlab{b}})Lee, Narasiman, Mutlu, and
+  Patt]{MICRO09:blp}
+Lee, C.~J., Narasiman V., Mutlu O., and Patt Y.
+\newblock Improving memory {Bank-Level Parallelism} in the presence of
+  prefetching.
+\newblock In \emph{MICRO}, pages 327--336, 2009{\natexlab{b}}.
+
+\bibitem[Lee et~al.(2001)Lee, Choi, Kim, Noh, Min, Cho, and Kim]{TC01:alloc}
+Lee, D., Choi J., Kim J., Noh S.~H., Min S.~L., Cho Y., and Kim C.~S.
+\newblock {LRUF}: A spectrum of policies that subsumes the least recently used
+  and least frequently used policies.
+\newblock \emph{IEEE Trans. Comput.}, 50\penalty0 (12):\penalty0 1352--1361,
+  2001.
+
+\bibitem[Lee et~al.(2015{\natexlab{a}})Lee, Kim, Pekhimenko, Khan, Seshadri,
+  Chang, and Mutlu]{HPCA15:al-dram}
+Lee, D., Kim Y., Pekhimenko G., Khan S., Seshadri V., Chang K., and Mutlu O.
+\newblock Adaptive-latency {DRAM}: Optimizing {DRAM} timing for the
+  common-case: Optimizing dram timing for the common-case.
+\newblock In \emph{HPCA}, pages 489--501, 2015{\natexlab{a}}.
+
+\bibitem[Lee et~al.(2015{\natexlab{b}})Lee, Kim, Pekhimenko, Khan, Seshadri,
+  Chang, and Mutlu]{HPCA15:aldram}
+Lee, D., Kim Y., Pekhimenko G., Khan S., Seshadri V., Chang K., and Mutlu O.
+\newblock Adaptive-latency {DRAM}: Optimizing {DRAM} timings for the
+  common-case.
+\newblock In \emph{HPCA}, pages 489--501, 2015{\natexlab{b}}.
+
+\bibitem[Liu and Lee(2013)]{HASP13:cache}
+Liu, F. and Lee R.
+\newblock Security testing of a secure cache design.
+\newblock In \emph{HASP}, 2013.
+
+\bibitem[Liu et~al.(2012{\natexlab{a}})Liu, Jaiyen, Veras, and
+  Mutlu]{ISCA12:raidr}
+Liu, J., Jaiyen B., Veras R., and Mutlu O.
+\newblock {RAIDR}: Retention-aware intelligent {DRAM} refresh.
+\newblock In \emph{ISCA}, pages 1--12, 2012{\natexlab{a}}.
+
+\bibitem[Liu et~al.(2013)Liu, Jaiyen, Kim, Wilkerson, and Mutlu]{ISCA13:ret}
+Liu, J., Jaiyen B., Kim Y., Wilkerson C., and Mutlu O.
+\newblock An experimental study of data retention behavior in modern {DRAM}
+  devices: Implications for retention time profiling mechanisms.
+\newblock In \emph{ISCA}, pages 60--71, 2013.
+
+\bibitem[Liu et~al.(2012{\natexlab{b}})Liu, Cui, Xing, Bao, Chen, and
+  Wu]{PACT12:close_page}
+Liu, L., Cui Z., Xing M., Bao Y., Chen M., and Wu~C.
+\newblock A software memory partition approach for eliminating bank-level
+  inerference in multicore systems.
+\newblock In \emph{PACT}, pages 367--376, 2012{\natexlab{b}}.
+
+\bibitem[Liu et~al.(2011)Liu, Pattabiraman, Moscibroda, and
+  Zorn]{ASPLOS11:flikker}
+Liu, S., Pattabiraman K., Moscibroda T., and Zorn B.~G.
+\newblock Flikker: saving {DRAM} refresh-power through critical data
+  partitioning.
+\newblock In \emph{ASPLOS}, pages 213--224, 2011.
+
+\bibitem[Loi et~al.(2006)Loi, Agrawal, Srivastava, Lin, Sherwood, and
+  Banerjee]{DAC06:3dmodel}
+Loi, G.~L., Agrawal B., Srivastava N., Lin S., Sherwood T., and Banerjee K.
+\newblock A thermally-aware performance analysis of vertically integrated
+  ({3-D}) processor-memory hierarchy.
+\newblock In \emph{DAC}, pages 991--996, 2006.
+
+\bibitem[Lucas et~al.(2014)Lucas, Alvarez-Mesa, Andersch, and
+  Juurlink]{MEM14:sparkk}
+Lucas, J., Alvarez-Mesa M., Andersch M., and Juurlink B.
+\newblock Sparkk: Quality-scalable approximate storage in {DRAM}.
+\newblock In \emph{The memory forum}, pages 1--6, 2014.
+
+\bibitem[Mandelman et~al.(2002)Mandelman, Dennard, Bronner, DeBrosse,
+  Divakaruni, Li, and Radens]{IBM02:scaling}
+Mandelman, J.~A., Dennard R.~H., Bronner G.~B., DeBrosse J.~K., Divakaruni R.,
+  Li~Y., and Radens C.~J.
+\newblock Challenges and future directions for the scaling of dynamic
+  random-access memory ({DRAM}).
+\newblock \emph{IBM Journal of Research and Development}, 46\penalty0 (Issues
+  2-3):\penalty0 187--212, 2002.
+
+\bibitem[MicronTech(2007)]{TOOL:power}
+MicronTech, .
+\newblock Calculating memory system power for {DDR3}.
+\newblock Micron Technology, 2007.
+
+\bibitem[MicronTech(2009)]{SIMU:datasheet}
+MicronTech, .
+\newblock {4Gb DDR3 SDRAM - MT41J512M8}.
+\newblock Micron Technology, 2009.
+
+\bibitem[Miguel et~al.(2014)Miguel, Badr, and Jerger]{MICRO14:appro}
+Miguel, J.~S., Badr M., and Jerger N.~E.
+\newblock Load value approximation.
+\newblock In \emph{MICRO}, pages 127--139, 2014.
+
+\bibitem[Miguel et~al.(2015)Miguel, Albericio, Moshovos, and
+  Jerger]{MICRO15:doppelganger}
+Miguel, J.~S., Albericio J., Moshovos A., and Jerger N.~E.
+\newblock Doppelganger: A cache for approximate computing.
+\newblock In \emph{MICRO}, 2015.
+
+\bibitem[Mukundan et~al.(2013)Mukundan, Hunter, h.~Kim, Stuecheli, and
+  Martinez]{ISCA13:ddr4}
+Mukundan, J., Hunter H., Kim K.h.~, Stuecheli J., and Martinez J.~F.
+\newblock Understanding and mitigating refresh overheads in high-density {DDR4
+  DRAM} systems.
+\newblock In \emph{ISCA}, pages 48--59, 2013.
+
+\bibitem[Mutlu and Moscibroda(2008)]{ISCA08:blp}
+Mutlu, O. and Moscibroda T.
+\newblock Parallelism-aware batch scheduling: Enhancing both performance and
+  fairness of shared {DRAM} systems.
+\newblock In \emph{ISCA}, pages 63--74, 2008.
+
+\bibitem[Nair et~al.(2013{\natexlab{a}})Nair, Chou, and
+  Qureshi]{HPCA13:refresh_pausing}
+Nair, P.~J., Chou C.-C., and Qureshi M.~K.
+\newblock A case for refresh pausing in {DRAM} memory systems.
+\newblock In \emph{HPCA}, pages 627--638, 2013{\natexlab{a}}.
+
+\bibitem[Nair et~al.(2013{\natexlab{b}})Nair, Kim, and
+  Qureshi]{ISCA13:archshield}
+Nair, P.~J., Kim D.-H., and Qureshi M.~K.
+\newblock {ArchShield}: Architectural framework for assisting {DRAM} scaling by
+  tolerating high error rates.
+\newblock In \emph{ISCA}, pages 72--83, 2013{\natexlab{b}}.
+
+\bibitem[Narayanan et~al.(2010)Narayanan, Sartori, Kumar, and
+  Jones]{DATE10:proc}
+Narayanan, S., Sartori J., Kumar R., and Jones D.~L.
+\newblock Scalable stochastic processors.
+\newblock In \emph{DATE}, pages 335--338, 2010.
+
+\bibitem[Ozturk and Kandemir(2008)]{TODAES08:bankmem}
+Ozturk, O. and Kandemir M.
+\newblock {ILP}-based energy minimization techniques for banked memories.
+\newblock \emph{ACM Transactions on Design Automation of Electronic Systems
+  (TODAES)}, 13\penalty0 (2):\penalty0 1--40, Jul 2008.
+
+\bibitem[Patterson(2015)]{SOSP15:xpoint}
+Patterson, D.
+\newblock Past and future of hardware and architecture.
+\newblock In \emph{SOSP}, 2015.
+
+\bibitem[Patterson and Hennessy(2008)]{BOOK:cod}
+Patterson, D.~A. and Hennessy J.~L.
+\newblock \emph{Computer organization and design: The hardware / software
+  interface}.
+\newblock Morgan Kaufmann, 2008.
+
+\bibitem[Percival(2005)]{BSDCan05:cache_fun}
+Percival, C.
+\newblock Cache missing for fun and profit.
+\newblock In \emph{DSDCan}, 2005.
+
+\bibitem[Qureshi et~al.(2015{\natexlab{a}})Qureshi, Kim, Khan, Nair, and
+  Mutlu]{DSN15:avatar}
+Qureshi, M.~K., Kim D.-H., Khan S., Nair P.~J., and Mutlu O.
+\newblock {AVATAR}: A variable-retention-time ({VRT}) aware refresh for {DRAM}
+  systems.
+\newblock In \emph{DSN}, pages 427--437, 2015{\natexlab{a}}.
+
+\bibitem[Qureshi et~al.(2015{\natexlab{b}})Qureshi, Kim, Khan, Nair, and
+  Mutlu]{DSN15:vrt}
+Qureshi, M.~K., Kim D.-H., Khan S., Nair P.~J., and Mutlu O.
+\newblock {AVATAR}: A variable-retention-time ({VRT}) aware refresh for {DRAM}
+  systems.
+\newblock In \emph{DSN}, pages 427--437, 2015{\natexlab{b}}.
+
+\bibitem[Rahmati et~al.(2015)Rahmati, Hicks, Holcomb, and Fu]{ISCA15:prob}
+Rahmati, A., Hicks M., Holcomb D.~E., and Fu~K.
+\newblock Probable cause: the deanonymizing effects of approximate {DRAM}.
+\newblock In \emph{ISCA}, pages 604--615, 2015.
+
+\bibitem[Ramos et~al.(2011)Ramos, Gorbatov, and Bianchini]{ICS11:hot_page}
+Ramos, L.~E., Gorbatov E., and Bianchini R.
+\newblock Page placement in hybrid memory systems.
+\newblock In \emph{ICS}, pages 85--95, 2011.
+
+\bibitem[Ryan and Calhoun(2008)]{ISQED08:offset}
+Ryan, J.~F. and Calhoun B.~H.
+\newblock Minimizing offset for latching voltage-mode sense amplifiers for
+  sub-threshold operation.
+\newblock In \emph{ISQED}, pages 127--132, 2008.
+
+\bibitem[Sampson et~al.(2011)Sampson, Dietl, Fortuna, Gnanapragasam, Ceze, and
+  Grossman]{PLDI11:enerj}
+Sampson, A., Dietl W., Fortuna E., Gnanapragasam D., Ceze L., and Grossman D.
+\newblock {EnerJ}: approximate data types for safe and general low-power
+  computation.
+\newblock In \emph{PLDI}, pages 164--174, 2011.
+
+\bibitem[Sampson et~al.(2013)Sampson, Nelson, Strauss, and Ceze]{MICRO13:appro}
+Sampson, A., Nelson J., Strauss K., and Ceze L.
+\newblock Approximate storage in solid-state memories.
+\newblock In \emph{MICRO}, pages 25--36, 2013.
+
+\bibitem[Sarangi et~al.(2008)Sarangi, Greskamp, Teodorescu, Nakano, Tiwari, and
+  Torrellas]{SM08:varius}
+Sarangi, S.~R., Greskamp B., Teodorescu R., Nakano J., Tiwari A., and Torrellas
+  J.
+\newblock {VARIUS}: A model of process variation and resulting timing errors
+  for microarchitects.
+\newblock \emph{IEEE Trans. Semicond. Manuf}, 21\penalty0 (1):\penalty0 3--13,
+  Feb 2008.
+
+\bibitem[Seshadri et~al.(2013)Seshadri, Kim, Fallin, Lee, Ausavarungnirun,
+  Pekhimenko, Luo, Mutlu, Gibbons, Kozuch, and Mowry]{MICRO13:rowclone}
+Seshadri, V., Kim Y., Fallin C., Lee D., Ausavarungnirun R., Pekhimenko G., Luo
+  Y., Mutlu O., Gibbons P.~B., Kozuch M.~A., and Mowry T.~C.
+\newblock {RowClone}: fast and energy-efficient in-{DRAM} bulk data copy and
+  initialization.
+\newblock In \emph{MICRO}, pages 185--197, 2013.
+
+\bibitem[Shariee et~al.(2015)Shariee, Gundu, Shevgoor, Balasubramonian, and
+  Tiwari]{MICRO15:fs}
+Shariee, A., Gundu A., Shevgoor M., Balasubramonian R., and Tiwari M.
+\newblock Avoiding information leakage in the memory controller with fixed
+  service policies.
+\newblock In \emph{MICRO}, 2015.
+
+\bibitem[Shin et~al.(2014)Shin, Yang, Choi, and Kim]{HPCA14:nuat}
+Shin, W., Yang J., Choi J., and Kim L.-S.
+\newblock {NUAT}: A non-uniform access time memory controller.
+\newblock In \emph{HPCA}, pages 464--475, 2014.
+
+\bibitem[Son et~al.(2014)Son, Kang, Park, and Seo]{PATENT14:twr}
+Son, J., Kang U., Park C., and Seo S.
+\newblock Memory device with relaxed timing parameter according to temperature,
+  operating method thereof, and memory controller and memory system using the
+  memory device.
+\newblock United States Patent, 12 2014.
+
+\bibitem[Son et~al.(2013)Son, Seongil, Ro, Lee, and Ahn]{ISCA13:charm}
+Son, Y.~H., Seongil O., Ro~Y., Lee J.~W., and Ahn J.~H.
+\newblock Reducing memory access latency with asymmetric {DRAM} bank
+  organizations.
+\newblock In \emph{ISCA}, pages 380--391, 2013.
+
+\bibitem[Stefanov et~al.(2013)Stefanov, v.~Dijk, Shi, Fletcher, l.~Ren, Yu, and
+  Devadas]{CCS13:oram}
+Stefanov, E., Dijk E.v.~, Shi E., Fletcher C., Ren l.~, Yu~X., and Devadas S.
+\newblock Path {ORAM}: an extremely simple oblivious {RAM} protocol.
+\newblock In \emph{CCS}, pages 229--310, 2013.
+
+\bibitem[Stuecheli et~al.(2010)Stuecheli, Kaseridis, Hunter, and
+  John]{MICRO10:elastic_refresh}
+Stuecheli, J., Kaseridis D., Hunter H.~C., and John L.~K.
+\newblock Elastic refresh: Techniques to mitigate refresh penalties in high
+  density memory.
+\newblock In \emph{MICRO}, pages 375--384, 2010.
+
+\bibitem[Su et~al.(2005)Su, Yeh, and Wu]{DFT05:ecc}
+Su, C., Yeh Y., and Wu~C.
+\newblock An integrated {ECC} and redundancy repair scheme for memory
+  reliability enhancement.
+\newblock In \emph{DFT}, pages 81--89, 2005.
+
+\bibitem[Vogelsang(2010)]{MICRO10:rambus}
+Vogelsang, T.
+\newblock Understanding the energy consumption of dynamic random access
+  memories.
+\newblock In \emph{MICRO}, pages 363--374, 2010.
+
+\bibitem[Wang(2015)]{PATENT15:twr}
+Wang, D.
+\newblock Backward compatible dynamic random access memory device and method of
+  testing therefor.
+\newblock United States Patent, 9 2015.
+
+\bibitem[Wang et~al.(2014{\natexlab{a}})Wang, Dong, and Xie]{ICCD14:proactive}
+Wang, J., Dong X., and Xie Y.
+\newblock Proactive {DRAM}: A {DRAM}-initiated retention management scheme.
+\newblock In \emph{ICCD}, pages 22--27, 2014{\natexlab{a}}.
+
+\bibitem[Wang and Suh(2012)]{NOCS12:noc_channel}
+Wang, Y. and Suh G.~E.
+\newblock Efficient timing channel protection for on-chip networks.
+\newblock In \emph{NOCS}, pages 142--151, 2012.
+
+\bibitem[Wang et~al.(2014{\natexlab{b}})Wang, Ferraiuolo, and
+  Suh]{HPCA14:channel}
+Wang, Y., Ferraiuolo A., and Suh G.~E.
+\newblock Timing channel protection for a shared memory controller.
+\newblock In \emph{HPCA}, pages 225--236, 2014{\natexlab{b}}.
+
+\bibitem[Wang et~al.(2015)Wang, Han, Wang, Li, and Li]{DAC15:radar}
+Wang, Y., Han Y., Wang C., Li~H., and Li~X.
+\newblock {RADAR}: A case for retention-aware {DRAM} assembly and repair in
+  future {FGR DRAM} memory.
+\newblock In \emph{DAC}, pages 1--6, 2015.
+
+\bibitem[Wang and Lee(2007)]{ISCA07:cache_channel}
+Wang, Z. and Lee R.
+\newblock New cache designs for thwarting software cache-based side channel
+  attacks.
+\newblock In \emph{ISCA}, pages 494--505, 2007.
+
+\bibitem[Wong et~al.(2008)Wong, Parries, Wang, and Iyer]{ITC08:ret_dist}
+Wong, K., Parries P.~C., Wang G., and Iyer S.~S.
+\newblock Analysis of retention time distribution of embedded {DRAM} - a new
+  method to characterize across-chip threshold voltage variation.
+\newblock In \emph{ITC}, pages 1--7, 2008.
+
+\bibitem[Yoon et~al.(2011)Yoon, Jeong, and Erez]{ISCA11:agms}
+Yoon, D.~Y., Jeong M.~K., and Erez M.
+\newblock Adaptive granularity memory systems: a tradeoff between storage
+  efficiency and throughput.
+\newblock In \emph{ISCA}, pages 295--306, 2011.
+
+\bibitem[Zhang et~al.(2014{\natexlab{a}})Zhang, Jayasena, Lyashevsky,
+  Greathouse, Xu, and Ignatowski]{HPDC14:pim_gpu}
+Zhang, D., Jayasena N., Lyashevsky A., Greathouse J.~L., Xu~L., and Ignatowski
+  M.
+\newblock {TOP-PIM}: throughput-oriented programmable processing in memory.
+\newblock In \emph{HPDC}, pages 85--98, 2014{\natexlab{a}}.
+
+\bibitem[Zhang et~al.(2014{\natexlab{b}})Zhang, Chen, Xu, Sun, Wang, and
+  Xie]{ISCA14:half_dram}
+Zhang, T., Chen K., Xu~C., Sun G., Wang T., and Xie Y.
+\newblock {Half-DRAM}: a high-bandwidth and low-power {DRAM} architecture from
+  the rethinking of fine-grained activation.
+\newblock In \emph{ISCA}, pages 349--360, 2014{\natexlab{b}}.
+
+\bibitem[Zhang et~al.(2015{\natexlab{a}})Zhang, Zhang, Childers, and
+  Yang]{DATE15:twr}
+Zhang, X., Zhang Y., Childers B.~R., and Yang J.
+\newblock Exploiting {DRAM} restore time variations in deep sub-micron scaling.
+\newblock In \emph{DATE}, pages 477--482, 2015{\natexlab{a}}.
+
+\bibitem[Zhang et~al.(2015{\natexlab{b}})Zhang, Zhang, and Yang]{ICCD15:dlb}
+Zhang, X., Zhang Y., and Yang J.
+\newblock {DLB}: Dynamic lane borrowing for improving bandwidth and performance
+  in hybrid memory cube.
+\newblock In \emph{ICCD}, pages 133--140, 2015{\natexlab{b}}.
+
+\bibitem[Zhang et~al.(2016)Zhang, Zhang, Childers, and Yang]{HPCA16:twr}
+Zhang, X., Zhang Y., Childers B.~R., and Yang J.
+\newblock Restore truncation for performance improvement for future {DRAM}
+  systems.
+\newblock In \emph{HPCA}. to be published, 2016.
+
+\bibitem[Zheng et~al.(2008)Zheng, Lin, Zhang, Gorbatov, David, and
+  Zhu]{MICRO08:minirank}
+Zheng, H., Lin J., Zhang Z., Gorbatov E., David H., and Zhu Z.
+\newblock {Mini-Rank}: Adaptive {DRAM} architecture for improving memory power
+  efficiency.
+\newblock In \emph{MICRO}, pages 210--221, 2008.
+
+\end{thebibliography}

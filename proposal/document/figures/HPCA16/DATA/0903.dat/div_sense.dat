@@ -1,0 +1,4 @@
+workload 20nm_base 20nm_spec 20nm_ref_pr_pv_64 20nm_ref_pr_pv_default 20nm_ref_pr_pv_multi_dimm 20nm_ref_pr_pv_multi_bin 20nm_ref_pr_pv_fixed_dimm 20nm_ref_pr_pv_fixed_bin
+2-unequal	1.000 1.136 1.076 1.130 1.116 1.139 1.094 1.146
+2-equal	1.000 1.136 1.070 1.115 1.120 1.161 1.102 1.191
+4-equal	1.000 1.136 1.100 1.150 1.140 1.174 1.123 1.195

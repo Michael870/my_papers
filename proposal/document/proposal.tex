@@ -1,0 +1,141 @@
+\documentclass[driverfallback=dvipdfmx,final]{pittetd}
+
+\usewithpatch{graphicx}
+\usepackage{amsmath,amsthm}
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{fixltx2e}
+\usepackage{url}
+\usepackage{color}
+\usepackage{wrapfigure}
+\usepackage{amssymb}
+
+%\usepackage{subcaption}
+\usepackage[labelformat=simple,font=footnotesize]{subcaption}
+\usepackage[font=small,labelfont=bf]{caption}
+
+\usepackage[square, authoryear]{natbib}
+% ADD THE FOLLOWING COUPLE LINES INTO YOUR PREAMBLE
+\let\OLDthebibliography\thebibliography
+\renewcommand\thebibliography[1]{
+  \OLDthebibliography{#1}
+  \setlength{\parskip}{0pt}
+   \setlength{\bibsep}{0ex} %% vertical spacing between references
+  \setlength{\itemsep}{7pt plus 0.3ex} %%
+}
+
+\renewcommand\thesubfigure{(\alph{subfigure})}
+\usepackage{soul}
+\usepackage{footnote}
+\usepackage{pifont}
+\usepackage{chngcntr}
+\counterwithin{figure}{chapter}
+\counterwithin{table}{chapter}
+%\usepackage[nottoc]{tocbibind}
+
+%\usepackage{tikz}
+%\usetikzlibrary{fit,positioning}
+
+\let\citeN\citet
+\let\cite\citep
+
+\patch{amsmatch}
+\patch{amsthm}
+\title[Adaptive and Power-aware Fault Tolerance for Future Extreme-scale Computing]
+{Adaptive and Power-aware Fault Tolerance for Future Extreme-scale Computing}
+\author{Xiaolong Cui}
+\degree{Bachelor of Engineering \\ Xi'an Jiaotong University \\2012}
+%\date{July 20th 1967} % This date is the date of the thesis defense. Default is \today
+%\year{1967}   % pittetd will use the current year unless otherwise indicated. So this command is not necessary.
+\keywords{\LaTeX, pittetd, theses, format}   % default, don't change
+\subject{Entity/Event-Level Sentiment Detection and Inference} %This fills in the 'Subject' field in Acrobat Reader's Document Info dialog box.
+\school{Kenneth P. Dietrich School of \\ Arts and Sciences} %The name of the school will be preceeded by 'the' unless otherwise specified, as in:
+%\school[certain]{department}
+%
+%\chapterfloats%                    Un-comment this to get figures and tables numbered within chapters.
+\begin{document}
+\maketitle
+%
+% For the committee membership page, you have to provide the names and affiliations of the members. The first one will 
+% be treated by pittetd as the committee chair (thesis/dissertation advisor).
+\committeemember{Dr. Taieb Znati, Department of Computer Science, with joint appointment in Telecommunication Program, University of Pittsburgh}
+\coadvisor{Dr. Rami Melhem, Department of Computer Science, University of Pittsburgh}%         This is used if there are two advisors.
+\committeemember{Dr. Rami Melhem, Department of Computer Science, University of Pittsburgh}%         This is used if there are two advisors.
+\committeemember{Dr. John Lange, Department of Computer Science, University of Pittsburgh}
+\committeemember{Dr. Esteban Meneses, School of Computing, Costa Rica Institute of Technology} 
+% etc., as many as needed. For master's theses, the committee may be omitted, naming only the advisor.
+\school{Computer Science Department}
+\makecommittee
+\copyrightpage                     %Uncomment this to get a copyright page.
+\begin{abstract}
+As the demand for computing power continue to increase, both HPC community and Cloud service provides are building larger computing platforms to take advantage of the power and economies of scale. On the HPC side, several of the most powerful countries are competing for developing the next generation supercomputer--exascale computing machines to accelerate scientific discoveries, big data analytics, etc. On the Cloud side, the world's largest IT companies are all building large-scale datecenters, for both private usage and public services. However, aside from the benefits, several daunting challenges will appear when it comes to extreme-scale.
+
+This thesis aims at simultaneously solving two major challenges, i.e., power consumption and fault tolerance, for future extreme-scale computing systems. We come up with a novel computational model, referred to as Lazy Shadowing, as an efficient and scalable approach to achieve high-levels of resilience, through forward progress, in extreme-scale, failure-prone computing environments. Two approaches have been proposed to implement this idea. Accordingly, detailed mathemetical models have been developed to quantify the system efficiency improving and energy saving of Lazy Shadowing. 
+
+In this work, I propose to continue the research in two aspects. Firstly, I propose to develop a MPI-based prototype to valdate the correctness of Lazy Shadowing in real environment. Using the prototype, I will run benchmarks and real applications to quantify its benefits compared to state-of-the-art approaches. In addition, I propose to further explore the potential of Lazy Shadowing and improve its efficiency. Based on the specific system configuration and application QoS requirement, I will study the possibility of partial shadowing in three dimensions, i.e., time, space, and workload.     
+
+\end{abstract}
+% If you say \begin{abstract}[Keywords:] instead of the simple \begin{abstract}, a list of the keywords is appended.
+% The list comes from the \keywords command above.
+% The starred version \begin{abstract*} typesets the word `ABSTRACT' on the top of the page
+
+
+\tableofcontents
+%\listoftables                      %Pittetd will complain if you tell it to create a list of tables when there are no
+%                                   tables (as in this sample file). Uncomment this command if you have tables.
+%\listoffigures                     %Obvious analogous for figures.
+%\preface
+% This is the text of the preface, with acknowledgments, dedication, etc. It is optional, and you create, as shown, by 
+% just saying \preface and starting the preface's actual text. Note that 'foreword' is no longer acceptable as title
+% for this preliminary.
+%
+%Conventions, such as notation (nomenclature) and abbreviations, don't receive their own preliminary page. They can be included as an appendix, or as part of the introduction.
+%
+\chapter{INTRODUCTION}
+\label{chapter:intro}
+\input{chapters/intro}
+
+\chapter{BACKGROUND}
+\label{chapter:background}
+\input{chapters/background}
+
+\chapter{Achieve Fast Restoring via Reorganization}
+\label{chapter:twr_reorganize}
+\input{chapters/twr_reorganize}
+
+\chapter{Shorten Restoring using Refresh}
+\label{chapter:partialrestore}
+\input{chapters/partialrestore}
+
+\chapter{Further Explorations of Restoring}
+\label{chapter:future_study}
+\input{chapters/future_study}
+
+\chapter{TIMELINE OF PROPOSED WORK}
+\label{chapter:timeline}
+\input{chapters/timeline}
+
+\chapter{SUMMARY}
+\label{chapter:summary}
+\input{chapters/summary}
+
+\appendix                      
+%After this command, chapters will be formatted as appendices. For example
+%\chapter{Possible Appendix}
+%\label{appendix:effectEventInferenceRules}
+%\input{appendixEffectEventInference}
+
+%\chapter*{BIB}
+\begin{singlespace}
+%\nocite{*}
+%\renewcommand{\bibsection}{} %remove automatically generated title, like "REFERENCE" or "BIBLIGROPHY"
+\bibliographystyle{plainnat}
+{
+\footnotesize
+\bibliography{references/refresh,references/twr,references/scaling,references/jedec,references/dram,references/approx_security,references/stacked,references/page_os,references/hpca16}
+}
+\end{singlespace}
+%\bibliography{gfbf,sentiment,agreementStudy,effectEventCorpus,effectEventInference,generalEventCorpus,generalEventInference,myWork}          %\safebibliography is used the same way as \bibliography, but gives pittetd
+%                                   a greater chance to succeed in formatting the bibliography when nonstandard
+%                                   BibTeX styles are used.
+\end{document}

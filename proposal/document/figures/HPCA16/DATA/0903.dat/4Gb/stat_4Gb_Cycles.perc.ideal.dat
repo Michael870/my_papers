@@ -1,0 +1,6 @@
+workload	20nm_base	20nm_norefresh	20nm_spec	20nm_bound	20nm_ref_pr_pv_fixed_bin	20nm_ref_pr_pv_archf64
+COM	1.000	1.057	1.111	1.109	1.141	1.167
+SPEC	1.000	1.064	1.177	1.179	1.238	1.268
+PARSEC	1.000	1.062	1.125	1.151	1.189	1.216
+BIO	1.000	1.080	1.207	1.271	1.329	1.371
+Gmean	1.000	1.063	1.136	1.155	1.195	1.224

@@ -1,0 +1,62 @@
+This chapter will briefly discuss further explorations of restoring, as future work. We'll extend the restoring topic to approximate computing, memory information leakage and 3D stacked memory.
+
+\section{Combine Restoring with Approximate Computing} \label{work:approx}
+\subsection{Introduction on Approximate Computing}
+Energy and power are increasing concerns in nowadays computer systems, ranging from mobile devices to data centers; and much energy is spent on guaranteeing correctness \cite{PLDI11:enerj}.
+Nevertheless, many modern applications have intrinsic tolerance to inaccuracy \cite{ISCA10:relax, PLDI11:enerj}. For instance, lots of problems have no perfect answer in domains like machine learning, computer vision and sensor data analysis, and hence the adopted solutions rely on heuristic approach; and, large-scale data analytics cares more about aggregate trends rather than the correctness of individual data elements. Apparently, these applications provide good opportunities to explore energy-accuracy tradeoff.
+
+Approximate computing necessitates the collaboration of different layers spanning circuits, architectures and algorithms. On program level, we should annotate the approximate data, which is non-critical and able to tolerate inexactness; on instruction level, the system should distinguish approximate and precise instructions and then take use of different strategies to execute; the fundamental energy savings rely on hardware techniques, including voltage reduction, floating point rounding and refresh rate reduction, etc.
+
+To quantify the energy-accuracy tradeoff, we need to measure the output quality of approximate execution and should ensure that the quality loss is sustainable.
+The qualify-of-service (QoS) metrics are per-application specific, and are measured by comparing the final outputs of approximate execution against those of precise one.
+For instance, if the outputs are images, then the QoS can be evaluated as the average difference of per-RGB value \cite{PLDI11:enerj} between the executions.
+
+\subsection{Related Work}
+Prior works on approximate computing performed explorations from both hardware \cite{DATE06:cmos, DATE10:proc, ISCA10:relax, ASPLOS11:flikker, ASPLOS12:disciplined, MICRO12:neural, MICRO13:appro, MICRO14:appro, MICRO15:doppelganger} and software \cite{PLDI10:green, PLDI11:enerj, ASPLOS11:knob, OOPSLA15:topaz}. Among them, there is significant research on storing approximate data more efficiently, which is also the focus of our tentative exploration.
+Flikker \cite{ASPLOS11:flikker} refreshes approximate data at lower rates to save DRAM refresh energy, which is recently extended by \cite{MEM14:sparkk, CASES15:appro}.
+\citeN{ASPLOS12:disciplined} proposed to apply dual voltage to SRAM array to balance energy and accuracy; Drowsy caches \cite{ISCA02:drowsy} reduces the supply voltage to save power; to improve PCM's lifetime and performance, \cite{MICRO13:appro} proposed to reduce write precision and reuse failed cells.
+
+\subsection{General Ideas}
+According to the observations of our prior studies \cite{DATE15:twr}, whereas the worst-case {\tt tWR} of the whole memory suffers from significant increase, a large portion of cells have {\tt tWR} within the specification range.
+Such variation provides opportunity for applying approximate computing to achieve performance and performance improvements: {\tt tWR} can be aggressively reduced to low value(s) as long as we can guarantee the correctness of precise data, and control the error impact of approximate data.
+
+Program annotation can be performed by inserting assembly code, which will be identified by Pintool. Pintool simulates the real instruction execution, and when stepping into annotated approximate region, it injects errors using the underlying DRAM bit mask.
+As prior arts \cite{PLDI11:enerj, MICRO14:appro}, we will control the annotation to let the program run to the end, and compare the approximate results against precise ones to report QoS. Simultaneously, Pintool outputs memory accesses, which are then fed into conventional memory simulator to collect performance and energy values. The most challenging part lies on the tradeoff between QoS and performance achievement: fine-grained and aggressive {\tt tWR} control benefits memory performance, but is likely to introduce too many errors. We will take some measurements to constraint the errors, candidate solutions can be dedicated allocation, location correction or memory bit remapping, etc.
+
+%\begin{itemize}
+%\itemsep 0pt
+%\item Fixed tWR, e.g., 15, and then do mapping or correction
+%\item Random mapping, apply full tWR for precise data
+%\end{itemize}
+
+\section{Study Security Issues of Restoring Variation} \label{work:security}
+%\subsection{Introduction on Memory Security Issues}
+Modern computing systems suffer from increasing concerns on privacy, security and trust issues, with timing channel attacks as a representative example.
+And recently, the concern on timing channel attack has moved from shared caches \cite{BSDCan05:cache_fun, ISCA07:cache_channel, HASP13:cache} and on-chip networks \cite{NOCS12:noc_channel, ISCA13:surfnoc} to shared main memory \cite{CCS13:oram, HPCA14:channel, MICRO15:fs}.
+Memory access pattern can leak a significant amount of sensitive information through statistical inference \cite{CCS13:oram}.
+
+As a remedy, ORAM \cite{CCS13:oram} was proposed to conceal a client's access pattern to remote storage by continuously shuffling and re-encrypting data as they are accessed.
+\citeN{HPCA14:channel} proposed temporal partitioning (TP) to isolate thread accesses to hide access pattern. As an improvement, Fixed Service (FS) policies were studied by \cite{MICRO15:fs} to reshape memory access behaviors without much performance degradation.
+
+Compared to the simple case of a single set of timings for the whole memory system, restoring variations in further scaling DRAM are likely to leak more information. For instance, various memory access speeds to different memory regions may expose the footprint to malicious users. And things can be much worse with the adoption of NUMA-aware page allocation and approximate computing. The former easily leak the frequently accessed data, and the latter correlates data to its location origin \cite{ISCA15:prob}. 
+
+In addition, simply borrowing the schemes in \cite{HPCA14:channel, MICRO15:fs} would introduce higher overhead because of the much longer worst-case restoring timings.
+As a result, it is necessary to integrate information leakage, restoring issues, page allocation and approximate computing to come out a workable solution with acceptable performance loss and safety guarantee.
+
+
+%\subsection{Related Work}
+
+%\subsection{Motivations and Proposed Ideas}
+
+\section{Explore Restoring in 3D Stacked DRAM} \label{work:stacked}
+Recent advances in die stacking techniques enables efficient integration of logic and memory dies in a single package, with a concrete example of Hybrid Memory Cube \cite{HMC:spec2}.
+HMC is especially promising for its innovative architecture that stacks multiple memory dies atop of the bottom logic die, and adopts packetized serial link interface to transfer data and requests \cite{ICCD15:dlb}.
+With the superior high bandwidth, low latency and packet-based interface, lots of work have proposed to move computation units inside the logic die \cite{JMicro:ndp, ISCA15:pim}.
+However, thermal management is a big issue in stacked memories \cite{DAC06:3dmodel, WONDP14:thermal}, and the deployment of bottom computation logics like simple cores \cite{ISCA15:pim} and even GPU \cite{HPDC14:pim_gpu} worsens the issue. Besides, temperature variations exist among vertical dies \cite{ICCD13:temp}. It is known that DRAM is sensitive to temperature changes, including refresh \cite{HPCA15:al-dram, ISCA13:ddr4} and restoring time \cite{PATENT14:twr, MEM14:twr}.
+Therefore, it is worthwhile to explore restoring time in stacked memories, and utilize the temperature characteristics to dig more opportunities to boost performance. 
+
+%\subsection{Introduction on Stacked DRAM}
+
+%\subsection{Related Work}
+
+%\subsection{Motivations and Proposed Ideas}
