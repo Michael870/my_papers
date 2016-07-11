@@ -25,11 +25,12 @@ globally consistent view until the recovery phase. The major advantage is the re
 each process maintains multiple checkpoints %and message logs, necessary to construct a consistent 
 %state during recovery. It 
 and can also suffer the well-known domino effect 
- \cite{randell_domino_effect}. One hybrid approach, known as communication induced 
-checkpointing, aims at reducing coordination overhead \cite{alvisi_ftc_1999}. The approach, however, may 
-cause processes to store useless states. To address this 
-shortcoming, ``forced checkpoints" have been proposed \cite{helary_rds_1997}. This approach, however,  may lead to unpredictable
-checkpointing rates. Although well-explored, uncoordinated checkpointing has not been widely adopted
+ \cite{randell_domino_effect,alvisi_ftc_1999,helary_rds_1997}. %One hybrid approach, known as communication induced 
+%checkpointing, aims at reducing coordination overhead \cite{alvisi_ftc_1999}. The approach, however, may 
+%cause processes to store useless states. To address this 
+%shortcoming, ``forced checkpoints" have been proposed \cite{helary_rds_1997}. This approach, however,  may lead to unpredictable
+%checkpointing rates. 
+Although well-explored, uncoordinated checkpointing has not been widely adopted
 in HPC environments for its complexities. 
 %its dependency on applications \cite{guermouche_2011_ipdps}.
 
@@ -42,11 +43,13 @@ to address this by only writing the changes since previous checkpoint \cite{Agar
 Another proposed scheme, known as in-memory checkpointing, minimizes the overhead of disk access~\cite{zheng_2004_ftccharm,6264677}.
 %offloads the checkpointing process to a secondary task and only writes incremental checkpoints \cite{li_trans_1994}.
 The main concern of these techniques is the increase in
-memory requirement to support the simultaneous execution of the checkpointing and the application. It has been suggested that nodes in extreme-scale systems should be configured with fast local storage~\cite{doe_ascr_exascale_2011}. 
+memory requirement. %to support the simultaneous execution of the checkpointing and the application. 
+It has been suggested that nodes in extreme-scale systems should be configured with fast local storage~\cite{doe_ascr_exascale_2011}. 
 %, which
 %improves the performance of checkpointing \cite{doe_ascr_exascale_2011}. 
-Multi-level checkpointing, which consists of
-writing checkpoints to multiple storage targets, can benefit from such a strategy \cite{Moody:10:SCR}. This,
+Multi-level checkpointing %, which consists of
+%writing checkpoints to multiple storage targets, 
+can benefit from such a strategy \cite{Moody:10:SCR}. This,
 however, may lead to increased failure rates of individual nodes and complicate the checkpoint writing process.
 %Furthermore, it may complicate the checkpoint writing process and requires that the system track the
 %current location of all process's checkpoints.

@@ -3,7 +3,7 @@ brings about a number of challenges and design decisions that need to be address
 tasks executing in parallel, the effective way to control shadows' execution rates, and the runtime mechanisms and 
 communications support to ensure efficient coordination between a 
 main and its shadow.
-Taking into consideration the main characteristics of compute-intensive and highly-scalable applications, we design two novel techniques, referred to as {\it shadow collocation} and {\it shadow leaping}, in order to achieve high-tolerance to failure while minimizing delay and energy consumption. In the following, we first introduce the execution and communication model of the targeted applications. We then describe the dynamics of Lazy Shadowing with shadow collocation and shadow leaping. Lastly, we discuss important aspects of its implementation. 
+Taking into consideration the main characteristics of compute-intensive and highly-scalable applications, we design two novel techniques, referred to as {\it shadow collocation} and {\it shadow leaping}, in order to achieve high-tolerance to failure while minimizing delay and energy consumption. %In the following, we first introduce the execution and communication model of the targeted applications. We then describe the dynamics of Lazy Shadowing with shadow collocation and shadow leaping. Lastly, we discuss important aspects of its implementation. 
 %In the following, we first introduce the basic Lazy Shadowing resilience model. We then %focus on resilience in extreme-scale computing environments, where a large number of %communicating tasks execute in parallel to complete a job. 
 %To achieve high tolerance to failure and reduce energy consumption in these environments, we %propose \emph{leaping shadows}, an instance of Lazy Shadowing. The main property of the %leaping shadows resilience model is its ability to sustain forward progress in the presence %of failures.
 %. referred to as \emph{leaping shadows}, 
@@ -55,17 +55,18 @@ The execution is composed of a set of iterations separated by synchronization ba
 We use the term core to represent the resource allocation unit (e.g., a
 CPU core, a multi-core CPU, or a cluster node), so that our algorithm is agnostic to the
 granularity of the hardware platform~\cite{casanova_inria_2012}. Each main process executes on one core exclusively to achieve maximum throughput.  
-To control the shadow's execution rate, Dynamic Voltage and Frequency Scaling (DVFS) can be applied while each shadow also uses one core exclusively~\cite{mills_2014_icnc,cui_en7085151,cui_2014_closer}. 
-The effectiveness of DVFS, however, may be markedly 
-limited by the granularity of voltage control, the number of frequencies available, and the negative effects on 
-reliability~\cite{chandra2008defect}.
+%To control the shadow's execution rate, Dynamic Voltage and Frequency Scaling (DVFS) can be applied while each shadow also uses one core exclusively~\cite{mills_2014_icnc,cui_en7085151,cui_2014_closer}. 
+%The effectiveness of DVFS, however, may be markedly 
+%limited by the granularity of voltage control, the number of frequencies available, and the negative effects on 
+%reliability~\cite{chandra2008defect}.
 %reduced in computational platforms that exhibit saturation of the processor clock frequencies, large static power consumption, or small power dynamic range. 
  %Given our focus on extreme-scale, multi-core computing infrastructure, we will use collocation for execution rate control.  
 %Recent development in processor and memory technology which results in the saturation of the processor clock frequencies, larger static power consumption, and smaller power dynamic range can markedly reduce the effectiveness of DVFS
-
+%
  %to tune the frequency of the core. An alternative is to collocate multiple processes on a core, which runs at the maximum rate, and execute the processes in a time sharing manner. In the rest of this paper, we will focus on the idea of collocation in the discussion of applying Lazy Shadowing to HPC applications.  
-
-An alternative is to collocate multiple shadows on a single core while keeping the core at maximum rate. Time sharing can then be used to achieve the desired execution rates.
+%
+%An alternative is to collocate multiple shadows on a single core while keeping the core at maximum rate. Time sharing can then be used to achieve the desired execution rates.
+On the other hand, we collocate multiple shadows on a single core and use time sharing to achieve the desired execution rates.
 To execute an application of $M$ tasks, $N=M+S$ cores are required, where $M$ is a multiple of $S$. Each main is allocated one core (referred to as \textit{main core}), while $\alpha=M/S$ (referred to as \textit{collocation ratio}) shadows are collocated on a core (\textit{shadow core}). 
 The $N$ cores are grouped into $S$ sets, each of which we call a \textit{shadowed set}. Each shadowed set contains $\alpha$ main cores and 1 shadow core.
 % $\alpha$ is referred to as shadowing ratio. For example, if $M=9$ and $S=3$, then the 9 shadows share 3 cores, with every $\alpha=3$ shadows collocated on each core, as shown in Figure~\ref{fig:sc_mapping}.
@@ -81,9 +82,9 @@ the other collocated shadows will be terminated to speed up the new main.
 Consequently, a failure, either in main or shadow core, will result in losing all the shadows in the shadowed set, thereby losing the tolerance to any other failures. %After the first failure, a shadowed set becomes \emph{vulnerable}\footnote{Rejuvenation techniques, such as restarting the lost shadows from the state of current mains on spare cores, can be used to eliminate vulnerability.}. 
 Quantitative study of this effect using probability theory is presented in Section~\ref{anal_app_fail}. %, this should not be a concern as the provided reliability is more than enough.
  
-\begin{figure}[!t]
+\begin{figure}[!b]
   \begin{center}
-    \includegraphics[width=\columnwidth]{Figures/sc_mapping.pdf}
+    \includegraphics[width=0.8\columnwidth]{Figures/sc_mapping.pdf}
   \end{center}
   %\vskip -0.25in 
   \caption{An example of collocation. $N=12$, $M=9$, $S=3$.}
@@ -116,7 +117,7 @@ Upon failure of a main process, its associated shadow speeds up to minimize the 
 At the same time, as shown in Figure~\ref{fig:jump2}, the remaining main processes continue execution until the barrier at $W_{syn}$, and then become idle until $t_r$. %, when the shadow of the failed main also reaches the barrier. %It is worth noting that, given the tightly-coupled and strongly-scaled nature of the application, synchronization points occur frequently. Consequently, the time between synchronization points is very small relative to the total execution time of the application. Therefore, if one main, $m_i$, fails at 
 %time $t_f$, the remaining main processes will reach their synchronization point, shortly after the failure, specifically at at time $t_{sync} = t_f +\epsilon$, 
 %where $\epsilon \approxeq 0$. 
-Shadow leaping opportunistically takes advantage of this idle time to {\it leap forward} the shadows by copying state from their mains, so that  
+Shadow leaping opportunistically takes advantage of this idle time to {\it leap forward} the shadows, so that  
 all processes, including shadows, can resume execution from a consistent point afterwards. %This process continues until the completion of all tasks. 
 Shadow leaping increases the shadow's rate of progress, at a minimal energy cost. Consequently, it reduces significantly the likelihood of a shadow falling excessively behind, thereby ensuring fast recovery while minimizing energy consumption.
 
@@ -180,11 +181,11 @@ Shadow leaping increases the shadow's rate of progress, at a minimal energy cost
     \While{execution not done}
     {
   %      \If{failure detected in $ss_j$} %\nllabel{line:if_start_1} 
-        \If{failure detected}
+        \If{failure detected in shadowed set $SS_i$}
         {
             \nllabel{line:if_start_1} 
             %\eIf{$ss_j$ is vulnerable}
-            \eIf{shadowed set is vulnerable}
+            \eIf{$SS_i$ is vulnerable}
             {
                 notify ``Application fatal failure"\;
                 %terminate all mains and shadows\;
@@ -192,7 +193,7 @@ Shadow leaping increases the shadow's rate of progress, at a minimal energy cost
                 restart execution\; %\Comment{re-execution}
             }
             {
-                mark the shadowed set as vulnerable\;
+                mark $SS_i$ as vulnerable\;
                 %\State $C_{vul} \gets C_{vul} + 1$
                 %\If{$C_{vul} == V$}
                 %    \State perform shadowed set rejuvenation   
@@ -200,7 +201,7 @@ Shadow leaping increases the shadow's rate of progress, at a minimal energy cost
                 \If{failure happened to a main} 
                 {
                     promote its shadow to new main\;
-                    triggers shadow leaping\; %failure induced shadow leaping
+                    trigger shadow leaping\; %failure induced shadow leaping
                     %$T_l \leftarrow T+t_{now}$\;
                 }
             }
@@ -247,8 +248,8 @@ This process continues until all tasks of the application are successfully compl
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %We implemented an Open MPI based prototype of Lazy Shadowing, which can be used to execute existing HPC workloads without any change of user code. 
 We are implementing a MPI based library for Lazy Shadowing, referred to as lsMPI. Inserted as a layer between application and MPI, lsMPI uses the MPI profiling hooks to intercept every MPI call. Currently, lsMPI 
-delegates failure detection to ULFM, which guarantees that an error code is returned if failure prevents 
-an MPI operation from completion
+delegates failure detection to ULFM%, which guarantees that an error code is returned if failure prevents 
+%an MPI operation from completion
 ~\cite{Bland:2012:EUF:2404033.2404064,bland2013post}. 
 lsMPI should be portable across all MPI implementations once extensions by ULFM are added to MPI standard.
 %Since the focus of this paper is to introduce
@@ -258,10 +259,11 @@ State consistency is required both during normal execution and following a failu
 We design a consistency protocol %in Figure~\ref{fig:cons_protocol}
 to assure 
 that the shadows see the same message order and MPI results as mains. %In this figure, A and B represent two mains, and A' and B' are their shadows. 
-For each message, the main sender sends a copy of the message to each of the main and shadow receivers. After getting the message, the main receiver sends an ACK to the shadow sender, so that the shadow sender can safely suppress sending the message and proceed. If a main fails,
-its associated shadow will become a new main and start sending out messages. The ACK messages, plus one NAK message after the failure, guarantee that the new main is always consistent with the other mains. 
+For each message, the main sender sends a copy of the message to each of the main and shadow receivers. After getting the message, the main receiver sends an ACK to the shadow sender, so that the shadow sender can safely suppress sending the message and proceed. 
+If a main fails,
+its associated shadow will become a new main and start sending out messages. %The ACK messages, plus one NAK message after the failure, guarantee that the new main is always consistent with the other mains. 
 %We bare the risk of temporarily losing consistency between the new main and the shadow receiver, 
-Although the remaining shadows may temporarily be inconsistent with the new main after the failure, shadow leaping will bring them back to a consistent state.
+%Although the remaining shadows may temporarily be inconsistent with the new main after the failure, shadow leaping will bring them back to a consistent state.
 %Since MPI implements reliable network transportation, the shadow receiver will eventually get the same message as its main, unless a failure occurs. We don't require the shadow receiver to sends ACK to the shadow sender during normal execution. If the main sender fails, the shadow sender will become a new main and start sending out messages. To avoid duplicate messages, the main receiver will use a NAK message to tell the new main the next message it needs. Since previously we require the shadow sender to get an ACK before suppressing a message, the shadow sender will never suppress a message that the main receiver would need, even in the cases of failure. Without using ACK, the shadow receiver may become inconsistent with the new main. However, by aligning the state of the shadow receiver with that of its main we assure that the shadow receiver will be in a consistent state after shadow leaping. 
 
 %\begin{figure}[!t]
