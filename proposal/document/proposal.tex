@@ -70,9 +70,9 @@
 \begin{abstract}
 As the demand for computing power continue to increase, both HPC community and Cloud service provides are building larger computing platforms to take advantage of the power and economies of scale. On the HPC side, several of the most powerful countries are competing for developing the next generation supercomputer--exascale computing machines to accelerate scientific discoveries, big data analytics, etc. On the Cloud side, large IT companies are all expanding large-scale datecenters, for both private usage and public services. However, aside from the benefits, several daunting challenges will appear when it comes to extreme-scale.
 
-This thesis aims at simultaneously solving two major challenges, i.e., power consumption and fault tolerance, for future extreme-scale computing systems. We come up with a novel computational model, referred to as Lazy Shadowing, as a power-aware and scalable approach to achieve high-levels of resilience, through forward progress, in extreme-scale, failure-prone computing environments. Two approaches have been proposed to realize this idea. Accordingly, precise mathemetical models and optimization framework have been developed to quantify and optimize the improvement in system efficiency and energy savings, respectively. 
+This thesis aims at simultaneously solving two major challenges, i.e., power consumption and fault tolerance, for future extreme-scale computing systems. We come up with a novel computational model, referred to as Lazy Shadowing, as a power-aware and scalable approach to achieve high-levels of resilience, through forward progress, in extreme-scale, failure-prone computing environments. Two approaches have been proposed to realize this idea. Accordingly, precise analytical models and optimization framework have been developed to quantify and optimize the improvement in system efficiency and energy savings, respectively. 
 
-In this work, I propose to continue the research in three aspects. Firstly, I propose to develop a MPI-based prototype to valdate the correctness of Lazy Shadowing in real environment. Using the prototype, I will run benchmarks and real applications to measure its performance compared to state-of-the-art approaches. Then, I propose to study the problem of mapping main and shadow processes to physical cores, with the consideration of hardware, architecture, environment, etc. Last but not least, I propose to further explore the potential of Lazy Shadowing and improve its efficiency. Based on the specific system configuration, application characteristics, and QoS requirement, I will study the viability of partial shadowing in three dimensions, i.e., time, space, and workload.     
+In this work, I propose to continue the research in three aspects. Firstly, I propose to develop a MPI-based prototype to prove the viability of Lazy Shadowing in real environment. Using the prototype, I will run benchmarks and real applications to measure its performance compared to state-of-the-art approaches. Then, I propose to study the problem of mapping main and shadow processes to physical cores, with the consideration of hardware, architecture, environment, etc. Last but not least, I propose to further explore the potential of Lazy Shadowing and improve its efficiency. Based on the specific system configuration, application characteristics, and QoS requirement, I will study the viability of partial shadowing in three dimensions, i.e., time, space, and workload.     
 
 \end{abstract}
 % If you say \begin{abstract}[Keywords:] instead of the simple \begin{abstract}, a list of the keywords is appended.
@@ -95,29 +95,29 @@ In this work, I propose to continue the research in three aspects. Firstly, I pr
 \label{chapter:intro}
 \input{chapters/intro}
 
-\chapter{BACKGROUND}
-\label{chapter:background}
-\input{chapters/background}
-
-\chapter{Achieve Fast Restoring via Reorganization}
-\label{chapter:twr_reorganize}
-\input{chapters/twr_reorganize}
-
-\chapter{Shorten Restoring using Refresh}
-\label{chapter:partialrestore}
-\input{chapters/partialrestore}
-
-\chapter{Further Explorations of Restoring}
-\label{chapter:future_study}
-\input{chapters/future_study}
-
-\chapter{TIMELINE OF PROPOSED WORK}
-\label{chapter:timeline}
-\input{chapters/timeline}
-
-\chapter{SUMMARY}
-\label{chapter:summary}
-\input{chapters/summary}
+%\chapter{BACKGROUND}
+%\label{chapter:background}
+%\input{chapters/background}
+%
+%\chapter{Achieve Fast Restoring via Reorganization}
+%\label{chapter:twr_reorganize}
+%\input{chapters/twr_reorganize}
+%
+%\chapter{Shorten Restoring using Refresh}
+%\label{chapter:partialrestore}
+%\input{chapters/partialrestore}
+%
+%\chapter{Further Explorations of Restoring}
+%\label{chapter:future_study}
+%\input{chapters/future_study}
+%
+%\chapter{TIMELINE OF PROPOSED WORK}
+%\label{chapter:timeline}
+%\input{chapters/timeline}
+%
+%\chapter{SUMMARY}
+%\label{chapter:summary}
+%\input{chapters/summary}
 
 \appendix                      
 %After this command, chapters will be formatted as appendices. For example
