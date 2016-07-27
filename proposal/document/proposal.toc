@@ -1,56 +1,9 @@
 \contentsline {chapter}{{\bfseries \numberline {1.0}INTRODUCTION}}{1}{chapter.1}
-\contentsline {section}{\numberline {1.1}Problem Statement}{2}{section.1.1}
-\contentsline {section}{\numberline {1.2}Research Overview}{3}{section.1.2}
-\contentsline {subsection}{\numberline {1.2.1}Achieve Fast Rows via Reorganization (Completed)}{3}{subsection.1.2.1}
-\contentsline {subsection}{\numberline {1.2.2}Refresh-aware Partial Restore (Completed)}{5}{subsection.1.2.2}
-\contentsline {subsection}{\numberline {1.2.3}Explore Restoring in Extended Scenarios (Future)}{5}{subsection.1.2.3}
-\contentsline {section}{\numberline {1.3}Contributions}{6}{section.1.3}
-\contentsline {section}{\numberline {1.4}OUTLINE}{7}{section.1.4}
-\contentsline {chapter}{{\bfseries \numberline {2.0}BACKGROUND}}{8}{chapter.2}
-\contentsline {section}{\numberline {2.1}DRAM Structure and Organization}{8}{section.2.1}
-\contentsline {section}{\numberline {2.2}DRAM Operations and Timing Constraints}{10}{section.2.2}
-\contentsline {section}{\numberline {2.3}DRAM Technology Scaling}{11}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Scaling Issues}{11}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}Related Work on Restoring}{12}{subsection.2.3.2}
-\contentsline {chapter}{{\bfseries \numberline {3.0}ACHIEVE FAST RESTORING VIA REORGANIZATION}}{14}{chapter.3}
-\contentsline {section}{\numberline {3.1}Modeling Restore Effects}{14}{section.3.1}
-\contentsline {section}{\numberline {3.2}Proposed Designs}{15}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Chip-specific Restoring Control}{15}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Chunk-specific Restoring Control}{15}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Chunk-specific with Remapping}{16}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}Restore Time aware Rank Construction}{17}{subsection.3.2.4}
-\contentsline {subsection}{\numberline {3.2.5}Restore Time aware Page Allocation}{18}{subsection.3.2.5}
-\contentsline {section}{\numberline {3.3}Architectural Enhancements}{19}{section.3.3}
-\contentsline {section}{\numberline {3.4}Experimental Methodology}{20}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Configuration}{20}{subsection.3.4.1}
-\contentsline {subsection}{\numberline {3.4.2}Workloads}{20}{subsection.3.4.2}
-\contentsline {section}{\numberline {3.5}Results}{21}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Execution Time}{22}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Page Allocation Effects}{23}{subsection.3.5.2}
-\contentsline {subsection}{\numberline {3.5.3}Further Studies}{24}{subsection.3.5.3}
-\contentsline {section}{\numberline {3.6}Conclusion}{24}{section.3.6}
-\contentsline {chapter}{{\bfseries \numberline {4.0}SHORTEN RESTORING USING REFRESH}}{25}{chapter.4}
-\contentsline {section}{\numberline {4.1}Motivation of Partial Restore}{25}{section.4.1}
-\contentsline {section}{\numberline {4.2}Proposed Designs}{26}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}RT-next: Refresh-aware Truncation}{26}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}RT-select: Proactive Refresh Rate Upgrade}{27}{subsection.4.2.2}
-\contentsline {section}{\numberline {4.3}Architectural Enhancements}{29}{section.4.3}
-\contentsline {section}{\numberline {4.4}Experimental Methodology}{31}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Configuration}{31}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Workloads}{31}{subsection.4.4.2}
-\contentsline {section}{\numberline {4.5}Results}{32}{section.4.5}
-\contentsline {subsection}{\numberline {4.5.1}Impact on Performance}{32}{subsection.4.5.1}
-\contentsline {subsection}{\numberline {4.5.2}Energy Consumption}{33}{subsection.4.5.2}
-\contentsline {subsection}{\numberline {4.5.3}Comparison against the State-of-the-art}{34}{subsection.4.5.3}
-\contentsline {subsection}{\numberline {4.5.4}Further Studies}{35}{subsection.4.5.4}
-\contentsline {section}{\numberline {4.6}Conclusion}{35}{section.4.6}
-\contentsline {chapter}{{\bfseries \numberline {5.0}FURTHER EXPLORATIONS OF RESTORING}}{36}{chapter.5}
-\contentsline {section}{\numberline {5.1}Combine Restoring with Approximate Computing}{36}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Introduction on Approximate Computing}{36}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}Related Work}{37}{subsection.5.1.2}
-\contentsline {subsection}{\numberline {5.1.3}General Ideas}{37}{subsection.5.1.3}
-\contentsline {section}{\numberline {5.2}Study Security Issues of Restoring Variation}{38}{section.5.2}
-\contentsline {section}{\numberline {5.3}Explore Restoring in 3D Stacked DRAM}{39}{section.5.3}
-\contentsline {chapter}{{\bfseries \numberline {6.0}TIMELINE OF PROPOSED WORK}}{40}{chapter.6}
-\contentsline {chapter}{{\bfseries \numberline {7.0}SUMMARY}}{41}{chapter.7}
-\contentsline {chapter}{{\bfseries BIBLIOGRAPHY}}{43}{appendix.A}
+\contentsline {section}{\numberline {1.1}Problem Statement}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Research Overview}{1}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Achieve Fast Rows via Reorganization (Completed)}{1}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Refresh-aware Partial Restore (Completed)}{1}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.3}Explore Restoring in Extended Scenarios (Future)}{1}{subsection.1.2.3}
+\contentsline {section}{\numberline {1.3}Contributions}{1}{section.1.3}
+\contentsline {section}{\numberline {1.4}OUTLINE}{2}{section.1.4}
+\contentsline {chapter}{{\bfseries BIBLIOGRAPHY}}{3}{appendix.A}

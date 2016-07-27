@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  25 JUL 2016 22:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  26 JUL 2016 23:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -436,11 +436,7 @@ Package: chngcntr 2009/09/02 v1.0a change counter resetting
 Class pittetd Info: No patch found for amsmatch on input line 42.
 Class pittetd Info: No patch found for amsthm on input line 43.
 
-(./proposal.aux
-
-LaTeX Warning: Label `tab:configuration' multiply defined.
-
-)
+(./proposal.aux)
 \openout1 = `proposal.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 56.
@@ -548,306 +544,87 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Try loading font information for U+msb on input line 1.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [6
-
-] [7])
+))
 \tf@toc=\write5
 \openout5 = `proposal.toc'.
 
+ [6
 
-[8]
+]
 Chapter 1
 (./chapters/intro.tex [1
 
 
-] [2] [3]
-<figures/thesis_work.pdf, id=466, 287.0725pt x 214.8025pt>
-File: figures/thesis_work.pdf Graphic file (type pdf)
-
-<use figures/thesis_work.pdf>
-Package pdftex.def Info: figures/thesis_work.pdf used on input line 58.
-(pdftex.def)             Requested size: 187.89912pt x 140.59998pt.
-
-Overfull \hbox (8.82635pt too wide) in paragraph at lines 73--75
-[]\OT1/cmr/m/n/12 From pro-ces-sor per-spec-tive, the afore-men-tioned vari-a-t
-ion ex-plo-ration pro-vides non-uniform
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [4 <./figures/thesis_work.pdf>] [5] [6]) [7]
-Chapter 2
-(./chapters/background.tex
-<figures/dram_org.pdf, id=670, 277.035pt x 154.5775pt>
-File: figures/dram_org.pdf Graphic file (type pdf)
-
-<use figures/dram_org.pdf>
-Package pdftex.def Info: figures/dram_org.pdf used on input line 13.
-(pdftex.def)             Requested size: 159.71497pt x 89.11722pt.
-
-<figures/dram_rank.pdf, id=671, 324.21124pt x 152.57pt>
-File: figures/dram_rank.pdf Graphic file (type pdf)
-
-<use figures/dram_rank.pdf>
-Package pdftex.def Info: figures/dram_rank.pdf used on input line 20.
-(pdftex.def)             Requested size: 183.20415pt x 86.21384pt.
- [8
-
- <./figures/dram_org.pdf> <./figures/dram_rank.pdf>] <figures/dram_array.pdf, i
-d=911, 266.9975pt x 176.66pt>
-File: figures/dram_array.pdf Graphic file (type pdf)
-
-<use figures/dram_array.pdf>
-Package pdftex.def Info: figures/dram_array.pdf used on input line 42.
-(pdftex.def)             Requested size: 169.11208pt x 111.8975pt.
-
-<figures/dram_cell.pdf, id=912, 122.4575pt x 175.65625pt>
-File: figures/dram_cell.pdf Graphic file (type pdf)
-
-<use figures/dram_cell.pdf>
-Package pdftex.def Info: figures/dram_cell.pdf used on input line 49.
-(pdftex.def)             Requested size: 75.1625pt x 107.81754pt.
-
-<figures/dram_rc.pdf, id=913, 122.4575pt x 177.66376pt>
-File: figures/dram_rc.pdf Graphic file (type pdf)
-
-<use figures/dram_rc.pdf>
-Package pdftex.def Info: figures/dram_rc.pdf used on input line 56.
-(pdftex.def)             Requested size: 75.1625pt x 109.04974pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [9 <./figures/dram_array.pdf> <./figures/dram_cell.pdf> <./figures/dram_rc.pdf
->]
-<figures/timing_read.pdf, id=1301, 793.96625pt x 182.6825pt>
-File: figures/timing_read.pdf Graphic file (type pdf)
-
-<use figures/timing_read.pdf>
-Package pdftex.def Info: figures/timing_read.pdf used on input line 83.
-(pdftex.def)             Requested size: 328.82706pt x 75.66129pt.
-
-<figures/timing_write.pdf, id=1302, 794.97pt x 189.70876pt>
-File: figures/timing_write.pdf Graphic file (type pdf)
-
-<use figures/timing_write.pdf>
-Package pdftex.def Info: figures/timing_write.pdf used on input line 91.
-(pdftex.def)             Requested size: 328.82706pt x 78.47292pt.
-
-Underfull \vbox (badness 1622) has occurred while \output is active []
-
- [10 <./figures/timing_read.pdf> <./figures/timing_write.pdf>] [11] [12]) [13]
-Chapter 3
-(./chapters/twr_reorganize.tex [14
-
 ]
-<figures/default.pdf, id=1617, 286.06876pt x 203.76125pt>
-File: figures/default.pdf Graphic file (type pdf)
 
-<use figures/default.pdf>
-Package pdftex.def Info: figures/default.pdf used on input line 52.
-(pdftex.def)             Requested size: 150.32503pt x 107.07263pt.
+LaTeX Warning: Reference `chapter:background' on page 2 undefined on input line
+ 31.
 
-<figures/chunk_unsort.pdf, id=1618, 286.06876pt x 202.7575pt>
-File: figures/chunk_unsort.pdf Graphic file (type pdf)
 
-<use figures/chunk_unsort.pdf>
-Package pdftex.def Info: figures/chunk_unsort.pdf used on input line 59.
-(pdftex.def)             Requested size: 150.32503pt x 106.54518pt.
+LaTeX Warning: Reference `chapter:twr_reorganize' on page 2 undefined on input 
+line 32.
 
-<figures/chunk_sort.pdf, id=1619, 286.06876pt x 202.7575pt>
-File: figures/chunk_sort.pdf Graphic file (type pdf)
 
-<use figures/chunk_sort.pdf>
-Package pdftex.def Info: figures/chunk_sort.pdf used on input line 66.
-(pdftex.def)             Requested size: 150.32503pt x 106.54518pt.
- [15] [16 <./figures/default.pdf> <./figures/chunk_unsort.pdf> <./figures/chunk
-_sort.pdf>]
-<figures/device_match.pdf, id=2164, 685.56125pt x 286.06876pt>
-File: figures/device_match.pdf Graphic file (type pdf)
+LaTeX Warning: Reference `chapter:partialrestore' on page 2 undefined on input 
+line 33.
 
-<use figures/device_match.pdf>
-Package pdftex.def Info: figures/device_match.pdf used on input line 104.
-(pdftex.def)             Requested size: 375.80542pt x 156.81885pt.
- [17 <./figures/device_match.pdf>] [18]
-<figures/TODAES_data/design.pdf, id=2592, 689.57625pt x 187.70125pt>
-File: figures/TODAES_data/design.pdf Graphic file (type pdf)
 
-<use figures/TODAES_data/design.pdf>
-Package pdftex.def Info: figures/TODAES_data/design.pdf used on input line 159.
+LaTeX Warning: Reference `chapter:future_study' on page 2 undefined on input li
+ne 34.
 
-(pdftex.def)             Requested size: 328.82706pt x 89.50557pt.
- [19 <./figures/TODAES_data/design.pdf>]
-[20] [21]
-<figures/TODAES_data/14nm/stat_RAND_main-cycles.perc.dat.pdf, id=2792, 911.405p
-t x 330.23375pt>
-File: figures/TODAES_data/14nm/stat_RAND_main-cycles.perc.dat.pdf Graphic file 
-(type pdf)
 
-<use figures/TODAES_data/14nm/stat_RAND_main-cycles.perc.dat.pdf>
-Package pdftex.def Info: figures/TODAES_data/14nm/stat_RAND_main-cycles.perc.da
-t.pdf used on input line 259.
-(pdftex.def)             Requested size: 328.82706pt x 119.14607pt.
- [22 <./figures/TODAES_data/14nm/stat_RAND_main-cycles.perc.dat.pdf>]
-<figures/TODAES_data/14nm/RAND_small.dat.pdf, id=2854, 532.99126pt x 326.21875p
-t>
-File: figures/TODAES_data/14nm/RAND_small.dat.pdf Graphic file (type pdf)
- <use figures/TODAES_data/14nm/RAND_small.dat.pdf>
-Package pdftex.def Info: figures/TODAES_data/14nm/RAND_small.dat.pdf used on in
-put line 289.
-(pdftex.def)             Requested size: 197.29623pt x 120.7538pt.
+LaTeX Warning: Reference `chapter:timeline' on page 2 undefined on input line 3
+5.
 
-<figures/TODAES_data/14nm/PROF_small.dat.pdf, id=2855, 532.99126pt x 326.21875p
-t>
-File: figures/TODAES_data/14nm/PROF_small.dat.pdf Graphic file (type pdf)
- <use figures/TODAES_data/14nm/PROF_small.dat.pdf>
-Package pdftex.def Info: figures/TODAES_data/14nm/PROF_small.dat.pdf used on in
-put line 294.
-(pdftex.def)             Requested size: 197.29623pt x 120.7538pt.
- [23 <./figures/TODAES_data/14nm/RAND_small.dat.pdf> <./figures/TODAES_data/14n
-m/PROF_small.dat.pdf>])
-[24]
-Chapter 4
-(./chapters/partialrestore.tex
-<figures/HPCA16/rt_partial.pdf, id=2972, 151.18692pt x 84.08585pt>
-File: figures/HPCA16/rt_partial.pdf Graphic file (type pdf)
 
-<use figures/HPCA16/rt_partial.pdf>
-Package pdftex.def Info: figures/HPCA16/rt_partial.pdf used on input line 20.
-(pdftex.def)             Requested size: 231.26378pt x 128.6342pt.
- [25
-
- <./figures/HPCA16/rt_partial.pdf>]
-[26] <figures/HPCA16/rt_next.pdf, id=3036, 150.5998pt x 85.07625pt>
-File: figures/HPCA16/rt_next.pdf Graphic file (type pdf)
-
-<use figures/HPCA16/rt_next.pdf>
-Package pdftex.def Info: figures/HPCA16/rt_next.pdf used on input line 75.
-(pdftex.def)             Requested size: 231.26378pt x 130.64914pt.
-
-<figures/HPCA16/rt_next_m.pdf, id=3052, 158.18144pt x 83.24059pt>
-File: figures/HPCA16/rt_next_m.pdf Graphic file (type pdf)
-
-<use figures/HPCA16/rt_next_m.pdf>
-Package pdftex.def Info: figures/HPCA16/rt_next_m.pdf used on input line 111.
-(pdftex.def)             Requested size: 231.26378pt x 121.7055pt.
- [27 <./figures/HPCA16/rt_next.pdf>]
-<figures/HPCA16/rt_selective.pdf, id=3082, 387.447pt x 113.13908pt>
-File: figures/HPCA16/rt_selective.pdf Graphic file (type pdf)
-
-<use figures/HPCA16/rt_selective.pdf>
-Package pdftex.def Info: figures/HPCA16/rt_selective.pdf used on input line 148
+LaTeX Warning: Reference `chapter:summary' on page 2 undefined on input line 35
 .
-(pdftex.def)             Requested size: 462.52756pt x 135.06529pt.
- [28 <./figures/HPCA16/rt_next_m.pdf> <./figures/HPCA16/rt_selective.pdf>] [29]
 
-<figures/HPCA16/rt_arch.pdf, id=3140, 159.36438pt x 76.01901pt>
-File: figures/HPCA16/rt_arch.pdf Graphic file (type pdf)
-
-<use figures/HPCA16/rt_arch.pdf>
-Package pdftex.def Info: figures/HPCA16/rt_arch.pdf used on input line 207.
-(pdftex.def)             Requested size: 234.87749pt x 112.04237pt.
- [30 <./figures/HPCA16/rt_arch.pdf>] [31]
-<figures/HPCA16/DATA/0903.dat/4Gb/stat_4Gb_Cycles.perc.main.dat.pdf, id=3182, 8
-91.33pt x 211.79124pt>
-File: figures/HPCA16/DATA/0903.dat/4Gb/stat_4Gb_Cycles.perc.main.dat.pdf Graphi
-c file (type pdf)
-
-<use figures/HPCA16/DATA/0903.dat/4Gb/stat_4Gb_Cycles.perc.main.dat.pdf>
-Package pdftex.def Info: figures/HPCA16/DATA/0903.dat/4Gb/stat_4Gb_Cycles.perc.
-main.dat.pdf used on input line 311.
-(pdftex.def)             Requested size: 469.75499pt x 111.61864pt.
-
-[32 <./figures/HPCA16/DATA/0903.dat/4Gb/stat_4Gb_Cycles.perc.main.dat.pdf>]
-<figures/HPCA16/DATA/0903.dat/4Gb/stat_4Gb_energy.all.dat.cat.pdf, id=3249, 917
-.4275pt x 446.66875pt>
-File: figures/HPCA16/DATA/0903.dat/4Gb/stat_4Gb_energy.all.dat.cat.pdf Graphic 
-file (type pdf)
-
-<use figures/HPCA16/DATA/0903.dat/4Gb/stat_4Gb_energy.all.dat.cat.pdf>
-Package pdftex.def Info: figures/HPCA16/DATA/0903.dat/4Gb/stat_4Gb_energy.all.d
-at.cat.pdf used on input line 339.
-(pdftex.def)             Requested size: 328.82706pt x 160.09862pt.
- [33 <./figures/HPCA16/DATA/0903.dat/4Gb/stat_4Gb_energy.all.dat.cat.pdf>]
-<figures/HPCA16/DATA/0903.dat/4Gb/stat_4Gb_Cycles.perc.statart.dat.pdf, id=3316
-, 915.42pt x 332.24126pt>
-File: figures/HPCA16/DATA/0903.dat/4Gb/stat_4Gb_Cycles.perc.statart.dat.pdf Gra
-phic file (type pdf)
-
-<use figures/HPCA16/DATA/0903.dat/4Gb/stat_4Gb_Cycles.perc.statart.dat.pdf>
-Package pdftex.def Info: figures/HPCA16/DATA/0903.dat/4Gb/stat_4Gb_Cycles.perc.
-statart.dat.pdf used on input line 367.
-(pdftex.def)             Requested size: 245.71754pt x 89.1791pt.
-
-[34 <./figures/HPCA16/DATA/0903.dat/4Gb/stat_4Gb_Cycles.perc.statart.dat.pdf>])
-[35]
-Chapter 5
-(./chapters/future_study.tex [36
-
-] [37] [38]) [39]
-Chapter 6
-(./chapters/timeline.tex) [40
-
-]
-Chapter 7
-(./chapters/summary.tex [41
-
-]) (./proposal.bbl [42]
+) (./proposal.bbl [2]
 
 Class pittetd Warning: Starred \chapter* has been treated as \chapter on input 
 line 1.
 
 Appendix
-[43
 
-] [44] [45] [46] [47])
+Package natbib Warning: Empty `thebibliography' environment on input line 8.
+
+)
 \openout3 = `proposal.etd'.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 141.
- [48]
+ [3
+
+]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 141.
  (./proposal.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 141.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 141.
 Package rerunfilecheck Info: File `proposal.out' has not changed.
-(rerunfilecheck)             Checksum: 1D13009787477A63A590B3DD1E5008D9;4443.
+(rerunfilecheck)             Checksum: AE0D2462C6EA86F6E1D9A76F4B4A250B;844.
 
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: There were undefined references.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 141.
  ) 
 Here is how much of TeX's memory you used:
- 8926 strings out of 493089
- 135409 string characters out of 6134842
- 234123 words of memory out of 5000000
- 11980 multiletter control sequences out of 15000+600000
- 15622 words of font info for 60 fonts, out of 8000000 for 9000
+ 8091 strings out of 493089
+ 118920 string characters out of 6134842
+ 215880 words of memory out of 5000000
+ 11432 multiletter control sequences out of 15000+600000
+ 10509 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,17n,44p,923b,695s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{Hfootnote.8} has been referenced but does not exi
-st, replaced by a fixed one
-
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
-/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></
-usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></u
-sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></us
-r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/
-local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/lo
-cal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loca
-l/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/
-texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/tex
-live/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texliv
-e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
-/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/
-2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2
-015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/20
-15/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/201
-5/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on proposal.pdf (56 pages, 1525900 bytes).
+ 42i,5n,40p,795b,394s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></
+usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></us
+r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on proposal.pdf (9 pages, 80691 bytes).
 PDF statistics:
- 3701 PDF objects out of 4296 (max. 8388607)
- 2375 compressed objects within 24 object streams
- 257 named destinations out of 1000 (max. 500000)
- 601 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 134 PDF objects out of 1000 (max. 8388607)
+ 116 compressed objects within 2 object streams
+ 23 named destinations out of 1000 (max. 500000)
+ 105 words of extra memory for PDF output out of 10000 (max. 10000000)
 
