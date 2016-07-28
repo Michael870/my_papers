@@ -42,6 +42,23 @@ Achieving high resilience to failures under strict power constraints is a daunti
 to enable future extreme-scale systems. In the following, we further explore the dimensions of these challenges and their impact 
 on the design and performance of future extreme-scale systems.
 
+\subsection{Resilience challenge}
+
+It is projected that the Mean Time Between Failures (MTBF) of future extreme-scale systems will be at the order of hours, meaning 
+that several failures will occur every day. Without an efficient fault tolerance mechenism, the applications running on the 
+systems will be continuously interrupted, requiring the execution to be restarted every time there is a failure. 
+
+Today, two major approaches exist for fault tolerance. The first approach is rollback recovery, of which coordinated checkpointing/
+restart is the most widely used technique in HPC to tame scale. The second approach is state machine replication (or process 
+replication) that are used in Cloud Computing and mission critical systems. Many studies have predicted the performance of future 
+extreme-scale systems with these two approaches. Unfortunately, for both of the two approaches, more than half of  the system's 
+efficiency will lost due to frequent failures.  
+ 
+\subsection{Power challenge}
+There has been a steady rise in power consumption in large-scale distributed systems, due to the continuous growth in system components. 
+Figure 1 shows a steady rise in system power consumption to 1-3MW in 2008 but then a sharp increase to 10-20MW in the following years. The trend shows that system power consumption could surpass 50MW by 2016.
+
+
 \section{Research Overview}
 
 \subsection{Achieve Fast Rows via Reorganization (Completed)}
