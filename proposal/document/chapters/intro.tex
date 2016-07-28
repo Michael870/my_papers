@@ -1,10 +1,46 @@
-As our reliance on IT continues to increase, the complexity and urgency of the problems our society will face in the future drives us to build more powerful and accessible computer systems. Among the different types of computer systems, High Performance Computing (HPC) and Cloud Computing systems are the two most powerful ones. For both of them, the compute power attributes to the massive amount of parallelism, which is supported by the massive amount of CPU cores, memory modules, communication devices, storage components, etc. 
+As our reliance on IT continues to increase, the complexity and urgency of the problems our society will face 
+in the future drives us to build more powerful and accessible computer systems. Among the different types of 
+computer systems, High Performance Computing (HPC) and Cloud Computing systems are the two most powerful ones. 
+For both of them, the compute power attributes to the massive amount of parallelism, which is supported by 
+the massive amount of CPU cores, memory modules, communication devices, storage components, etc. 
 
-Nowadays, two types of systems are widely used to enable us to solving 
+Since CPU frequency flatten out in early 2000s, parallelism has been the standard way to achieve performance increase. 
+In HPC, Terascale performance was achieved with fewer than 10,000 heavyweight single-core processors in the late 90’s. 
+A decade later, petascale performance required about ten times processors that each has multiple cores. Nowadays, a race
+is underway to build the world's first exascale machine to accelerate scientific discoveries and breakthroughs. It is 
+projected that an exascale machine will achieve billion-way parallelism by using one million sockets each supporting 
+1,000 cores. Similar trend is happening in Cloud Computing. 
+As the demand for Cloud Computing accelerates, cloud service providers  
+will be faced with the need to expand their underlying infrastructure to ensure the expected levels of performance, reliability and cost-effectiveness. 
+%Large IT companies are all building large-scale data centers 
+%to exploit the power and econies of scale. 
+For example, Microsoft, Google, Facebook, and Rackspace have hundreds of thousands 
+of web servers in their dedicated data centers to support their business. 
 
-
+Unfortunately, several challenging issues come with the increase in system scale. As today's HPC and Cloud Computing systems grow to 
+meet tomorrow's compute power demand, the behavior of the systems will be increasingly difficult to specify, predict and manage. 
+This upward trend, in terms of scale and complexity, has a direct negative effect on the overall system reliability. 
+Even with the expected improvement in the reliability of future computing technology, the rate of system level failures will 
+dramatically increase with the number of components, possibly by several orders of magnitude. 
+At the same time, the rapid 
+growing power consumption, as a result of the increase in system components, is another major concern. 
+%It is reported that 
+%the power required to run the machines as well as cool them has become the largest cost factor in a large-scale system's operating 
+%expenses.  
+At future extreme-scale, failure would become a norm rather than an exception, 
+driving the system to significantly lower efficiency with unprecedented amount of power consumption. 
 
 \section{Problem Statement}
+
+The system scale needed to address our future computing needs will come at the cost of increasing complexity, unpredictability, 
+and operating expenses. 
+Regardless of the reliability of individual component, the system level reliability will continue to decrease as the number of 
+components increases. Concerned with the energy costs, the U.S Department of Energy has set 20 megawatts as the power upperbound 
+for future exascale systems, challenging the research community to provide a 1000x improvement in performance with only a 
+10x increase in power consumption. 
+Achieving high resilience to failures under strict power constraints is a daunting and critical challenge that must be addressed 
+to enable future extreme-scale systems. In the following, we further explore the dimensions of these challenges and their impact 
+on the design and performance of future extreme-scale systems.
 
 \section{Research Overview}
 

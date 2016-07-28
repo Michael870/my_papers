@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  26 JUL 2016 23:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  27 JUL 2016 21:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -552,35 +552,39 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 ]
 Chapter 1
-(./chapters/intro.tex [1
+(./chapters/intro.tex
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no ™ in font cmr12!
+ [1
 
 
-]
+] [2]
 
-LaTeX Warning: Reference `chapter:background' on page 2 undefined on input line
- 31.
-
-
-LaTeX Warning: Reference `chapter:twr_reorganize' on page 2 undefined on input 
-line 32.
+LaTeX Warning: Reference `chapter:background' on page 3 undefined on input line
+ 53.
 
 
-LaTeX Warning: Reference `chapter:partialrestore' on page 2 undefined on input 
-line 33.
+LaTeX Warning: Reference `chapter:twr_reorganize' on page 3 undefined on input 
+line 54.
 
 
-LaTeX Warning: Reference `chapter:future_study' on page 2 undefined on input li
-ne 34.
+LaTeX Warning: Reference `chapter:partialrestore' on page 3 undefined on input 
+line 55.
 
 
-LaTeX Warning: Reference `chapter:timeline' on page 2 undefined on input line 3
-5.
+LaTeX Warning: Reference `chapter:future_study' on page 3 undefined on input li
+ne 56.
 
 
-LaTeX Warning: Reference `chapter:summary' on page 2 undefined on input line 35
+LaTeX Warning: Reference `chapter:timeline' on page 3 undefined on input line 5
+7.
+
+
+LaTeX Warning: Reference `chapter:summary' on page 3 undefined on input line 57
 .
 
-) (./proposal.bbl [2]
+) (./proposal.bbl [3]
 
 Class pittetd Warning: Starred \chapter* has been treated as \chapter on input 
 line 1.
@@ -593,7 +597,7 @@ Package natbib Warning: Empty `thebibliography' environment on input line 8.
 \openout3 = `proposal.etd'.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 141.
- [3
+ [4
 
 ]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 141.
@@ -609,9 +613,9 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 141.
  ) 
 Here is how much of TeX's memory you used:
- 8091 strings out of 493089
- 118920 string characters out of 6134842
- 215880 words of memory out of 5000000
+ 8092 strings out of 493089
+ 118926 string characters out of 6134842
+ 216880 words of memory out of 5000000
  11432 multiletter control sequences out of 15000+600000
  10509 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -621,10 +625,10 @@ Here is how much of TeX's memory you used:
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></
 usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></us
 r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on proposal.pdf (9 pages, 80691 bytes).
+Output written on proposal.pdf (10 pages, 83000 bytes).
 PDF statistics:
- 134 PDF objects out of 1000 (max. 8388607)
- 116 compressed objects within 2 object streams
- 23 named destinations out of 1000 (max. 500000)
+ 138 PDF objects out of 1000 (max. 8388607)
+ 119 compressed objects within 2 object streams
+ 24 named destinations out of 1000 (max. 500000)
  105 words of extra memory for PDF output out of 10000 (max. 10000000)
 
