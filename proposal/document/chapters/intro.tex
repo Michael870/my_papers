@@ -84,35 +84,99 @@ reconsideration of the fault tolerance problem.
 In this thesis, our research objective is to simultaneously address the power and resilience challenges for future extreme-scale 
 systems so that both system efficiency and application QoS are guaranteed.
 To this end, we propose an adaptive and power-aware computational model, referred to as Lazy Shadowing, as an efficient and 
-scalable alternative to achieve high-levels of resilience, through forward progress, in extreme-scale, failure-prone computing environments. 
+scalable alternative to achieve high-levels of resilience, through forward progress, in extreme-scale, failure-prone 
+computing environments. 
 
 Previously, we have formally defined the computational model, studied possible techniques to realize and optimize the idea, and 
 built analytical models for performance evalution. Next, I propose to continue the study of Lazy Shadowing in two aspects.
+Firstly, I propose to implement a prototype of Lazy Shadoing in the context of Message Passing Interface (MPI), to validate our 
+computational model as well as measure its performance in real environment. Secondly, I propose to study the possibility of 
+``smart shadowing" which further reduces the cost of shadowing by considering the specific system configuration, application characteristics, and QoS requirement.
 
-\subsection{Achieve Fast Rows via Reorganization (Completed)}
+\subsection{Lazy Shadowing: a novel fault-tolerant computational model (completed)}
 
-\subsection{Refresh-aware Partial Restore (Completed)}
+The basic tenet of Lazy Shadowing is to associate with each main process a suite of “shadows” whose size depends on the 
+``criticality" of the application and its performance requirements. Each shadow process is an exact replica of the original 
+main process. To tolerate failures, the main process and its associated shadow processes will execute in parallel, but on 
+different compute nodes. 
+The shadows initially execute at a reduced rate via Dynamic Voltage Frequency and Scaling (DVFS) to save power. 
+If the main process completes the task succesfully, we will 
+terminate the shadows immediately. If the main process fails, however, we will promote one of the shadow processes to be a 
+new main process and possibly increase its execution rate to mitigate delay. This continues until the task completes. 
 
-\subsection{Explore Restoring in Extended Scenarios (Future)}
+Given that the failure rate of an individual node is much lower than the aggregate system failure, it is very likely that 
+the main process will always complete its execution successfully, thereby achieving fault tolerance at a significantly reduced 
+cost of power. Consequently, the high probability that shadows never have to complete the full task, coupled with the fact that 
+they initially only consume a minimal amount of power, dramatically increases a power-constrained system’s tolerance to failure.
 
+The major challenge in Lazy Shadowing resides in determining jointly the execution rates of all task instances, 
+both before and after a failure occurs, with the objective to optimize performance, resilience, and/or power consumption.
+As a case study, we develop a reward-based analytical framework to derive the optimal execution rates for minimizing energy 
+consumption under strict completion time constraints.  
+
+\subsection{Applying Lazy Shadowing to extreme-scale systems (completed)}
+
+Enabling Lazy Shadowing for resiliency in extreme-scale computing brings about a number of challenges and design decisions 
+that need to be addressed, including the applicability of this concept to a large number of tasks executing in parallel, 
+the effective way to control shadows’ execution rates, and the runtime mechanisms and communications support to ensure efficient 
+coordination between a main and its shadow. Taking into consideration the main characteristics of compute-intensive and 
+highly-scalable applications, we design two novel techniques, referred to as shadow collocation and shadow leaping, 
+in order to achieve high tolerance to failures while minimizing delay and power consumption.
+
+To control the processes' execution rate, DVFS can be applied while each process resides on one core exclusively. 
+The effectiveness of DVFS, however, may be markedly 
+limited by the granularity of voltage control, the number of frequencies available, and the negative effects on 
+reliability. 
+An alternative is to collocate multiple processes on each core while keeping all the cores executing at maximum frequency. 
+Then time sharing can be used to achieve the desired execution rates for each collocated process. 
+Since this approach collocates multiple processes on a core, it simultaneously reduces the number of compute nodes and 
+the power consumption. 
+
+Furthermore, we identify a unique opportunity that allows the lagging shadows to benefit from the faster execution 
+of the mains, without incurring extra overhead. Specifically, when a failure occurs, Lazy Shadowing takes advantage of 
+the recovery time and leaps forward the shadows by copying states from the mains. This technique not only achieves forward 
+progress for the shadows at minimized power and delay, but also reduces the recovery time after each failure.
+
+\subsection{lsMPI: implementation of Lazy Shadowing in MPI (partially completed)}
+
+Though Lazy Shadowing has been shown to scale to future extreme-scale systems with our analytical models, a real implementation 
+is still necessary for validation and performance measurement in real systems. We plan to implement a prototype of Lazy 
+Shadowing as a runtime for Message Passing Interface (MPI), which is the de facto programming paradigm for HPC. Instead of 
+a full-feature MPI implementation, the runtime is designed to be a separate layer between MPI and user application, in order 
+to take advantage of existing MPI performance optimizations that numerous researches have spent years on. The runtime will spawn 
+the shadow processes at initialization phase, manage the coordination between main and shadow processes during execution, 
+and guarantees consistency for messages and non-deterministic events. With this implementation, we will perform thorough 
+experiments measuring its runtime overhead as well as performance under failures.
+
+\subsection{Smart shadowing (future)}
+Lazy Shadowing is a flexible and adaptive computational model that deserves further investigation. Previous studies have shown that 
+different nodes tend to have different failure probabilities, e.g., 20\% of the nodes account for 80\% of the failures. The reason 
+is complicated and may attribute to the manufacture process, heterogenous architecture, environment factors (e.g. temperature), 
+and/or workloads. I propose to apply machine learning techniques to learn the heterogenity in failure distributions among a given 
+system's nodes. Then I will study how the mapping from processes to physical cores can impact the performance and cost dichotomy. 
+In addition, I will further consider allocating different number of shadow processes for different tasks to reduce cost while 
+maintaining performance. 
 
 \section{Contributions}
 This thesis makes the following contributions:
 
 \begin{itemize}
-\item We perform pioneering study on DRAM restoring in deep sub-micron scaling. We built models to simulate restoring behaviors and then generate DRAM devices to faithfully repeat the manufacturing process  and perform architectural-level studies.
-\item Targeting at restoring issues, we propose schemes from different perspectives. On device and architectural levels, we apply chunk remapping and chip clustering techniques to achieve fast memory access; on system level, we maximizing performance improvement by allocating hot pages of the running workloads to fast regions.
-\item Going further, we integrate restoring variation characteristics with approximate computing to strike a good balance among performance, energy and accuracy. We then explore restoring issues in extended scenarios including information leakage and 3D-stacked memory.  
+\item Development of an adaptive and power-aware computational model for efficient and scalable fault tolerance in future extreme-scale 
+computing systems.
+\item Comprehensive and accurate analytical models to quantify the expected completion time and energy consumption in both HPC and Cloud Computing systems.
+\item A fully functional implementation of Lazy Shadowing for Message Passing Interface
+\item Exploration of Lazy Shadowing's potential to adapt to different environments, workloads, and QoS requirements. 
 \end{itemize}
 
 
 \section{OUTLINE}
 \label{outline}
 The rest of this proposal is organized as follow:  
-Chapter \ref{chapter:background} introduces the DRAM structures, operations and scaling issues.
-In Chapter \ref{chapter:twr_reorganize}, we build models to study restoring effects, and then propose a series of techniques to shorten restoring timing values.
-In Chapter \ref{chapter:partialrestore}, we explore the correlation between restoring and refresh, and seek the opportunities to early terminate restore operations.
-Further restoring explorations are discussed in Chapter \ref{chapter:future_study}.
+Chapter \ref{chapter:background} introduces fault tolerance and power management in large-scale distributed systems.
+In Chapter \ref{chapter:shadowing}, we formally define Lazy Shadowing computational model and build analytical model for performance 
+evaluation.
+In Chapter \ref{chapter:scale}, we explore techniques to efficiently apply Lazy Shadowing in extreme-scale systems. 
+Implementation issues are discussed in Chapter \ref{chapter:implementation}. Adaptivity and smart shadowing are discussed in Chapter \ref{chapter:smart}.
 Chapter \ref{chapter:timeline} and \ref{chapter:summary} lists the timeline and concludes the proposal, respectively.
 
 

@@ -1,8 +1,7 @@
-This is BibTeX, Version 0.99d (TeX Live 2015)
+This is BibTeX, Version 0.99d (TeX Live 2013)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: proposal.aux
 The style file: plainnat.bst
-I found no \citation commands---while reading file proposal.aux
 Database file #1: references/refresh.bib
 Database file #2: references/twr.bib
 Database file #3: references/scaling.bib
@@ -12,45 +11,44 @@ Database file #6: references/approx_security.bib
 Database file #7: references/stacked.bib
 Database file #8: references/page_os.bib
 Database file #9: references/hpca16.bib
-You've used 0 entries,
+You've used 1 entry,
             2779 wiz_defined-function locations,
-            601 strings with 5009 characters,
-and the built_in function-call counts, 33 in all, are:
-= -- 0
-> -- 0
-< -- 0
-+ -- 0
-- -- 0
-* -- 2
-:= -- 10
-add.period$ -- 0
-call.type$ -- 0
-change.case$ -- 0
-chr.to.int$ -- 0
-cite$ -- 0
-duplicate$ -- 0
-empty$ -- 1
-format.name$ -- 0
-if$ -- 1
+            608 strings with 5168 characters,
+and the built_in function-call counts, 647 in all, are:
+= -- 55
+> -- 30
+< -- 1
++ -- 10
+- -- 9
+* -- 47
+:= -- 92
+add.period$ -- 3
+call.type$ -- 1
+change.case$ -- 6
+chr.to.int$ -- 1
+cite$ -- 2
+duplicate$ -- 33
+empty$ -- 55
+format.name$ -- 12
+if$ -- 142
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 0
-newline$ -- 8
-num.names$ -- 0
-pop$ -- 0
+missing$ -- 1
+newline$ -- 13
+num.names$ -- 4
+pop$ -- 15
 preamble$ -- 1
-purify$ -- 0
+purify$ -- 5
 quote$ -- 0
-skip$ -- 1
+skip$ -- 29
 stack$ -- 0
-substring$ -- 0
-swap$ -- 0
-text.length$ -- 0
+substring$ -- 30
+swap$ -- 11
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 0
+type$ -- 11
 warning$ -- 0
-while$ -- 0
+while$ -- 5
 width$ -- 0
-write$ -- 7
-(There was 1 error message)
+write$ -- 20
