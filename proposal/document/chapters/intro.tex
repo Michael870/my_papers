@@ -4,18 +4,20 @@ computer systems, High Performance Computing (HPC) and Cloud Computing systems a
 For both of them, the compute power attributes to the massive amount of parallelism, which is supported by 
 the massive amount of CPU cores, memory modules, communication devices, storage components, etc. 
 
-Since CPU frequency flatten out in early 2000s, parallelism has been the standard way to achieve performance increase. 
-In HPC, Terascale performance was achieved with fewer than 10,000 heavyweight single-core processors in the late 90’s. 
-A decade later, petascale performance required about ten times processors that each has multiple cores. Nowadays, a race
+Since CPU frequency flatten out in early 2000s, parallelism has become the ``golden rule" of boosting performance. 
+In HPC, Terascale performance was achieved in the late 90’s with fewer than 10,000 heavyweight single-core processors. 
+A decade later, petascale performance required about ten times processors with multiple cores on each processor. Nowadays, a race
 is underway to build the world's first exascale machine to accelerate scientific discoveries and breakthroughs. It is 
 projected that an exascale machine will achieve billion-way parallelism by using one million sockets each supporting 
-1,000 cores. Similar trend is happening in Cloud Computing. 
+1,000 cores. 
+
+Similar trend is happening in Cloud Computing. 
 As the demand for Cloud Computing accelerates, cloud service providers  
 will be faced with the need to expand their underlying infrastructure to ensure the expected levels of performance, reliability and cost-effectiveness. 
-%Large IT companies are all building large-scale data centers 
-%to exploit the power and econies of scale. 
+As a result, lots of large-scale data centers have been built and are being built by IT companies
+to exploit the power and econies of scale. 
 For example, Microsoft, Google, Facebook, and Rackspace have hundreds of thousands 
-of web servers in their dedicated data centers to support their business. 
+of web servers in dedicated data centers to support their business. 
 
 Unfortunately, several challenging issues come with the increase in system scale. As today's HPC and Cloud Computing systems grow to 
 meet tomorrow's compute power demand, the behavior of the systems will be increasingly difficult to specify, predict and manage. 
@@ -33,33 +35,59 @@ driving the system to significantly lower efficiency with unprecedented amount o
 \section{Problem Statement}
 
 The system scale needed to address our future computing needs will come at the cost of increasing complexity, unpredictability, 
-and operating expenses. 
+and operating expenses. As we approach future extreme-scale, two of the biggest challenges will be system resilience and power 
+consumption, both being direct consequences of the increase in the number of components. 
+
 Regardless of the reliability of individual component, the system level reliability will continue to decrease as the number of 
-components increases. Concerned with the energy costs, the U.S Department of Energy has set 20 megawatts as the power upperbound 
-for future exascale systems, challenging the research community to provide a 1000x improvement in performance with only a 
-10x increase in power consumption. 
-Achieving high resilience to failures under strict power constraints is a daunting and critical challenge that must be addressed 
-to enable future extreme-scale systems. In the following, we further explore the dimensions of these challenges and their impact 
-on the design and performance of future extreme-scale systems.
-
-\subsection{Resilience challenge}
-
-It is projected that the Mean Time Between Failures (MTBF) of future extreme-scale systems will be at the order of hours, meaning 
-that several failures will occur every day. Without an efficient fault tolerance mechenism, the applications running on the 
+components increases. It is projected that the Mean Time Between Failures (MTBF) of future extreme-scale systems will be at the order of hours, meaning 
+that many failures will occur every day. Without an efficient fault tolerance mechenism, faults will be so frequent that the applications running on the 
 systems will be continuously interrupted, requiring the execution to be restarted every time there is a failure. 
 
-Today, two major approaches exist for fault tolerance. The first approach is rollback recovery, of which coordinated checkpointing/
-restart is the most widely used technique in HPC to tame scale. The second approach is state machine replication (or process 
-replication) that are used in Cloud Computing and mission critical systems. Many studies have predicted the performance of future 
-extreme-scale systems with these two approaches. Unfortunately, for both of the two approaches, more than half of  the system's 
-efficiency will lost due to frequent failures.  
+Also thanks to the continuous growth in system components, there has been a steady rise in power consumption in large-scale distributed systems. 
+In 2005, the peak power consumption of supercomputers was 3.2 Megawatts. This number was doubled 5 years later, and reached 17.8 
+Megawatts with a total of 3,120,000 cores in 2013. Recognizing this rapid upward trend, the U.S. Department of Energy has set 20 
+megawatts as the power limit for future exascale systems, 
+challenging the research community to provide a 1000x improvement in performance with only a 10x increase in power. 
+This huge imbalance makes system power a leading design constraint on the path to exascale. 
+
+Today, two approaches exist for fault tolerance. The first approach is rollback recovery, which rolls back and restarts the execution 
+every time there is a failure. This approach is often equiped with checkpointing to periodically save the execution state to a 
+stable storage so that execution can be restarted from a recent checkpoint in the case of a failure. 
+Although checkpointing is the most widely used technique in today's HPC systems, it is strongly believed that it may not scale to 
+future extreme-scale systems. Given the anticipated increase in system level failure rates and the time to checkpoint large-scale compute-intensive and data-intensive applications, it is predicted that the time required to periodically checkpoint an application and restart its execution will approach the system’s MTBF. Consequently, applications will make little forward progress, thereby reducing considerably the overall system efficiency. 
+
+The second approach, referred to as process replication, exploits hardware redundancy and executes multiple instances of the same task 
+in parallel to overcome failure and guarantee that at least one task reaches completion. Although this approach is extensively used 
+to deal with failures in 
+Cloud Computing and mission critical systems, it has 
+never been used in any HPC system due to its low system efficiency. To replicate each process, process replication requires 
+at least double the amount of compute nodes, which also increases the power consumption proportionally. 
+
+Previous studies show that neither of the two approaches is efficient for future extreme-scale systems. And unfortunately, neither 
+of them addresses the power cap issue. 
+Achieving high resilience to failures under strict power constraints is a daunting and critical challenge that requires new 
+computational models with scalability, adaptability, and power-awareness. 
  
-\subsection{Power challenge}
-There has been a steady rise in power consumption in large-scale distributed systems, due to the continuous growth in system components. 
-Figure 1 shows a steady rise in system power consumption to 1-3MW in 2008 but then a sharp increase to 10-20MW in the following years. The trend shows that system power consumption could surpass 50MW by 2016.
-
-
 \section{Research Overview}
+
+There is a delicate interplay between fault tolerance and power consumption. Checkpointing and process replication require 
+additional power to achieve fault tolerance. Conversely, it has been shown that lowering supply voltages, a commonly used 
+technique to conserve power, increases the probability of transient faults. The trade-off between fault free operation and 
+optimal power consumption has been explored in the literature. Limited insights have emerged, however, with respect to how 
+adherence to application’s desired QoS requirements affects and is affected by the fault tolerance and power consumption 
+dichotomy. In addition, abrupt and unpredictable changes in system behavior may lead to unexpected fluctuations in performance, 
+which can be detrimental to applications’ QoS requirements. The inherent instability of extreme-scale computing systems, 
+in terms of the envisioned high-rate and diversity of faults, together with the demanding power constraints under which 
+these systems will be designed to operate, calls for a 
+reconsideration of the fault tolerance problem.
+
+In this thesis, our research objective is to simultaneously address the power and resilience challenges for future extreme-scale 
+systems so that both system efficiency and application QoS are guaranteed.
+To this end, we propose an adaptive and power-aware computational model, referred to as Lazy Shadowing, as an efficient and 
+scalable alternative to achieve high-levels of resilience, through forward progress, in extreme-scale, failure-prone computing environments. 
+
+Previously, we have formally defined the computational model, studied possible techniques to realize and optimize the idea, and 
+built analytical models for performance evalution. Next, I propose to continue the study of Lazy Shadowing in two aspects.
 
 \subsection{Achieve Fast Rows via Reorganization (Completed)}
 
