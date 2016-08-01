@@ -15,7 +15,7 @@ Similar trend is happening in Cloud Computing.
 As the demand for Cloud Computing accelerates, cloud service providers  
 will be faced with the need to expand their underlying infrastructure to ensure the expected levels of performance, reliability and cost-effectiveness. 
 As a result, lots of large-scale data centers have been and are being built by IT companies
-to exploit the power and econies of scale. 
+to exploit the power and economies of scale. 
 For example, Microsoft, Google, Facebook, and Rackspace have hundreds of thousands 
 of web servers in dedicated data centers to support their business. 
 
@@ -40,7 +40,7 @@ consumption, both being direct consequences of the increase in the number of com
 
 Regardless of the reliability of individual component, the system level reliability will continue to decrease as the number of 
 components increases. It is projected that the Mean Time Between Failures (MTBF) of future extreme-scale systems will be at the order of hours or even minutes, meaning 
-that many failures will occur every day. Without an efficient fault tolerance mechenism, faults will be so frequent that the applications running on the 
+that many failures will occur every day. Without an efficient fault tolerance mechanism, faults will be so frequent that the applications running on the 
 systems will be continuously interrupted, requiring the execution to be restarted every time there is a failure. 
 
 Also thanks to the continuous growth in system components, there has been a steady rise in power consumption in large-scale distributed systems. 
@@ -51,7 +51,7 @@ challenging the research community to provide a 1000x improvement in performance
 This huge imbalance makes system power a leading design constraint on the path to exascale. 
 
 Today, two approaches exist for fault tolerance. The first approach is rollback recovery, which rolls back and restarts the execution 
-every time there is a failure. This approach is often equiped with checkpointing to periodically save the execution state to a 
+every time there is a failure. This approach is often equipped with checkpointing to periodically save the execution state to a 
 stable storage so that execution can be restarted from a recent checkpoint in the case of a failure. 
 Although checkpointing is the most widely used technique in today's HPC systems, it is strongly believed that it may not scale to 
 future extreme-scale systems. Given the anticipated increase in system level failure rates and the time to checkpoint large-scale 
@@ -91,8 +91,8 @@ scalable alternative to achieve high-levels of resilience, through forward progr
 computing environments. 
 
 Previously, we have formally defined the computational model, studied possible techniques to realize and optimize the idea, and 
-built analytical models for performance evalution. Next, I propose to continue the study of Lazy Shadowing in two aspects.
-Firstly, I propose to implement a prototype of Lazy Shadoing in the context of Message Passing Interface (MPI), to validate our 
+built analytical models for performance evaluation. Next, I propose to continue the study of Lazy Shadowing in two aspects.
+Firstly, I propose to implement a prototype of Lazy Shadowing in the context of Message Passing Interface (MPI), to validate our 
 computational model as well as measure its performance in real environment. Secondly, I propose to study the possibility of 
 ``smart shadowing" which further reduces the cost of shadowing by considering the specific system configuration, application characteristics, and QoS requirement.
 
@@ -102,20 +102,22 @@ The basic tenet of Lazy Shadowing is to associate with each main process a suite
 ``criticality" of the application and its performance requirements. Each shadow process is an exact replica of the original 
 main process. To tolerate failures, the main process and its associated shadow processes will execute in parallel, but on 
 different compute nodes. 
-The shadows initially execute at a reduced rate via Dynamic Voltage Frequency and Scaling (DVFS) to save power. 
-If the main process completes the task succesfully, we will 
+The shadows initially execute at a reduced rate %via Dynamic Voltage Frequency and Scaling (DVFS) 
+to save power. 
+If the main process completes the task successfully, we will 
 terminate the shadows immediately. If the main process fails, however, we will promote one of the shadow processes to be a 
 new main process and possibly increase its execution rate to mitigate delay. This continues until the task completes. 
 
 Given that the failure rate of an individual node is much lower than the aggregate system failure, it is very likely that 
 the main process will always complete its execution successfully, thereby achieving fault tolerance at a significantly reduced 
 cost of power. Consequently, the high probability that shadows never have to complete the full task, coupled with the fact that 
-they initially only consume a minimal amount of power, dramatically increases a power-constrained system’s tolerance to failure.
+they initially only consume a minimal amount of power, dramatically increases a power-constrained system's tolerance to failure.
 
 The major challenge in Lazy Shadowing resides in determining jointly the execution rates of all task instances, 
 both before and after a failure occurs, with the objective to optimize performance, resilience, and/or power consumption.
-As a case study, we develop a reward-based analytical framework to derive the optimal execution rates for minimizing energy 
-consumption under strict completion time constraints.  
+As a case study, we develop a reward-based analytical framework to derive the optimal execution rates with Dynamic Voltage 
+Frequency and Scaling for maximizing reward and minimizing energy 
+costs under strict completion time constraints.  
 
 \subsection{Applying Lazy Shadowing to extreme-scale systems (completed)}
 
@@ -148,14 +150,14 @@ Shadowing as a runtime for Message Passing Interface (MPI), which is the de fact
 a full-feature MPI implementation, the runtime is designed to be a separate layer between MPI and user application, in order 
 to take advantage of existing MPI performance optimizations that numerous researches have spent years on. The runtime will spawn 
 the shadow processes at initialization phase, manage the coordination between main and shadow processes during execution, 
-and guarantees consistency for messages and non-deterministic events. With this implementation, we will perform thorough 
+and guarantee consistency for messages and non-deterministic events. With this implementation, we will perform thorough 
 experiments measuring its runtime overhead as well as performance under failures.
 
 \subsection{Smart shadowing (future)}
 Lazy Shadowing is a flexible and adaptive computational model that deserves further investigation. Previous studies have shown that 
 different nodes tend to have different failure probabilities, e.g., 20\% of the nodes account for 80\% of the failures. The reason 
-is complicated and may attribute to the manufacture process, heterogenous architecture, environment factors (e.g. temperature), 
-and/or workloads. I propose to apply machine learning techniques to learn the heterogenity in failure distributions among a given 
+is complicated and may attribute to the manufacture process, heterogeneous architecture, environment factors (e.g. temperature), 
+and/or workloads. I propose to apply machine learning techniques to learn the heterogeneity in failure distributions among a given 
 system's nodes. Then I will study how the mapping from processes to physical cores can impact the performance and cost dichotomy. 
 In addition, I will further consider allocating different number of shadow processes for different tasks to reduce cost while 
 maintaining performance. 
