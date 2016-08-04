@@ -1,0 +1,483 @@
+Current fault tolerance approaches rely exclusively on either time or hardware redundancy to hide failures from being seen by users. 
+Rollback recovery, which exploits time redundancy, requires full or partial re-execution when failure occurs. 
+%after the failure is detected. 
+Such an approach
+can incur a significant delay, % subjecting cloud service providers to SLA violations,
+and high power costs due to extended execution time.
+On the other hand, Process Replication relies on hardware redundancy and executes multiple
+instances of the same task in parallel to guarantee completion with minimal delay.  %This approach,
+%which has been used extensively to deal with failure in time-critical
+%applications, is currently used in Cloud Computing to provide fault
+%tolerance while hiding the delay of
+%re-execution. 
+This solution, however, requires a significant increase in hardware resources and increases the power consumption proportionally. 
+
+It is without doubt that our understanding of how to build reliable systems out of unreliable components has led the development of robust and fairly reliable large-scale software and networking systems. The inherent instability of extreme-scale distributed systems of the future in terms of the envisioned high-rate and diversity of faults, however, calls for a reconsideration of the fault tolerance problem as a whole. % and the exploration of radically different approaches that go beyond adapting or optimizing well known and proven techniques.
+
+My proposed approaches to resiliency go beyond adapting or optimizing well known and proven techniques, and explore radically different methodologies to fault tolerance that scale to extreme-scale computing infrastructures. The proposed solutions differ in the type of faults they manage, their design, and the fault tolerance protocols they use. It is not just a scale up of  ``point" solutions, but an exploration of innovative and scalable fault tolerance frameworks. When integrated, it will lead to efficient solutions for a ``tunable" resiliency that takes into consideration the nature of the data and the requirements of the application.
+
+\section{Computational model}
+
+\begin{figure}[!t]
+	\begin{center}
+		\subfigure[No Failure]
+		{
+			\label{fig:sc_no_fail}
+			\includegraphics[width=0.31\textwidth]{figures/example1.pdf}
+		}
+		\subfigure[Shadow Process Failure]
+		{
+			\label{fig:sc_shadow_fail}
+			\includegraphics[width=0.28\textwidth]{figures/example3.pdf}
+		}
+		\subfigure[Main Process Failure]
+		{
+			\label{fig:sc_main_fail}
+			\includegraphics[width=0.32\textwidth]{figures/example2.png}
+		}
+	\end{center}
+	\caption{Shadow replication for a single task and single replica}
+	\label{fig:sc_overview}
+\end{figure}
+
+
+The basic tenet of Shadow Replication is to associate with each
+main process a suite of ``shadows'' whose size depends on the
+``criticality'' of the application and its performance requirements,
+as defined by the SLA. 
+
+Assuming the fail-stop fault model, where a processor stops execution once a fault
+occurs and failure can be detected by other processors~\cite{gartner_faults_1999,cristian_comm_1991}, 
+we define the Shadow Replication fault-tolerance model as follows:
+\begin{itemize}
+\item A main process, $P_m(W,\text{ }\sigma_m)$, whose responsibility is to executes a task of size $W$ at a speed of $\sigma_m$;
+\item A suite of shadow processes, $P_{s}(W,\text{ }\sigma_b^s, \text{ }\sigma_a^s)$ ($1 \le s \le \cal S)$, where $\cal S$ is the size of the suite. The shadows execute on separate computing nodes. Each shadow process is associated with two execution speeds. All shadows start execution simultaneously with the main process at speed $\sigma_b^s$ ($1 \le s \le \cal S$). Upon failure of the main process, all shadows switch their executions to $\sigma_a^s$, with one shadow being designated as the new main process. This process continues until completion of the task.
+\end{itemize}
+%All shadows execute simultaneously with the main process at speed $\sigma_a^s$
+
+To illustrate the behavior of Shadow Replication, we limit the number of shadows to a single process and consider the scenarios depicted in Figure \ref{fig:sc_overview}, assuming a single process failure. Figure \ref{fig:sc_no_fail} represents the case when neither the main nor the shadow fails. The main process, executing
+at a higher speed, completes the task at time $t_c^m$. At this time, the shadow process, progressing at a lower speed, stops execution immediately. Figure \ref{fig:sc_shadow_fail} represents the case when the shadow fails. This failure, however, has no impact on the progress of the main process, which still completes the task at $t_c^m$. Figure \ref{fig:sc_main_fail} depicts the case when the main process fails while the shadow is in progress. After detecting the failure of the main process, the shadow begins execution at a higher speed, completing the task at time $t_c^s$. When possible, the shadow execution speed upon failure must be set so that $t_c^s$ does not exceed $t_c^m$. Given that the failure rate of an individual node is much lower than
+the aggregate system failure, it is very likely that the main process
+will always complete its execution successfully, thereby achieving fault tolerance at a significantly reduced cost of energy consumed by the shadow. %saving a lot of energy for its associated shadow processes. 
+
+
+A closer look at the model reveals that shadow
+replication is a generalization of traditional fault tolerance
+techniques, namely re-execution and traditional replication. If the
+SLA specification allows for flexible completion time, shadow
+replication would take advantage of the delay laxity to trade time
+redundancy for energy savings. It is clear, therefore, that for a
+large response time, Shadow Replication converges to re-execution, as
+the shadow remains idle during the execution of the main process and
+only starts execution upon failure. If the target response time is
+stringent, however, Shadow Replication converges to pure replication,
+as the shadow must execute simultaneously with the main at the same
+speed. The flexibility of the Shadow Replication model provides the
+basis for the design of a fault tolerance strategy that strikes a
+balance between task completion time and energy saving, thereby
+maximizing profit.
+
+%Given that the probability of two individual nodes executing the same
+%instances of a task fail at the same time is low, we will focus on the study of Shadow Replication model with a single shadow. It is clear, however, that the model can
+%be extended to support multiple processes, as required by the
+%application's fault-tolerance requirement. Furthermore, we adopt the
+%fail-stop~ fault model, where a processor stops execution once a fault
+%occurs and failure can be detected by other
+%processes\cite{gartner_faults_1999,cristian_comm_1991}.
+
+\section{A use case in Cloud Computing}
+
+Cloud computing workload ranges from business applications and
+intelligence, to analytics and social networks mining and log
+analysis, to scientific applications in various fields of sciences and
+discovery. These applications exhibit different behaviors, in term of
+computation requirements and data access patterns. While some
+applications are compute-intensive, others involve the processing of
+increasingly large amounts of data. The scope and scale of these
+applications are such that an instance of a job running one of these
+applications requires the sequential execution of multiple computing
+phases; each phase consists of thousands, if not millions, of tasks
+scheduled to execute in parallel and involves the processing of a very
+large amount of data~\cite{lin2010data,Ferdman:2012:CCS:2150976.2150982}. This
+model is directly reflective of the \emph{MapReduce} computational
+model, which is predominately used in
+Cloud Computing \cite{mrbs}.  An instance of this model, is depicted in Figure \ref{fig:system_model}.
+
+
+\begin{figure}[!h]
+	\begin{center}
+		\includegraphics[width=0.6\columnwidth]{figures/system_model_1.pdf}
+	\end{center}
+	\caption{Cloud computing execution model with 2 phases.}
+	\label{fig:system_model}
+\end{figure}
+
+%Each job has a targeted response time defined
+%by the terms of the SLA. Further, the SLA defines the amount to be
+%paid for completing the job by the targeted response time as well as
+%the penalty to be incurred if the targeted response time is not
+%met. 
+
+Each task is mapped to one compute core and executes at a speed, $\sigma$. The partition of the job among tasks is
+such that each task processes a similar
+workload, $W$. Consequently, baring failures, tasks are expected to
+complete at about the same time. Therefore, the minimal response time
+of each task, when no failure occurs, is
+$t_{min}~=~\frac{W}{\sigma_{max}}$, where $\sigma_{max}$ is the maximum speed. This is also the minimal response
+time of the entire phase. 
+
+As the number of tasks increases, however, the likelihood of a task
+failure during an execution of a given phase increases
+accordingly. This underscores the importance of an energy-efficient
+fault-tolerance model to mitigate the impact of a failing task on the
+overall delay of the execution phase. Lazy Shadowing is a perfect match for the needs. We can easily apply 
+Lazy Shadowing by issuing one main and shadow pair for each task, and the execution can be performed phase 
+by phase, just as previously. 
+
+\section{Reward-based optimal Lazy Shadowing}
+
+In this section, we describe a profit-based optimization framework for
+the cloud-computing execution model previous described. Using this
+framework we compute profit-optimized execution speeds by
+optimizing the following objective function:
+
+%It is assumed that failures can be detected.
+
+%While this is the case in many computing
+%environments, there are cases where failure detection may not be
+%possible. To address this limitation, we propose a sub-optimal shadow
+%replication scheme, whereby both the main process and the shadow
+%execute independently at stretched speeds to meet the expected
+%response time, without the need for the main processes failure
+%detection.
+
+%In this section, we describe a reward-based analytical
+%model to guide the design of the shadow replication scheme that
+%executes at optimal speed to maximize profits. 
+
+
+%In this section we are going to develop a framework to assess and
+%explore the trade-off between energy consumption and performance of
+%fault tolerant computation models, namely shadow replication, pure
+%replication, and re-execution. To this end, we adopt a reward-based
+%model to study the economic potential of shadow replication, analyze its
+%interplay between resiliency and power management, and compare it to
+%other fault tolerance models.
+
+%Without loss of generality, we focus on the execution of one job as
+%shown in Fig. 2, assuming that there are N tasks in total that will
+%execute in parallel. The completion of the job depends on the
+%successful execution of all these tasks, and a failure in one task
+%would delay the completion of the entire job.
+
+\begin{equation}
+\label{optimization_problem}
+%\setlength{\abovedisplayskip}{14pt}
+\begin{alignedat}{2}
+\max_{\sigma_m,\sigma_b,\sigma_a}     & E[profit] \\
+s.t.                                 & 0 \leq \sigma_m \leq \sigma_{max} \\
+                                     & 0 \leq \sigma_b \leq \sigma_{m} \\
+                                     & 0 \leq \sigma_a \leq \sigma_{max} 
+\end{alignedat}
+\end{equation}
+We assume that processor
+speeds are continuous and use nonlinear optimization techniques
+to solve the above optimization problem. 
+
+In order to earn profit, service providers must either increase
+income or decrease expenditure. We take both factors into
+consideration for the purpose of maximizing profit while meeting
+customer's requirements. In our model, we set the expected profit to be
+expected income minus expected expense.
+
+\begin{equation}
+E[\text{profit}]=E[\text{income}]-E[\text{expense}]
+\end{equation}
+
+\subsection{Reward Model}
+\label{sla_reward_model}
+The cloud computing SLA can be diverse and
+complex. To focus on the profit and reliability
+aspects of the SLA, we define the reward model based on job completion
+time. Platform as a Service (PaaS) companies will continue to become
+more popular causing an increase in SLAs using job completion time as
+their performance metric. We are already seeing this appear in
+web-based remote procedure calls and data analytic requests.
+
+As depicted in Figure \ref{fig:reward}, customers expect that their
+job deployed on cloud finishes by a mean response time $t_{R_1}$.  As a
+return, the provider earns a certain amount of reward, denoted by R,
+for satisfying customer's requirements. However, if the job cannot be
+completed by the expected response time, the provider loses a fraction of $R$
+proportional to the delay incurred. For large delay, the profit loss may translate into a penalty that the CSP must pay to the customer. In this model, the maximum penalty $P$ is paid if the
+delay reaches or exceeds $t_{R_2}$. The four
+parameters, $R$, $P$, $t_{R_1}$ and
+$t_{R_2}$, completely define the reward model.
+
+%The three parameters, R, and should be determined while negotiating
+%the SLA according to the task workload. In our model, R is
+%proportional to the expected energy cost that SP has to pay for
+%executing customer’s tasks. Especially, R can grow with workload in a
+%linearly proportional manner, logarithmic manner, or exponential
+%manner.
+%
+%, which
+%should be larger than the minimal response time . 
+
+There are two facts that the service provider must take into account
+when negotiating the terms of the SLA. The first is the response time
+of the main process assuming no failure (Figure
+\ref{fig:sc_no_fail} and Figure \ref{fig:sc_shadow_fail}). This
+results in the following completion time:
+\begin{equation}
+t_c^m=W/\sigma_m
+\label{eq:tcm}
+\end{equation}
+
+If the main process fails (shown in Figure \ref{fig:sc_main_fail}), the
+task completion time by shadow process is the time of the failure,
+$t_f$, plus the time necessary to complete the remaining work.
+
+\begin{equation}
+t_c^s=t_f+\frac{W-t_f \times \sigma_b}{\sigma_a}
+\label{eq:tcs}
+\end{equation}
+
+This reward model is flexible and extensible; it is not restricted to
+the form shown in Figure \ref{fig:reward}. In particular, the decrease
+may be linear, concave, or convex and the penalty can extend to
+infinity. This model can further be extended to take into
+consideration both the short-term income and long-term reputation of
+the service provider~\cite{Daw:2002:LRP:639717.639720}.
+
+
+\begin{figure}[t!]	
+	\begin{center}
+		\includegraphics[width=0.6\columnwidth]{figures/reward.pdf}
+	\end{center}
+	\caption{A reward function}
+	\label{fig:reward}
+\end{figure}
+
+
+\subsection{Failure Model}
+Failure can occur at any point during the execution of the main or
+shadow process. Our assumption is that at most one failure occurs,
+therefore if the main process fails it is implied that the shadow will
+complete the task without failure. We can make this assumption because
+we know the failure of any one node is rare thus the failure
+of any two specific nodes is very unlikely.
+
+% I don't think we need to say this and it opens us up to having to
+% explain multiple shadows which we do not do today.
+%In order
+%to achieve higher resiliency one would make use of multiple shadow
+%processes and this failure model will still be valid.
+
+We assume that two probability density functions, $f_m(t_f)$ and
+$f_s(t_f)$, exist which express the probabilities of the main and shadow
+process failing at time $t_f$ separately. The model does not assume a
+specific distribution. However, in the remainder of this paper we use
+an exponential probability density function, $f_m(t_f)=f_s(t_f)=\lambda
+e^{-\lambda t_f}$, of which the mean time between failure (MTBF) is $\frac{1}{\lambda}$.
+
+\subsection{Power and Energy Models}
+Dynamic voltage and frequency scaling
+(DVFS) has
+been widely exploited as a technique to reduce CPU dynamic power~\cite{flautner_2002_APS,pillai_2001_sosp}. It
+is well known that one can reduce the dynamic CPU power consumption at
+least quadratically by reducing the execution speed linearly. The
+dynamic CPU power consumption of a computing node executing at speed
+$\sigma$ is given by the function $p_d(\sigma)=\sigma^n$ where $n \ge
+2$.
+%% removed burd_1995_systems citation
+
+In addition to the dynamic power, CPU leakage and other components
+(memory, disk, network etc.) all contribute to static power
+consumption, which is independent of the CPU speed. In this paper we
+define static power as a fixed fraction of the node power consumed
+when executing at maximum speed, referred to as $\rho$. Hence node
+power consumption is expressed as
+$p(\sigma)=\rho \times \sigma_{max}^n + (1-\rho)\times \sigma^n$. When the execution speed is zero
+the machine is in a sleep state, powered off or not assigned as a
+resource; therefore it will not be consuming any power, static or
+dynamic.  Throughout this paper we assume that dynamic power is cubic
+in relation to
+speed~\cite{rusu_2003_ecs,zhai_2004_dac}, therefore the
+overall system power when executing at speed $\sigma$ is defined as:
+
+\begin{equation}
+p(\sigma) = \begin{cases} \rho \sigma_{max}^3 + (1-\rho) \sigma^3 & \mbox{if } \sigma > 0 \\ 
+                          0 & \mbox{if } \sigma = 0 \end{cases}
+\label{eq:power_model}
+\end{equation}
+%% I removed chen_2012_srds from speed citation to save space
+
+Using the power model given by \ref{eq:power_model}, the
+energy consumed by a process executing at speed $\sigma$ during an
+interval $T$ is given by
+\begin{equation}
+E(\sigma,T) = p(\sigma) \times T
+\end{equation}
+
+%We derive the expected energy consumption of shadow replication for a
+%single task assuming the failure model described
+%previously. 
+
+Corresponding to \ref{fig:sc_overview}, there are three
+failure cases to consider: main and shadow both succeed, shadow fails
+and main fails. As described earlier, the case of both the main and
+shadow failing is very rare and will be ignored. The expected
+energy consumption for a single task is then the weighted average of
+the expected energy consumption in the three cases.
+
+%Each task is dependent upon the completion of all other tasks, this
+%means that if a task completes prior to another task it must idly wait
+%for that task to complete. In our system model a task will have to
+%wait if at least one main process fails to complete, thus forcing all
+%tasks to wait until the latest shadow process completes. 
+
+First consider the case where no failure occurs and the main process
+successfully completes the task at time $t_c^m$, corresponding to
+\ref{fig:sc_no_fail}.
+\begin{equation}
+\begin{split}
+E_1 = &  ( 1-\int_0^{t_c^m}f_m(t)dt) \times (1 - \int_0^{t_c^m} f_s(t)dt) \times \\
+      &  (  E(\sigma_m,t_c^m) + E(\sigma_b,t_c^m))
+\label{eq:energy_no_failure}
+\end{split}
+\end{equation}
+The first line is the probability of fault-free execution of the main
+process and shadow process. Then we multiple this probablity by the
+energy consumed by the main and the shadow process during this fault
+free execution, ending at $t_c^m$.
+
+Next, consider the case where the shadow process fails at some point
+before the main process successfully completes the task, corresponding to
+\ref{fig:sc_shadow_fail}.
+\begin{equation}
+\begin{split}
+E_2 = & (1-\int_0^{t_c^m}f_m(t)dt) \times \\
+      & \int_0^{t_c^m}(E(\sigma_m,t_c^m)+E(\sigma_b,t)) \times f_s(t)dt
+\label{eq:energy_shadow_fail}
+\end{split}
+\end{equation}
+The first factor is the probability that the main process does not
+fail, and the probability of shadow fails is included in the second factor which also contains the energy consumption since it depends on the shadow failure time. Energy consumption comes from the main process until the completion of the task,
+and the shadow process before its failure.
+
+The one remaining case to consider is when the main process fails and
+the shadow process must continue to process until the task completes,
+corresponding to Figure \ref{fig:sc_main_fail}.
+\begin{equation}
+\begin{split}
+E_3 = & (1-\int_0^{t_c^m}f_s(t)dt) \times \int_0^{t_c^m}(E(\sigma_m,t)+\\
+      & E(\sigma_b,t)+E(\sigma_a,t_c^s-t))f_m(t)dt
+\label{eq:energy_main_fail}
+\end{split}
+\end{equation}
+Similarly, the first factor expresses the probability that the shadow process does
+not fail. In this case, the shadow process executes from the beginning to
+$t_c^s$ when it completes the task. However, under our ``at most one
+failure'' assumption, the period during which shadow process may fail
+ends at $t_c^m$, since the only reason why shadow process is still in
+execution after $t_c^m$ is that main process has already failed. There
+are three parts of energy consumption, including that of main process
+before main's failure, that of shadow process before main's failure,
+and that of shadow process after main's failure, all of which depend
+on the failure occurrence time. 
+
+The three equations above describe the expected energy consumption by a
+pair of main and shadow processes for completing a task under
+different situations. However, under our system model it might be the
+case that those processes that finish early will wait idly and
+consume static power if failure delays one task. If it is the case
+that processes must wait for all tasks to complete, then this energy
+needs to be accounted for in our model. The probability of this is the probability that at least one main process fails,
+referred to as the system level failure probability.
+\begin{equation}
+P_f=1-(1-\int_0^{t_c^m}f_m(t)dt)^N
+\label{eq:prob_of_one_main_failure}
+\end{equation}
+Hence, we have the fourth equation corresponding to the energy consumed while waiting in idle. 
+\begin{equation}
+  \begin{split}
+  E_4 = & ( 1-\int_0^{t_c^m}f_m(t)dt) \times (1 - \int_0^{t_c^m} f_s(t)dt) \times \\
+        & 2 P_f \times E(0,t_c^j-t_c^m) + \int_0^{t_c^m}f_s(t)dt \times \\
+        & (1-\int_0^{t_c^m}f_m(t)dt) \times P_f \times E(0,t_c^j-t_c^m) 
+  \end{split}
+\end{equation}
+Corresponding to the first case, neither main process nor shadow
+process fails, but both of them have to wait in idle from task
+completion time $t_c^m$ to the last task's completion (by a shadow
+process) with probability $P_f$. Under the second case, only the main
+process has to wait if some other task is delayed since its shadow
+process has already failed. These two aspects are accounted in the
+first and last two lines in $E_4$ separately.  We use the expected
+shadow completion time $t_c^j$ as an approximation of the latest task
+completion time which is also the job completion time.
+
+%% Rami said remove, I agree - bnm
+%and the reason why we
+%ignore the third case is that the third case itself accounts for the
+%delayed task and it is already factored in $E_3$. 
+
+%\begin{equation}
+%t_c^j=\frac{\int_0^{t_c^m}t_c^s \times f_m(t)dt}{\int_0^{t_c^m}f_m(t)dt}
+%\label{eq:estimated_shadow_completion}
+%\end{equation}
+
+By summing these four parts and then multiplying it by $N$ we will have
+the expected energy consumed by Shadow Replication for completing a
+job of $N$ tasks.
+\begin{equation}
+E[\text{energy}]=N \times (E_1 + E_2 + E_3 + E_4)
+\label{eq:total_energy}
+\end{equation}
+
+\subsection{Income and Expense Models}
+The income is the reward paid by customer for the cloud computing
+services that they utilize. It depends on the reward function $r(t)$,
+depicted in \ref{fig:reward}, and the actual job completion
+time. Therefore, the income should be either $r(t_c^m)$, if all main
+processes can complete without failure, or $r^*(t_c^s)$ otherwise. It
+is worth noting that the reward in case of failure should be
+calculated based on the last completed task, which we approximate by
+calculating the expected time of completion allowing us to derive the
+expected reward, i.e. $r^*(t_c^s)=\frac{\int_0^{t_c^m}r(t_c^s) \times
+f_m(t)dt}{\int_0^{t_c^m}f_m(t)dt}$. Therefore the income is estimated
+by the following equation.
+\begin{equation}
+E[\text{income}]= (1-P_f) \times r(t_c^m) + P_f \times r^*(t_c^s)
+\end{equation}
+
+%% there is some hand-waving maddness above, unclear how to fix? -bnm
+
+The first part is the reward earned by the main process times the
+probability that all main processes would complete tasks without
+failure. If at least one main process fails, that task would have to
+be completed by a shadow process. As a result, the second part is the
+reward earned by shadow process times the system level failure probability.
+
+If $C$ is the charge expressed as dollars per unit of energy consumption
+(e.g. kilowatt hour), then the expected expenditure would be $C$ times
+the expected energy consumption for all $N$ tasks:
+\begin{equation}
+E[\text{expense}] = C \times E[\text{energy}]
+\label{eq:expense}
+\end{equation}
+
+However, the expenditure of running the cloud computing service is more
+than just energy, and must includes hardware, maintenance, and human
+labor. These costs can be accounted for by amortizing these costs into the
+static power factor, $\rho$. Because previous studies have
+suggested~\cite{Elnozahy03energyconservation,Raghavendra:2008:NPS}
+that energy will become a dominate factor we decided to focus on this
+challenge and leave other aspects to future work.
+
+Based on the above formalization of the optimization problem, the
+MATLAB Optimization Toolbox~\cite{matlab_opt} was used to solve the
+resulting nonlinear optimization problem.
+
+\subsection{Profit-aware stretched replication} 
+

@@ -25,17 +25,6 @@ The basic tenet of Shadow Replication is to associate with each
 main process a suite of ``shadows'' whose size depends on the
 ``criticality'' of the application and its performance requirements,
 as defined by the SLA. 
-%To overcome potential failures, the shadows
-%execute on separate computing nodes, concurrently with but at slower
-%speeds than, the main process.
-
-%The successful completion of the main
-%process results in the immediate termination of all shadow
-%processes. If the main process fails, the primary shadow process takes
-%over the role of the main process and resumes computation, possibly at
-%an increased speed, in order to complete the task at a targeted
-%response time.
-
 
 Formally, we define the Shadow Replication fault-tolerance model as follows:
 \begin{itemize}
@@ -43,7 +32,6 @@ Formally, we define the Shadow Replication fault-tolerance model as follows:
 \item A suite of shadow processes, $P_{s}(W,\text{ }\sigma_b^s, \text{ }\sigma_a^s)$ ($1 \le s \le \cal S)$, where $\cal S$ is the size of the suite. 
 The shadows execute on separate computing nodes. Each shadow process is associated with two execution speeds. All shadows start execution simultaneously with the main process at speed $\sigma_b^s$ ($1 \le s \le \cal S$). Upon failure of the main process, all shadows switch their executions to $\sigma_a^s$, with one shadow being designated as the new main process. This process continues until completion of the task.
 \end{itemize}
-%All shadows execute simultaneously with the main process at speed $\sigma_a^s$
 
 To illustrate the behavior of Shadow Replication, we limit the number of shadows to a single process and consider the scenarios depicted in Figure \ref{fig:sc_overview}, assuming a single process failure. Figure \ref{fig:sc_no_fail} represents the case when neither the main nor the shadow fails. The main process, executing
 at a higher speed, completes the task at time $t_c^m$. At this time, the shadow process, progressing at a lower speed, stops execution immediately. Figure \ref{fig:sc_shadow_fail} represents the case when the shadow fails. This failure, however, has no impact on the progress of the main process, which still completes the task at $t_c^m$. Figure \ref{fig:sc_main_fail} depicts the case when the main process fails while the shadow is in progress. After detecting the failure of the main process, the shadow begins execution at a higher speed, completing the task at time $t_c^s$. When possible, the shadow execution speed upon failure must be set so that $t_c^s$ does not exceed $t_c^m$. Given that the failure rate of an individual node is much lower than

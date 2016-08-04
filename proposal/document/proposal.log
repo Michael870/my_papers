@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  31 JUL 2016 23:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  2 AUG 2016 23:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -360,22 +360,44 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-(/usr/local/texlive/2015/texmf-dist/tex/latex/caption/subcaption.sty
-Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/epsfig.sty
+Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
+\epsfxsize=\dimen136
+\epsfysize=\dimen137
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/subfigure/subfigure.sty
+Package: subfigure 2002/03/15 v2.1.5 subfigure package
+\subfigtopskip=\skip62
+\subfigcapskip=\skip63
+\subfigcaptopadj=\dimen138
+\subfigbottomskip=\skip64
+\subfigcapmargin=\dimen139
+\subfiglabelskip=\skip65
+\c@subfigure=\count124
+\c@lofdepth=\count125
+\c@subtable=\count126
+\c@lotdepth=\count127
 
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+(/usr/local/texlive/2015/texmf-dist/tex/latex/subfigure/subfigure.cfg)
+\subfig@top=\skip66
+\subfig@bottom=\skip67
+)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 57.
-\captionmargin=\dimen136
-\captionmargin@=\dimen137
-\captionwidth=\dimen138
-\caption@tempdima=\dimen139
-\caption@indent=\dimen140
-\caption@parindent=\dimen141
-\caption@hangindent=\dimen142
+\captionmargin=\dimen140
+\captionmargin@=\dimen141
+\captionwidth=\dimen142
+\caption@tempdima=\dimen143
+\caption@indent=\dimen144
+\caption@parindent=\dimen145
+\caption@hangindent=\dimen146
 Package caption Info: Unknown document class (or package),
 (caption)             standard defaults will be used.
 )
@@ -389,17 +411,15 @@ x \@tempboxa {#1: #2}\ifdim \wd \@tempboxa >\hsize {\let \nobreakspace \space \
 ClassWarning {pittetd}{The caption of #1 is longer than one line}}#1: #2\par \e
 lse \global \@minipagefalse \hb@xt@ \hsize {\hfil \box \@tempboxa \hfil }\fi \v
 skip \belowcaptionskip .
-\c@ContinuedFloat=\count124
+\c@ContinuedFloat=\count128
 Package caption Info: hyperref package is loaded.
-)
-\c@subfigure=\count125
-\c@subtable=\count126
+Package caption Info: subfigure package is loaded.
 ) (/usr/local/texlive/2015/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip62
-\bibsep=\skip63
+\bibhang=\skip68
+\bibsep=\skip69
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count127
+\c@NAT@ctr=\count129
 )
 (/usr/local/texlive/2015/texmf-dist/tex/latex/soul/soul.sty
 Package: soul 2003/11/17 v2.4 letterspacing/underlining (mf)
@@ -408,15 +428,15 @@ Package: soul 2003/11/17 v2.4 letterspacing/underlining (mf)
 \SOUL@cmds=\toks35
 \SOUL@buffer=\toks36
 \SOUL@token=\toks37
-\SOUL@spaceskip=\skip64
-\SOUL@ttwidth=\dimen143
-\SOUL@uldp=\dimen144
-\SOUL@ulht=\dimen145
+\SOUL@spaceskip=\skip70
+\SOUL@ttwidth=\dimen147
+\SOUL@uldp=\dimen148
+\SOUL@ulht=\dimen149
 )
 (/usr/local/texlive/2015/texmf-dist/tex/latex/mdwtools/footnote.sty
 Package: footnote 1997/01/28 1.13 Save footnotes around boxes
 \fn@notes=\box55
-\fn@width=\dimen146
+\fn@width=\dimen150
 )
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/pifont.sty
 Package: pifont 2005/04/12 PSNFSS-v9.2a Pi font support (SPQR) 
@@ -433,46 +453,46 @@ File: upsy.fd 2001/06/04 font definitions for U/psy.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/chngcntr/chngcntr.sty
 Package: chngcntr 2009/09/02 v1.0a change counter resetting
 )
-Class pittetd Info: No patch found for amsmatch on input line 42.
-Class pittetd Info: No patch found for amsthm on input line 43.
+Class pittetd Info: No patch found for amsmatch on input line 44.
+Class pittetd Info: No patch found for amsthm on input line 45.
 
 (./proposal.aux)
 \openout1 = `proposal.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
 
 
 Package hyperref Warning: Option `letterpaper' is no longer used.
 
-Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 56.
-Package hyperref Info: Option `colorlinks' set `true' on input line 56.
-Package hyperref Info: Option `bookmarksopen' set `true' on input line 56.
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 58.
+Package hyperref Info: Option `colorlinks' set `true' on input line 58.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 58.
 \AtBeginShipoutBox=\box56
-Package hyperref Info: Link coloring ON on input line 56.
+Package hyperref Info: Link coloring ON on input line 58.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count128
+\c@section@level=\count130
 )
-LaTeX Info: Redefining \ref on input line 56.
-LaTeX Info: Redefining \pageref on input line 56.
-LaTeX Info: Redefining \nameref on input line 56.
+LaTeX Info: Redefining \ref on input line 58.
+LaTeX Info: Redefining \pageref on input line 58.
+LaTeX Info: Redefining \nameref on input line 58.
 
 (./proposal.out) (./proposal.out)
 \@outlinefile=\write4
@@ -481,16 +501,16 @@ LaTeX Info: Redefining \nameref on input line 56.
 
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count129
-\scratchdimen=\dimen147
+\scratchcounter=\count131
+\scratchdimen=\dimen151
 \scratchbox=\box57
-\nofMPsegments=\count130
-\nofMParguments=\count131
+\nofMPsegments=\count132
+\nofMParguments=\count133
 \everyMPshowfont=\toks38
-\MPscratchCnt=\count132
-\MPscratchDim=\dimen148
-\MPnumerator=\count133
-\makeMPintoPDFobject=\count134
+\MPscratchCnt=\count134
+\MPscratchDim=\dimen152
+\MPnumerator=\count135
+\makeMPintoPDFobject=\count136
 \everyMPtoPDFconversion=\toks39
 ) (/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -518,12 +538,12 @@ ge it.
 [2
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 69.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 71.
  (/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 69.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 71.
  [3
 
 ]
@@ -540,13 +560,13 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Try loading font information for U+msb on input line 1.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-))
+) [5
+
+])
 \tf@toc=\write5
 \openout5 = `proposal.toc'.
 
- [5
-
-]
+ [6]
 Chapter 1
 (./chapters/intro.tex
 Missing character: There is no ‚ in font cmr12!
@@ -559,9 +579,9 @@ Missing character: There is no ô in font cmr12!
 Missing character: There is no ‚ in font cmr12!
 Missing character: There is no Ä in font cmr12!
 Missing character: There is no ô in font cmr12!
-Missing character: There is no ‚ in font cmr12!
-Missing character: There is no Ä in font cmr12!
-Missing character: There is no ô in font cmr12!
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
  [3]
 Missing character: There is no ‚ in font cmr12!
 Missing character: There is no Ä in font cmr12!
@@ -569,6 +589,9 @@ Missing character: There is no ú in font cmr12!
 Missing character: There is no ‚ in font cmr12!
 Missing character: There is no Ä in font cmr12!
 Missing character: There is no ù in font cmr12!
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
  [4]
 Missing character: There is no ‚ in font cmr12!
 Missing character: There is no Ä in font cmr12!
@@ -576,101 +599,219 @@ Missing character: There is no ô in font cmr12!
 Missing character: There is no ‚ in font cmr12!
 Missing character: There is no Ä in font cmr12!
 Missing character: There is no ô in font cmr12!
- [5] [6]) [7]
+
+[5] [6] [7]) [8]
 Chapter 2
-(./chapters/background.tex) [8
+(./chapters/background.tex [9
 
-]
+]) [10]
 Chapter 3
-(./chapters/shadowing.tex) [9
+(./chapters/shadowing.tex
+<figures/example1.pdf, id=307, 606.265pt x 383.4325pt>
+File: figures/example1.pdf Graphic file (type pdf)
+
+<use figures/example1.pdf>
+Package pdftex.def Info: figures/example1.pdf used on input line 27.
+(pdftex.def)             Requested size: 145.6229pt x 92.09589pt.
+
+<figures/example3.pdf, id=308, 542.025pt x 382.42876pt>
+File: figures/example3.pdf Graphic file (type pdf)
+
+<use figures/example3.pdf>
+Package pdftex.def Info: figures/example3.pdf used on input line 32.
+(pdftex.def)             Requested size: 131.53082pt x 92.80013pt.
+
+<figures/example2.png, id=309, 1048.27635pt x 719.8092pt>
+File: figures/example2.png Graphic file (type png)
+
+<use figures/example2.png>
+Package pdftex.def Info: figures/example2.png used on input line 37.
+(pdftex.def)             Requested size: 150.32503pt x 103.2219pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [11
 
 ]
+[12 <./figures/example1.pdf> <./figures/example3.pdf
+
+pdfTeX warning: pdflatex (file ./figures/example3.pdf): PDF inclusion: multiple
+ pdfs with page group included in a single page
+> <./figures/example2.png>]
+
+Package natbib Warning: Citation `lin2010data' on page 13 undefined on input li
+ne 101.
+
+
+Package natbib Warning: Citation `Ferdman:2012:CCS:2150976.2150982' on page 13 
+undefined on input line 101.
+
+
+Package natbib Warning: Citation `mrbs' on page 13 undefined on input line 104.
+
+
+[13] <figures/system_model_1.pdf, id=357, 450.68375pt x 270.00874pt>
+File: figures/system_model_1.pdf Graphic file (type pdf)
+
+<use figures/system_model_1.pdf>
+Package pdftex.def Info: figures/system_model_1.pdf used on input line 109.
+(pdftex.def)             Requested size: 281.85585pt x 168.87039pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [14 <./figures/system_model_1.pdf>] [15]
+
+Package natbib Warning: Citation `Daw:2002:LRP:639717.639720' on page 16 undefi
+ned on input line 251.
+
+<figures/reward.pdf, id=606, 635.37375pt x 296.10625pt>
+File: figures/reward.pdf Graphic file (type pdf)
+
+<use figures/reward.pdf>
+Package pdftex.def Info: figures/reward.pdf used on input line 256.
+(pdftex.def)             Requested size: 281.85585pt x 131.35796pt.
+ [16 <./figures/reward.pdf>]
+
+Package natbib Warning: Citation `flautner_2002_APS' on page 17 undefined on in
+put line 287.
+
+
+Package natbib Warning: Citation `pillai_2001_sosp' on page 17 undefined on inp
+ut line 287.
+
+
+Package natbib Warning: Citation `rusu_2003_ecs' on page 17 undefined on input 
+line 306.
+
+
+Package natbib Warning: Citation `zhai_2004_dac' on page 17 undefined on input 
+line 306.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [17]
+[18] [19]
+
+Package natbib Warning: Citation `Elnozahy03energyconservation' on page 20 unde
+fined on input line 474.
+
+
+Package natbib Warning: Citation `Raghavendra:2008:NPS' on page 20 undefined on
+ input line 474.
+
+[20]
+
+Package natbib Warning: Citation `matlab_opt' on page 21 undefined on input lin
+e 479.
+
+) [21]
 Chapter 4
-(./chapters/scale.tex) [10
+(./chapters/scale.tex) [22
 
 ]
 Chapter 5
-(./chapters/implementation.tex) [11
+(./chapters/implementation.tex) [23
 
 ]
 Chapter 6
-(./chapters/smart.tex) [12
+(./chapters/smart.tex) [24
 
 ]
 Chapter 7
 (./chapters/timeline.tex
 
-LaTeX Warning: Reference `work:approx' on page 13 undefined on input line 26.
+LaTeX Warning: Reference `work:approx' on page 25 undefined on input line 26.
 
 
-LaTeX Warning: Reference `chapter:future_study' on page 13 undefined on input l
+LaTeX Warning: Reference `chapter:future_study' on page 25 undefined on input l
 ine 26.
 
 
-LaTeX Warning: Reference `work:security' on page 13 undefined on input line 26.
+LaTeX Warning: Reference `work:security' on page 25 undefined on input line 26.
 
 
 
-LaTeX Warning: Reference `chapter:future_study' on page 13 undefined on input l
+LaTeX Warning: Reference `chapter:future_study' on page 25 undefined on input l
 ine 26.
 
 
-LaTeX Warning: Reference `work:stacked' on page 13 undefined on input line 26.
+LaTeX Warning: Reference `work:stacked' on page 25 undefined on input line 26.
 
 
-LaTeX Warning: Reference `chapter:future_study' on page 13 undefined on input l
+LaTeX Warning: Reference `chapter:future_study' on page 25 undefined on input l
 ine 26.
 
-) [13
+
+Package natbib Warning: Citation `ICCD15:dlb' on page 25 undefined on input lin
+e 35.
+
+) [25
 
 ]
 Chapter 8
-(./chapters/summary.tex [14
+(./chapters/summary.tex [26
 
-]) (./proposal.bbl [15]
+]) (./proposal.bbl [27]
 
 Class pittetd Warning: Starred \chapter* has been treated as \chapter on input 
 line 1.
 
 Appendix
+[28
+
+]
+Missing character: There is no √ in font cmr10!
+Missing character: There is no © in font cmr10!
 )
 \openout3 = `proposal.etd'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 148.
- [16
 
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 148.
+
+Package natbib Warning: There were undefined citations.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 150.
+[29]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 150.
  (./proposal.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 148.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 148.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 150.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 150.
 Package rerunfilecheck Info: File `proposal.out' has not changed.
-(rerunfilecheck)             Checksum: 0E66C2DCFF584C691D80F997F628CCBC;1472.
+(rerunfilecheck)             Checksum: 1FA16BD5BE31DB9FE33DE1B2CD801963;2014.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 148.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 150.
  ) 
 Here is how much of TeX's memory you used:
- 8159 strings out of 493089
- 119824 string characters out of 6134842
- 218369 words of memory out of 5000000
- 11456 multiletter control sequences out of 15000+600000
- 11463 words of font info for 42 fonts, out of 8000000 for 9000
+ 8514 strings out of 493089
+ 125986 string characters out of 6134842
+ 224038 words of memory out of 5000000
+ 11729 multiletter control sequences out of 15000+600000
+ 13509 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,10n,40p,808b,392s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,15n,38p,816b,524s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></
-usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
-r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/
-local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/l
-ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on proposal.pdf (21 pages, 130835 bytes).
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pf
+b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb
+></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
+sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
+/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/l
+ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loc
+al/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/
+texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/tex
+live/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texl
+ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texliv
+e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on proposal.pdf (35 pages, 886194 bytes).
 PDF statistics:
- 254 PDF objects out of 1000 (max. 8388607)
- 221 compressed objects within 3 object streams
- 45 named destinations out of 1000 (max. 500000)
- 169 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 773 PDF objects out of 1000 (max. 8388607)
+ 612 compressed objects within 7 object streams
+ 111 named destinations out of 1000 (max. 500000)
+ 250 words of extra memory for PDF output out of 10000 (max. 10000000)
 

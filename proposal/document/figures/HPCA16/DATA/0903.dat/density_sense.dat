@@ -1,5 +1,0 @@
-workload 20nm_base 20nm_spec 20nm_norefresh 20nm_ref_pr_pv_64 20nm_ref_pr_pv_default 20nm_ref_pr_pv_multi_dimm 20nm_ref_pr_pv_multi_bin 20nm_ref_pr_pv_fixed_dimm 20nm_ref_pr_pv_fixed_bin
-4Gb	1.000 1.136 1.063 1.100 1.150 1.140 1.174 1.123 1.195
-8Gb	1.000 1.138 1.091 1.101 1.155 1.154 1.162 1.128 1.193
-16Gb	1.000 1.137 1.123 1.099 1.140 1.139 1.139 1.117 1.170
-32Gb	1.000 1.137 1.174 1.103 1.128 1.128 1.128 1.114 1.148

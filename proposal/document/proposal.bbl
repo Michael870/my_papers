@@ -1,14 +1,191 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{26}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[Zhang et~al.(2015)Zhang, Zhang, and Yang]{ICCD15:dlb}
-Zhang, X., Zhang Y., and Yang J.
-\newblock {DLB}: Dynamic lane borrowing for improving bandwidth and performance
-  in hybrid memory cube.
-\newblock In \emph{ICCD}, pages 133--140, 2015.
+\bibitem[Agarwal and et. al.()]{Agarwal:04:Adaptive}
+Agarwal, Saurabh and al. et. .
+\newblock Adaptive incremental checkpointing for massively parallel systems.
+\newblock In \emph{ICS 04}, St. Malo, France.
+
+\bibitem[Ahern and et. al.(2011)]{doe_ascr_exascale_2011}
+Ahern, Sean and al. et. .
+\newblock Scientific discovery at the exascale, a report from the doe ascr 2011
+  workshop on exascale data management, analysis, and visualization, 2011.
+
+\bibitem[Alvisi et~al.(1999)Alvisi, Elnozahy, Rao, Husain, and
+  de~Mel]{alvisi_ftc_1999}
+Alvisi, L., Elnozahy E., Rao S., Husain S.~A., and Mel A.de~.
+\newblock An analysis of communication induced checkpointing.
+\newblock In \emph{Fault-Tolerant Computing}, 1999.
+\newblock \doi{10.1109/FTCS.1999.781058}.
+
+\bibitem[Cappello(2009)]{Cappello:09:Fault}
+Cappello, Franck.
+\newblock Fault tolerance in petascale/ exascale systems: Current knowledge,
+  challenges and research opportunities.
+\newblock \emph{IJHPCA}, 23\penalty0 (3):\penalty0 212--226, 2009.
+
+\bibitem[Chandy and Ramamoorthy(1972)]{chandy_trans_1972}
+Chandy, K.M. and Ramamoorthy C.V.
+\newblock Rollback and recovery strategies for computer programs.
+\newblock \emph{Computers, IEEE Transactions on}, C-21\penalty0 (6):\penalty0
+  546--556, June 1972.
+\newblock ISSN 0018-9340.
+\newblock \doi{10.1109/TC.1972.5009007}.
+
+\bibitem[chang Nam et~al.(1997)chang Nam, Kim, Lee, and Lee]{nam_ftc_1997}
+Nam, Hyochang , Kim Jong, Lee Sunggu, and Lee Sunggu.
+\newblock Probabilistic checkpointing.
+\newblock In \emph{In Proceedings of Intl. Symposium on Fault-Tolerant
+  Computing}, pages 153--160, 1997.
+
+\bibitem[Cristian(1991)]{cristian_comm_1991}
+Cristian, Flavin.
+\newblock Understanding fault-tolerant distributed systems.
+\newblock \emph{Commun. ACM}, 34\penalty0 (2):\penalty0 56--78, February 1991.
+\newblock ISSN 0001-0782.
+\newblock \doi{10.1145/102792.102801}.
+
+\bibitem[Elliott and et. al.()]{elliott_2012_cpr}
+Elliott, James and al. et. .
+\newblock Combining partial redundancy and checkpointing for {HPC}.
+\newblock In \emph{ICDCS '12}, Washington, DC, US.
+\newblock ISBN 978-0-7695-4685-8.
+\newblock \doi{10.1109/ICDCS.2012.56}.
+
+\bibitem[Elnozahy and et. al.(2002)]{Elnozahy:02:Survey}
+Elnozahy, E. and al. et. .
+\newblock A survey of rollback-recovery protocols in message-passing systems.
+\newblock \emph{{ACM} Computing Surveys}, 34\penalty0 (3):\penalty0 375--408,
+  2002.
+\newblock ISSN 0360-0300.
+\newblock \doi{http://doi.acm.org/10.1145/568522.568525}.
+
+\bibitem[Elnozahy and Zwaenepoel(1992)]{elnozahy_1992_manetho}
+Elnozahy, Elmootazbellah and Zwaenepoel Willy.
+\newblock Manetho: Transparent rollback-recovery with low overhead, limited
+  rollback and fast output commit.
+\newblock \emph{TC}, 41:\penalty0 526--531, 1992.
+
+\bibitem[Elnozahy and Plank(2004)]{elnozahy_dsc_2004}
+Elnozahy, E.N. and Plank J.S.
+\newblock Checkpointing for peta-scale systems: a look into the future of
+  practical rollback-recovery.
+\newblock \emph{DSC}, 1\penalty0 (2):\penalty0 97 -- 108, april-june 2004.
+\newblock ISSN 1545-5971.
+\newblock \doi{10.1109/TDSC.2004.15}.
+
+\bibitem[Engelmann and B{\"o}hm(2011)]{engelmann2011redundant}
+Engelmann, Christian and B{\"o}hm Swen.
+\newblock Redundant execution of hpc applications with mr-mpi.
+\newblock In \emph{PDCN}, pages 15--17, 2011.
+
+\bibitem[Ferreira et~al.()Ferreira, Stearley, Laros, Oldfield, Pedretti,
+  Brightwell, Riesen, Bridges, and Arnold]{ferreira_sc_2011}
+Ferreira, Kurt, Stearley Jon, Laros James~H., III, Oldfield Ron, Pedretti
+  Kevin, Brightwell Ron, Riesen Rolf, Bridges Patrick~G., and Arnold Dorian.
+\newblock Evaluating the viability of process replication reliability for
+  exascale systems.
+\newblock In \emph{Proceedings of 2011 International Conference for High
+  Performance Computing, Networking, Storage and Analysis}, SC '11, pages
+  44:1--44:12.
+\newblock ISBN 978-1-4503-0771-0.
+\newblock \doi{10.1145/2063384.2063443}.
+
+\bibitem[Fiala and et. al.(2012)]{fiala_2012_sdc}
+Fiala, David and al. et. .
+\newblock Detection and correction of silent data corruption for large-scale
+  high-performance computing.
+\newblock SC, Los Alamitos, CA, USA, 2012.
+\newblock ISBN 978-1-4673-0804-5.
+
+\bibitem[G\"{a}rtner(1999)]{gartner_faults_1999}
+G\"{a}rtner, Felix~C.
+\newblock Fundamentals of fault-tolerant distributed computing in asynchronous
+  environments.
+\newblock \emph{ACM Comput. Surv.}, 31\penalty0 (1):\penalty0 1--26, March
+  1999.
+\newblock ISSN 0360-0300.
+\newblock \doi{10.1145/311531.311532}.
+
+\bibitem[Helary and et. al.(1997)]{helary_rds_1997}
+Helary, J and al. et. .
+\newblock Preventing useless checkpoints in distributed computations.
+\newblock In \emph{RDS}, 1997.
+\newblock \doi{10.1109/RELDIS.1997.632814}.
+
+\bibitem[Li et~al.(1994)Li, Naughton, and Plank]{li_trans_1994}
+Li, K., Naughton J.~F., and Plank J.~S.
+\newblock Low-latency, concurrent checkpointing for parallel programs.
+\newblock \emph{IEEE Trans. Parallel Distrib. Syst.}, 5\penalty0 (8):\penalty0
+  874--879, August 1994.
+\newblock ISSN 1045-9219.
+\newblock \doi{10.1109/71.298215}.
+
+\bibitem[Moody et~al.(2010)Moody, Bronevetsky, Mohror, and
+  Supinski]{Moody:10:SCR}
+Moody, Adam, Bronevetsky Greg, Mohror Kathryn, and Supinski Bronis.
+\newblock Design, modeling, and evaluation of a scalable multi-level
+  checkpointing system.
+\newblock In \emph{SC}, pages 1--11, 2010.
+\newblock ISBN 978-1-4244-7559-9.
+\newblock \doi{http://dx.doi.org/10.1109/SC.2010.18}.
+
+\bibitem[Plank and Li(1994)]{plank_ftcs_1994}
+Plank, J.S. and Li~Kai.
+\newblock Faster checkpointing with n+1 parity.
+\newblock In \emph{Fault-Tolerant Computing}, pages 288--297, June 1994.
+\newblock \doi{10.1109/FTCS.1994.315631}.
+
+\bibitem[Randell(1975)]{randell_domino_effect}
+Randell, B.
+\newblock System structure for software fault tolerance.
+\newblock In \emph{Proceedings of the international conference on Reliable
+  software}, New York, NY, USA, 1975. ACM.
+\newblock \doi{10.1145/800027.808467}.
+
+\bibitem[Reinhardt and et. al.(2000)]{reinhardt2000transient}
+Reinhardt, Steven~K and al. et. .
+\newblock \emph{Transient fault detection via simultaneous multithreading},
+  volume~28.
+\newblock ACM, 2000.
+
+\bibitem[Riesen et~al.(2010)Riesen, Ferreira, Stearley, Oldfield, III,
+  Pedretti, and Brightwell]{riesen_sandia_2010}
+Riesen, Rolf, Ferreira Kurt, Stearley Jon~R., Oldfield Ron, III James H.~Laros,
+  Pedretti Kevin~T., and Brightwell Ron.
+\newblock Redundant computing for exascale systems, December 2010.
+
+\bibitem[Schneider(1990)]{schneider_1990_tutorial}
+Schneider, Fred~B.
+\newblock Implementing fault-tolerant services using the state machine
+  approach: A tutorial.
+\newblock \emph{ACM Comput. Surv.}, 22\penalty0 (4):\penalty0 299--319,
+  December 1990.
+\newblock ISSN 0360-0300.
+\newblock \doi{10.1145/98163.98167}.
+
+\bibitem[Stearley and et. al.(2012)]{stearly_2012_partial}
+Stearley, J. and al. et. .
+\newblock Does partial replication pay off?
+\newblock In \emph{DSN-W}, pages 1--6, June 2012.
+\newblock \doi{10.1109/DSNW.2012.6264669}.
+
+\bibitem[Zheng et~al.(2012)Zheng, Ni, and Kalé]{6264677}
+Zheng, G., Ni~Xiang, and Kalé L.~V.
+\newblock A scalable double in-memory checkpoint and restart scheme towards
+  exascale.
+\newblock In \emph{DSN-W}, pages 1--6, June 2012.
+\newblock \doi{10.1109/DSNW.2012.6264677}.
+
+\bibitem[Zheng and et. al.(2004)]{zheng_2004_ftccharm}
+Zheng, Gengbin and al. et. .
+\newblock {FTC-Charm++}: an in-memory checkpoint-based fault tolerant runtime
+  for {Charm++} and {MPI}.
+\newblock In \emph{Cluster Computing}, pages 93--103, 2004.
+\newblock \doi{10.1109/CLUSTR.2004.1392606}.
 
 \end{thebibliography}
