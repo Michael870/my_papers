@@ -1,11 +1,8 @@
-DRAM technology scaling has reached a threshold where physical limitations exert unprecedented hurdles on cell behaviors.
-Without dedicated mitigations, memory is expected to suffer from serious performance loss, yield degradation and reliability decrease, which goes against the demanding of system designs and applications. Among the induced problems, restoring has been an long time neglected issue, and it is likely to impose great constraints to the scaling advancement.
-As a result, this thesis explores DRAM further scaling from restoring perspective.
-
-Reduced cell dimensions and worsening process variation cause increasingly slow access and significantly more outliers falling beyond the specifications.
-To alleviate the influences on performance and yield, we propose to manage the timing constraints at fine chunk granularity, and thus more fast regions can be exposed to upper level. In addition, we devise the extra chunk remapping and dedicated rank formation to restrict the impacts of slow cells. However, the exposed fast regions can not be fully utilized for restoring oblivious page allocation; accordingly, to maximize performance gains, we move forward to profile the pages of the workloads, and deliberately allocate the hot pages to fast parts.
-
-In addition, restoring can seek help from the correlated refresh operation, which periodically fully charge the cells. We propose to perform partial restore withe respect to the distance to next refresh; the closer to next refresh, the less needed charge and the earlier the restore operation can be terminated. For ease of implementation, we divide the refresh window into 4 sub ones, and apply an separate set of timings for each. Moreover, compared to refresh, restore contributes more critically to the overall performance, and hence we optimize the partial restore with refresh rate upgrading. More frequent refresh helps to lower the restoring objectives, but at a risk of raising energy consumption. As a compromise, we selectively upgrade recent touched rows only.
-
-As the most fundamental building block of computer systems, DRAM prolonged restoring operation will ultimately affect upper application level, and thus we further explore in extended scenarios, including approximate computing, information leakage and 3D stacked memory.
-With our full-stack exploration, we believe the scaling issues can be greatly alleviated.
+Current fault tolerance approaches rely exclusively on either time or hardware redundancy to hide failures from being seen by users. 
+Rollback recovery, which exploits time redundancy, requires full or partial re-execution when failure occurs.  
+Such an approach
+can incur a significant delay, % subjecting cloud service providers to SLA violations,
+and high power costs due to extended execution time.
+On the other hand, Process Replication relies on hardware redundancy and executes multiple
+instances of the same task in parallel to guarantee completion with minimal delay. 
+This solution, however, requires a significant increase in hardware resources and increases the power consumption proportionally. 

@@ -1,4 +1,4 @@
-\begin{thebibliography}{26}
+\begin{thebibliography}{29}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -124,6 +124,23 @@ Li, K., Naughton J.~F., and Plank J.~S.
   874--879, August 1994.
 \newblock ISSN 1045-9219.
 \newblock \doi{10.1109/71.298215}.
+
+\bibitem[Mills(2014)]{mills2014power}
+Mills, Bryan.
+\newblock \emph{Power-Aware Resilience for Exascale Computing}.
+\newblock PhD thesis, University of Pittsburgh, 2014.
+
+\bibitem[Mills and et. al.(2014)]{mills_2014_icnc}
+Mills, Bryan and al. et. .
+\newblock Shadow computing: An energy-aware fault tolerant computing model.
+\newblock In \emph{ICNC}, 2014.
+
+\bibitem[Mills et~al.(2014)Mills, Znati, Melhem, Grant, and
+  Ferreira]{mills_2014_pdp}
+Mills, Bryan, Znati Taieb, Melhem Rami, Grant Ryan~E., and Ferreira Kurt~B.
+\newblock Energy consumption of resilience mechanisms in large scale systems.
+\newblock In \emph{Parallel, Distributed and Network-Based Processing (PDP),
+  22st Euromicro International Conference}, Feb 2014.
 
 \bibitem[Moody et~al.(2010)Moody, Bronevetsky, Mohror, and
   Supinski]{Moody:10:SCR}

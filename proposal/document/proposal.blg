@@ -1,23 +1,20 @@
-This is BibTeX, Version 0.99d (TeX Live 2015)
+This is BibTeX, Version 0.99d (TeX Live 2013)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: proposal.aux
 The style file: plainnat.bst
 Database file #1: proposal.bib
 Warning--entry type for "doe_ascr_exascale_2011" isn't style-file defined
---line 887 of file proposal.bib
+--line 894 of file proposal.bib
 Warning--entry type for "riesen_sandia_2010" isn't style-file defined
---line 893 of file proposal.bib
+--line 900 of file proposal.bib
+Warning--I didn't find a database entry for "tchana_cits_2012"
 Warning--I didn't find a database entry for "lin2010data"
 Warning--I didn't find a database entry for "Ferdman:2012:CCS:2150976.2150982"
 Warning--I didn't find a database entry for "mrbs"
-Warning--I didn't find a database entry for "Daw:2002:LRP:639717.639720"
 Warning--I didn't find a database entry for "flautner_2002_APS"
 Warning--I didn't find a database entry for "pillai_2001_sosp"
 Warning--I didn't find a database entry for "rusu_2003_ecs"
 Warning--I didn't find a database entry for "zhai_2004_dac"
-Warning--I didn't find a database entry for "Elnozahy03energyconservation"
-Warning--I didn't find a database entry for "Raghavendra:2008:NPS"
-Warning--I didn't find a database entry for "matlab_opt"
 Warning--I didn't find a database entry for "ICCD15:dlb"
 Warning--empty year in Agarwal:04:Adaptive
 Warning--empty year in Agarwal:04:Adaptive
@@ -27,45 +24,45 @@ Warning--empty year in ferreira_sc_2011
 Warning--empty year in ferreira_sc_2011
 Warning--empty booktitle in fiala_2012_sdc
 Warning--can't use both volume and number fields in reinhardt2000transient
-You've used 26 entries,
+You've used 29 entries,
             2779 wiz_defined-function locations,
-            792 strings with 9835 characters,
-and the built_in function-call counts, 12992 in all, are:
-= -- 1189
-> -- 680
-< -- 28
-+ -- 230
-- -- 204
-* -- 1006
-:= -- 1929
-add.period$ -- 105
-call.type$ -- 26
-change.case$ -- 145
-chr.to.int$ -- 26
-cite$ -- 60
-duplicate$ -- 616
-empty$ -- 1095
-format.name$ -- 300
-if$ -- 2798
+            800 strings with 10160 characters,
+and the built_in function-call counts, 14212 in all, are:
+= -- 1288
+> -- 759
+< -- 30
++ -- 257
+- -- 228
+* -- 1095
+:= -- 2122
+add.period$ -- 114
+call.type$ -- 29
+change.case$ -- 161
+chr.to.int$ -- 29
+cite$ -- 66
+duplicate$ -- 679
+empty$ -- 1198
+format.name$ -- 334
+if$ -- 3050
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 25
-newline$ -- 164
-num.names$ -- 104
-pop$ -- 317
+missing$ -- 27
+newline$ -- 179
+num.names$ -- 116
+pop$ -- 357
 preamble$ -- 1
-purify$ -- 120
+purify$ -- 134
 quote$ -- 0
-skip$ -- 468
+skip$ -- 512
 stack$ -- 0
-substring$ -- 446
-swap$ -- 105
+substring$ -- 452
+swap$ -- 111
 text.length$ -- 9
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 281
+type$ -- 314
 warning$ -- 8
-while$ -- 113
+while$ -- 122
 width$ -- 0
-write$ -- 392
-(There were 22 warnings)
+write$ -- 429
+(There were 19 warnings)

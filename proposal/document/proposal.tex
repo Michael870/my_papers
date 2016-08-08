@@ -76,7 +76,7 @@ to accelerate scientific discoveries, big data analytics, etc. On the Cloud side
 
 This thesis aims at simultaneously solving two major challenges, i.e., power consumption and fault tolerance, for future extreme-scale computing systems. We come up with a novel power-aware computational model, referred to as Lazy Shadowing, to achieve high-levels of resilience in extreme-scale and failure-prone computing environments. Different approaches have been studied to apply this model. Accordingly, precise analytical models and optimization framework have been developed to quantify and optimize the performance, respectively. 
 
-In this work, I propose to continue the research in two aspects. Firstly, I propose to develop a MPI-based prototype to validate Lazy Shadowing in real environment. Using the prototype, I will run benchmarks and real applications to measure its performance and compare to state-of-the-art approaches. Then, I propose to further explore the potential of Lazy Shadowing and improve its efficiency. Based on the specific system configuration, application characteristics, and QoS requirement, I will study 
+In this work, I propose to continue the research in two aspects. Firstly, I propose to develop a MPI-based prototype to validate Lazy Shadowing in real environment. Using the prototype, I will run benchmarks and real applications to measure its performance and compare to state-of-the-art approaches. Then, I propose to further explore the adaptivity of Lazy Shadowing and improve its efficiency. Based on the specific system configuration, application characteristics, and QoS requirement, I will study 
 the impact of process mapping the viability of partial shadowing.     
 
 \end{abstract}
@@ -108,11 +108,15 @@ the impact of process mapping the viability of partial shadowing.
 \label{chapter:shadowing}
 \input{chapters/shadowing}
 
+\chapter{Reward-based optimal Lazy Shadowing}
+\label{chapter:reward}
+\input{chapters/reward}
+
 \chapter{Applying Lazy Shadowing to extreme-scale systems}
 \label{chapter:scale}
 \input{chapters/scale}
 
-\chapter{lsMPI: implementation of Lazy Shadowing in MPI}
+\chapter{lsMPI: an implementation in MPI}
 \label{chapter:implementation}
 \input{chapters/implementation}
 
