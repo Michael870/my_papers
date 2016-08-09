@@ -1,0 +1,189 @@
+Enabling Lazy Shadowing for resiliency in extreme-scale computing 
+brings about a number of challenges and design decisions that need to be addressed, including the applicability of this concept to a large number of 
+tasks executing in parallel, the effective way to control shadows' execution rates, and the runtime mechanisms and 
+communications support to ensure efficient coordination between a 
+main and its shadow.
+Taking into consideration the main characteristics of compute-intensive and highly-scalable applications, we design two novel techniques, referred to as {\it shadow collocation} and {\it shadow leaping}, in order to achieve high-tolerance to failure while minimizing delay and energy consumption.
+
+We consider the class of compute-intensive and strongly-scaled applications, executing on a large-scale multi-core computing infrastructure~\cite{doe_ascr_exascale_2011}. 
+We use $W$ to denote the size of an application workload, and assume that the workload is split into a set of tasks, $T$, which execute in parallel. 
+Assuming the maximum execution rate is $\sigma_{max}=1$, the failure-free completion time of the application is $W/|T|$. 
+Given the prominence of MPI in HPC environments, we assume message passing as the communication mechanism between tasks. 
+The execution is composed of a set of iterations separated by synchronization barriers. 
+
+\section{Shadow collocation}
+
+We use the term core to represent the resource allocation unit (e.g., a
+CPU core, a multi-core CPU, or a cluster node), so that our algorithm is agnostic to the
+granularity of the hardware platform~\cite{casanova_inria_2012}. Each main process executes on one core exclusively to achieve maximum throughput.  
+On the other hand, we collocate multiple shadows on a single core and use time sharing to achieve the desired execution rates.
+To execute an application of $M$ tasks, $N=M+S$ cores are required, where $M$ is a multiple of $S$. Each main is allocated one core (referred to as \textit{main core}), while $\alpha=M/S$ (referred to as \textit{collocation ratio}) shadows are collocated on a core (\textit{shadow core}). 
+The $N$ cores are grouped into $S$ sets, each of which we call a \textit{shadowed set}. Each shadowed set contains $\alpha$ main cores and 1 shadow core.
+This is illustrated in Figure~\ref{fig:sc_mapping}.  
+
+Collocation has an important ramification with respect to the resilience of the system. Specifically, 
+one failure can be tolerated in each shadowed set. If a shadow core fails, all the shadows in the 
+shadowed set will be lost without interrupting the execution of the mains. 
+On the other hand, if a main core fails, the associated shadow will be promoted to a new main, and all 
+the other collocated shadows will be terminated to speed up the new main.
+Consequently, a failure, either in main or shadow core, will result in losing all the shadows in the shadowed set, thereby losing the tolerance to any other failures. After the first failure, a shadowed set becomes \emph{vulnerable}\footnote{Rejuvenation techniques, such as restarting the lost shadows from the state of current mains on spare cores, can be used to eliminate vulnerability.}. 
+ 
+\begin{figure}[!b]
+  \begin{center}
+    \includegraphics[width=0.8\columnwidth]{figures/sc_mapping.pdf}
+  \end{center}
+  %\vskip -0.25in 
+  \caption{An example of collocation. $N=12$, $M=9$, $S=3$.}
+  \label{fig:sc_mapping}
+\end{figure}
+
+
+\section{Shadow leaping}
+\label{sec:leaping_shadows}
+
+As the shadows execute at a lower rate, failures will incur delay for recovery. This problem deteriorates as dependencies incurred by messages and synchronization barriers would propagate the delay of one task to others.  
+Fortunately, slowing down the shadows provides an opportunity for the shadows to benefit from the faster execution of their mains. By copying the state of each main to its shadow, which is similar to the process of storing a checkpoint in a buddy in \cite{zheng_2004_ftccharm}, forward progress is achieved for the shadows with minimized time and energy. This technique, referred to as \textit{shadow leaping}, effectively limits the distance between main and shadow in progress. 
+As a result, the recovery time after a failure, which depends on the distance between the failing main 
+and its shadow, is also reduced. 
+More importantly, 
+we opportunistically overlap shadow leaping with failure recovery to avoid extra overhead. 
+
+Assuming a failure occurrence at time $t_f$, Figure~\ref{fig:leap} shows the concept of shadow leaping. 
+Upon failure of a main process, its associated shadow speeds up to minimize the impact of failure recovery on the other tasks' progress, as illustrated in Figure~\ref{fig:jump1}. 
+At the same time, as shown in Figure~\ref{fig:jump2}, the remaining main processes continue execution until the barrier at $W_{syn}$, and then become idle until $t_r$. 
+Shadow leaping opportunistically takes advantage of this idle time to {\it leap forward} the shadows, so that  
+all processes, including shadows, can resume execution from a consistent point afterwards. 
+Shadow leaping increases the shadow's rate of progress, at a minimal energy cost. Consequently, it reduces significantly the likelihood of a shadow falling excessively behind, thereby ensuring fast recovery while minimizing energy consumption.
+
+\begin{figure}[!t]
+	\begin{center}
+        \subfigure[Faulty task behavior.]
+		{
+			\label{fig:jump1}
+			\includegraphics[width=0.4\columnwidth]{figures/jump1.pdf}
+		}
+		\subfigure[Non-faulty task behavior.]
+		{
+			\label{fig:jump2}
+			\includegraphics[width=0.4\columnwidth]{figures/jump2.pdf}
+		}
+	\end{center}
+	%\vskip -0.25in
+	\caption{The illustration of shadow leaping.}
+	\label{fig:leap}
+\end{figure}
+
+\section{Analytical framework}
+
+In the following we develop analytical models to quantify the expected performance of Lazy Shadowing, as well as prove the bound on performance loss due to failures. 
+All the analysis below is under the assumption that there are a total of $N$ cores, and $W$ is the application workload.  
+$M$ of the $N$ cores are allocated for main processes, each having a workload of $w=\frac{W}{M}$, and the rest $S$ cores are for the collocated shadow processes. %For process replication,
+Note that process replication is a special case of Lazy Shadowing where $\alpha=1$, so 
+$M=S=\frac{N}{2}$ and $w=\frac{2W}{N}$. 
+
+An application has to roll back when all replicas of a task have been lost. We call this an application fatal failure, which is inevitable even when every process is replicated. 
+In order to take into account the overhead of rollback in the calculation of completion time and energy consumption, we first 
+study the probability of application fatal failure. 
+We use 
+$f(t)$ to denote the failure probability density function of each core, and then $F(t) = \int_0^tf(\tau)d\tau$ is the probability that a core fails in the next $t$ time. 
+Since each shadowed set can tolerate one failure, 
+then the probability that a shadowed set with $\alpha$ main cores and 1 shadow core does not fail by time $t$ is the probability of no failure plus the probability of one failure, i.e., 
+
+\begin{equation}
+	P_g = \Big(1-F(t)\Big)^{\alpha+1} + {{\alpha+1} \choose 1}F(t)\times \Big(1-F(t)\Big)^{\alpha}
+\end{equation}
+and the probability that an fatal failure occurs to an application using $N$ cores within $t$ time is the complement of the probability that
+none of the shadowed sets fails, i.e.,
+
+\begin{equation}
+	P_a = 1 - ({P_g})^{S}
+\end{equation}
+where $S=\frac{N}{\alpha+1}$ is the number of shadowed sets.
+The application fatal failure probability can then be calculated by using $t$ equal to the expected completion time of the application, which will be modeled in the next subsection.
+
+There are two types of delay due to failures. If a failure does not lead to an application fatal failure, the delay corresponds to the catching up of the shadow of the failing main (see Figure~\ref{fig:jump1}). Otherwise, a possible larger (rollback) delay will be introduced by an application fatal failure. In the following we consider both delays step by step. 
+First we discuss the case of $k$ failures without application fatal failure. Should a failure occur during the recovery of a previous failure, its recovery would overlap with the ongoing recovery. To study the worst case behavior, we assume failures do not overlap, so that the execution is split into $k+1$ intervals, as illustrated in Figure~\ref{fig:progress}. 
+$\Delta_i$ ($1\le i \le k+1$) represents the $i^{th}$ execution interval, and $\tau_i$ ($1\le i \le k$) is the recovery time after $\Delta_i$. 
+
+\begin{figure}[!t]
+	\begin{center}
+		\includegraphics[width=0.7\columnwidth]{figures/progress}
+	\end{center}
+	%\vskip -0.22in 
+	\caption{Application's progress with shadow catching up delays.}
+	\label{fig:progress}
+\end{figure}
+
+
+The following theorem expresses the completion time, $T_c^k$, as a function of $k$.
+
+\begin{theorem}
+Assuming that failures do not overlap and no application fatal failure occurs, then using Lazy Shadowing, 
+	$$T_c^k = w + (1-\sigma_s^b)\sum_{i=1}^k\Delta_i$$
+\end{theorem}
+\begin{proof}
+
+Lazy Shadowing guarantees that all the shadows reach the same execution point as the mains (See Figure~\ref{fig:leap}) after a previous recovery, so every recovery time is proportional to its previous execution interval. %, which is $\Delta_i$. 
+That is, $\tau_i = \Delta_i \times (1 - \sigma_s^b)$. 
+According to Figure~\ref{fig:progress}, the completion time with $k$ failures is 
+	$T_c^k = \sum_{i=1}^{k+1}\Delta_i + \sum_{i=1}^k\tau_i = w + (1-\sigma_s^b)\sum_{i=1}^k\Delta_i$
+\end{proof}
+
+Although it may seem that the delay would keep growing with the number of failures, 
+it turns out to be well bounded, as a benefit of shadow leaping: 
+
+\begin{corollary}
+The delay induced by failures is bounded by $(1-\sigma_s^b)w$.
+\end{corollary}
+\begin{proof}
+From above theorem we can see the delay from $k$ failures is $(1-\sigma_s^b)\sum_{i=1}^k\Delta_i$. It is straightforward that, for any non-negative integer of $k$, we have the equation $\sum_{i=1}^{k+1}\Delta_i= w$. As a result, 
+$\sum_{i=1}^{k}\Delta_i = w - \Delta_{k+1} \le w$. Therefore, $(1-\sigma_s^b)\sum_{i=1}^k\Delta_i \le (1-\sigma_s^b)w$.
+\end{proof}
+
+Typically, the number of failures to be encountered is stochastic. Given a failure distribution, however, we can calculate the probability for a specific value of $k$. We assume that failures do not occur during recovery, so the failure probability of a core during the execution can be calculated as $P_c = F(w)$. Then the probability that there are $k$ failures among the $N$ cores is 
+\begin{equation}
+\begin{split}
+P_s^{k}= & \dbinom{N}{k}{P_c}^k(1-P_c)^{N-k} \\
+\end{split}
+\end{equation}
+
+The following theorem expresses the expected completion time, $T_{total}$, considering all possible number of failures. 
+
+\begin{theorem}
+Assuming that failures do not overlap, then using Lazy Shadowing,
+$T_{total} = T_{c} / (1 - P_a)$, where $T_{c} = \sum_{i} T_{c}^{i} \cdot P_s^{i}$.
+\end{theorem}
+\begin{proof}
+Without application fatal failure, the completion time considering all possible values of $k$ can be averaged as $T_{c} = \sum_{i} T_{c}^{i} \cdot P_s^{i}$. If an application fatal failure occurs, however, the application needs to roll back to the beginning. With the probability of rollback calculated as $P_a$ in Section~\ref{anal_app_fail}, the total expected completion time is $T_{total} = T_{c} / (1 - P_a)$.
+\end{proof}
+
+Process replication is a special case of Lazy Shadowing where $\alpha=1$, so we can use the above theorem to derive the expected completion time for process replication using the same amount of cores:
+
+\begin{corollary}
+The expected completion time for process replication is $T_{total} = 2W/N / (1 - P_a)$.
+\end{corollary}
+\begin{proof}
+Using process replication, half of the available cores are dedicated to shadows so that the workload assigned to each task is significantly increased, i.e., $w=2W/N$. Different from cases where $\alpha \ge 2$, failures do not incur any delay except for application fatal failures. %, since the replicas are executing at the same rate as the main processes. 
+As a result, without application fatal failure the completion time under process replication is constant regardless of the number of failures, i.e., $T_c=T_c^k=w=2W/N$. Finally, the expected completion time considering the possibility of rollback is $T_{total} = T_c / (1 - P_a) = 2W/N / (1 - P_a)$.
+\end{proof}
+
+Power consumption consists of two parts, dynamic power, $p_d$, which exists only when a core is executing, and static power, $p_s$, which is constant as long as the machine is on. This can be modeled as $p = p_d + p_s$. Note that in addition to CPU leakage, other components, such as memory and disk, also contribute to static power. 
+
+
+For process replication, all cores are running all the time until the application is complete. Therefore, the expected energy consumption, $En$, is proportional to the expected execution time $T_{total}$: 
+\begin{equation}
+%En = N * p * T_{total}
+En = N \times p \times T_{total}
+\label{eq:exp_energy1}
+\end{equation} 
+
+Even using the same amount of cores, Lazy Shadowing can save power and energy, since main cores are idle during the recovery time after each failure, and the shadows can achieve forward progress through shadow leaping. During normal execution, all the cores consume static power as well as dynamic power. During recovery time, however, the main cores are idle and consume only static power, while the shadow cores first perform shadow leaping and then become idle. Altogether, the expected energy consumption for Lazy Shadowing can be modeled as 
+\begin{equation}
+En = N \times p_s \times T_{total} + N \times p_d \times w + S \times p_{l} \times T_l.
+%En = N * p_s * T_{total} + N * p_d * w + S * p_{l} * T_l.
+\label{eq:exp_energy2}
+\end{equation}
+with $p_{l}$ denoting the dynamic power consumption of each core during shadow leaping and $T_l$ the expected total time spent on leaping.
+
+
+
