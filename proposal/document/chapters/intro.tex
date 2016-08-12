@@ -85,7 +85,7 @@ these systems will be designed to operate, calls for a
 reconsideration of the fault tolerance problem.
 
 To this end, Mills, Znati, and Melhem have proposed a novel computational model, referred to as Shadow Replication, as a  
-power-aware approach to achieve high-levels of resilience, through forward progress, in extreme-scale computing environments~\cite{mills_2014_icnc,mills_2014_pdp,mills2014power}. Based on Dynamic Voltage Frequency and Scaling (DVFS), Mills studied the computational model and its performance in terms of completion time and energy consumption in HPC systems. Through the use of analytical models, simulations, and experimentation, Mills demonstrated that Shadow Replication can achieve resilience more efficiently than both checkpointing and traditional replication when power is limited. However, Mills' work is limited to the use of DVFS, which has been shown to have multiple issues that question its viability. In addition, Mills' study is agnostic to the multi-dimensional QoS requirements that go beyond time and energy.
+power-aware approach to achieve high-levels of resilience through forward progress~\cite{mills_2014_icnc,mills_2014_pdp,mills2014power}. Based on Dynamic Voltage and Frequency Scaling (DVFS), Mills studied the computational model and its performance in terms of completion time and energy consumption in HPC systems. Through the use of analytical models, simulations, and experimentation, Mills demonstrated that Shadow Replication can achieve resilience more efficiently than both checkpointing and traditional replication when power is limited. However, in Mills' work Shadow Replication is limited to the use of DVFS, which has been shown to have multiple issues that question its viability. In addition, Mills' study is limited to HPC systems and focuses exclusively on minimizing energy consumption with constraints on time to completion. In general, QoS requirements for various computing systems can be expressed in multiple dimensions that go beyond time and energy. At the same time, an implementation is needed to verify the computational model both with and without failures. 
 
 
 %In this thesis, our research objective is to simultaneously address the power and resilience challenges for future extreme-scale 
@@ -104,13 +104,13 @@ power-aware approach to achieve high-levels of resilience, through forward progr
 %new main process and possibly increase its execution rate to mitigate delay.
 
 To address the above limitations, this thesis builds on the computational model of Shadow Replication, and seeks to simultaneously address the power and resilience challenges for future extreme-scale systems while guaranteeing system efficiency and application QoS requirements.
-Specifically, this thesis tries to answer 4 questions: 1) is Lazy Shadowing able to achieve objectives that are more than time to completion, such as multiple simultaneous requirements defined in a SLA in the Cloud; 2) how to enable Lazy Shadowing when DVFS is not viable, and ensure forward progress while guaranteeing useful work in future extreme-scale systems; 3) is Lazy Shadowing a viable computational model in real environments; 4) how to make Lazy Shadowing reflective of the propensity of the processing elements to failures and adaptive to the QoS requirements.
+Specifically, this thesis tries to answer 4 questions: 1) is Shadow Replication general enough to achieve objectives that are more than time to completion, such as multiple simultaneous requirements defined in a SLA in the Cloud; 2) how to enable Shadow Replication when DVFS is not viable, and ensure forward progress while guaranteeing useful work in future extreme-scale systems; 3) is the computational model realistic in real environments; and 4) how to make the computational model reflective of the propensity of the processing elements to failures and adaptive to different environments and requirements.
 With these questions in mind, 
-I have studied different techniques to enable the model, and developed analytical frameworks to optimize for different objectives in the Cloud and HPC environments.
+I have studied different techniques to embody and augment the model, and developed analytical frameworks for different objectives in the Cloud and HPC environments.
 %Previously, we have formally defined the computational model, studied possible techniques to realize and optimize the idea, and 
 %built analytical models for performance evaluation. 
 Next, I propose to continue the study in two aspects.
-Firstly, I propose to implement a prototype of Lazy Shadowing in the context of Message Passing Interface (MPI), to validate the 
+Firstly, I propose to implement a prototype in the context of Message Passing Interface (MPI), to validate the 
 computational model as well as measure its performance in real environment. Secondly, I propose to study the possibility of 
 ``smart shadowing" which further reduces the cost of shadowing by considering the specific system configuration, application characteristics, and QoS requirement.
 
