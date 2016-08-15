@@ -1,0 +1,51 @@
+In a complex system like what we have today, the behavior of Lazy Shadowing is subject to both the hardware configuration, such as failure detection and execution rate control, and software behavior, such as the amount of communication and synchronization. 
+It's difficult for an analytical framework to precisely capture every details of Lazy Shadowing when it runs in a real environment. Therefore, a functional prototype is necessary to prove its validity as well as measure its actual performance. 
+
+We are implementing Lazy Shadowing as a library (lsMPI) for MPI, which is the de facto programming paradigm for HPC. Instead of a full-feature MPI implementation, the library is designed to be a separate layer between MPI and user application, and uses the MPI profiling hooks to intercept every MPI call. There are three benefits for this choice: 1) we can save tremendous time and efforts of rebuilding MPI from scratch; 2) we can take advantage of existing MPI performance optimizations that numerous researches have spent years on; and 3) the library is portable across all MPI implementations. 
+The library will spawn the shadow processes at initialization phase, manage the coordination between main and shadow processes during execution, and guarantee order and consistency for messages and non-deterministic events.
+Once completed, users should be able to link to the library without any change to existing code. 
+
+Same as rMPI~\cite{ferreira_sc_2011}, lsMPI uses the underlying Reliability, Availability and Serviceability (RAS) system to detect process failure. In this prototype system, we will emulate a RAS system at the user level, and use an event mechanism to inform lsMPI whenever RAS detects a failure. When initializing, each process installs a signal handler dedicated for failure detection and notification. When a process is about the fail, RAS will send a signal to the process and triger the handler, which forces the process to fail and use out-of-band messages to notify other processes of the failure. 
+
+When user specifies $N$ processes, we will transparently translate it into $2N + K$ processes where $K$ is the number of shadowed sets. In our wrapper of MPI_Init() we will spawn $N$ main processes, $N$ shadow processes, and $K$ shadow coordinators. User has the flexibility to specify how the main processes are orgnanized into shadowed sets through a rankfile. With a rankfile as input, lsMPI creates a process as shadow coordinator for each shadowed set. The logical organization is depicted in Figure~\ref{fig:logical_org}. 
+
+\begin{figure}[!t]
+  \begin{center}
+      \includegraphics[width=0.7\columnwidth]{figures/logical_org}
+  \end{center}
+  \caption{Logical organization of a MPI world with Lazy Shadowing.}
+  \label{fig:logical_con}
+\end{figure}
+
+State consistency is required both during normal execution and following a failure. % of a main process to roll-forward the shadows. 
+We design a consistency protocol as shown in Figure~\ref{fig:cons_protocol}, 
+to assure 
+that the shadows see the same message order and MPI operation results as the mains. In this figure, A and B represent two mains, and A' and B' are their shadows. 
+For each message, the main of the sender sends a copy of the message to each of the main and shadow of the receiver, and the shadow of the sender is suppressed from sending out messages until its main process fails. %After sending out the message, the main sends an ACK to its shadow, so that the shadow can safely suppress sending the message and proceed. 
+If a main fails,
+its associated shadow will become a new main. Same as the previous main, the new main sends 2 copies for each application message. 
+To assure consistent transition, i.e., there is neither duplicate or missing message, we require the main to send a ACK after each application message. With ACKs, the shadow knows exactly which messages have been sent out before its main fails. 
+
+
+\begin{figure}[!t]
+  \begin{center}
+  	\subfigure[Before failure]
+		{
+			\label{fig:consist_w_fail}
+      		\includegraphics[width=0.4\columnwidth]{figures/cons_protocol}
+      	}
+  	\subfigure[After failure]
+		{
+			\label{fig:consist_wo_fail}
+      		\includegraphics[width=0.4\columnwidth]{figures/cons_protocol_failure.png}
+      	}
+  \end{center}
+  %\vskip -0.25in
+  \caption{Consistency protocol for lsMPI.}
+  \label{fig:cons_protocol}
+\end{figure}
+
+We assume that only MPI operations can introduce non-determinism. MPI\_ANY\_SOURCE receives may result in different message orders between the main and shadow. To deal with this, we always let the main receive a message ahead of the shadow and then forward the message source to its shadow (SYNC message in Figure~\ref{fig:cons_protocol}). 
+The shadow then issues a receive with the specific source. Other operations, such as MPI\_Wtime() and MPI\_Probe(), can be dealt with by always forwarding the result from the main to the shadow.
+
+Remote Direct Memory Access (RDMA) will be used to leap forward the state of the shadow to be consistent with that of its associated main. Rather than copying data to the buffers of the OS, RDMA allows to transfer data directly from the main process to its shadow. The zero-copy feature of RDMA considerably reduces latency, thereby enabling fast transfer of data between the main and its shadow.

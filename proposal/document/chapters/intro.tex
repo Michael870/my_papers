@@ -85,7 +85,7 @@ these systems will be designed to operate, calls for a
 reconsideration of the fault tolerance problem.
 
 To this end, Mills, Znati, and Melhem have proposed a novel computational model, referred to as Shadow Replication, as a  
-power-aware approach to achieve high-levels of resilience through forward progress~\cite{mills_2014_icnc,mills_2014_pdp,mills2014power}. Based on Dynamic Voltage and Frequency Scaling (DVFS), Mills studied the computational model and its performance in terms of completion time and energy consumption in HPC systems. Through the use of analytical models, simulations, and experimentation, Mills demonstrated that Shadow Replication can achieve resilience more efficiently than both checkpointing and traditional replication when power is limited. However, in Mills' work Shadow Replication is limited to the use of DVFS, which has been shown to have multiple issues that question its viability. In addition, Mills' study is limited to HPC systems and focuses exclusively on minimizing energy consumption with constraints on time to completion. In general, QoS requirements for various computing systems can be expressed in multiple dimensions that go beyond time and energy. At the same time, an implementation is needed to verify the computational model both with and without failures. 
+power-aware approach to achieve high-levels of resilience through forward progress~\cite{mills_2014_icnc,mills_2014_pdp,mills2014power}. Based on Dynamic Voltage and Frequency Scaling (DVFS), Mills studied the computational model and its performance in terms of completion time and energy consumption in HPC systems. Through the use of analytical models, simulations, and experimentation, Mills demonstrated that Shadow Replication can achieve resilience more efficiently than both checkpointing and traditional replication when power is limited. However, in Mills' work Shadow Replication is limited to the use of DVFS, which has been shown to have multiple issues that question its viability. In addition, Mills' study is limited to HPC systems and focuses exclusively on minimizing energy consumption with constraints on time to completion. In contrast, QoS requirements for various computing systems can be expressed in multiple dimensions that go beyond time and energy. At the same time, an implementation is needed to verify the computational model both with and without failures. 
 
 
 %In this thesis, our research objective is to simultaneously address the power and resilience challenges for future extreme-scale 
@@ -144,7 +144,7 @@ costs under strict completion time constraints.
 
 \subsection{Lazy Shadowing (completed)}
 
-Enabling Lazy Shadowing for resiliency in extreme-scale computing brings about a number of challenges and design decisions 
+Enabling Shadow Replication for resiliency in extreme-scale computing brings about a number of challenges and design decisions 
 that need to be addressed, including the applicability of this concept to a large number of tasks executing in parallel, 
 the effective way to control shadows’ execution rates, and the runtime mechanisms and communications support to ensure efficient 
 coordination between a main and its shadow. Taking into consideration the main characteristics of compute-intensive and 
@@ -175,7 +175,7 @@ Shadowing as a runtime for Message Passing Interface (MPI), which is the de fact
 a full-feature MPI implementation, the runtime is designed to be a separate layer between MPI and user application, in order 
 to take advantage of existing MPI performance optimizations that numerous researches have spent years on. The runtime will spawn 
 the shadow processes at initialization phase, manage the coordination between main and shadow processes during execution, 
-and guarantee consistency for messages and non-deterministic events. With this implementation, we will perform thorough 
+and guarantee order and consistency for messages and non-deterministic events. With this implementation, we will perform thorough 
 experiments measuring its runtime overhead as well as performance under failures.
 
 \subsection{Smart shadowing (future)}
@@ -191,8 +191,8 @@ maintaining performance.
 When completed, this thesis will make the following contributions:
 
 \begin{itemize}
-\item A reward-based framework for Lazy Shadowing to satisfy SLA requirements as well as maximize profit in Cloud Computing
-\item Study of optimization techniques that apply Lazy Shadowing to future extreme-scale systems
+\item A reward-based framework for Shadow Replication to satisfy SLA requirements as well as maximize profit in Cloud Computing
+\item Study of Lazy Shadowing as an enhanced model for future extreme-scale systems
 \item A fully functional implementation of Lazy Shadowing for Message Passing Interface
 \item Exploration of Lazy Shadowing's adaptivity to different environments, workloads, and QoS requirements. 
 \end{itemize}
@@ -202,8 +202,8 @@ When completed, this thesis will make the following contributions:
 \label{outline}
 The rest of this proposal is organized as follow:  
 Chapter \ref{chapter:background} introduces fault tolerance in large-scale distributed systems, 
-and Chapter \ref{chapter:shadowing} introduces Lazy Shadowing computational model. In Chapter \ref{chapter:reward} we build a reward-based optimization framework for Lazy Shadowing in the Cloud environment.
-In Chapter \ref{chapter:scale}, we explore techniques to efficiently apply Lazy Shadowing in extreme-scale systems. 
+and Chapter \ref{chapter:shadowing} introduces the Shadow Replication computational model. In Chapter \ref{chapter:reward} we build a reward-based optimization framework for Shadow Replication in the Cloud environment.
+In Chapter \ref{chapter:scale}, we introduce Lazy Shadowing which enhances Shadow Replication for extreme-scale systems. 
 Implementation issues are discussed in Chapter \ref{chapter:implementation}. Adaptivity and smart shadowing are discussed in Chapter \ref{chapter:smart}.
 Chapter \ref{chapter:timeline} and \ref{chapter:summary} lists the timeline and concludes the proposal, respectively.
 
