@@ -7,7 +7,7 @@ Once completed, users should be able to link to the library without any change t
 
 Same as rMPI~\cite{ferreira_sc_2011}, lsMPI uses the underlying Reliability, Availability and Serviceability (RAS) system to detect process failure. In this prototype system, we will emulate a RAS system at the user level, and use an event mechanism to inform lsMPI whenever RAS detects a failure. When initializing, each process installs a signal handler dedicated for failure detection and notification. When a process is about the fail, RAS will send a signal to the process and triger the handler, which forces the process to fail and use out-of-band messages to notify other processes of the failure. 
 
-When user specifies $N$ processes, we will transparently translate it into $2N + K$ processes where $K$ is the number of shadowed sets. In our wrapper of MPI_Init() we will spawn $N$ main processes, $N$ shadow processes, and $K$ shadow coordinators. User has the flexibility to specify how the main processes are orgnanized into shadowed sets through a rankfile. With a rankfile as input, lsMPI creates a process as shadow coordinator for each shadowed set. The logical organization is depicted in Figure~\ref{fig:logical_org}. 
+When user specifies $N$ processes, lsMPI will translate it into $2N + K$ processes where $K$ is the number of shadowed sets. User has the flexibility to specify how the main processes are orgnanized into shadowed sets through a rankfile. In our wrapper of MPI\_Init() we will spawn $N$ main processes, $N$ shadow processes, and 1 shadow coordinator per shadowed set. The logical organization is depicted in Figure~\ref{fig:logical_org}. Shadow coordinator manages the coordination between main and shadow processes. When a main process finishes, it will notify its corresponding shadow coordinator, which then terminites the associated shadow process. When a main process fails, the RAS system will notify the corresponding shadow coordinator, which then promotes the associated shadow process to a new main process and kills the collocated shadows.
 
 \begin{figure}[!t]
   \begin{center}
@@ -27,23 +27,23 @@ its associated shadow will become a new main. Same as the previous main, the new
 To assure consistent transition, i.e., there is neither duplicate or missing message, we require the main to send a ACK after each application message. With ACKs, the shadow knows exactly which messages have been sent out before its main fails. 
 
 
-\begin{figure}[!t]
-  \begin{center}
-  	\subfigure[Before failure]
-		{
-			\label{fig:consist_w_fail}
-      		\includegraphics[width=0.4\columnwidth]{figures/cons_protocol}
-      	}
-  	\subfigure[After failure]
-		{
-			\label{fig:consist_wo_fail}
-      		\includegraphics[width=0.4\columnwidth]{figures/cons_protocol_failure.png}
-      	}
-  \end{center}
-  %\vskip -0.25in
-  \caption{Consistency protocol for lsMPI.}
-  \label{fig:cons_protocol}
-\end{figure}
+%\begin{figure}[!t]
+%  \begin{center}
+%  	\subfigure[Before failure]
+%		{
+%			\label{fig:consist_w_fail}
+%      		\includegraphics[width=0.4\columnwidth]{figures/cons_protocol}
+%      	}
+%  	\subfigure[After failure]
+%		{
+%			\label{fig:consist_wo_fail}
+%      		\includegraphics[width=0.4\columnwidth]{figures/cons_protocol_failure.png}
+%      	}
+%  \end{center}
+%  %\vskip -0.25in
+%  \caption{Consistency protocol for lsMPI.}
+%  \label{fig:cons_protocol}
+%\end{figure}
 
 We assume that only MPI operations can introduce non-determinism. MPI\_ANY\_SOURCE receives may result in different message orders between the main and shadow. To deal with this, we always let the main receive a message ahead of the shadow and then forward the message source to its shadow (SYNC message in Figure~\ref{fig:cons_protocol}). 
 The shadow then issues a receive with the specific source. Other operations, such as MPI\_Wtime() and MPI\_Probe(), can be dealt with by always forwarding the result from the main to the shadow.
