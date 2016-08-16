@@ -69,7 +69,7 @@
 \newcommand\@@@degree{}
 \DeclareOption{phd}{\renewcommand{\t@or@d}{phd}%
     \renewcommand\@this{Dissertation}%
-    \renewcommand\@@@degree{PhD}%
+    \renewcommand\@@@degree{PhD candidate}%
     \def\@degreesought{\textbf{Doctor of Philosophy}}%
     \def\@advisor{Director}}
 \DeclareOption{ma}{\renewcommand{\t@or@d}{ma}%
