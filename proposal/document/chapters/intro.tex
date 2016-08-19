@@ -22,8 +22,8 @@ of web servers in dedicated data centers to support their business.
 Unfortunately, several challenging issues come with the increase in system scale. As today's HPC and Cloud Computing systems grow to 
 meet tomorrow's compute power demand, the behavior of the systems will be increasingly difficult to specify, predict and manage. 
 This upward trend, in terms of scale and complexity, has a direct negative effect on the overall system reliability. 
-Even with the expected improvement in the reliability of future computing technology, the rate of system level failures will 
-dramatically increase with the number of components, possibly by several orders of magnitude. 
+%Even with the expected improvement in the reliability of future computing technology, the rate of system level failures will 
+%dramatically increase with the number of components, possibly by several orders of magnitude. 
 At the same time, the rapid 
 growing power consumption, as a result of the increase in system components, is another major concern. 
 %It is reported that 
@@ -38,8 +38,8 @@ The system scale needed to address our future computing needs will come at the c
 and operating expenses. As we approach future extreme-scale, two of the biggest challenges will be system resilience and power 
 consumption, both being direct consequences of the increase in the number of components. 
 
-Regardless of the reliability of individual component, the system level reliability will continue to decrease as the number of 
-components increases. It is projected that the Mean Time Between Failures (MTBF) of future extreme-scale systems will be at the order of hours or even minutes, meaning 
+Regardless of the reliability of individual component, the system level failure rate will continue to increase as the number of 
+components increases, possibly by several orders of magnitude. It is projected that the Mean Time Between Failures (MTBF) of future extreme-scale systems will be at the order of hours or even minutes, meaning 
 that many failures will occur every day. Without an efficient fault tolerance mechanism, faults will be so frequent that the applications running on the 
 systems will be continuously interrupted, requiring the execution to be restarted every time there is a failure. 
 
@@ -103,16 +103,17 @@ power-aware approach to achieve high-levels of resilience through forward progre
 %terminate the shadows immediately. If the main process fails, however, we will promote one of the shadow processes to be a 
 %new main process and possibly increase its execution rate to mitigate delay.
 
-To address the above limitations, this thesis builds on the computational model of Shadow Replication, and seeks to simultaneously address the power and resilience challenges for future extreme-scale systems while guaranteeing system efficiency and application QoS requirements.
-Specifically, this thesis tries to answer 4 questions: 1) is Shadow Replication general enough to achieve objectives that are more than time to completion, such as multiple simultaneous requirements defined in a SLA in the Cloud; 2) how to enable Shadow Replication when DVFS is not viable, and ensure forward progress while guaranteeing useful work in future extreme-scale systems; 3) is the computational model realistic in real environments; and 4) how to make the computational model reflective of the propensity of the processing elements to failures and adaptive to different environments and requirements.
+To address the above limitations, this thesis builds on the computational model of Shadow Replication, and seeks to simultaneously address the power and resilience challenges for future extreme-scale systems while guaranteeing system efficiency and application QoS.
+Specifically, this thesis tries to answer 4 questions: 1) is Shadow Replication general enough to achieve objectives beyond time to completion; %, such as multiple simultaneous requirements defined in a SLA in the Cloud; 
+2) how to enable Shadow Replication when DVFS is not viable, and ensure forward progress in failure-prone, extreme-scale systems; 3) is the computational model realistic in real environments; and 4) how to make the computational model reflective of the propensity of the processing elements to failures and adaptive to different environments and requirements.
 With these questions in mind, 
 I have studied different techniques to embody and augment the model, and developed analytical frameworks for different objectives in the Cloud and HPC environments.
 %Previously, we have formally defined the computational model, studied possible techniques to realize and optimize the idea, and 
 %built analytical models for performance evaluation. 
 Next, I propose to continue the study in two aspects.
 Firstly, I propose to implement a prototype in the context of Message Passing Interface (MPI), to validate the 
-computational model as well as measure its performance in real environment. Secondly, I propose to study the possibility of 
-``smart shadowing" which further reduces the cost of shadowing by considering the specific system configuration, application characteristics, and QoS requirement.
+computational model as well as measure its performance in real environment. Secondly, I propose to study  
+``smart shadowing" which adapts to the system configuration, application characteristics, and QoS requirement.
 
 %\subsection{Lazy Shadowing: a novel fault-tolerant computational model (completed)}
 
@@ -149,32 +150,34 @@ that need to be addressed, including the applicability of this concept to a larg
 the effective way to control shadows’ execution rates, and the runtime mechanisms and communications support to ensure efficient 
 coordination between a main and its shadow. Taking into consideration the main characteristics of compute-intensive and 
 highly-scalable applications, 
-we devise novel ideas of shadow collocation and shadow leaping, and integrate them with the basic computational model of Shadow Replication, which jointly form a more efficient and scalable paradigm that we call Lazy Shadowing.
+we devise novel ideas of shadow collocation and shadow leaping, and integrate them with Shadow Replication to form a more efficient and scalable paradigm that we call Lazy Shadowing.
 %we design two novel techniques, referred to as shadow collocation and shadow leaping, 
 %in order to achieve high tolerance to failures while minimizing delay and power consumption.
 
-To control the processes' execution rate, DVFS can be applied while each process resides on one core exclusively. 
-The effectiveness of DVFS, however, may be markedly 
-limited by the granularity of voltage control, the number of frequencies available, and the negative effects on 
-reliability. 
-An alternative is to collocate multiple processes on each core while keeping all the cores executing at maximum frequency. 
-Then time sharing can be used to achieve the desired execution rates for each collocated process. 
-Since this approach collocates multiple processes on a core, it simultaneously reduces the number of compute nodes and 
-the power consumption. 
-
-Furthermore, we identify a unique opportunity that ensures forward progress in failure-prone environments. Since each shadow process is associated with a main process, the lagging shadow can benefit from the faster execution 
-of the main with minimal overhead. Specifically, when a failure occurs, Lazy Shadowing takes advantage of 
-the recovery time and leaps forward each shadow by copying states from its associated main. This technique not only achieves forward 
-progress for the shadow processes at minimized power and delay, but also reduces the recovery time after each failure.
+%To control the processes' execution rate, DVFS can be applied while each process resides on one core exclusively. 
+%The effectiveness of DVFS, however, may be markedly 
+%limited by the granularity of voltage control, the number of frequencies available, and the negative effects on 
+%reliability. 
+%An alternative is to collocate multiple processes on each core while keeping all the cores executing at maximum frequency. 
+%Then time sharing can be used to achieve the desired execution rates for each collocated process. 
+%Since this approach collocates multiple processes on a core, it simultaneously reduces the number of compute nodes and 
+%the power consumption. 
+%
+%Furthermore, we identify a unique opportunity that ensures forward progress in failure-prone environments. Since each shadow process is associated with a main process, the lagging shadow can benefit from the faster execution 
+%of the main with minimal overhead. Specifically, when a failure occurs, Lazy Shadowing takes advantage of 
+%the recovery time and leaps forward each shadow by copying states from its associated main. This technique not only achieves forward 
+%progress for the shadow processes at minimized power and delay, but also reduces the recovery time after each failure.
 
 \subsection{lsMPI: an implementation in MPI (partially completed)}
 
-Though Lazy Shadowing has been shown to scale to future extreme-scale systems with our analytical models, a real implementation 
-is still necessary for validation and performance measurement in real systems. I am implementing a prototype of Lazy 
-Shadowing as a runtime for Message Passing Interface (MPI), which is the de facto programming paradigm for HPC. Instead of 
-a full-feature MPI implementation, the runtime is designed to be a separate layer between MPI and user application, in order 
-to take advantage of existing MPI performance optimizations that numerous researches have spent years on. The runtime will spawn 
-the shadow processes at initialization phase, manage the coordination between main and shadow processes during execution, 
+Though Lazy Shadowing has been evaluated analytically, a real implementation 
+is necessary for validation and performance measurement in real systems. I am implementing a prototype of Lazy 
+Shadowing as a runtime for Message Passing Interface (MPI). %, which is the de facto programming paradigm for HPC. 
+%Instead of 
+%a full-feature MPI implementation, the runtime is designed to be a separate layer between MPI and user application, in order 
+%to take advantage of existing MPI performance optimizations that numerous researches have spent years on. 
+The runtime will spawn 
+the shadow processes at initialization phase, manage the coordination between main and shadow processes, 
 and guarantee order and consistency for messages and non-deterministic events. With this implementation, we will perform thorough 
 experiments measuring its runtime overhead as well as performance under failures.
 

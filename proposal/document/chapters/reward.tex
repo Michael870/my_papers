@@ -1,28 +1,26 @@
 Cloud Computing has emerged as an attractive platform for increasingly
 diverse compute- and data-intensive applications, as it allows for
-low-entry costs, on demand resource provisioning and allocation and
+low-entry costs, on demand resource provisioning and allocation, and
 reduced cost of maintaining internal IT
-infrastructure~\cite{tchana_cits_2012}. Cloud computing will continue
-to grow and attract attention from commercial and public market
-segments. Recent studies predict annual growth rate of 17.7 percent by
-2016, making cloud computing the fastest growing segment in the
-software industry.
-
+infrastructure~\cite{tchana_cits_2012}. %Cloud computing will continue
+%to grow and attract attention from commercial and public market
+%segments. Recent studies predict annual growth rate of 17.7 percent by
+%2016, making cloud computing the fastest growing segment in the
+%software industry.
 As the demand for cloud computing
 accelerates, cloud service providers (CSPs) will be faced with the
 need to expand their underlying infrastructure to ensure the expected
-levels of performance, reliability and cost-effectiveness, resulting
+levels of performance and cost-effectiveness, resulting
 in a multi-fold increase in the number of computing, storage and
 communication components in their datacenters. The direct implication of large datacenters is increased management complexity and propensity to
 failure.
 
 Failure to deliver
-the service as specified subjects the CSP to pay a penalty,
-resulting in a loss of revenue. In addition, CSPs face rising energy costs of their large-scale
+the service as specified subjects the CSP to a loss of revenue. In addition, CSPs face rising energy costs of their large-scale
 datacenters. This raises the question of how
 fault tolerance might impact power consumption and ultimately the
-expected profit of the service providers. In this work, we address the above trade-off challenge 
-by studying the application of Lazy Shadowing for resilience in cloud computing.
+expected profit of the service providers. In this work, we address the above challenge 
+by studying the application of Shadow Replication for QoS in cloud computing.
 
 \section{Cloud workload characteristics}
 
@@ -51,21 +49,21 @@ Cloud Computing \cite{mrbs}.  An instance of this model, is depicted in Figure \
 	\label{fig:system_model}
 \end{figure} 
 
-Each task is mapped to one compute core and executes at a speed, $\sigma$. The partition of the job among tasks is
-such that each task processes a similar
-workload, $W$. Consequently, baring failures, tasks are expected to
-complete at about the same time. Therefore, the minimal response time
-of each task, when no failure occurs, is
-$t_{min}~=~\frac{W}{\sigma_{max}}$, where $\sigma_{max}$ is the maximum speed. This is also the minimal response
-time of the entire phase. 
-
-As the number of tasks increases, however, the likelihood of a task
-failure during an execution of a given phase increases
-accordingly. This underscores the importance of an energy-efficient
-fault-tolerance model to mitigate the impact of a failing task on the
-overall delay of the execution phase. Lazy Shadowing is a perfect match for the needs. We can easily apply 
-Lazy Shadowing by issuing one main and shadow pair for each task, and the execution can be performed phase 
-by phase, just as previously described. 
+%Each task is mapped to one compute core and executes at a speed, $\sigma$. The partition of the job among tasks is
+%such that each task processes a similar
+%workload, $W$. Consequently, baring failures, tasks are expected to
+%complete at about the same time. Therefore, the minimal response time
+%of each task, when no failure occurs, is
+%$t_{min}~=~\frac{W}{\sigma_{max}}$, where $\sigma_{max}$ is the maximum speed. This is also the minimal response
+%time of the entire phase. 
+%
+%As the number of tasks increases, however, the likelihood of a task
+%failure during an execution of a given phase increases
+%accordingly. This underscores the importance of an energy-efficient
+%fault-tolerance model to mitigate the impact of a failing task on the
+%overall delay of the execution phase. Lazy Shadowing is a perfect match for the needs. We can easily apply 
+%Lazy Shadowing by issuing one main and shadow pair for each task, and the execution can be performed phase 
+%by phase, just as previously described. 
 
 \section{Optimization framework}
 
@@ -93,226 +91,228 @@ In order to earn profit, service providers must either increase
 income or decrease expenditure. We take both factors into
 consideration for the purpose of maximizing profit while meeting
 customer's requirements. In our model, we set the expected profit to be
-expected income minus expected expense.
+expected income minus expected expense. To model the expected income and expected expense, we built models for job reward, process failure distribution, power consumption, and energy cost. Please refer to~\cite{cui_2014_closer} for more details.
 
 \begin{equation}
 E[\text{profit}]=E[\text{income}]-E[\text{expense}]
 \end{equation}
 
-\subsection{Reward Model}
-\label{sla_reward_model}
-
-As depicted in Figure \ref{fig:reward}, customers expect that their
-job deployed on cloud finishes by a mean response time $t_{R_1}$.  As a
-return, the provider earns a certain amount of reward, denoted by R,
-for satisfying customer's requirements. However, if the job cannot be
-completed by the expected response time, the provider loses a fraction of $R$
-proportional to the delay incurred. For large delay, the profit loss may translate into a penalty that the CSP must pay to the customer. In this model, the maximum penalty $P$ is paid if the
-delay reaches or exceeds $t_{R_2}$. The four
-parameters, $R$, $P$, $t_{R_1}$ and
-$t_{R_2}$, completely define the reward model.
-
-There are two facts that the service provider must take into account
-when negotiating the terms of the SLA. The first is the response time
-of the main process assuming no failure (Figure
-\ref{fig:sc_no_fail} and Figure \ref{fig:sc_shadow_fail}). This
-results in the following completion time:
-\begin{equation}
-t_c^m=W/\sigma_m
-\label{eq:tcm}
-\end{equation}
-
-If the main process fails (shown in Figure \ref{fig:sc_main_fail}), the
-task completion time by shadow process is the time of the failure,
-$t_f$, plus the time necessary to complete the remaining work.
-
-\begin{equation}
-t_c^s=t_f+\frac{W-t_f \times \sigma_b}{\sigma_a}
-\label{eq:tcs}
-\end{equation}
 
 
-\begin{figure}[t!]	
-	\begin{center}
-		\includegraphics[width=0.6\columnwidth]{figures/reward.pdf}
-	\end{center}
-	\caption{A reward function}
-	\label{fig:reward}
-\end{figure}
-
-
-\subsection{Failure Model}
-
-We assume that two probability density functions, $f_m(t_f)$ and
-$f_s(t_f)$, exist which express the probabilities of the main and shadow
-process failing at time $t_f$ separately. The model does not assume a
-specific distribution. However, in the remainder of this paper we use
-an exponential probability density function, $f_m(t_f)=f_s(t_f)=\lambda
-e^{-\lambda t_f}$, of which the mean time between failure (MTBF) is $\frac{1}{\lambda}$.
-
-\subsection{Power and Energy Models}
-Dynamic voltage and frequency scaling
-(DVFS) has
-been widely exploited as a technique to reduce CPU dynamic power~\cite{flautner_2002_APS,pillai_2001_sosp}. It
-is well known that one can reduce the dynamic CPU power consumption at
-least quadratically by reducing the execution speed linearly. The
-dynamic CPU power consumption of a computing node executing at speed
-$\sigma$ is given by the function $p_d(\sigma)=\sigma^n$ where $n \ge
-2$.
-%% removed burd_1995_systems citation
-
-In addition to the dynamic power, CPU leakage and other components
-(memory, disk, network etc.) all contribute to static power
-consumption, which is independent of the CPU speed. We
-define static power as a fixed fraction of the node power consumed
-when executing at maximum speed, referred to as $\rho$. Hence node
-power consumption is expressed as
-$p(\sigma)=\rho \times \sigma_{max}^n + (1-\rho)\times \sigma^n$. When the execution speed is zero
-the machine is in a sleep state, powered off or not assigned as a
-resource; therefore it will not be consuming any power, static or
-dynamic.  Throughout this thesis we assume that dynamic power is cubic
-in relation to
-speed~\cite{rusu_2003_ecs,zhai_2004_dac}, therefore the
-overall system power when executing at speed $\sigma$ is defined as:
-
-\begin{equation}
-p(\sigma) = \begin{cases} \rho \sigma_{max}^3 + (1-\rho) \sigma^3 & \mbox{if } \sigma > 0 \\ 
-                          0 & \mbox{if } \sigma = 0 \end{cases}
-\label{eq:power_model}
-\end{equation}
-%% I removed chen_2012_srds from speed citation to save space
-
-Using the power model given by \ref{eq:power_model}, the
-energy consumed by a process executing at speed $\sigma$ during an
-interval $T$ is given by
-\begin{equation}
-E(\sigma,T) = p(\sigma) \times T
-\end{equation}
-
-Corresponding to \ref{fig:sc_overview}, there are three
-failure cases to consider: main and shadow both succeed, shadow fails
-and main fails. As described earlier, the case of both the main and
-shadow failing is very rare and will be ignored. The expected
-energy consumption for a single task is then the weighted average of
-the expected energy consumption in the three cases.
-
-First consider the case where no failure occurs and the main process
-successfully completes the task at time $t_c^m$, corresponding to
-\ref{fig:sc_no_fail}.
-\begin{equation}
-\begin{split}
-E_1 = &  ( 1-\int_0^{t_c^m}f_m(t)dt) \times (1 - \int_0^{t_c^m} f_s(t)dt) \times \\
-      &  (  E(\sigma_m,t_c^m) + E(\sigma_b,t_c^m))
-\label{eq:energy_no_failure}
-\end{split}
-\end{equation}
-The first line is the probability of fault-free execution of the main
-process and shadow process. Then we multiple this probability by the
-energy consumed by the main and the shadow process during this fault
-free execution, ending at $t_c^m$.
-
-Next, consider the case where the shadow process fails at some point
-before the main process successfully completes the task, corresponding to
-\ref{fig:sc_shadow_fail}.
-\begin{equation}
-\begin{split}
-E_2 = & (1-\int_0^{t_c^m}f_m(t)dt) \times \\
-      & \int_0^{t_c^m}(E(\sigma_m,t_c^m)+E(\sigma_b,t)) \times f_s(t)dt
-\label{eq:energy_shadow_fail}
-\end{split}
-\end{equation}
-The first factor is the probability that the main process does not
-fail, and the probability of shadow fails is included in the second factor which also contains the energy consumption since it depends on the shadow failure time. Energy consumption comes from the main process until the completion of the task,
-and the shadow process before its failure.
-
-The one remaining case to consider is when the main process fails and
-the shadow process must continue to process until the task completes,
-corresponding to Figure \ref{fig:sc_main_fail}.
-\begin{equation}
-\begin{split}
-E_3 = & (1-\int_0^{t_c^m}f_s(t)dt) \times \int_0^{t_c^m}(E(\sigma_m,t)+\\
-      & E(\sigma_b,t)+E(\sigma_a,t_c^s-t))f_m(t)dt
-\label{eq:energy_main_fail}
-\end{split}
-\end{equation}
-Similarly, the first factor expresses the probability that the shadow process does
-not fail. In this case, the shadow process executes from the beginning to
-$t_c^s$ when it completes the task. However, under our ``at most one
-failure'' assumption, the period during which shadow process may fail
-ends at $t_c^m$, since the only reason why shadow process is still in
-execution after $t_c^m$ is that main process has already failed. There
-are three parts of energy consumption, including that of main process
-before main's failure, that of shadow process before main's failure,
-and that of shadow process after main's failure, all of which depend
-on the failure occurrence time. 
-
-The three equations above describe the expected energy consumption by a
-pair of main and shadow processes for completing a task under
-different situations. However, under our system model it might be the
-case that those processes that finish early will wait idly and
-consume static power if failure delays one task. If it is the case
-that processes must wait for all tasks to complete, then this energy
-needs to be accounted for in our model. The probability of this is the probability that at least one main process fails,
-referred to as the system level failure probability.
-\begin{equation}
-P_f=1-(1-\int_0^{t_c^m}f_m(t)dt)^N
-\label{eq:prob_of_one_main_failure}
-\end{equation}
-Hence, we have the fourth equation corresponding to the energy consumed while waiting in idle. 
-\begin{equation}
-  \begin{split}
-  E_4 = & ( 1-\int_0^{t_c^m}f_m(t)dt) \times (1 - \int_0^{t_c^m} f_s(t)dt) \times \\
-        & 2 P_f \times E(0,t_c^j-t_c^m) + \int_0^{t_c^m}f_s(t)dt \times \\
-        & (1-\int_0^{t_c^m}f_m(t)dt) \times P_f \times E(0,t_c^j-t_c^m) 
-  \end{split}
-\end{equation}
-Corresponding to the first case, neither main process nor shadow
-process fails, but both of them have to wait in idle from task
-completion time $t_c^m$ to the last task's completion (by a shadow
-process) with probability $P_f$. Under the second case, only the main
-process has to wait if some other task is delayed since its shadow
-process has already failed. These two aspects are accounted in the
-first and last two lines in $E_4$ separately.  We use the expected
-shadow completion time $t_c^j$ as an approximation of the latest task
-completion time which is also the job completion time.
-
-By summing these four parts and then multiplying it by $N$ we will have
-the expected energy consumed by Shadow Replication for completing a
-job of $N$ tasks.
-\begin{equation}
-E[\text{energy}]=N \times (E_1 + E_2 + E_3 + E_4)
-\label{eq:total_energy}
-\end{equation}
-
-\subsection{Income and Expense Models}
-The income is the reward paid by customer for the cloud computing
-services that they utilize. It depends on the reward function $r(t)$,
-depicted in \ref{fig:reward}, and the actual job completion
-time. Therefore, the income should be either $r(t_c^m)$, if all main
-processes can complete without failure, or $r^*(t_c^s)$ otherwise. It
-is worth noting that the reward in case of failure should be
-calculated based on the last completed task, which we approximate by
-calculating the expected time of completion allowing us to derive the
-expected reward, i.e. $r^*(t_c^s)=\frac{\int_0^{t_c^m}r(t_c^s) \times
-f_m(t)dt}{\int_0^{t_c^m}f_m(t)dt}$. Therefore the income is estimated
-by the following equation.
-\begin{equation}
-E[\text{income}]= (1-P_f) \times r(t_c^m) + P_f \times r^*(t_c^s)
-\end{equation}
-
-The first part is the reward earned by the main process times the
-probability that all main processes would complete tasks without
-failure. If at least one main process fails, that task would have to
-be completed by a shadow process. As a result, the second part is the
-reward earned by shadow process times the system level failure probability.
-
-If $C$ is the charge expressed as dollars per unit of energy consumption
-(e.g. kilowatt hour), then the expected expenditure would be $C$ times
-the expected energy consumption for all $N$ tasks:
-\begin{equation}
-E[\text{expense}] = C \times E[\text{energy}]
-\label{eq:expense}
-\end{equation}
+%\subsection{Reward Model}
+%\label{sla_reward_model}
+%
+%As depicted in Figure \ref{fig:reward}, customers expect that their
+%job deployed on cloud finishes by a mean response time $t_{R_1}$.  As a
+%return, the provider earns a certain amount of reward, denoted by R,
+%for satisfying customer's requirements. However, if the job cannot be
+%completed by the expected response time, the provider loses a fraction of $R$
+%proportional to the delay incurred. For large delay, the profit loss may translate into a penalty that the CSP must pay to the customer. In this model, the maximum penalty $P$ is paid if the
+%delay reaches or exceeds $t_{R_2}$. The four
+%parameters, $R$, $P$, $t_{R_1}$ and
+%$t_{R_2}$, completely define the reward model.
+%
+%There are two facts that the service provider must take into account
+%when negotiating the terms of the SLA. The first is the response time
+%of the main process assuming no failure (Figure
+%\ref{fig:sc_no_fail} and Figure \ref{fig:sc_shadow_fail}). This
+%results in the following completion time:
+%\begin{equation}
+%t_c^m=W/\sigma_m
+%\label{eq:tcm}
+%\end{equation}
+%
+%If the main process fails (shown in Figure \ref{fig:sc_main_fail}), the
+%task completion time by shadow process is the time of the failure,
+%$t_f$, plus the time necessary to complete the remaining work.
+%
+%\begin{equation}
+%t_c^s=t_f+\frac{W-t_f \times \sigma_b}{\sigma_a}
+%\label{eq:tcs}
+%\end{equation}
+%
+%
+%\begin{figure}[t!]	
+%	\begin{center}
+%		\includegraphics[width=0.6\columnwidth]{figures/reward.pdf}
+%	\end{center}
+%	\caption{A reward function}
+%	\label{fig:reward}
+%\end{figure}
+%
+%
+%\subsection{Failure Model}
+%
+%We assume that two probability density functions, $f_m(t_f)$ and
+%$f_s(t_f)$, exist which express the probabilities of the main and shadow
+%process failing at time $t_f$ separately. The model does not assume a
+%specific distribution. However, in the remainder of this paper we use
+%an exponential probability density function, $f_m(t_f)=f_s(t_f)=\lambda
+%e^{-\lambda t_f}$, of which the mean time between failure (MTBF) is $\frac{1}{\lambda}$.
+%
+%\subsection{Power and Energy Models}
+%Dynamic voltage and frequency scaling
+%(DVFS) has
+%been widely exploited as a technique to reduce CPU dynamic power~\cite{flautner_2002_APS,pillai_2001_sosp}. It
+%is well known that one can reduce the dynamic CPU power consumption at
+%least quadratically by reducing the execution speed linearly. The
+%dynamic CPU power consumption of a computing node executing at speed
+%$\sigma$ is given by the function $p_d(\sigma)=\sigma^n$ where $n \ge
+%2$.
+%%% removed burd_1995_systems citation
+%
+%In addition to the dynamic power, CPU leakage and other components
+%(memory, disk, network etc.) all contribute to static power
+%consumption, which is independent of the CPU speed. We
+%define static power as a fixed fraction of the node power consumed
+%when executing at maximum speed, referred to as $\rho$. Hence node
+%power consumption is expressed as
+%$p(\sigma)=\rho \times \sigma_{max}^n + (1-\rho)\times \sigma^n$. When the execution speed is zero
+%the machine is in a sleep state, powered off or not assigned as a
+%resource; therefore it will not be consuming any power, static or
+%dynamic.  Throughout this thesis we assume that dynamic power is cubic
+%in relation to
+%speed~\cite{rusu_2003_ecs,zhai_2004_dac}, therefore the
+%overall system power when executing at speed $\sigma$ is defined as:
+%
+%\begin{equation}
+%p(\sigma) = \begin{cases} \rho \sigma_{max}^3 + (1-\rho) \sigma^3 & \mbox{if } \sigma > 0 \\ 
+%                          0 & \mbox{if } \sigma = 0 \end{cases}
+%\label{eq:power_model}
+%\end{equation}
+%%% I removed chen_2012_srds from speed citation to save space
+%
+%Using the power model given by \ref{eq:power_model}, the
+%energy consumed by a process executing at speed $\sigma$ during an
+%interval $T$ is given by
+%\begin{equation}
+%E(\sigma,T) = p(\sigma) \times T
+%\end{equation}
+%
+%Corresponding to \ref{fig:sc_overview}, there are three
+%failure cases to consider: main and shadow both succeed, shadow fails
+%and main fails. As described earlier, the case of both the main and
+%shadow failing is very rare and will be ignored. The expected
+%energy consumption for a single task is then the weighted average of
+%the expected energy consumption in the three cases.
+%
+%First consider the case where no failure occurs and the main process
+%successfully completes the task at time $t_c^m$, corresponding to
+%\ref{fig:sc_no_fail}.
+%\begin{equation}
+%\begin{split}
+%E_1 = &  ( 1-\int_0^{t_c^m}f_m(t)dt) \times (1 - \int_0^{t_c^m} f_s(t)dt) \times \\
+%      &  (  E(\sigma_m,t_c^m) + E(\sigma_b,t_c^m))
+%\label{eq:energy_no_failure}
+%\end{split}
+%\end{equation}
+%The first line is the probability of fault-free execution of the main
+%process and shadow process. Then we multiple this probability by the
+%energy consumed by the main and the shadow process during this fault
+%free execution, ending at $t_c^m$.
+%
+%Next, consider the case where the shadow process fails at some point
+%before the main process successfully completes the task, corresponding to
+%\ref{fig:sc_shadow_fail}.
+%\begin{equation}
+%\begin{split}
+%E_2 = & (1-\int_0^{t_c^m}f_m(t)dt) \times \\
+%      & \int_0^{t_c^m}(E(\sigma_m,t_c^m)+E(\sigma_b,t)) \times f_s(t)dt
+%\label{eq:energy_shadow_fail}
+%\end{split}
+%\end{equation}
+%The first factor is the probability that the main process does not
+%fail, and the probability of shadow fails is included in the second factor which also contains the energy consumption since it depends on the shadow failure time. Energy consumption comes from the main process until the completion of the task,
+%and the shadow process before its failure.
+%
+%The one remaining case to consider is when the main process fails and
+%the shadow process must continue to process until the task completes,
+%corresponding to Figure \ref{fig:sc_main_fail}.
+%\begin{equation}
+%\begin{split}
+%E_3 = & (1-\int_0^{t_c^m}f_s(t)dt) \times \int_0^{t_c^m}(E(\sigma_m,t)+\\
+%      & E(\sigma_b,t)+E(\sigma_a,t_c^s-t))f_m(t)dt
+%\label{eq:energy_main_fail}
+%\end{split}
+%\end{equation}
+%Similarly, the first factor expresses the probability that the shadow process does
+%not fail. In this case, the shadow process executes from the beginning to
+%$t_c^s$ when it completes the task. However, under our ``at most one
+%failure'' assumption, the period during which shadow process may fail
+%ends at $t_c^m$, since the only reason why shadow process is still in
+%execution after $t_c^m$ is that main process has already failed. There
+%are three parts of energy consumption, including that of main process
+%before main's failure, that of shadow process before main's failure,
+%and that of shadow process after main's failure, all of which depend
+%on the failure occurrence time. 
+%
+%The three equations above describe the expected energy consumption by a
+%pair of main and shadow processes for completing a task under
+%different situations. However, under our system model it might be the
+%case that those processes that finish early will wait idly and
+%consume static power if failure delays one task. If it is the case
+%that processes must wait for all tasks to complete, then this energy
+%needs to be accounted for in our model. The probability of this is the probability that at least one main process fails,
+%referred to as the system level failure probability.
+%\begin{equation}
+%P_f=1-(1-\int_0^{t_c^m}f_m(t)dt)^N
+%\label{eq:prob_of_one_main_failure}
+%\end{equation}
+%Hence, we have the fourth equation corresponding to the energy consumed while waiting in idle. 
+%\begin{equation}
+%  \begin{split}
+%  E_4 = & ( 1-\int_0^{t_c^m}f_m(t)dt) \times (1 - \int_0^{t_c^m} f_s(t)dt) \times \\
+%        & 2 P_f \times E(0,t_c^j-t_c^m) + \int_0^{t_c^m}f_s(t)dt \times \\
+%        & (1-\int_0^{t_c^m}f_m(t)dt) \times P_f \times E(0,t_c^j-t_c^m) 
+%  \end{split}
+%\end{equation}
+%Corresponding to the first case, neither main process nor shadow
+%process fails, but both of them have to wait in idle from task
+%completion time $t_c^m$ to the last task's completion (by a shadow
+%process) with probability $P_f$. Under the second case, only the main
+%process has to wait if some other task is delayed since its shadow
+%process has already failed. These two aspects are accounted in the
+%first and last two lines in $E_4$ separately.  We use the expected
+%shadow completion time $t_c^j$ as an approximation of the latest task
+%completion time which is also the job completion time.
+%
+%By summing these four parts and then multiplying it by $N$ we will have
+%the expected energy consumed by Shadow Replication for completing a
+%job of $N$ tasks.
+%\begin{equation}
+%E[\text{energy}]=N \times (E_1 + E_2 + E_3 + E_4)
+%\label{eq:total_energy}
+%\end{equation}
+%
+%\subsection{Income and Expense Models}
+%The income is the reward paid by customer for the cloud computing
+%services that they utilize. It depends on the reward function $r(t)$,
+%depicted in \ref{fig:reward}, and the actual job completion
+%time. Therefore, the income should be either $r(t_c^m)$, if all main
+%processes can complete without failure, or $r^*(t_c^s)$ otherwise. It
+%is worth noting that the reward in case of failure should be
+%calculated based on the last completed task, which we approximate by
+%calculating the expected time of completion allowing us to derive the
+%expected reward, i.e. $r^*(t_c^s)=\frac{\int_0^{t_c^m}r(t_c^s) \times
+%f_m(t)dt}{\int_0^{t_c^m}f_m(t)dt}$. Therefore the income is estimated
+%by the following equation.
+%\begin{equation}
+%E[\text{income}]= (1-P_f) \times r(t_c^m) + P_f \times r^*(t_c^s)
+%\end{equation}
+%
+%The first part is the reward earned by the main process times the
+%probability that all main processes would complete tasks without
+%failure. If at least one main process fails, that task would have to
+%be completed by a shadow process. As a result, the second part is the
+%reward earned by shadow process times the system level failure probability.
+%
+%If $C$ is the charge expressed as dollars per unit of energy consumption
+%(e.g. kilowatt hour), then the expected expenditure would be $C$ times
+%the expected energy consumption for all $N$ tasks:
+%\begin{equation}
+%E[\text{expense}] = C \times E[\text{energy}]
+%\label{eq:expense}
+%\end{equation}
 
 
 \section{Profit-aware stretched replication} 
