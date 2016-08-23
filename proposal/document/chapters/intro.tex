@@ -1,12 +1,12 @@
 As our reliance on IT continues to increase, the complexity and urgency of the problems our society will face 
 in the future drives us to build more powerful and accessible computer systems. Among the different types of 
 computer systems, High Performance Computing (HPC) and Cloud Computing systems are the two most powerful ones. 
-For both of them, the computing power attributes to the massive amount of parallelism, which is supported by 
+For both, the computing power attributes to the massive amount of parallelism, which is supported by 
 the massive amount of computing cores, memory modules, communication devices, storage components, etc. 
 
-Since CPU frequency flattens out in early 2000s, parallelism has become the ``golden rule" to boost performance. 
+Since CPU frequency flattened out in early 2000s, parallelism has become the ``golden rule" to boost performance. 
 In HPC, Terascale performance was achieved in the late 90’s with fewer than 10,000 heavyweight single-core processors. 
-A decade later, petascale performance required about ten times processors with multiple cores on each processor. Nowadays, a race
+A decade later, petascale performance required about ten times more processors with multiple cores on each processor. Nowadays, a race
 is underway to build the world's first exascale machine to accelerate scientific discoveries and breakthroughs. It is 
 projected that an exascale machine will achieve billion-way parallelism by using one million sockets each supporting 
 1,000 cores. 
@@ -52,15 +52,15 @@ This huge imbalance makes system power a leading design constraint on the path t
 
 Today, two approaches exist for fault tolerance. The first approach is rollback recovery, which rolls back and restarts the execution 
 every time there is a failure. This approach is often equipped with checkpointing to periodically save the execution state to a 
-stable storage so that execution can be restarted from a recent checkpoint in the case of a failure. 
+stable storage so that execution can be restarted from a recent checkpoint in the case of a failure~\cite{Elnozahy:02:Survey,kalaiselvi_sadhana_2000,Chandy:1985:DSD:214451.214456}. 
 Although checkpointing is the most widely used technique in today's HPC systems, it is strongly believed that it may not scale to 
-future extreme-scale systems. Given the anticipated increase in system level failure rates and the time to checkpoint large-scale 
+future extreme-scale systems~\cite{ferreira_sc_2011}. Given the anticipated increase in system level failure rates and the time to checkpoint large-scale 
 compute-intensive and data-intensive applications, it is predicted that the time required to periodically checkpoint an application 
 and restart its execution will approach the system's MTBF. Consequently, applications will make little forward progress, thereby 
 reducing considerably the overall system efficiency. 
 
 The second approach, referred to as process replication, exploits hardware redundancy and executes multiple instances of the same task 
-in parallel to overcome failure and guarantee that at least one task instance reaches completion. Although this approach is extensively used 
+in parallel to overcome failure and guarantee that at least one task instance reaches completion~\cite{bartlett_1981_nonstop,tsai_isads_2011}. Although this approach is extensively used 
 to deal with failures in 
 Cloud Computing and mission critical systems, it has 
 never been used in any HPC system due to its low system efficiency. To replicate each process, process replication requires 

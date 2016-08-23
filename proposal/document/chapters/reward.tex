@@ -22,32 +22,32 @@ fault tolerance might impact power consumption and ultimately the
 expected profit of the service providers. In this work, we address the above challenge 
 by studying the application of Shadow Replication for QoS in cloud computing.
 
-\section{Cloud workload characteristics}
-
-Cloud computing workload ranges from business applications and
-intelligence, to analytics and social networks mining and log
-analysis, to scientific applications in various fields of sciences and
-discovery. These applications exhibit different behaviors, in term of
-computation requirements and data access patterns. While some
-applications are compute-intensive, others involve the processing of
-increasingly large amounts of data. The scope and scale of these
-applications are such that an instance of a job running one of these
-applications requires the sequential execution of multiple computing
-phases; each phase consists of thousands, if not millions, of tasks
-scheduled to execute in parallel and involves the processing of a very
-large amount of data~\cite{lin2010data,Ferdman:2012:CCS:2150976.2150982}. This
-model is directly reflective of the \emph{MapReduce} computational
-model, which is predominately used in
-Cloud Computing \cite{mrbs}.  An instance of this model, is depicted in Figure \ref{fig:system_model}.
-
-
-\begin{figure}[!h]
-	\begin{center}
-		\includegraphics[width=0.6\columnwidth]{figures/system_model_1.pdf}
-	\end{center}
-	\caption{Cloud computing execution model with 2 phases.}
-	\label{fig:system_model}
-\end{figure} 
+%\section{Cloud workload characteristics}
+%
+%Cloud computing workload ranges from business applications and
+%intelligence, to analytics and social networks mining and log
+%analysis, to scientific applications in various fields of sciences and
+%discovery. These applications exhibit different behaviors, in term of
+%computation requirements and data access patterns. While some
+%applications are compute-intensive, others involve the processing of
+%increasingly large amounts of data. The scope and scale of these
+%applications are such that an instance of a job running one of these
+%applications requires the sequential execution of multiple computing
+%phases; each phase consists of thousands, if not millions, of tasks
+%scheduled to execute in parallel and involves the processing of a very
+%large amount of data~\cite{lin2010data,Ferdman:2012:CCS:2150976.2150982}. This
+%model is directly reflective of the \emph{MapReduce} computational
+%model, which is predominately used in
+%Cloud Computing \cite{mrbs}.  An instance of this model, is depicted in Figure \ref{fig:system_model}.
+%
+%
+%\begin{figure}[!h]
+%	\begin{center}
+%		\includegraphics[width=0.6\columnwidth]{figures/system_model_1.pdf}
+%	\end{center}
+%	\caption{Cloud computing execution model with 2 phases.}
+%	\label{fig:system_model}
+%\end{figure} 
 
 %Each task is mapped to one compute core and executes at a speed, $\sigma$. The partition of the job among tasks is
 %such that each task processes a similar
@@ -68,7 +68,7 @@ Cloud Computing \cite{mrbs}.  An instance of this model, is depicted in Figure \
 \section{Optimization framework}
 
 In this section, we describe a profit-based optimization framework for
-the cloud-computing execution model previous described. Using this
+Shadow Replication in cloud computing. Using this
 framework we compute profit-optimized execution speeds by
 optimizing the following objective function:
 
@@ -327,76 +327,77 @@ the shadow execute independently at stretched speeds to meet the
 expected response time, without the need for failure
 detection. In profit-aware stretched replication both the main and
 shadow execute at speed $\sigma_r$, found by optimizing the profit
-model.  For both traditional replication and stretched replication,
-the task completion time is independent of failure and can be directly
-calculated as:
-\begin{equation}
-t_c=\frac{W}{\sigma_{max}} \text{ or } t_c=\frac{W}{\sigma_r}
-\end{equation}
-
-
-Since all tasks will have the same completion time, the job completion
-time would also be $t_c$. Further, the expected income, which depends
-on negotiated reward function and job completion time, is independent
-of failure:
-\begin{equation}
-E[income]=r(t_c)
-\end{equation}
-
-Since both traditional replication and profit-aware stretched
-replication are special cases of our Shadow Replication paradigm where
-$\sigma_m=\sigma_b=\sigma_a=\sigma_{max}$ or
-$\sigma_m=\sigma_b=\sigma_a=\sigma_r$ respectively, we can easily derive the
-expected energy consumption using \ref{eq:total_energy} with $E_4$
-fixed at 0 and then compute the expected expense using \ref{eq:expense}.
-
-\section{Re-execution}
-
-\noindent 
-Contrary to replication, re-execution initially assigns a single
-process for the execution of a task. If the original task fails, the
-process is re-executed. In the cloud computing execution framework
-this is equivalent to a checkpoint/restart, the checkpoint is
-implicitly taken at the end of each phase and because the tasks are
-loosely coupled they can restart independently. 
-
-Based on the one failure assumption, two cases must be considered to
-calculate the task completion time. If no failure occurs, the task
-completion time is:
-\begin{equation}
-t_c=\frac{W}{\sigma_{max}}
-\end{equation}
-In case of failure, however, the completion time is equal to the sum
-of the time elapsed until failure and the time needed for
-re-execution. Again, we use the expected value
-$t_f^*=\frac{\int_0^{t_c}t \times f_m(t)dt}{\int_0^{t_c}f_m(t)dt}$ to
-approximate the time that successfully completed processes have to
-spend waiting for the last one.
-
-Similar to Shadow Replication, the income for re-execution is the
-weighted average of the two cases:
-\begin{equation}
-E[\text{income}]=(1-P_f) \times r(t_c) + P_f \times r(t_c+t_f^{*})
-\end{equation}
-
-For one task, if no failure occurs then the expected energy consumption can be
-calculated as
-\begin{equation}
-E_5=(1 - \int_0^{t_c} f_m(t)dt) \times (E(\sigma_{max},t_c)+ P_f \times E(0,t_f^{*}))
-\label{eq:energy_first_task}
-\end{equation}
-
-If failure occurs, however, the expected energy consumption can be calculated
-as
-\begin{equation}
-E_6=\int_0^{t_c}(E(\sigma_{max},t) + E(\sigma_{max},t_c)) \times f_m(t) dt
-\label{eq:energy_rexecution_task}
-\end{equation}
-Therefore, the expected energy consumption by re-execution for
-completing a job of $N$ tasks is
-\begin{equation}
-E[energy]=N \times (E_5 + E_6)
-\end{equation}
+model.  
+%For both traditional replication and stretched replication,
+%the task completion time is independent of failure and can be directly
+%calculated as:
+%\begin{equation}
+%t_c=\frac{W}{\sigma_{max}} \text{ or } t_c=\frac{W}{\sigma_r}
+%\end{equation}
+%
+%
+%Since all tasks will have the same completion time, the job completion
+%time would also be $t_c$. Further, the expected income, which depends
+%on negotiated reward function and job completion time, is independent
+%of failure:
+%\begin{equation}
+%E[income]=r(t_c)
+%\end{equation}
+%
+%Since both traditional replication and profit-aware stretched
+%replication are special cases of our Shadow Replication paradigm where
+%$\sigma_m=\sigma_b=\sigma_a=\sigma_{max}$ or
+%$\sigma_m=\sigma_b=\sigma_a=\sigma_r$ respectively, we can easily derive the
+%expected energy consumption using \ref{eq:total_energy} with $E_4$
+%fixed at 0 and then compute the expected expense using \ref{eq:expense}.
+%
+%\section{Re-execution}
+%
+%\noindent 
+%Contrary to replication, re-execution initially assigns a single
+%process for the execution of a task. If the original task fails, the
+%process is re-executed. In the cloud computing execution framework
+%this is equivalent to a checkpoint/restart, the checkpoint is
+%implicitly taken at the end of each phase and because the tasks are
+%loosely coupled they can restart independently. 
+%
+%Based on the one failure assumption, two cases must be considered to
+%calculate the task completion time. If no failure occurs, the task
+%completion time is:
+%\begin{equation}
+%t_c=\frac{W}{\sigma_{max}}
+%\end{equation}
+%In case of failure, however, the completion time is equal to the sum
+%of the time elapsed until failure and the time needed for
+%re-execution. Again, we use the expected value
+%$t_f^*=\frac{\int_0^{t_c}t \times f_m(t)dt}{\int_0^{t_c}f_m(t)dt}$ to
+%approximate the time that successfully completed processes have to
+%spend waiting for the last one.
+%
+%Similar to Shadow Replication, the income for re-execution is the
+%weighted average of the two cases:
+%\begin{equation}
+%E[\text{income}]=(1-P_f) \times r(t_c) + P_f \times r(t_c+t_f^{*})
+%\end{equation}
+%
+%For one task, if no failure occurs then the expected energy consumption can be
+%calculated as
+%\begin{equation}
+%E_5=(1 - \int_0^{t_c} f_m(t)dt) \times (E(\sigma_{max},t_c)+ P_f \times E(0,t_f^{*}))
+%\label{eq:energy_first_task}
+%\end{equation}
+%
+%If failure occurs, however, the expected energy consumption can be calculated
+%as
+%\begin{equation}
+%E_6=\int_0^{t_c}(E(\sigma_{max},t) + E(\sigma_{max},t_c)) \times f_m(t) dt
+%\label{eq:energy_rexecution_task}
+%\end{equation}
+%Therefore, the expected energy consumption by re-execution for
+%completing a job of $N$ tasks is
+%\begin{equation}
+%E[energy]=N \times (E_5 + E_6)
+%\end{equation}
 
 \section{Performance evaluation}
 
@@ -416,8 +417,9 @@ Without loss of generality, we normalize $\sigma_{max}$ to be 1, so
 that all the speeds can be expressed as a fraction of maximum
 speed. Accordingly, the task workload $W$ is also adjusted such that
 it is equal to the amount of time (in hours) required for a single
-task, preserving the ratios expressed in
-\ref{eq:tcm} and \ref{eq:tcs}. The price of
+task. %, preserving the ratios expressed in
+%\ref{eq:tcm} and \ref{eq:tcs}. 
+The price of
 energy is assumed to be 1 unit. We assume that $R$ in our reward model
 is linearly proportional to the number of tasks $N$ and the maximal
 reward for one task is 3 units, so the total reward for a job is $3
@@ -504,45 +506,51 @@ system parameters. As expected
 re-execution is desired when the vulnerability to failure is
 low. As always, Shadow Replication can adjust its execution strategy to maximize the profits, as shown in Figure~\ref{fig:mtbf}.
 
-Lastly, we evaluate
-the expected profit of each resilience technique using three different
+Lastly, we evaluate 
+the profit of each resilience technique using three different
 benchmark applications representing a wide range of
 application~\cite{mrbs}: Business Intelligence, Bioinformatics and
-Recommendation System. 
-Using the results of the experiments reported in \cite{mrbs}, we
-derived that the time required to process data for above application types are 3.3 MB/s, 6.6 MB/s, and 13.2 MB/s, respectively. 
-
-\begin{figure}[!h]
-	
-	\begin{center}
-	\includegraphics[width=\columnwidth]{figures/application_comparison.png}
-	\end{center}
-	\caption{Application comparison. $\rho$=0.5, N=$500000$, $t_{R_1}$=$1.3t_{min}$, $t_{R_2}$=$2.6t_{min}$.}
-	\label{fig:app_compare}
-\end{figure}
-
-
-In Figure \ref{fig:app_compare} we compare the expected
-profit for each application using each of the 4 resilience techniques. 
-We consider two data sizes expected in future
-cloud computing environments, 500TB and 2PB. The figure shows that
-for business intelligence applications, Shadow Replication achieves significantly larger profits for both data sizes. This
-is because business intelligence applications tend to be IO intensive
-resulting in longer running tasks. Whereas recommendation systems tend
-to require little data IO resulting in shorter running tasks making
-re-execution as good as Shadow Replication. Bioinformatics tends to be in between
-these two applications resulting in shadow computing performing better
-when processing large datasets (2 PB) but not outstanding on smaller
-datasets (500 TB). The take away from this evaluation is that for the
-shown system parameters if phase execution is short, then re-execution
-performs as well as Shadow Replication. Alternatively, if a phase is long (20 minutes or
-greater), then Shadow Replication can be as much as 47.9\% more
-profitable than re-execution. The previous sensitivity analysis can be
-used to extrapolate expected profit for different system parameters.
+Recommendation System. Please refer to~\cite{cui_2014_closer} for more details.
+%Lastly, we evaluate
+%the expected profit of each resilience technique using three different
+%benchmark applications representing a wide range of
+%application~\cite{mrbs}: Business Intelligence, Bioinformatics and
+%Recommendation System. 
+%Using the results of the experiments reported in \cite{mrbs}, we
+%derived that the time required to process data for above application types are 3.3 MB/s, 6.6 MB/s, and 13.2 MB/s, respectively. 
+%
+%\begin{figure}[!h]
+%	
+%	\begin{center}
+%	\includegraphics[width=\columnwidth]{figures/application_comparison.png}
+%	\end{center}
+%	\caption{Application comparison. $\rho$=0.5, N=$500000$, $t_{R_1}$=$1.3t_{min}$, $t_{R_2}$=$2.6t_{min}$.}
+%	\label{fig:app_compare}
+%\end{figure}
+%
+%
+%In Figure \ref{fig:app_compare} we compare the expected
+%profit for each application using each of the 4 resilience techniques. 
+%We consider two data sizes expected in future
+%cloud computing environments, 500TB and 2PB. The figure shows that
+%for business intelligence applications, Shadow Replication achieves significantly larger profits for both data sizes. This
+%is because business intelligence applications tend to be IO intensive
+%resulting in longer running tasks. Whereas recommendation systems tend
+%to require little data IO resulting in shorter running tasks making
+%re-execution as good as Shadow Replication. Bioinformatics tends to be in between
+%these two applications resulting in shadow computing performing better
+%when processing large datasets (2 PB) but not outstanding on smaller
+%datasets (500 TB). The take away from this evaluation is that for the
+%shown system parameters if phase execution is short, then re-execution
+%performs as well as Shadow Replication. Alternatively, if a phase is long (20 minutes or
+%greater), then Shadow Replication can be as much as 47.9\% more
+%profitable than re-execution. The previous sensitivity analysis can be
+%used to extrapolate expected profit for different system parameters.
 
 \section{Summary}
 
-To assess the performance of the Lazy Shadowing, an analytical framework is developed and 
+In this work we focus on the objective of satisfying SLA in Cloud Computing and demonstrate that Shadow Replication is capable of achieving multi-dimensional QoS goals. 
+To assess the performance of the Shadow Replication, an analytical framework is developed and 
 an extensive performance evaluation study is carried out. 
 In this study, system properties that affect the
 profitability of fault tolerance methods, namely failure rate,
