@@ -1,8 +1,7 @@
-Cloud Computing has emerged as an attractive platform for increasingly
+Cloud Computing has emerged as an attractive platform for 
 diverse compute- and data-intensive applications, as it allows for
-low-entry costs, on demand resource provisioning and allocation, and
-reduced cost of maintaining internal IT
-infrastructure~\cite{tchana_cits_2012}. %Cloud computing will continue
+low-entry costs, on demand resource provisioning, and
+reduced cost of maintenance~\cite{tchana_cits_2012}. %Cloud computing will continue
 %to grow and attract attention from commercial and public market
 %segments. Recent studies predict annual growth rate of 17.7 percent by
 %2016, making cloud computing the fastest growing segment in the
@@ -10,17 +9,14 @@ infrastructure~\cite{tchana_cits_2012}. %Cloud computing will continue
 As the demand for cloud computing
 accelerates, cloud service providers (CSPs) will be faced with the
 need to expand their underlying infrastructure to ensure the expected
-levels of performance and cost-effectiveness, resulting
-in a multi-fold increase in the number of computing, storage and
-communication components in their datacenters. The direct implication of large datacenters is increased management complexity and propensity to
-failure.
+levels of performance and cost-effectiveness. %, resulting
+%in a multi-fold increase in the number of computing, storage and
+%communication components in their datacenters. The direct implication of large datacenters is increased management complexity and propensity to failure.
 
-Failure to deliver
-the service as specified subjects the CSP to a loss of revenue. In addition, CSPs face rising energy costs of their large-scale
-datacenters. This raises the question of how
+Two direct implications of large-scale datacenters are increased energy costs, which increase the operating expenditure, and service failures, which subject the CSP to a loss of revenue. Therefore, Service Level Agreement (SLA) becomes a critical aspect for a sustainable cloud computing business. To understand the question of how
 fault tolerance might impact power consumption and ultimately the
-expected profit of the service providers. In this work, we address the above challenge 
-by studying the application of Shadow Replication for QoS in cloud computing.
+expected profit of CSPs, we  
+study the application of Shadow Replication for satisfying SLA in cloud computing.
 
 %\section{Cloud workload characteristics}
 %
@@ -67,11 +63,9 @@ by studying the application of Shadow Replication for QoS in cloud computing.
 
 \section{Optimization framework}
 
-In this section, we describe a profit-based optimization framework for
-Shadow Replication in cloud computing. Using this
-framework we compute profit-optimized execution speeds by
-optimizing the following objective function:
-
+We develop a reward model to abstract SLA terms in Cloud Computing. To maximize the expected profit for CSPs, we build a reward-based optimization framework:  
+%In this section, we describe a profit-based optimization framework for
+%Shadow Replication in cloud computing. 
 
 \begin{equation}
 \label{optimization_problem}
@@ -83,19 +77,23 @@ s.t.                                 & 0 \leq \sigma_m \leq \sigma_{max} \\
                                      & 0 \leq \sigma_a \leq \sigma_{max} 
 \end{alignedat}
 \end{equation}
-We assume that processor
-speeds are continuous and use nonlinear optimization techniques
+To express the expected profit ($E[profit]$) considering failures, we further develop models for process failure distribution, power consumption, and service expenditure including energy cost.
+Assuming that processor
+speeds are continuous, we use nonlinear optimization techniques
 to solve the above optimization problem. 
+Using this framework, we compute profit-optimized execution speeds for Shadow Replication. 
+Please refer to~\cite{cui_2014_closer} for more details.
 
-In order to earn profit, service providers must either increase
-income or decrease expenditure. We take both factors into
-consideration for the purpose of maximizing profit while meeting
-customer's requirements. In our model, we set the expected profit to be
-expected income minus expected expense. To model the expected income and expected expense, we built models for job reward, process failure distribution, power consumption, and energy cost. Please refer to~\cite{cui_2014_closer} for more details.
 
-\begin{equation}
-E[\text{profit}]=E[\text{income}]-E[\text{expense}]
-\end{equation}
+%In order to earn profit, service providers must either increase
+%income or decrease expenditure. We take both factors into
+%consideration for the purpose of maximizing profit while meeting
+%customer's requirements. In our model, we set the expected profit to be
+%expected income minus expected expense. To model the expected income and expected expense, we built models for job reward, process failure distribution, power consumption, and energy cost. Please refer to~\cite{cui_2014_closer} for more details.
+%
+%\begin{equation}
+%E[\text{profit}]=E[\text{income}]-E[\text{expense}]
+%\end{equation}
 
 
 
@@ -315,8 +313,7 @@ E[\text{profit}]=E[\text{income}]-E[\text{expense}]
 %\end{equation}
 
 
-\section{Profit-aware stretched replication} 
-Unlike traditional replication
+Unlike traditional replication, 
 Shadow Replication is dependent upon failure detection, enabling the
 replica to increase its execution speed upon failure and maintain the
 targeted response time thus maximizing profit. While this is the case
@@ -402,7 +399,7 @@ model.
 \section{Performance evaluation}
 
 This section evaluates the expected profit of each of the fault tolerance
-methods discussed above under different system environment. We have identified 5
+methods using above optimization framework. We study different system environment and identify 5
 important parameters which affect the expected profit:
 \begin{itemize}
 \item Static power ratio $\rho$, which determines the portion of power that is unaffected by the execution speed.
@@ -419,57 +416,21 @@ speed. Accordingly, the task workload $W$ is also adjusted such that
 it is equal to the amount of time (in hours) required for a single
 task. %, preserving the ratios expressed in
 %\ref{eq:tcm} and \ref{eq:tcs}. 
-The price of
-energy is assumed to be 1 unit. We assume that $R$ in our reward model
-is linearly proportional to the number of tasks $N$ and the maximal
-reward for one task is 3 units, so the total reward for a job is $3
-\times N$ units.  However, for the analysis we look
-at the average of expenditure and income on each task by dividing the
-total expenditure and income by $N$. In our basic configuration we
-assume that the static power ratio is 0.5, the task size is 1 hour, the node MTBF 5 is
-years, the number of tasks is $100000$, and the response time thresholds for
+In our baseline configuration we
+assume that the static power ratio is 0.5, the node MTBF is 5 
+years, the number of tasks is $100000$, the task size is 1 hour, and the response time thresholds for
 maximal and minimal rewards are 1.3 hours and 2.6 hours
-respectively. Since the maximal power consumption is 1 unit, the
-energy needed for the task with one process at maximal speed is also 1
-unit. 
+respectively. 
 
 
 With various architectures and organizations, servers deployed at
 different data centers will have different characteristics in terms of
 power consumption. The static power ratio is used to abstract the
 amount of static power consumed versus dynamic power.  
-
-\begin{figure}[!h]	
-	\begin{center}
-		\subfigure[Profit for different static power ratio. MTBF=5 years, N=100000, W=1 hour, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.]
-		{
-			\label{fig:rho}
-			\includegraphics[width=0.4\columnwidth]{figures/rho_profit.pdf}
-		}
-		\subfigure[Profit for different response time threshold. $\rho$=0.5, MTBF=5 years, N=100000, W=1 hour.]
-		{
-			\label{fig:t}
-			\includegraphics[width=0.4\columnwidth]{figures/t_profit.pdf}
-		}
-		\subfigure[Profit for different task size over MTBF. $\rho$=0.5, N=100000, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.]
-		{
-			\label{fig:n}
-			\includegraphics[width=0.4\columnwidth]{figures/n_profit.pdf}
-		}
-		\subfigure[Profit for different task size over MTBF. $\rho$=0.5, N=100000, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.]
-		{
-			\label{fig:mtbf}
-			\includegraphics[width=0.4\columnwidth]{figures/mtbf_profit.pdf}
-		}
-	\end{center}
-
-\end{figure}
-
-
 The potential profit gains achievable by using profit-aware
 replication techniques decreases as static power increases, as is shown
 in Figure~\ref{fig:rho}. The reason is that our profit-aware
-techniques rely upon the fact that one can reduce energy costs by
+techniques rely upon the fact that one can reduce dynamic power by
 adjusting the execution speeds. Modern systems have a static power between 40\%-70\% and
 it is reasonable to suspect that this will continue to be the case. Within
 this target range of static power, Shadow Replication can achieve, on
@@ -477,9 +438,10 @@ average, 19.3\% more profit than traditional replication, 8.9\% more
 than profit-aware stretched replication, and 28.8\% more than re-execution.
 
 Figure~\ref{fig:t} shows the effect that targeted response time has upon
-the profitability of each fault tolerance method. We vary the first threshold $t_{R_1}$ from the minimal response
-time $t_{min}$ to $1.9t_{min}$, and set the second threshold $t_{R_2}$
-to be always $2t_{R_1}$. Compared to traditional replication, all the other methods increase their profit as the targeted
+the profitability of each fault tolerance method. %We vary the first threshold $t_{R_1}$ from the minimal response
+%time $t_{min}$ to $1.9t_{min}$, and set the second threshold $t_{R_2}$
+%to be always $2t_{R_1}$. 
+Compared to traditional replication, all the other methods increase their profit as the targeted
 response time increases, this is expected because each of the other
 techniques can make use of increased laxity in time to increase
 profit. Re-execution is the most sensitive to the target response
@@ -506,11 +468,41 @@ system parameters. As expected
 re-execution is desired when the vulnerability to failure is
 low. As always, Shadow Replication can adjust its execution strategy to maximize the profits, as shown in Figure~\ref{fig:mtbf}.
 
+\begin{figure}[!h]	
+	\begin{center}
+		\subfigure[Profit for different static power ratio. MTBF=5 years, N=100000, W=1 hour, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.]
+		{
+			\label{fig:rho}
+			\includegraphics[width=0.4\columnwidth]{figures/rho_profit.pdf}
+		}
+		\subfigure[Profit for different response time threshold. $\rho$=0.5, MTBF=5 years, N=100000, W=1 hour.]
+		{
+			\label{fig:t}
+			\includegraphics[width=0.4\columnwidth]{figures/t_profit.pdf}
+		}
+		\subfigure[Profit for different task size over MTBF. $\rho$=0.5, N=100000, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.]
+		{
+			\label{fig:n}
+			\includegraphics[width=0.4\columnwidth]{figures/n_profit.pdf}
+		}
+		\subfigure[Profit for different task size over MTBF. $\rho$=0.5, N=100000, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.]
+		{
+			\label{fig:mtbf}
+			\includegraphics[width=0.4\columnwidth]{figures/mtbf_profit.pdf}
+		}
+		\caption{Profit comparison among fault tolerance methods.}
+	\end{center}
+
+\end{figure}
+
+
+
+
 Lastly, we evaluate 
 the profit of each resilience technique using three different
 benchmark applications representing a wide range of
 application~\cite{mrbs}: Business Intelligence, Bioinformatics and
-Recommendation System. Please refer to~\cite{cui_2014_closer} for more details.
+Recommendation System. While the results vary from application to application, they are aligned with above results and analysis. Please refer to~\cite{cui_2014_closer} for more details.
 %Lastly, we evaluate
 %the expected profit of each resilience technique using three different
 %benchmark applications representing a wide range of

@@ -29,11 +29,11 @@ cause processes to store useless states. To address this
 shortcoming, ``forced checkpoints" have been proposed \cite{helary_rds_1997}. This approach, however,  may lead to unpredictable
 checkpointing rates. 
 Although well-explored, uncoordinated checkpointing has not been widely adopted
-in HPC environments for its complexities. 
+in HPC environments due to its complexities. 
 %its dependency on applications \cite{guermouche_2011_ipdps}.
 
 
-One of the largest overheads in any checkpointing process is the time necessary to write the checkpointing 
+One of the largest overheads in any checkpointing process is the time necessary to write the checkpoints
 to stable storage. Incremental checkpointing attempts
 to address this by only writing the changes since previous checkpoint \cite{Agarwal:04:Adaptive,elnozahy_1992_manetho,li_trans_1994}. 
 This can be achieved using dirty-bit page flags \cite{plank_ftcs_1994,elnozahy_1992_manetho}. Hash based incremental checkpointing, on the other hand, makes use of hashes to detect changes \cite{nam_ftc_1997,Agarwal:04:Adaptive}. 
@@ -59,7 +59,7 @@ Process replication, or state machine replication, has long been used for reliab
 %require a more challenging level of fault tolerance to deal with the 
 %confront a dramatic growth in both the frequency and diversity of faults.
 %As a result,
-Although it is initially rejected in HPC communities, 
+Although it was initially rejected in HPC communities, 
 replication has recently been proposed to address the deficiencies of checkpointing for upcoming extreme-scale systems \cite{Cappello:09:Fault,engelmann2011redundant}. 
 Full and partial
 process replication have also been studied to augment existing checkpointing techniques, and to  

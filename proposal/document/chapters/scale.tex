@@ -219,7 +219,7 @@ Our results show that at extreme-scale, the completion time and energy consumpti
 Figure~\ref{fig:t32} reveals that the most time efficient choice largely depends on MTBF. 
 %More specifically, process replication consumes less time when MTBF is low while otherwise Lazy Shadowing is more efficient.
 When MTBF is high, Lazy Shadowing requires less time as more cores are used for main processes and less workload is assigned to each process. As MTBF decreases, process replication outperforms Lazy Shadowing as a result of the increased likelihood of rollback for Lazy Shadowing.
-In terms of energy consumption, Lazy Shadowing has much more advantage over process replication. %For MTBF from 2 to 25 years, Lazy Shadowing with $\alpha=5$ can achieve 9.6-17.1\% energy saving, while the saving increases to 13.1- 23.3\% for $\alpha=10$. The only exception is when MTBF is extremely low (1 year), Lazy Shadowing with $\alpha=10$ consumes more energy because of extended execution time.
+In terms of energy consumption, Lazy Shadowing has a much larger advantage over process replication. %For MTBF from 2 to 25 years, Lazy Shadowing with $\alpha=5$ can achieve 9.6-17.1\% energy saving, while the saving increases to 13.1- 23.3\% for $\alpha=10$. The only exception is when MTBF is extremely low (1 year), Lazy Shadowing with $\alpha=10$ consumes more energy because of extended execution time.
 
 \begin{figure}[!t]
 	\captionsetup{justification=centering}
@@ -276,7 +276,7 @@ on the expected energy consumption. The results for Lazy Shadowing with $\alpha=
 Figure~\ref{fig:power_ratio}. 
 %The results for other values of $\alpha$ have similar behavior and thus are not shown. 
 Lazy Shadowing achieves
-more energy saving when static power ratio is low, since it saves dynamic 
+more energy saving when the static power ratio is low, since it saves dynamic 
 power but not static power. %When static power ratio is low ($\rho=0.3$), Lazy Shadowing
 %is able to save 20\%-24\% energy for the MTBF of 5 to 25 years. The saving decreases to 5\%-11\% when $\rho$ reaches 0.7. 
 
