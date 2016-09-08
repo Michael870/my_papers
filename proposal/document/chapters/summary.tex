@@ -1,36 +1,3 @@
-\begin{table}[ht]
-\vspace{-0.3in}
-\caption{Timeline of Proposed Work.}
-\vspace{-0.15in}
-\centering
-\scalebox{0.85}
-{
-\begin{tabular}{|l|l|l|}
-\hline
-\textbf{Date} & \textbf{Content} & \textbf{Deliverable results} \\
-\hline
-Sep.-   & Explore restoring in approximate computing & Pin-based framework for \\
- & in Section \ref{work:approx} of Chapter \ref{chapter:future_study}& restoring approximation \\
-\hline
-Mar - May  & Integrate restoring with information leakage & Experimental data of memory\\% through access pattern &  Paper submission \\
- & in Section \ref{work:security} of Chapter \ref{chapter:future_study}& performance and security\\
-\hline
-Jun - Sep & Study restoring in Hybrid Memory Cube (HMC) & Modified simulator of temperature\\
- & in Section \ref{work:stacked} of Chapter \ref{chapter:future_study}&  effect of restoring in HMC \\
-\hline
-Jul - Oct  & Thesis writing & Thesis ready for defense \\
-\hline
-Oct - Dec & Thesis revising & Completed thesis \\
-\hline
-\end{tabular}
-}
-\label{tab:timeline}
-\end{table}
-
-
-
-
-
 Current fault tolerance approaches rely exclusively on either time or hardware redundancy to hide failures from being seen by users. 
 Rollback recovery, which exploits time redundancy, requires full or partial re-execution when failure occurs.  
 Such an approach
@@ -39,3 +6,45 @@ and high power costs due to extended execution time.
 On the other hand, Process Replication relies on hardware redundancy and executes multiple
 instances of the same task in parallel to guarantee completion with minimal delay. 
 This solution, however, requires a significant increase in hardware resources and increases the power consumption proportionally. 
+
+The system scale needed to solve the complex and urgent problems that our society will be facing is going beyond the scope of existing 
+fault tolerance approaches. This thesis builds on top of the shadow replication fault-tolerant computational model, and 
+devises novel techniques to simultaneously address the power and resilience challenges for future extreme-scale systems while guaranteeing system efficiency and application QoS. 
+A combination of modeling, simulation, and experiments will be used to test the viability of the proposed ideas. The proposed work will be completed following the timeline shown in 
+Table~\ref{tab:timeline}.
+
+
+\begin{table}[ht]
+\vspace{-0.3in}
+\caption{Timeline of Proposed Work.}
+\vspace{-0.15in}
+\centering
+\scalebox{0.85}
+{
+\begin{tabularx}{\textwidth}{|c|X|X|}
+\toprule
+\textbf{Date} & \textbf{Content} & \textbf{Deliverable results} \\
+\midrule
+Sep. - Nov.  & Finish the implementation of lsMPI with shadow leaping & A funtional MPI library for Lazy Shadowing \\
+\hline
+December & Measure the performance of lsMPI w/ and w/o failures & A paper for publication \\
+\hline
+January & Analysis of failure repository & Failure distribution across nodes within a system \\
+\hline
+Feb. - Mar.  & Study the problem of process mapping and partial shadowing & Analytical models and optimization problem formulation \\
+\hline
+April  & Build a trace based simulator to evaluate process mapping and partial shadowing & A paper for publication \\ 
+\hline
+May - Aug. & Thesis writing & Thesis ready for defense \\
+\hline
+Sep. - Oct. & Thesis revising & Completed thsis \\ 
+\bottomrule
+\end{tabularx}
+}
+\label{tab:timeline}
+\end{table}
+
+
+
+
+
