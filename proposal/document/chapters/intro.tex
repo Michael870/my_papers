@@ -9,7 +9,7 @@ In HPC, Terascale performance was achieved in the late 90’s with fewer than 10
 A decade later, petascale performance required about ten times more processors with multiple cores on each processor. Nowadays, a race
 is underway to build the world's first exascale machine to accelerate scientific discoveries and breakthroughs. It is 
 projected that an exascale machine will achieve billion-way parallelism by using one million sockets each supporting 
-1,000 cores. 
+1,000 cores~\cite{doe_ascr_exascale_2011}. 
 
 Similar trend is happening in Cloud Computing. 
 As the demand for Cloud Computing accelerates, cloud service providers  
@@ -47,7 +47,7 @@ Also thanks to the continuous growth in system components, there has been a stea
 In 2005, the peak power consumption of a single supercomputer reached 3.2 Megawatts. This number was doubled only after 5 years, and reached 17.8 
 Megawatts with a machine of 3,120,000 cores in 2013. Recognizing this rapid upward trend, the U.S. Department of Energy has set 20 
 megawatts as the power limit for future exascale systems, 
-challenging the research community to provide a 1000x improvement in performance with only a 10x increase in power. 
+challenging the research community to provide a 1000x improvement in performance with only a 10x increase in power~\cite{exa_challenge_2010}. 
 This huge imbalance makes system power a leading design constraint on the path to exascale. 
 
 Today, two approaches exist for fault tolerance. The first approach is rollback recovery, which rolls back and restarts the execution 
@@ -56,7 +56,7 @@ stable storage so that execution can be restarted from a recent checkpoint in th
 Although checkpointing is the most widely used technique in today's HPC systems, it may not scale to 
 future extreme-scale systems~\cite{ferreira_sc_2011,elnozahy_dsc_2004,4367962}. Given the anticipated increase in system level failure rates and the time to checkpoint large-scale 
 compute-intensive and data-intensive applications, the time required to periodically checkpoint an application 
-and restart its execution will approach the system's MTBF. Consequently, applications will make little forward progress, thereby 
+and restart its execution will approach the system's MTBF~\cite{Cappello:2009:TER:1640402.1640428}. Consequently, applications will make little forward progress, thereby 
 reducing considerably the overall system efficiency. 
 
 The second approach, referred to as process replication, exploits hardware redundancy and executes multiple instances of the same task 
@@ -75,7 +75,7 @@ computational models with scalability, adaptability, and power-awareness in mind
 
 There is a delicate interplay between fault tolerance and power consumption. Checkpointing and process replication require 
 additional power to achieve fault tolerance. Conversely, it has been shown that lowering supply voltages, a commonly used 
-technique to conserve power, increases the probability of transient faults~\cite{chandra2008defect}. The trade-off between fault free operation and 
+technique to conserve power, increases the probability of transient faults~\cite{chandra2008defect,zhao2008reliability}. The trade-off between fault free operation and 
 optimal power consumption has been explored in the literature. Limited insights have emerged, however, with respect to how 
 adherence to application's desired QoS requirements affects and is affected by the fault tolerance and power consumption 
 dichotomy. In addition, abrupt and unpredictable changes in system behavior may lead to unexpected fluctuations in performance, 
@@ -137,7 +137,7 @@ In summary, my thesis will consist of the following main components.
 Shadow Replication is a flexible computational model that can achieve multi-dimensional QoS requirements. 
 The major challenge in Shadow Replication resides in determining jointly the execution rates of all task instances, 
 both before and after a failure occurs, with the objective to optimize performance, resilience, power consumption, or their combinations.
-In this work we focus on the SLA requirements in the Cloud and develop a reward-based analytical framework, in order to derive the optimal execution rates for maximizing reward and minimizing energy 
+In this work we focus on the Service Level Agreement (SLA) requirements in the Cloud and develop a reward-based analytical framework, in order to derive the optimal execution rates for maximizing reward and minimizing energy 
 costs under strict completion time constraints~\cite{cui_en7085151,cui_2014_closer}. 
 
 %To define the reward-based analytical framework, we first define a failure model that considers the failure distribution of each process, and a power model that describes the power consumption characteristics under different states. Based on the failure model and power model, we then derive the expected income as a function of completion time, and the expected energy cost as a product of power and time. Lastly, the reward is defined as the optimization objective to balance between completion time and energy cost.  
