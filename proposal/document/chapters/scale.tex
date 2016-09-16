@@ -1,5 +1,5 @@
 Enabling Lazy Shadowing for resiliency in extreme-scale computing 
-brings about a number of challenges and design decisions that need to be addressed, including the applicability of this concept to a large number of 
+brings about a number of challenges and design decisions, including the applicability of this concept to a large number of 
 tasks executing in parallel, the effective way to control shadows' execution rates, and the runtime mechanisms and 
 communications support to ensure efficient coordination between a 
 main and its shadow.
@@ -17,11 +17,11 @@ and integrate them with Shadow Replication to form a more efficient and scalable
 To control the processes' execution rate, DVFS can be applied while each process resides on one core exclusively. 
 The effectiveness of DVFS, however, may be markedly 
 limited by the granularity of voltage control, the number of frequencies available, and the negative effects on 
-reliability. 
+reliability~\cite{Eyerman:2011:FDU:1952998.1952999,Keller:EECS-2015-257,chandra2008defect,zhao2008reliability}. 
 An alternative is to collocate multiple processes on each core while keeping all the cores executing at maximum frequency. 
 Then time sharing can be used to achieve the desired execution rates for each collocated process. 
-Since this approach collocates multiple processes on a core, it simultaneously reduces the number of compute nodes and 
-the power consumption. 
+Since this approach collocates multiple processes on each  core, it simultaneously reduces the number of compute nodes required and 
+reduces the power consumption. 
 
 
 %We use the term core to represent the resource allocation unit (e.g., a
@@ -64,7 +64,7 @@ Upon failure of a main process, its associated shadow speeds up to minimize the 
 At the same time, as shown in Figure~\ref{fig:jump2}, the remaining main processes continue execution until the barrier at $W_{syn}$, and then become idle until $t_r$. 
 Shadow leaping opportunistically takes advantage of this idle time to {\it leap forward} the shadows, so that  
 all processes, including shadows, can resume execution from a consistent point afterwards. 
-Shadow leaping increases the shadow's rate of progress, at a minimal energy cost. Consequently, it reduces significantly the likelihood of a shadow falling excessively behind, thereby ensuring fast recovery while minimizing energy consumption.
+Shadow leaping increases the shadow's rate of progress, at a minimal energy cost. Consequently, it reduces significantly the likelihood of a shadow falling excessively behind, thereby ensuring fast recovery while minimizing the total energy consumption.
 
 \begin{figure}[!t]
 	\begin{center}
@@ -205,8 +205,8 @@ Careful analysis of the models leads us to identify several important factors th
  with the influence of each of the factors considered.
 
 We compare with both process replication and checkpointing. %, assuming the same number of cores to use. 
-The completion time with checkpointing is calculated with Daly's model~\cite{daly_fgcs_2006} assuming 10 minutes for both checkpointing and restart. %The energy consumption is then derived with Equation~\ref{eq:exp_energy1}. 
-It is important to point out that we always assume the same number of cores, so that process replication and Lazy Shadowing do not use extra cores for the replicas. 
+The completion time with checkpointing is calculated with Daly's model~\cite{daly_fgcs_2006} assuming 10 minutes for both checkpointing time and restart time. %The energy consumption is then derived with Equation~\ref{eq:exp_energy1}. 
+It is important to point out that we always assume the same number of cores available to use, so that process replication and Lazy Shadowing do not use extra cores for the replicas. 
 
 %It is clear from THEOREM 1 that the total recovery delay $\sum_{i=1}^k\tau_i$ is determined by the execution time $\sum_{i=1}^k\Delta_i$, independent of the distribution of failures. 
 %% which determines the individual value of $\Delta_i$. 
@@ -295,7 +295,7 @@ power but not static power. %When static power ratio is low ($\rho=0.3$), Lazy S
 %As the scale and complexity of HPC systems continue to increase, both the failure rate and power consumption are expected to increase dramatically, making it extremely challenging to deliver extreme-scale computing performance efficiently. Existing fault tolerance methods rely on either time or hardware redundancy. Neither of them appeals to the next generation of supercomputing, as the first approach may incur significant delay while the second one constantly wastes over 50\% of the system resources.
 
 In this work, we present a comprehensive discussion of the techniques that enable Lazy Shadowing to achieve scalable resilience in future extreme-scale computing systems. In addition, we develop a series of analytical models to assess its performance in terms of reliability, completion time, and energy consumption. 
-Through comparison with existing fault tolerance approaches, we identify the scenarios where each of the alternatives should be chosen.
+Through comparison with existing fault tolerance approaches, we identify the scenarios where each of the alternatives should be chosen for best performance.
 
 
 

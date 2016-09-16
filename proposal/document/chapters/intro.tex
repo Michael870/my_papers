@@ -35,8 +35,8 @@ driving the system to significantly lower efficiency with unprecedented amount o
 \section{Problem Statement}
 
 The system scale needed to address our future computing needs will come at the cost of increasing complexity, unpredictability, 
-and operating expenses. As we approach future extreme-scale, two of the biggest challenges will be system resilience and power 
-consumption, both being direct consequences of the increase in the number of components~\cite{exa_challenge_2010}. 
+and operating expenses. As we approach future extreme-scale computing, two of the biggest challenges will be system resilience and power 
+consumption, both being direct consequences of the dramatic increase in the number of system components~\cite{exa_challenge_2010}. 
 
 Regardless of the reliability of individual component, the system level failure rate will continue to increase as the number of 
 components increases, possibly by several orders of magnitude. It is projected that the Mean Time Between Failures (MTBF) of future extreme-scale systems will be at the order of hours or even minutes, meaning 
@@ -85,7 +85,7 @@ these systems will be designed to operate, calls for a
 reconsideration of the fault tolerance problem.
 
 To this end, Mills, Znati, and Melhem have proposed a novel computational model, referred to as Shadow Replication, as a  
-power-aware approach to achieve high-levels of resilience through forward progress~\cite{mills_2014_icnc,mills_2014_pdp,mills2014power}. Based on Dynamic Voltage and Frequency Scaling (DVFS), Mills studied the computational model and its performance in terms of completion time and energy consumption in HPC systems. Through the use of analytical models, simulations, and experimentation, Mills demonstrated that Shadow Replication can achieve resilience more efficiently than both checkpointing and traditional replication when power is limited. However, in Mills' work Shadow Replication is limited to the use of DVFS, which has been shown to have multiple issues that question its viability. In addition, Mills' study is limited to HPC systems and focuses exclusively on minimizing energy consumption with constraints on time to completion. In contrast, QoS requirements for various computing systems can be expressed in multiple dimensions that go beyond time and energy. At the same time, an implementation is needed to verify the computational model both with and without failures. 
+power-aware approach to achieve high-levels of resilience through forward progress~\cite{mills_2014_icnc,mills_2014_pdp,mills2014power}. Based on Dynamic Voltage and Frequency Scaling (DVFS)~\cite{Orgerie:2014:STI:2597757.2532637,4658633,LeSueur:2010:DVF:1924920.1924921}, Mills studied the computational model and its performance in terms of completion time and energy consumption in HPC systems. Through the use of analytical models, simulations, and experimentation, Mills demonstrated that Shadow Replication can achieve resilience more efficiently than both checkpointing and traditional replication when power is limited. However, in Mills' work Shadow Replication is limited to the use of DVFS, which has been shown to have multiple issues that question its viability. In addition, Mills' study is limited to HPC systems and focuses exclusively on minimizing energy consumption with constraints on time to completion. In contrast, QoS requirements for various computing systems can be expressed in multiple dimensions that go beyond time and energy. At the same time, an implementation is needed to verify the computational model both with and without failures. 
 
 
 %In this thesis, our research objective is to simultaneously address the power and resilience challenges for future extreme-scale 
@@ -107,10 +107,10 @@ To address the above limitations, this thesis builds on the computational model 
 Specifically, this thesis tries to answer 4 questions: 1) is Shadow Replication general enough to achieve objectives beyond time to completion; %, such as multiple simultaneous requirements defined in a SLA in the Cloud; 
 2) how to enable Shadow Replication when DVFS is not viable, and ensure forward progress in failure-prone, extreme-scale systems; 3) is the computational model realistic in real environments; and 4) how to make the computational model reflective of the propensity of the processing elements to failures and adaptive to different environments and requirements.
 With these questions in mind, 
-I have studied different techniques to embody and augment the model, and developed analytical frameworks for different objectives in the Cloud and HPC environments~\cite{cui_en7085151,cui_2016_scalcom,cui_2014_closer}.
+I have studied different techniques to embody and augment the model, and developed analytical frameworks for different objectives in the Cloud and HPC environments~\cite{cui_2014_closer,cui_en7085151,cui_2016_scalcom}.
 %Previously, we have formally defined the computational model, studied possible techniques to realize and optimize the idea, and 
 %built analytical models for performance evaluation. 
-To complete my thesis, I propose to continue the study in two aspects.
+To complete my thesis, I propose to extend the study in the following two aspects.
 Firstly, I propose to implement a prototype in the context of Message Passing Interface (MPI), to validate the 
 computational model as well as measure its performance in real environment. Secondly, I propose to study  
 ``smart shadowing" which adapts to the system configuration, application characteristics, and QoS requirement.
@@ -135,10 +135,10 @@ In summary, my thesis will consist of the following main components.
 
 \subsection{Reward-based optimal Shadow Replication (completed)}
 Shadow Replication is a flexible computational model that can achieve multi-dimensional QoS requirements. 
-The major challenge in Shadow Replication resides in determining jointly the execution rates of all task instances, 
+The major challenge resides in determining jointly the execution rates of all task instances, 
 both before and after a failure occurs, with the objective to optimize performance, resilience, power consumption, or their combinations.
 In this work we focus on the Service Level Agreement (SLA) requirements in the Cloud and develop a reward-based analytical framework, in order to derive the optimal execution rates for maximizing reward and minimizing energy 
-costs under strict completion time constraints~\cite{cui_en7085151,cui_2014_closer}. 
+costs under strict completion time constraints~\cite{cui_2014_closer,cui_en7085151}. 
 
 %To define the reward-based analytical framework, we first define a failure model that considers the failure distribution of each process, and a power model that describes the power consumption characteristics under different states. Based on the failure model and power model, we then derive the expected income as a function of completion time, and the expected energy cost as a product of power and time. Lastly, the reward is defined as the optimization objective to balance between completion time and energy cost.  
 
@@ -146,8 +146,7 @@ costs under strict completion time constraints~\cite{cui_en7085151,cui_2014_clos
 
 \subsection{Lazy Shadowing (completed)}
 
-Enabling Shadow Replication for resiliency in extreme-scale computing brings about a number of challenges and design decisions 
-that need to be addressed, including the applicability of this concept to a large number of tasks executing in parallel, 
+Enabling Shadow Replication for resiliency in extreme-scale computing brings about a number of challenges and design decisions, including the applicability of this concept to a large number of tasks executing in parallel, 
 the effective way to control shadows’ execution rates, and the runtime mechanisms and communications support to ensure efficient 
 coordination between a main and its shadow. Taking into consideration the main characteristics of compute-intensive and 
 highly-scalable applications, 
@@ -205,7 +204,7 @@ When completed, this thesis will make the following contributions:
 \section{OUTLINE}
 \label{outline}
 The rest of this proposal is organized as follow:  
-Chapter \ref{chapter:background} introduces fault tolerance in large-scale distributed systems, 
+Chapter \ref{chapter:background} reviews existing fault tolerance techniques in large-scale distributed systems, 
 and Chapter \ref{chapter:shadowing} introduces the Shadow Replication computational model. In Chapter \ref{chapter:reward} we build a reward-based optimization framework for Shadow Replication in the Cloud environment.
 In Chapter \ref{chapter:scale}, we introduce Lazy Shadowing which enhances Shadow Replication for extreme-scale systems. 
 Implementation issues are discussed in Chapter \ref{chapter:implementation}. Adaptivity and smart shadowing are discussed in Chapter \ref{chapter:smart}.

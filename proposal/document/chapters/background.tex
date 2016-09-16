@@ -1,7 +1,7 @@
 %Extreme-scale computing presents some unique challenges to fault tolerance as faults are no longer 
 %an exceptional event \cite{ferreira_sc_2011}. 
 Rollback recovery is the dominant mechanism to achieve fault
-tolerance in current HPC environments~\cite{Elnozahy:02:Survey}. In the most general form, rollback recovery 
+tolerance in current HPC environments~\cite{Deconinck93surveyof,Elnozahy:02:Survey,Egwutuoha2013}. In the most general form, rollback recovery 
 involves the periodic saving of the execution state (checkpoint), with the anticipation that
 in the case of a failure, computation can be restarted from a previously saved checkpoint. % \cite{Elnozahy:02:Survey}. %The identification of an error, before or during a checkpoint,
 %requires that the application rollback to the previously completed checkpoint. 
@@ -29,8 +29,7 @@ cause processes to store useless states. To address this
 shortcoming, ``forced checkpoints" have been proposed \cite{helary_rds_1997}. This approach, however,  may lead to unpredictable
 checkpointing rates. 
 Although well-explored, uncoordinated checkpointing has not been widely adopted
-in HPC environments due to its complexities. 
-%its dependency on applications \cite{guermouche_2011_ipdps}.
+in HPC environments due to its complexities and its dependency on applications \cite{guermouche_2011_ipdps}.
 
 
 One of the largest overheads in any checkpointing process is the time necessary to write the checkpoints
@@ -52,7 +51,7 @@ however, may lead to increased failure rates of individual nodes and complicate 
 %current location of all process's checkpoints.
 
 
-Process replication, or state machine replication, has long been used for reliability and availability in distributed and mission critical systems \cite{schneider_1990_tutorial}. %Replication can be used to detect and correct system failures that are otherwise undetectable,
+Process replication, or state machine replication, has long been used for reliability and availability in distributed and mission critical systems \cite{schneider_1990_tutorial,Sousa2005,5470865}. %Replication can be used to detect and correct system failures that are otherwise undetectable,
 %such as silent data corruption and Byzantine faults \cite{fiala_2012_sdc}. 
 %This approach is barely used in HPC systems, primarily due to its low efficiency.
 %However, upcoming extreme-scale systems are expected to 
