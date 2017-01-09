@@ -9,7 +9,7 @@ In HPC, Terascale performance was achieved in the late 90’s with fewer than 10
 A decade later, petascale performance required about ten times more processors with multiple cores on each processor. Nowadays, a race
 is underway to build the world's first exascale machine to accelerate scientific discoveries and breakthroughs. It is 
 projected that an exascale machine will achieve billion-way parallelism by using one million sockets each supporting 
-1,000 cores~\cite{doe_ascr_exascale_2011}. 
+1,000 cores~\cite{doe_ascr_exascale_2011,top_ten_2014}. 
 
 Similar trend is happening in Cloud Computing. 
 As the demand for Cloud Computing accelerates, cloud service providers  
@@ -36,7 +36,7 @@ driving the system to significantly lower efficiency with unprecedented amount o
 
 The system scale needed to address our future computing needs will come at the cost of increasing complexity, unpredictability, 
 and operating expenses. As we approach future extreme-scale computing, two of the biggest challenges will be system resilience and power 
-consumption, both being direct consequences of the dramatic increase in the number of system components~\cite{exa_challenge_2010}. 
+consumption, both being direct consequences of the dramatic increase in the number of system components~\cite{exa_challenge_2010,snir2014addressing}. 
 
 Regardless of the reliability of individual component, the system level failure rate will continue to increase as the number of 
 components increases, possibly by several orders of magnitude. It is projected that the Mean Time Between Failures (MTBF) of future extreme-scale systems will be at the order of hours or even minutes, meaning 
@@ -76,7 +76,7 @@ computational models with scalability, adaptability, and power-awareness in mind
 There is a delicate interplay between fault tolerance and power consumption. Checkpointing and process replication require 
 additional power to achieve fault tolerance. Conversely, it has been shown that lowering supply voltages, a commonly used 
 technique to conserve power, increases the probability of transient faults~\cite{chandra2008defect,zhao2008reliability}. The trade-off between fault free operation and 
-optimal power consumption has been explored in the literature. Limited insights have emerged, however, with respect to how 
+optimal power consumption has been explored in the literature~\cite{meneses2014energy,mills2014energy}. Limited insights have emerged, however, with respect to how 
 adherence to application's desired QoS requirements affects and is affected by the fault tolerance and power consumption 
 dichotomy. In addition, abrupt and unpredictable changes in system behavior may lead to unexpected fluctuations in performance, 
 which can be detrimental to applications’ QoS requirements. The inherent instability of extreme-scale computing systems, 
@@ -85,7 +85,7 @@ these systems will be designed to operate, calls for a
 reconsideration of the fault tolerance problem.
 
 To this end, Mills, Znati, and Melhem have proposed a novel computational model, referred to as Shadow Replication, as a  
-power-aware approach to achieve high-levels of resilience through forward progress~\cite{mills_2014_icnc,mills_2014_pdp,mills2014power}. Based on Dynamic Voltage and Frequency Scaling (DVFS)~\cite{Orgerie:2014:STI:2597757.2532637,4658633,LeSueur:2010:DVF:1924920.1924921}, Mills studied the computational model and its performance in terms of completion time and energy consumption in HPC systems. Through the use of analytical models, simulations, and experimentation, Mills demonstrated that Shadow Replication can achieve resilience more efficiently than both checkpointing and traditional replication when power is limited. However, in Mills' work Shadow Replication is limited to the use of DVFS, which has been shown to have multiple issues that question its viability. In addition, Mills' study is limited to HPC systems and focuses exclusively on minimizing energy consumption with constraints on time to completion. In contrast, QoS requirements for various computing systems can be expressed in multiple dimensions that go beyond time and energy. At the same time, an implementation is needed to verify the computational model both with and without failures. 
+power-aware approach to achieve high-levels of resilience through forward progress~\cite{mills_2014_icnc,mills_2014_pdp,mills2014power}. Based on Dynamic Voltage and Frequency Scaling (DVFS)~\cite{Orgerie:2014:STI:2597757.2532637,4658633,LeSueur:2010:DVF:1924920.1924921}, Mills studied the computational model and its performance in terms of completion time and energy consumption in HPC systems. Through the use of analytical models, simulations, and experimentation, Mills demonstrated that Shadow Replication can achieve resilience more efficiently than both checkpointing and traditional replication when power is limited. However, in Mills' work Shadow Replication is limited to the use of DVFS, which has been shown to have multiple issues that question its viability~\cite{Eyerman:2011:FDU:1952998.1952999,Keller:EECS-2015-257,chandra2008defect,zhao2008reliability}. In addition, Mills' study is limited to HPC systems and focuses exclusively on minimizing energy consumption with constraints on time to completion. In contrast, QoS requirements for various computing systems can be expressed in multiple dimensions that go beyond time and energy. At the same time, an implementation is needed to verify the computational model both with and without failures. 
 
 
 %In this thesis, our research objective is to simultaneously address the power and resilience challenges for future extreme-scale 
@@ -183,10 +183,11 @@ experiments to measure its runtime overhead as well as performance under failure
 
 \subsection{Smart shadowing (future)}
 Lazy Shadowing is a flexible and adaptive computational model that deserves further investigation. Previous studies have shown that 
-different nodes tend to have different failure probabilities, e.g., 20\% of the nodes account for 80\% of the failures. The reason 
+different nodes tend to have different failure probabilities, e.g., 19\% of the nodes account for 92\% of the machine check errors on Blue Waters~\cite{di2014lessons}. The reason 
 is complicated and may attribute to the manufacture process, heterogeneous architecture, environment factors (e.g. temperature), 
-and/or workloads. I propose to apply machine learning techniques to learn the heterogeneity in failure distributions among a given 
-system's nodes. Then I will study how the mapping from processes to physical cores can impact the performance and cost dichotomy. 
+and/or workloads. % I propose to apply machine learning techniques to learn the heterogeneity in failure distributions among a given 
+%system's nodes. 
+Under differernt failure distribution assumptions, I will study how the mapping from processes to physical cores can impact the performance and cost dichotomy. 
 In addition, I will further consider allocating different number of shadow processes for different tasks to reduce cost while 
 maintaining performance. 
 

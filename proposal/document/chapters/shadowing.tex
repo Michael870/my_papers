@@ -5,7 +5,9 @@ Shadow Replication is a novel computational model that goes beyond adapting or o
 %When integrated, it will lead to efficient solutions for a ``tunable" resiliency that takes into consideration the nature of the data and the requirements of the application.
 The basic tenet of Shadow Replication is to associate with each main process a suite of “shadows” whose size depends on the 
 ``criticality" of the application and its performance requirements. Each shadow process is an exact replica of the original 
-main process, but it executes at a reduced rate to save power when possible.
+main process, 
+and a consistency protocol is needed to assure that the main and the shadow are consistent.  
+When possible, the shadow executes at a reduced rate to save power.
 Shadow Replication achieves power efficiency under QoS requirements by dynamically responding to failures. 
 %If the main process completes the task successfully, the associated shadows will be terminated immediately. If the main process fails, however, one of the shadow processes will be promoted to be a 
 %new main process, and possibly increase its execution rate to mitigate delay.
