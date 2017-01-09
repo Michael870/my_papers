@@ -1,0 +1,35 @@
+Careful analysis of the models above leads us to identify several important factors that determine the performance. These factors can be classified into three categories, i.e., system, application, and algorithm. The system category includes static power ratio $\rho$ ($\rho=p_s/p$), total number of cores $N$, and MTBF of each core; the application category is mainly the total workload, $W$; and shadowing ratio $\alpha$ in the algorithm category determines the number of main cores and shadow cores ($N=M+S$ and $\alpha=M/S$). In this section, we evaluate each performance metric of Lazy Shadowing, 
+ %using the models above, 
+ with the influence of each of the factors considered. %First we calculate the application failure probability for various scenarios. Then we proceed to study the expected energy consumption and completion time under different application failure probabilities. 
+
+%\subsection{Application failure probability}
+%\label{eval_app_fail_prob}
+%\input{Evaluation/app_fail_prob}
+
+%\subsection{Comparison to process replication}
+%\label{eval_comparison}
+%\input{Evaluation/comparison}
+
+%\subsection{Energy comparison}
+%\label{eval_energy_comp}
+%\input{Evaluation/energy_comp}
+
+\subsection{Comparison to checkpointing and process replication}
+\label{eval_comparison}
+\input{Evaluation/comparison}
+
+\subsection{Impact of the number of cores}
+\label{eval_core}
+\input{Evaluation/number_of_cores}
+
+\subsection{Impact of workload}
+\label{eval_workload}
+\input{Evaluation/workload}
+
+\subsection{Impact of static power ratio}
+\label{eval_static_power}
+\input{Evaluation/static_power}
+
+\subsection{Adding collocation overhead}
+\label{eval_collocation}
+\input{Evaluation/collocation}
