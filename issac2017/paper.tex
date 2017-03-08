@@ -1,0 +1,151 @@
+\RequirePackage{fixltx2e}
+\documentclass[a4paper]{isp}
+
+\usepackage[american]{babel}
+
+\usepackage{graphicx}
+
+%extended enumerate, such as \begin{compactenum}
+\usepackage{paralist}
+
+\usepackage[T1]{fontenc}
+\usepackage[tight,footnotesize]{subfigure} 
+\usepackage[linesnumbered]{algorithm2e}
+%better font
+\usepackage{lmodern}
+%if more space is needed, exchange lmodern by mathptmx
+%\usepackage{mathptmx}
+
+%enable margin kerning
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{url}
+
+%unobstrusive usage of hyperref
+\ifnum\pdfoutput>0
+\usepackage[
+%pdfauthor={},
+%pdfsubject={},
+%pdftitle={},
+%pdfkeywords={},
+bookmarks=false,
+breaklinks=true,
+colorlinks=true,
+linkcolor=black,
+citecolor=black,
+urlcolor=black,
+%pdfstartpage=19,
+pdfpagelayout=SinglePage
+]{hyperref}
+%enables correct jumping to figures when referencing
+\usepackage[all]{hypcap}
+\else
+\usepackage{hyperref}
+\fi
+
+\usepackage[capitalise,nameinlink]{cleveref}
+%Nice formats for \cref
+\crefname{section}{Sect.}{Sect.}
+\Crefname{section}{Section}{Sections}
+\crefname{figure}{Fig.}{Fig.}
+\Crefname{figure}{Figure}{Figures}
+
+\usepackage{xspace}
+%Nice formats for e.g., i.e.
+\newcommand{\eg}{e.\,g.,\ }
+\newcommand{\ie}{i.\,e.,\ }
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}[theorem]
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+\begin{document}
+\pdfgentounicode=1
+
+\title{Adaptive and Power-Aware Resilience for Extreme-scale Computing}
+%If Title is too long, use \titlerunning
+%\titlerunning{Short Title}
+
+%Single insitute
+%Currently disabled
+%\iffalse
+\author{Xiaolong Cui \and Taieb Znati \and Rami Melhem}
+%If there are too many authors, use \authorrunning
+%\authorrunning{First Author et al.}
+\institute{ Department of Computer Science, University of Pittsburgh, Pittsburgh, United States \\
+    \email{\{mclarencui,znati,melhem\}@cs.pitt.edu}
+}
+%\fi
+
+%Multiple insitutes
+%Multiple institutes are typeset as follows:
+%\author{Sheldon Cooper\inst{1}\corauthor \and Leonard Hofstadter\inst{2} \and Rajesh Koothrappali\inst{1} \and Howard Wolowitz\inst{2} }
+
+%If there are too many authors, use \authorrunning
+%\authorrunning{First Author et al.}
+
+%\institute{
+% Division of Physics, Mathematics and Astronomy, California Institute of Technology, Pasadena, United States\\
+%\and
+%Division of Engineering and Applied Science, California Institute of Technology, Pasadena, United States\\
+%\email{sheldon.cooper@caltech.edu}
+%}
+			
+\maketitle
+
+\begin{abstract}
+    \input{abstract} 
+
+    \keywords{Lazy Shadowing, extreme-scale computing, forward progress, reliability}
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+\input{intro}
+
+%\section{\uppercase{Related Work}}
+%\label{sec:related_work}
+%\input{related_work}
+
+
+\section{Lazy shadowing}
+\label{sec:frame_model}
+%\label{frame_single}
+%\input{Framework/single}
+\input{computational_model}
+
+\section{Extreme-scale fault tolerance}
+\label{frame_multiple}
+\input{framework}
+
+%\section{\uppercase{Lazy Shadowing Computational Model}}
+%\label{sec:com_model}
+%\input{computational_model}
+
+%%\section{\uppercase{Resilience Framework}}
+%%\label{sec:framework}
+%\input{framework}
+
+\section{\uppercase{Analytical Models}}
+\label{sec:analytical}
+\input{analytical}
+
+\section{\uppercase{Evaluation}}
+\label{sec:evaluation}
+\input{evaluation}
+
+\section{\uppercase{Conclusion and Future Work}}
+\label{sec:conclusion}
+\input{conclusion}
+
+%%%%%%%%%%%%%%%%%%%%%%%bibtex%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{IEEEtran}
+\bibliography{paper}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

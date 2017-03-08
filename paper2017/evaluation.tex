@@ -1,35 +1,101 @@
-Careful analysis of the models above leads us to identify several important factors that determine the performance. These factors can be classified into three categories, i.e., system, application, and algorithm. The system category includes static power ratio $\rho$ ($\rho=p_s/p$), total number of cores $N$, and MTBF of each core; the application category is mainly the total workload, $W$; and shadowing ratio $\alpha$ in the algorithm category determines the number of main cores and shadow cores ($N=M+S$ and $\alpha=M/S$). In this section, we evaluate each performance metric of Lazy Shadowing, 
- %using the models above, 
- with the influence of each of the factors considered. %First we calculate the application failure probability for various scenarios. Then we proceed to study the expected energy consumption and completion time under different application failure probabilities. 
+We deployed rsMPI on a medium sized cluster and utilized up to 21 nodes for testing and benchmarking. Each node consists of a 2-way SMPs with Intel Haswell E5-2660 v3 processors of 10 cores per socket (20 cores per node), and is configured with 128 GB RAM. Nodes are connected via 56 GB/s FDR InfiniBand. To maximize the compute capacity, we used up to 20 cores per node.
 
-%\subsection{Application failure probability}
-%\label{eval_app_fail_prob}
-%\input{Evaluation/app_fail_prob}
+We used benchmark applications from both the Sandia National Lab Mantevo Project and NAS Parallel Benchmarks (NPB), and evaluated rsMPI with various problem sizes and number of processes. CoMD is a proxy for the computations in a typical molecular dynamics application. MiniAero is an explicit unstructured finite volume code that solves the compressible Navier-Stokes equations. Both MiniFE and HPCCG are proxy applications for unstructured implicit finite element codes, but HPCCG uses MPI\_ANY\_SOURCE receive operations and can be used to demonstrate rsMPI's capability of handling MPI non-deterministic events. IS, EP, and CG from NPB represent integer sort, embarrassingly parallel, and conjugate gradient applications, respectively. These applications cover key simulation workloads for US DOE, and represent both different communication patterns and computation-to-communication ratios.
 
-%\subsection{Comparison to process replication}
-%\label{eval_comparison}
-%\input{Evaluation/comparison}
+\subsection{Measurement of runtime overhead}
+\label{sec:runtime_overhead}
+While the hardware overhead for rsMPI is straightforward (e.g., collocation ratio of 4 results in the need for 25\% more hardware cost), the runtime overhead of the enforced consistency protocol depend on applications. To measure this overhead we ran each benchmark application linked to srMPI multiple times and compared the average execution time with the baseline, where each application runs with original OpenMPI.
 
-%\subsection{Energy comparison}
-%\label{eval_energy_comp}
-%\input{Evaluation/energy_comp}
+Figure~\ref{fig:runtime_overhead} shows the comparison of the execution time between baseline and srMPI for the 7 applications. All the experiments are conducted with 256 application-visible processes. That is, the baseline always uses 256 MPI ranks compiled with the unmodified OpenMPI library, while rsMPI uses 256 mains together with 256 shadows which are invisible to the application. Each result shows the average execution time of 5 runs, the standard deviation, and srMPI's runtime overhead. The baseline execution time varies from seconds to half an hour, so we plotted the time in log-scale. 
 
-\subsection{Comparison to checkpointing and process replication}
-\label{eval_comparison}
-\input{Evaluation/comparison}
+From the figure we can see that srMPI has comparable execution time to the baseline for all applications except IS. The reason for the large overhead of IS is that IS uses all-to-all communication and is largely communication-intensive. This is verified by adding fake computation to the application and we can see an immediate drop of the overhead to negligible level. We argue that communication-intensive applications like IS are not scalable, and as a result, they are not suitable for large-scale HPC. 
+For all other applications, the overhead varies from 0.64\% (EP) to 2.47\% (CoMD). Even for HPCCG, which uses MPI\_ANY\_SOURCE and adds extra work to our consistency protocol, the overhead is only 1.95\%, thanks to the asynchronous semantics of MPI\_Send. Therefore, we conclude that srMPI's runtime overheads are modest for scalable HPC applications that exhibit a fair communication-to-computation ratio.
 
-\subsection{Impact of the number of cores}
-\label{eval_core}
-\input{Evaluation/number_of_cores}
+\begin{figure}[!t]
+  \begin{center}
+      \includegraphics[width=\columnwidth]{figures/runtime_overhead}
+  \end{center}
+  \caption{Comparison of execution time between baseline and rsMPI. 256 application-visible processes, and collocation ratio of 4 for srMPI.}
+  \label{fig:runtime_overhead}
+\end{figure}
 
-\subsection{Impact of workload}
-\label{eval_workload}
-\input{Evaluation/workload}
+\subsection{Scalability}
+In addition to measuring the runtime overhead at fixed application-visible process count, we also assessed both strong and weak scalability by varying the number of processes for the applications. Strong scaling is defined as how the execution time varies with the number of processes for a fixed total problem size. In contrast, weak scaling is defined as how the execution time varies with the number of processes for a fixed problem size per process. 
 
-\subsection{Impact of static power ratio}
-\label{eval_static_power}
-\input{Evaluation/static_power}
+Among the seven applications, HPCCG, CoMD, and miniAero allow us to vary the input so that we can perform both strong scaling and weak scaling test. The results for miniAero are similar to those of CoMD, so we only show the results for HPCCG and CoMD here. Figure~\ref{fig:scalability} reveals that both HPCCG and CoMD have good strong scalability. By increasing the number of processes, we can always reduce the execution time for a fixed problem size. At the same time, srMPI's runtime overhead increases with the number of processes during the strong scalability test. At 256 processes, the overhead reaches 13.2\% for CoMD, and 29.1\% for HPCCG. This may seem to contradict with the results in Section~\ref{sec:runtime_overhead}. It is expected, however, since increasing the number of processes while keeping a constant problem size increases the communication-to-computation ratio of the application. Hence, to keep rsMPI overheads reasonable, it is important to choose input sizes such that the ratio of communication-to-computation is balanced. 
 
-\subsection{Adding collocation overhead}
-\label{eval_collocation}
-\input{Evaluation/collocation}
+
+\begin{figure*}[!t]
+	\begin{center}
+		\subfigure[HPCCG strong scalability]
+		{
+			\label{fig:hpccg_strong}
+			\includegraphics[width=0.4\textwidth]{figures/hpccg_strong}
+		}
+		\subfigure[HPCCG weak scalability]
+		{
+			\label{fig:hpccg_weak}
+			\includegraphics[width=0.4\textwidth]{figures/hpccg_weak}
+		}
+		\subfigure[CoMD strong scalability]
+		{
+			\label{fig:comd_strong}
+			\includegraphics[width=0.4\textwidth]{figures/comd_strong}
+		}
+		\subfigure[CoMD weak scalability]
+		{
+			\label{fig:comd_weak}
+			\includegraphics[width=0.4\textwidth]{figures/comd_weak}
+		}
+	\end{center}
+	\caption{Scalability test for number of processes from 1 to 256. Collocation ratio is 4 for srMPI.}
+	\label{fig:scalability}
+\end{figure*}
+
+Comparing the baseline execution time between Figure~\ref{fig:hpccg_weak} and Figure~\ref{fig:comd_weak}, it is obvious that HPCCG and CoMD have different weak scaling characteristics. Keeping the same problem size per process, the execution time for CoMD increases by 8.9\% from 1 process to 256 processes, while the execution time is almost doubled for HPCCG. However, further analysis show that from 16 to 256 processes, the execution time increases by only 2.5\% for CoMD, and 1.0\% for HPCCG. We suspect that the results are not only determined by the scalability of the application, but also impacted by other factors, such as cache and memory contention on the same node, and network interference from other jobs running on the cluster. Remember that each node in the cluster has 20 cores and we always use all the cores of a node before adding another node. Therefore, it is very likely that the node level contention leads to the substantial increase in execution time for HPCCG. By analyzing the results from 16 to 256 processes, we believe both of HPCCG and CoMD are weak scaling applications. 
+
+Different from strong scalability test, there is no correlation between srMPI's runtime overhead and the number of processes during the weak scalability test. The overhead is always below 2.1\%, except for the case of 32 processes for CoMD where the overhead is 5.0\%. %The reason for this exception is still under investigation.
+
+\subsection{Performance under failures}
+%The last set of experiments test srMPI's capability of tolerating failures and evaluate its performance under various failures by comparing with checkpointing/restart. 
+
+As one main goal of this work is to achieve fault tolerance, an integrated fault injector is required to evaluate the effectiveness and efficiency of rsMPI to tolerate failures during execution. To produce failures in a manner similar to naturally occurring process failures, our failure injector is designed to be distributed and co-exist with all rsMPI processes. Failure is injected by sending a specific signal to the target process.
+
+Failure detection is beyond the scope of srMPI, and we assume the underlying hardware platform has a RAS system that provides this functionality. In our test system, we emulate a RAS system with a signal handler installed at every main and shadow. The signal handler catches failure signal sent from the failure injector, and uses a rsMPI defined failure message via a dedicated communicator to notify all other processes of the failure. 
+%To detect failure, srMPI receiving operation checks for failure messages before performing the actual receiving. 
+Similar to ULFM, process in srMPI can only detect failure when it does an MPI receive operation. In a srMPI receive, 
+a process checks for failure messages before it does the actual MPI receive operation.
+
+We also implemented checkpointing to compare with srMPI in the presence of failures. To be optimistic, we chose double in-memory checkpointing that is much more scalable then disk-based checkpointing~\cite{zheng2004ftc}. Same as leaping in srMPI, our implementation provides an API for process state registration. This API requires the same parameters as leap\_register\_state(void *addr, int count, MPI\_Datatype dt), but internally, it allocates extra memory in order to store the state of a ``buddy" process. Another provided API is checkpoint(), which can be used to insert a checkpoint in the application code. For fairness, our implementation also uses MPI messages to transfer state.  
+For both srMPI and checkpointing/restart, we assume a 60 seconds rebooting time after a failure. All experiments run with 256 application-visible processes, and the results are average of 5 runs. 
+
+Firstly, we tested the effectiveness of leaping. For each application, we identified the process state and register them with rsMPI. Figure~\ref{fig:single_failure} shows the execution time of HPCCG with a single failure injected at various locations. The blue solid line represents srMPI without any forced leaping, and the red dash line represents srMPI with periodic forced leaping. Note that the execution time is reduced compared to previous results because we reduced the number of iterations for the application main loop from 5000 to 150, so that there is no need for any forced leaping by buffer overflow. Every time we set our failure injector to randomly pick a process to inject a failure, and the failure is scheduled to occur at certain point during the execution. Corresponding to the x-axis, the scheduled failure time varies from 10\% to 90\% of the application's execution. For example, 10\% means the application completes 15 iterations for a total of 150 iterations. 
+
+\begin{figure}[!t]
+  \begin{center}
+      \includegraphics[width=\columnwidth]{figures/single_failure}
+  \end{center}
+  \caption{Execution time of HPCCG with a single injected failure. Collocation ratio is 2 for srMPI.}
+  \label{fig:single_failure}
+\end{figure}
+
+As expected, without forced leaping the execution time increases with the failure occurrence time, as reflected by the blue line in Figure~\ref{fig:single_failure}. The reason is that failure recovery time for srMPI is proportional to the amount of divergence between mains and shadows, and the divergence grows as the execution proceeds. On the other hand, forced leaping can effectively reduce the divergence by leaping the shadow forward to the state of its associated main, similar to the idea that checkpointing can reduce the amount of wasted work due to a failure by saving the execution state. To prove the effectiveness of leaping, we insert 4 forced leaping at 20\%, 40\%, 60\% and 80\% of the execution. The red line in Figure~\ref{fig:single_failure} clears show that the divergence effect is bounded due to periodic leaping, regardless of the failure occurrence time.
+
+Next, we compare rsMPI with checkpointing for multiple failures. To run the same number of application-visible processes, rsMPI needs more nodes than checkpointing to host the shadow processes. For fairness, we take into account the extra hardware cost when comparing srMPI to checkpointing, by defining the following metric:
+$$\text{Efficiency} = \frac{T_f \times N}{T_e \times M}$$
+, where $T_f$ and $N$ are the execution time and number of nodes without failures, and $T_e$ and $M$ are the actual execution time and required number of nodes for a specific fault tolerance mechanism. Intuitively, $T_f \times N$ represents the total amount of workload required by the application, and $T_e \times M$ is the actual amount of work carried out. The efficiency will be in the range 0 to 1, inclusive, and the higher is the better.
+
+The forced leaping interval for an application is selected such that no buffer overflow at the shadows would take place. Therefore, the interval should vary from system to system and also depends on the application patterns. We assume checkpointing/restart has the same buffer pressure as it needs to perform message logging, so its checkpointing interval is selected based on the same metric as rsMPI. We evaluated rsMPI with 2 different collocation ratios, i.e., 2 and 4. When collocation ratio is 2, rsMPI uses 50\% more nodes than checkpointing, and the execution rate of each shadow is roughly 50\% of the processor rate. Therefore, we set the checkpointing interval to be the same as the forced leaping interval for srMPI. When collocation ratio is 4, rsMPI needs 25\% more nodes, and each shadow's rate is roughly 25\% of the processor rate. As a result, we loose the checkpointing interval to be twice of the forced leaping interval. 
+
+With the checkpointing and forced leaping inserted to the application code, we randomly injected up to 10 failures into the execution. Figure~\ref{fig:multiple_failure} shows the comparison between checkpointing and srMPI (collocation ratio of 4) for both execution time and efficiency defined above. Although the failure-free execution time of srMPI is slightly larger than that of checkpointing, which results from srMPI's consistency protocol, the failure recovery time of checkpointing immediately overwhelms that of srMPI as failures occur. With 10 failures, the execution time of checkpointing is 42.8\% more than that of srMPI. Considering hardware overhead, the efficiency of checkpointing is also worse than that of srMPI when the number of failures reaches 6.
+
+\begin{figure}[!t]
+  \begin{center}
+      \includegraphics[width=\columnwidth]{figures/multiple_failure}
+  \end{center}
+  \caption{Execution time of HPCCG with multiple injected failures. Collocation ratio is 4 for srMPI.}
+  \label{fig:multiple_failure}
+\end{figure}
+
+Between srMPI with collocation ratio of 2 and srMPI with collocation ratio of 4, srMPI with collocation ratio of 2 wins in execution time, while srMPI with collocation ratio of 4 wins in efficiency. 
+%execution time is xx faster than checkpointing. It is projected to beat checkpointing in efficiency when 40 failures.

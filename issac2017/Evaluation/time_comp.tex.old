@@ -1,0 +1,41 @@
+To study the efficiency of Lazy Shadowing in terms of completion time and energy consumption, we compare Lazy Showing with checkpointing and process replication using the analytical models developed above. Our models are generic with no assumption about failure probability distribution. However, since failures happen randomly attributing to multiple complex factors, the expectation of the combined effect of all failures on an application's execution is like that they are uniformly distributed. Specifically, each $\Delta_i = w/(k+1)$, and $T_c$ can be rewritten as $w + w*(1-\sigma_s)*\frac{k}{k+1}$ for Lazy Shadowing and $w*(1 + \frac{k}{2})$ for checkpointing.
+
+The completion time comparison with the strong scaling work model is shown in Figure~\ref{fig:time12}, with one line for checkpointing, one line for process replication, and three lines for Lazy Shadowing corresponding to three different shadowed set sizes. In this example we use total workload of 60,000 hours and 10,000 cores. Although other values of W and M are not shown, the results are all similar. Figure~\ref{fig:time1} assumes that there is no overhead of collocating multiple shadows on the same core so that each of the (S-1) shadows gets a fair shair of the core's maximal execution speed ($\sigma_s=\frac{1}{S-1}$). The results show that checkpointing is very efficient when failures barely occur, while incurring significant delay when there are more failures. On the contrary, Lazy Shadowing can bound the completion time even when failures are frequent, which means a good scalability. When approximating the collocation overhead with a log function, which captures the effect of cache miss rate, the results are shown in Figure~\ref{fig:time2}. The completion time for Lazy Shadowing increases slightly, but the scalability remains.
+
+\begin{figure}[!t]
+	\begin{center}
+		\subfigure[$\sigma_s=\frac{1}{S}$.]
+		{
+			\label{fig:time1}
+			\includegraphics[width=0.45\textwidth]{Figures/time1}
+		}
+		\subfigure[$\sigma_s=\frac{1}{S^{1.5}}$.]
+		{
+			\label{fig:time2}
+			\includegraphics[width=0.45\textwidth]{Figures/time2}
+		}
+	\end{center}
+	\caption{Completion time comparison. W=60000 hours, M=10000.}
+	\label{fig:time12}
+\end{figure}
+
+Although W and M do not influence the analysis above, the ratio between the two impacts the failure probability. The failure probability distributions for fixed M=10000 and different Ws are shown in Figure~\ref{fig:f_dis}. 
+
+
+\begin{figure}[!t]
+	\begin{center}
+		\includegraphics[width=0.45\textwidth]{Figures/s2n10000}
+	\end{center}
+	\caption{Failure probability distribution. MTTI=5 years, M=10000.}
+	\label{fig:f_dis}
+\end{figure}
+
+Using Equation~\ref{eq:exp_time}, the expected completion time for each of the three resilience methods can be calculated, as shown in Figure~\ref{fig:exp_time} in log scale. For Lazy Shadowing, we choose S=5, and both with and without the overhead of collocation are considered. (Better results can be achieved if we choose larger S)
+
+\begin{figure}[!t]
+	\begin{center}
+		\includegraphics[width=0.45\textwidth]{Figures/exp_time}
+	\end{center}
+	\caption{Comparison of expected completion time. MTTI=5 years, M=10000, S=5.}
+	\label{fig:exp_time}
+\end{figure}
