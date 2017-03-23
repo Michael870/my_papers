@@ -3,7 +3,7 @@
 
 The study of fault tolerance has been fruitful for large-scale High Performance Computing~\cite{herault2015fault}. Checkpointing/restart periodically saves the execution state to stable storage, with the anticipation that
 computation can be restarted from a saved checkpoint in the case of a failure. 
-Assuming that all non-deterministic events can be identified, message logging protocols allow a system to recover beyond the most recent consistent checkpoint by combining checkpointing with logging of non-deterministic events~\cite{Elnozahy:02:Survey}. Another way to cope with faults is proactive fault tolerance, which relies on a prediction model to forecast fault ahead of time and take preventive measures, such as task migration or checkpointing the application~\cite{chakravorty2006proactive,gainaru2012fault}. Algorithm-based fault tolerance (ABFT) uses redundant information inherent of its coding of the problem to achieve resilience. Although the efficiency of ABFT can be orders of magnitude better than that of general techniques, it lacks generality~\cite{herault2015fault}.
+Assuming that all non-deterministic events can be identified, message logging protocols allow a system to recover beyond the most recent consistent checkpoint by combining checkpointing with logging of non-deterministic events~\cite{Elnozahy:02:Survey}. Another way to cope with faults is proactive fault tolerance, which relies on a prediction model to forecast faults ahead of time and take preventive measures, such as task migration or checkpointing the application~\cite{chakravorty2006proactive,gainaru2012fault}. Algorithm-based fault tolerance (ABFT) uses redundant information inherent of its coding of the problem to achieve resilience. Although the efficiency of ABFT can be orders of magnitude higher than that of general techniques, it lacks generality~\cite{herault2015fault}.
 
 For the past 30 years, disk-based coordinated checkpointing has been the primary fault tolerance mechanism in 
 production HPC systems~\cite{ferreira_sc_2011}. 
@@ -11,13 +11,13 @@ production HPC systems~\cite{ferreira_sc_2011}.
 %requires that the application rollback to the previously completed checkpoint. 
 To achieve a globally consistent state, all processes
 coordinate with one another to produce individual states that satisfy the ``happens before" relationship \cite{chandy_trans_1972}.
-Coordinated Checkpointing gains its popularity for its simplicity and ease of implementation. Its major drawback, however, is the
+Coordinated Checkpointing gains its popularity from its simplicity and ease of implementation. Its major drawback, however, is the
 lack of scalability~\cite{hargrove2006berkeley}.
-Uncoordinated checkpointing allows processes to record their states independently, thereby reducing the overhead during fault free operation~\cite{plank_ftc_1999,guermouche_2011_ipdps}. 
+Uncoordinated checkpointing allows processes to record their states independently, thereby reducing the overhead during fault free operation~\cite{guermouche_2011_ipdps}. 
 % and postpone creating a 
 %globally consistent view until the recovery phase \cite{plank_ftc_1999}. The major advantage is the reduced overhead during fault free operation. 
 However, the scheme requires that
-each process maintains multiple checkpoints, necessary to construct a consistent state during recovery, and complicates the garbage collection scheme. It can also suffer the well-known domino effect~\cite{randell_domino_effect}. %One hybrid approach, known as communication induced 
+each process maintain multiple checkpoints, necessary to construct a consistent state during recovery, and complicates the garbage collection scheme. It can also suffer the well-known domino effect~\cite{randell_domino_effect}. %One hybrid approach, known as communication induced 
 %checkpointing schemes, aims at reducing coordination overhead \cite{alvisi_ftc_1999}. The approach, however, may 
 %cause processes to store useless states that are never used in future rollbacks. To address this 
 %shortcoming, ``forced checkpoints" have been proposed \cite{helary_rds_1997}. This approach may lead to unpredictable
@@ -46,7 +46,7 @@ in HPC environments due to implementation complexity.
 Recently, process replication has been proposed as a viable alternative to checkpointing in HPC, as replication can significantly increase system availability and achieve higher efficiency than checkpointing in failure-prone systems~\cite{riesen_sandia_2010,cappello2009fault}.
 In addition, full and partial
 replication have also been used to augment existing checkpointing techniques, and to guard
-against silent data corruption \cite{stearly_2012_partial,elliott_2012_cpr,ni_2013_acr,fiala_2012_sdc}.
+against silent data corruption \cite{elliott_2012_cpr,ni_2013_acr,fiala_2012_sdc}.
 
 
 %Our work is based on process replication, or state machine replication, which has long been used to provide fault tolerance in distributed and mission critical systems\cite{schneider_1990_tutorial,bartlett_1981_nonstop}. Replication can be used to detect and correct system failures that are otherwise undetectable,
@@ -67,4 +67,4 @@ against silent data corruption \cite{stearly_2012_partial,elliott_2012_cpr,ni_20
 %that achieves a fine-grained tradeoff between time and hardware redundancy while meeting resilience and
 %power requirements.
 
-Many efforts aim at providing fault tolerance to MPI, which is the de facto programming paradigm for HPC. Checkpointing and message logging are supported by either building them from scratch or integrating with existing solutions~\cite{doi:10.1177/1094342005056139,bosilca2002mpich,7013060,4228333,Moody:10:SCR}. Several replication schemes are implemented in MPI, with the runtime overhead being negligible or up to 70\% depending upon the application communication patterns~\cite{engelmann2011redundant,ferreira_sc_2011,fiala_2012_sdc}. ULFM provides a set of MPI extensions that enable the deployment of application specific fault tolerance strategies~\cite{Bland2012}.
+Many efforts aim at providing fault tolerance to MPI, which is the de facto programming paradigm for HPC. Checkpointing and message logging are supported by either building them from scratch or integrating with existing solutions~\cite{doi:10.1177/1094342005056139,bosilca2002mpich,7013060,4228333,Moody:10:SCR}. Several replication schemes are implemented in MPI, with the runtime overhead ranging from negligible to 70\%, depending on the application communication patterns~\cite{engelmann2011redundant,ferreira_sc_2011,fiala_2012_sdc}. ULFM provides a set of MPI extensions that enable the deployment of application specific fault tolerance strategies~\cite{Bland2012}.
