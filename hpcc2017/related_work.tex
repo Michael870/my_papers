@@ -1,0 +1,70 @@
+%Extreme-scale computing presents some unique challenges to fault tolerance as faults are no longer 
+%an exceptional event \cite{ferreira_sc_2011}. 
+
+The study of fault tolerance has been fruitful for large-scale High Performance Computing~\cite{herault2015fault}. Checkpointing/restart periodically saves the execution state to stable storage, with the anticipation that
+computation can be restarted from a saved checkpoint in the case of a failure. 
+Assuming that all non-deterministic events can be identified, message logging protocols allow a system to recover beyond the most recent consistent checkpoint by combining checkpointing with logging of non-deterministic events~\cite{Elnozahy:02:Survey}. Another way to cope with faults is proactive fault tolerance, which relies on a prediction model to forecast faults ahead of time and take preventive measures, such as task migration or checkpointing the application~\cite{chakravorty2006proactive,gainaru2012fault}. Algorithm-based fault tolerance (ABFT) uses redundant information inherent of its coding of the problem to achieve resilience. Although the efficiency of ABFT can be orders of magnitude higher than that of general techniques, it lacks generality~\cite{herault2015fault}.
+
+For the past 30 years, disk-based coordinated checkpointing has been the primary fault tolerance mechanism in 
+production HPC systems~\cite{ferreira_sc_2011}. 
+%In the most general form,  %The identification of an error, before or during a checkpoint,
+%requires that the application rollback to the previously completed checkpoint. 
+To achieve a globally consistent state, all processes
+coordinate with one another to produce individual states that satisfy the ``happens before" relationship \cite{chandy_trans_1972}.
+Coordinated Checkpointing gains its popularity from its simplicity and ease of implementation. Its major drawback, however, is the
+lack of scalability~\cite{hargrove2006berkeley}.
+Uncoordinated checkpointing allows processes to record their states independently, thereby reducing the overhead during fault free operation~\cite{guermouche_2011_ipdps}. 
+% and postpone creating a 
+%globally consistent view until the recovery phase \cite{plank_ftc_1999}. The major advantage is the reduced overhead during fault free operation. 
+However, the scheme requires that
+each process maintain multiple checkpoints, necessary to construct a consistent state during recovery, and complicates the garbage collection scheme. It can also suffer the well-known domino effect~\cite{randell_domino_effect}. %One hybrid approach, known as communication induced 
+%checkpointing schemes, aims at reducing coordination overhead \cite{alvisi_ftc_1999}. The approach, however, may 
+%cause processes to store useless states that are never used in future rollbacks. To address this 
+%shortcoming, ``forced checkpoints" have been proposed \cite{helary_rds_1997}. This approach may lead to unpredictable
+%checkpointing rates. 
+%Although well-explored, uncoordinated checkpointing has not been widely adopted
+%in HPC environments, due to its dependency on applications \cite{zheng2004ftc,guermouche_2011_ipdps}.
+
+
+One of the largest overheads in any checkpointing technique is the time to save checkpoint
+to stable storage. %, such as a centralized file system. 
+To mitigate this issue, multiple optimization techniques have been proposed, including incremental checkpointing, semi-blocking checkpointing, in-memory checkpointing, and multi-level checkpointing~\cite{Agarwal:04:Adaptive,plank_ftcs_1994,elnozahy_1992_manetho,zheng2004ftc,ni2012hiding,Moody:10:SCR,hakkarine_2013}.
+ Although well-explored, these techniques have not been widely adopted
+in HPC environments due to implementation complexity. 
+%Incremental checkpointing attempts
+%to address this shortcoming by only writing the changes since the previous checkpoint \cite{nam_ftc_1997,Agarwal:04:Adaptive}. 
+%This can be achieved using dirty-bit page flags \cite{plank_ftcs_1994,elnozahy_1992_manetho}. Hash based incremental checkpointing, on the other
+%hand, makes use of hashes to detect changes \cite{nam_ftc_1997,Agarwal:04:Adaptive}. Another proposed scheme, known as copy-on-write,
+%offloads the checkpointing process to a secondary task and only writes incremental checkpoints \cite{li_trans_1994}.
+%The main concern of these techniques is the increase in their
+%memory requirement to support the simultaneous execution of the checkpointing and the application. %It has been suggested that nodes in extreme-scale systems should be configured with fast local storage~\cite{doe_ascr_exascale_2011}. Multi-level checkpointing, which consists of
+%writing checkpoints to multiple storage media, can benefit from such a strategy \cite{Moody:10:SCR,hakkarine_2013}. This,
+%however, may lead to increased failure rates of individual node and complicate the checkpoint writing process\cite{chen_2011_hystor}.
+%Furthermore, it may complicate the checkpoint writing process and requires that the system track the
+%current location of all process's checkpoints.
+
+Recently, process replication has been proposed as a viable alternative to checkpointing in HPC, as replication can significantly increase system availability and achieve higher efficiency than checkpointing in failure-prone systems~\cite{riesen_sandia_2010,cappello2009fault}.
+In addition, full and partial
+replication have also been used to augment existing checkpointing techniques, and to guard
+against silent data corruption \cite{elliott_2012_cpr,ni_2013_acr,fiala_2012_sdc}.
+
+
+%Our work is based on process replication, or state machine replication, which has long been used to provide fault tolerance in distributed and mission critical systems\cite{schneider_1990_tutorial,bartlett_1981_nonstop}. Replication can be used to detect and correct system failures that are otherwise undetectable,
+%such as silent data corruption and Byzantine faults \cite{ni_2013_acr,fiala_2012_sdc}. Recently, replication is proposed as a
+%viable alternative to checkpointing in HPC \cite{riesen_sandia_2010,lefray_2013_rsd,Cappello:09:Fault}. 
+%In addition, full and partial
+%replication have also been used to augment existing checkpointing techniques, and to guard
+%against silent data corruption \cite{stearly_2012_partial,elliott_2012_cpr}. There are several different implementations of
+%replication in the widely used MPI library, each with their different tradeoffs and overheads. The
+%overhead can be negligible or up to 70\% depending upon the communication patterns of the
+%application \cite{engelmann2011redundant}. %Moreover, replication alone is not enough to guarantee fault tolerance since
+%it is possible that all nodes executing a given process could fail simultaneously, thus
+%replication is typically paired with some form of checkpointing. 
+
+%The most relevant works to ours is redundant multi-threading (RMT) whereby one leading thread of execution is running ahead of trailing threads \cite{reinhardt2000transient,Wadden:2014:RDE:2665671.2665686}. However, our approach is different in that it tunes the execution rates of the leading and trailing threads in a finer grain, in order to achieve a "parameterized" trade-off between completion time and energy consumption. Further, we take advantage of the recovery time after each failure and "leap" the trailing threads to achieve forward progress, largely improving performance in terms of both completion time and energy consumption. This differs from RMT, of which the "leaping" of the trailing thread results in extra overhead.
+%To the best of our knowledge,
+%Lazy Shadowing is the first attempt to explore a state-machine replication based framework
+%that achieves a fine-grained tradeoff between time and hardware redundancy while meeting resilience and
+%power requirements.
+
+Many efforts aim at providing fault tolerance to MPI, which is the de facto programming paradigm for HPC. Checkpointing and message logging are supported by either building them from scratch or integrating with existing solutions~\cite{doi:10.1177/1094342005056139,bosilca2002mpich,7013060,4228333,Moody:10:SCR}. Several replication schemes are implemented in MPI, with the runtime overhead ranging from negligible to 70\%, depending on the application communication patterns~\cite{engelmann2011redundant,ferreira_sc_2011,fiala_2012_sdc}. ULFM provides a set of MPI extensions that enable the deployment of application specific fault tolerance strategies~\cite{Bland2012}.
