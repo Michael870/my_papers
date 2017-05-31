@@ -13,7 +13,7 @@ Leaping induced by failure has proven to be a critical mechanism in reducing the
 %Consequently, the time to recover from subsequent failures is reduced significantly. 
 thus reducing the recovery time for subsequent failures. Consequently, the time to recover from a failure increases with the increase in time between failures.  
 Based on this observation, a proactive approach is to ``force" leaping when the divergence between a main and its shadow exceeds a specified threshold. 
-In our future work, we will study the concept to determine what behavior triggers forced leaping to optimize the average recovery time. We will also explore how this mechanism will be implemented in srMPI.
+In our future work, we will study the concept to determine what behavior triggers forced leaping to optimize the average recovery time. We will also explore how this mechanism will be implemented in rsMPI.
 
 %we will study forcing the shadDuring experimentation we noticed the problem that recovery time in Rejuvenating Shadows can become substantial when the failure interval is large (Figure~\ref{fig:single_failure}). To deal with this issue, we are studying the idea of ``forced leaping", which borrows the idea from periodic checkpointing and forces a leaping whenever failure has been absent for a long time, in order to reduce the divergence between mains and shadows. Optimal intervals for forced leaping will be explored to balance between runtime overhead and failure recovery overhead. 
 
