@@ -1,19 +1,14 @@
 %Current fault-tolerance approaches rely exclusively on either time or hardware redundancy for recovery. Rollback recovery  exploits time redundancy but can incur significant delay and high energy cost. On the other hand, process replication relies on hardware redundancy and requires a significant increase in resources and  power consumption.
 
-In this paper, we propose a novel fault tolerance model, referred to as Rejuvenating Shadows. %By configuring the execution rate of the shadows through collocation, 
-Either by using DVFS or collocating shadows to reduce the execution rate of the shadows, 
-Rejuvenating Shadows enables a parameterized trade-off between time and hardware redundancy. The proposed solution differs from traditional approaches in the type of faults it handles and the fault tolerance protocol it uses.  %When deployed, 
-This property leads to efficient and ``tunable" resilience that takes into consideration the time-to-solution, the power constraints and the resilience level of the underlying application.%Although applied in this paper to collocated shadows, the principle of Rejuvenating Shadows applies, as well, to shadows whose execution rate is reduced through DVFS.
-%Either using DVFS or collocat
-
-We discussed the design decisions and presented the details of a full-feature implementation of Rejuvenating Shadows in MPI. Careful design guarantees that Rejuvenating Shadows always achieves forward progress in the presence of failures, maintains consistent level of resilience regardless of the number of failures, and minimizes implementation complexity and runtime overhead. Through empirical experiments, we demonstrated that Rejuvenating Shadows outperforms checkpointing/restart in both execution time and resource utilization, especially in failure-prone environments.
+In this paper, we propose a novel fault tolerance model of Rejuvenating Shadows. %By configuring the execution rate of the shadows through collocation, 
+Careful design guarantees that Rejuvenating Shadows always achieves forward progress in the presence of failures, maintains consistent level of resilience, and minimizes implementation complexity and runtime overhead. Through empirical experiments, we demonstrated that Rejuvenating Shadows outperforms checkpointing/restart in both execution time and resource utilization, especially in failure-prone environments.
 
 Leaping induced by failure has proven to be a critical mechanism in reducing the divergence between a main and its shadow, 
 %with respect to workload execution.
 %Consequently, the time to recover from subsequent failures is reduced significantly. 
-thus reducing the recovery time for subsequent failures. Consequently, the time to recover from a failure increases with the increase in time between failures.  
+thus reducing the recovery time for subsequent failures. Consequently, the time to recover from a failure increases with failure intervals.  
 Based on this observation, a proactive approach is to ``force" leaping when the divergence between a main and its shadow exceeds a specified threshold. 
-In our future work, we will study the concept to determine what behavior triggers forced leaping to optimize the average recovery time. We will also explore how this mechanism will be implemented in srMPI.
+In our future work, we will study the concept to determine what behavior triggers forced leaping to optimize the average recovery time. 
 
 %we will study forcing the shadDuring experimentation we noticed the problem that recovery time in Rejuvenating Shadows can become substantial when the failure interval is large (Figure~\ref{fig:single_failure}). To deal with this issue, we are studying the idea of ``forced leaping", which borrows the idea from periodic checkpointing and forces a leaping whenever failure has been absent for a long time, in order to reduce the divergence between mains and shadows. Optimal intervals for forced leaping will be explored to balance between runtime overhead and failure recovery overhead. 
 
