@@ -1,5 +1,5 @@
 %Implementation issues have been briefly discussed in \cite{cui_2016_scalcom}. 
-This section presents the details of our implementation of rsMPI, which is an MPI library for Rejuvenating Shadows. 
+This section presents the details of our rsMPI implementation of Rejuvenating Shadows, as an MPI library. 
 Similar to rMPI and RedMPI~\cite{ferreira_sc_2011,fiala_2012_sdc}, rsMPI is implemented as a separate layer between MPI and user application. It uses the standard MPI profiling interface to intercept every MPI call (using function wrappers) and enforces Rejuvenating Shadows logic. 
 %In this way, we not only can take advantage of existing MPI performance optimization that numerous researches have spent years on, but also achieve portability across all MPI implementations that conform to the MPI specification.
 When used, rsMPI transparently spawns the shadow processes during the initialization phase, manages the coordination between main and shadow processes, and guarantees order and consistency for messages and non-deterministic MPI events.
@@ -21,30 +21,52 @@ Using the MPI profiling interface, we added wrapper for MPI\_Comm\_rank() and MP
 
 \subsection{Execution rate control}
 \label{sec:rate_control}
-While the mains always execute at maximum rate for HPC's throughput consideration, the shadows are configured to execute slower by collocation as specified by user in a configuration file. Accordingly, rsMPI will generate an MPI rankfile and provide it to the MPI runtime to control the process mapping. Note that rsMPI always maps the main and shadow of the same task onto different nodes. This is preferred as a fault on a node will not affect both of them. 
+While each main executes on a separate processor at maximum rate for HPC's throughput consideration, shadows are configured to collocate and execute at a slower rate based on a user configuration file. Accordingly, rsMPI will generate an MPI rankfile and provide it to the MPI runtime to control process mapping. Note that rsMPI always maps the main and shadow of the same task onto different nodes. This is required to prevent a fault on one node from affecting  both a main and its associated  shadow.
 %In addition, rsMPI will automatically translate the number of processes (MPI ranks) specified for the application into the number of processes needed by rsMPI. For example, if the user specifies $N$ processes, rsMPI will translate it into $2N + K$ processes, where $K$ is the number of shadowed sets. Therefore, rsMPI will spawn $N$ main processes, $N$ shadow processes, and $K$ shadow coordinator processes for $K$ shadowed sets during MPI initialization. The logical organization is depicted in Figure~\ref{fig:logical_org}. 
-To minimize resource usage, each coordinator is collocated with all the shadows in the shadowed set. Since a coordinator simply waits for incoming control messages (discussed below) and does minimal work, it has negligible impact on the execution rate of the collocated shadows. 
+To minimize resource usage, each coordinator is collocated with the shadows in the shadowed set. 
+A coordinator performs  minimal work, as its main task is to simply handle incoming control messages (discussed below).  As such, the impact of coordinator on the execution rate of collocated shadows is minimal.
+%Since a coordinator simply waits for incoming control messages (discussed below) and does minimal work, it has negligible impact on the execution rate of the collocated shadows. 
 
+
+
+\subsection{Message passing and consistency}
+State consistency between mains and shadows is required both during normal execution and following a failure. % of a main process to roll-forward the shadows. 
+As depicted in Figure~\ref{fig:cons_protocol}, a protocol is used 
+to enforce sequential consistency, i.e., each shadow sees the same message order and operation results as its main. 
+%In this figure, A and B represent two mains, and A' and B' are their shadows. 
+Instead of sending messages from main to main and shadow to shadow~\cite{ferreira_sc_2011}, we choose to let the main sender forward each message to the shadow receiver. This allows us to speed up a single shadow when a main fails. 
+%For each message, the sending main sends a copy of the message to both the receiving main and its shadow, and the shadow of the sender is suppressed from sending out messages. 
+We assume that two copies of the same message are sent in an atomic manner\footnote{This property can be ensured, for example, by using the NIC multicast functionality of the network.}.
+%Note that, the SYNC message in Figure~\ref{fig:cons_protocol} is only used to address potential non-determinism as will be discussed in details in the next section.
+
+\begin{figure}[!t]
+  \begin{center}
+      	\includegraphics[width=0.7\columnwidth]{figures/cons_protocol_hpcc.png}
+  \end{center}
+  \vskip -0.2in
+  \caption{Consistency protocol for Rejuvenating Shadows.}
+  \label{fig:cons_protocol}
+  \vskip -0.2in
+\end{figure}
+
+For MPI point-to-point communication routines, we add wrappers to implement the above consistency protocol. %For sending functions, such as MPI\_Send() and MPI\_Isend(), rsMPI requires the main to duplicate the sending while the messages are suppressed at the shadow (see Figure~\ref{fig:cons_protocol}). For receiving functions, such as MPI\_Recv() and MPI\_Irecv(), both the main and the shadow does one receiving from the main process at the sending side. 
+Collective communication in rsMPI uses point-to-point communication in a binomial tree topology, which demonstrates excellent scalability.
+Assuming that only MPI operations can introduce non-determinism, the SYNC message shown in Figure~\ref{fig:cons_protocol} is used to enforce consistency in such cases. For example, MPI\_ANY\_SOURCE may result in different message orders between a main and its shadow. To deal with this, we serialize the receiving of MPI\_ANY\_SOURCE messages by having the main finish the receiving and then use a SYNC message to forward the message source to its shadow, which then receives from the specific source. 
+%Other operations, such as MPI\_Wtime() and MPI\_Probe(), are dealt with in a similar manner by forwarding the result from a main to its shadow.
 
 \subsection{Coordination between mains and shadows}
-Each shadowed set has a coordinator process dedicated to coordination between the mains and shadows in the shadowed set. 
-Coordinators do not execute any application code, but just wait for rsMPI defined control messages, and then carry out some 
-coordination work accordingly. There are three types of control messages: termination, failure, and leaping. Correspondingly, each coordinator is responsible for three actions:
+Each shadowed set has a coordinator process dedicated to coordination between the mains and shadows in the set. 
+Coordinators do not execute application code, but just wait for rsMPI defined control messages, and then carry out some 
+coordination work accordingly. There are three types of control messages: termination, failure, and leaping. They corresponds to three actions:
 \begin{itemize}
-  \item when a main finishes, it notifies its coordinator, which then forces the associated shadow to terminate.
-  \item when a main fails, its associated shadow needs to catch up, so the coordinator temporarily suspends the other collocated shadows, and resumes their execution once the recovery is done.
-  \item when a main initiates a leaping after detecting another main's failure, the coordinator triggers leaping at the associated shadow.
+  \item When a main finishes, the coordinator forces the associated shadow to terminate.
+  \item When a main fails, the coordinator temporarily speeds up the associated shadow by suspending the other collocated shadows, until the recovery is done.
+  \item When a main initiates a leaping, the coordinator triggers leaping at the associated shadow.
 \end{itemize}
 %Main and shadow processes can communicate with their coordinator via control messages defined by rsMPI. 
 % Firstly, when a main process finishes, it notifies its coordinator, which then forces the associated shadow process to terminate. Secondly, when a main process fails, its associated shadow process needs to catch up, so the coordinator will temporarily suspend the other collocated shadows, and resume their execution once the recovery is done. Lastly, when a main or shadow initiates a leaping, either because of failure or buffer overflow, the coordinator triggers leaping at the associated shadow or main.  
 %the RAS system will notify the corresponding shadow coordinator, which then promotes the associated shadow process to a new main process and kills the collocated shadows.
 To separate control messages from data messages, rsMPI uses a dedicated MPI communicator for the control messages. This Control Communicator is created by the wrapper to the MPI\_Init call. In addition, to ensure fast response and minimize the number of messages, coordinators also use OS signals to communicate with their collocated shadows. %There are three types of coordination in rsMPI.
-
-\subsection{Message passing and consistency}
-We wrapped around every MPI communication function and implemented the consistency protocol described in Section~\ref{sec:shadow}. For sending functions, such as MPI\_Send() and MPI\_Isend(), rsMPI requires the main to duplicate the sending while the messages are suppressed at the shadow (see Figure~\ref{fig:cons_protocol}). For receiving functions, such as MPI\_Recv() and MPI\_Irecv(), both the main and the shadow does one receiving from the main process at the sending side. Internally, collective communication in rsMPI uses point-to-point communication in a binomial tree topology, which demonstrates excellent scalability.
-
-We assume that only MPI operations can introduce non-determinism, and the SYNC message shown in Figure~\ref{fig:cons_protocol} is used to enforce consistency. For example, MPI\_ANY\_SOURCE may result in different message orders between a main and its shadow. To deal with this, we serialize the receiving of MPI\_ANY\_SOURCE messages by having the main finish the receiving and then use a SYNC message to forward the message source to its shadow, which then issues a receiving from the specific source. 
-%Other operations, such as MPI\_Wtime() and MPI\_Probe(), are dealt with in a similar manner by forwarding the result from a main to its shadow.
 
 
 \subsection{Leaping}
@@ -66,18 +88,19 @@ Application developer could use domain knowledge to identify only necessary stat
 
 %Different from Checkpointing where the process state is saved, leaping directly transfers process state between a main and its shadow. 
 %Since MPI provides natural support for message passing between processes, 
-rsMPI uses MPI messages to transfer process state. Although multiple pieces of data can be registered as a process' state, only a single message needs to be transferred, as MPI supports derived datatypes. To prevent the messages carrying process state from mixing with application messages, rsMPI uses a separate Control Communicator for transferring process state. With the synchronization of leaping by coordinator and the fast transfer of process state via MPI messages, the overhead of leaping is minimized. 
+rsMPI uses MPI messages to transfer process state. Although multiple pieces of data can be registered as a process' state, only a single message needs to be transferred, as MPI supports derived datatypes. To isolate state messages from application messages, rsMPI uses a separate MPI communicator to transfer process state.  
+By using a coordinator to synchronize the leaping process and relying on  MPI messages to rapidly transfer process state, the overhead of leaping is minimized. 
 
 %A challenge in leaping lies in the need for maintaining state consistency. 
-To make sure a pair of main and shadow stay consistent after a leaping, not only user-defined states should be transferred, but also lower level states, such as program counter and message buffer, need to be correctly updated. Specifically, the roll forward process needs to satisfy two requirements:  
-1) it need to discard all obsolete messages after the leaping; 2) it need to resume execution at the same point as the target process. We discuss our solutions below, under the assumption that the application's main body consists of a loop, which is true in most cases. 
+To make sure a pair of main and shadow stay consistent after a leaping, not only user-defined states should be transferred, but also lower level states, such as program counter and message buffers, need to be correctly updated. Specifically, the leap-recipient needs to satisfy two requirements:  
+1) Discard all obsolete messages after the leaping; 2) Resume execution at the same point as the leap-provider. We discuss our solutions below, under the assumption that the application's main body consists of a loop, which is true in most HPC applications. 
 %Firstly, after updating its state, the lagging process should resume execution at the same point as the target process. Secondly, the lagging process should discard all obsolete message before resuming normal execution. To address these issues, first we assume that the application's main body consists of a loop, which is true in most cases.
 
 %There is no straightforward way to discard obsolete messages since the message buffer is maintained by MPI runtime and not visible to rsMPI. Hence, 
-To correctly discard all obsolete messages, rsMPI borrows the idea of ``determinants" from message logging~\cite{Elnozahy:02:Survey}, and requires every main and shadow to log the metadata (i.e., MPI source, tag, and communicator) for all received messages. Then during leaping, the metadata at the target process is transferred to the roll forward process, so that the later can combine MPI probe and receive to remove the messages that have been consumed by the former but not by itself.
+To correctly discard all obsolete messages, rsMPI borrows the idea of ``determinants" from message logging~\cite{Elnozahy:02:Survey}, and requires every main and shadow to log the metadata (i.e., MPI source, tag, and communicator) for all received messages. Then during leaping, the metadata at the leap-provider is transferred to the leap-recipient, so that the later can combine MPI probe and receive to remove the messages that have been consumed by the former but not by itself.
 
-To resume execution from the same point, we restrict leaping to always occur at certain possible points, and use internal counter to make sure that both the roll forward and target processes start leaping from the same point. For example, when a main initiates a leaping, the coordinator will trigger a signal handler at the associated shadow. The signal handler does not carry out leaping, but sets a flag for leaping and receives from its main a counter value that indicates the leaping point. %Then, the shadow will check the flag and compare the counter value at every possible leaping point. 
-Only when both the flag is set and counter value matches will the shadow start leaping. In this way, it is guaranteed that after leaping the main and shadow will resume execution from the same point. To balance the trade-off between implementation overhead and flexibility, we choose MPI receive operations as the only possible leaping points. 
+To resume execution from the same point, we restrict leaping to always occur at certain possible points, and use an internal counter to make sure that both the leap-recipient and leap-provider start leaping from the same point. For example, when a main initiates a leaping, the coordinator will trigger a specific signal handler at the associated shadow. The signal handler does not carry out leaping, but sets a flag for leaping and receives from its main a counter value that indicates the leaping point. %Then, the shadow will check the flag and compare the counter value at every possible leaping point. 
+Only when both the flag is set and counter value matches will the shadow start leaping. In this way, it is guaranteed that after leaping the leap-recipient and leap-provider will resume execution from the same point. To balance the trade-off between implementation overhead and flexibility, we choose MPI receive operations as the only possible leaping points. 
 
  
 

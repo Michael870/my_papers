@@ -1,8 +1,9 @@
 We deployed rsMPI on a medium sized cluster and utilized up to 21 nodes (420 cores) for testing and benchmarking. Each node consists of a 2-way SMPs with Intel Haswell E5-2660 v3 processors of 10 cores per socket (20 cores per node), and is configured with 128 GB RAM. Nodes are connected via 56 GB/s FDR InfiniBand. %To maximize the compute capacity, we used up to 20 cores per node.
 
-We used benchmarks from the Sandia National Lab Mantevo Project and NAS Parallel Benchmarks (NPB), and evaluated rsMPI with various problem sizes and number of processes. CoMD is a proxy for molecular dynamics application. MiniAero is an explicit unstructured finite volume code that solves the Navier-Stokes equations. Both MiniFE and HPCCG are unstructured implicit finite element codes, but HPCCG uses MPI\_ANY\_SOURCE receive operations and can demonstrate rsMPI's capability of handling non-deterministic events. IS, EP, and CG from NPB represent integer sort, embarrassingly parallel, and conjugate gradient applications, respectively. These applications cover key simulation workloads and represent both different communication patterns and computation-to-communication ratios.
+Benchmarks from the Sandia National Lab Mantevo Project and NAS Parallel Benchmarks (NPB) are used. %, and evaluated rsMPI with various problem sizes and number of processes. 
+CoMD is a proxy for molecular dynamics application. MiniAero is an explicit unstructured finite volume code that solves the Navier-Stokes equations. Both MiniFE and HPCCG are unstructured implicit finite element codes, but HPCCG uses MPI\_ANY\_SOURCE receive operations and can demonstrate rsMPI's capability of handling non-deterministic events. IS, EP, and CG from NPB represent integer sort, embarrassingly parallel, and conjugate gradient applications, respectively. These applications cover key simulation workloads and represent both different communication patterns and computation-to-communication ratios.
 
-We also implemented double in-memory checkpointing to compare with rsMPI in the presence of failures. 
+We also implemented double in-memory checkpointing~\cite{zheng2004ftc} to compare with rsMPI in the presence of failures. 
 %To be optimistic, we chose double in-memory checkpointing that is much more scalable than disk-based checkpointing~\cite{zheng2004ftc}. 
 Same as leaping in rsMPI, our application-level checkpointing provides an API for process state registration. This API requires the same parameters, but internally, it allocates extra memory in order to store the state of a ``buddy" process. Another provided API is checkpoint(), which inserts a checkpoint in the application code. For fairness, MPI messages are used to transfer state between buddies.  
 For both rsMPI and checkpointing/restart, we assume a 60 seconds rebooting time after a failure. %All experiments run with 256 application-visible processes, and the results are average of 5 runs.
@@ -15,16 +16,17 @@ Figure~\ref{fig:runtime_overhead} shows the comparison of the execution time for
 
 From the figure we can see that rsMPI has comparable execution time to the baseline for all applications except IS. The reason for the exception of IS is that IS uses all-to-all communication and is heavily communication-intensive. %This is verified by adding fake computation to the application and we can see an immediate drop of the overhead to negligible level. 
 We argue that communication-intensive applications like IS are not scalable, and as a result, they are not suitable for large-scale HPC. 
-For all other applications, the overhead varies from 0.64\% (EP) to 2.47\% (CoMD). Even for HPCCG, which uses MPI\_ANY\_SOURCE and adds extra work to our consistency protocol, the overhead is only 1.95\%, thanks to the asynchronous semantics of MPI\_Send. Therefore, we conclude that rsMPI's runtime overheads are modest for scalable HPC applications that exhibit a fair communication-to-computation ratio.
+For all other applications, the overhead varies from 0.64\% (EP) to 2.47\% (CoMD). %Even for HPCCG, which uses MPI\_ANY\_SOURCE and adds extra work to our consistency protocol, the overhead is only 1.95\%, thanks to the asynchronous semantics of MPI\_Send. 
+Therefore, we conclude that rsMPI's runtime overheads are modest for applications that exhibit a fair communication-to-computation ratio.
 
 \begin{figure}[!t]
   \begin{center}
-      \includegraphics[width=0.9\columnwidth]{figures/runtime_overhead}
+      \includegraphics[width=0.9\columnwidth]{figures/runtime_overhead_hpcc}
   \end{center}
-  \vskip -0.25in
+  \vskip -0.1in
   \caption{Comparison of execution time between baseline and rsMPI using 256 application-visible processes and collocation ratio of 2 for rsMPI.}
   \label{fig:runtime_overhead}
-  \vspace{-0.15in}
+  %\vspace{-0.05in}
 \end{figure}
 
 \subsection{Scalability}
@@ -37,31 +39,21 @@ Among the seven applications, HPCCG, CoMD, and miniAero allow us to configure th
 
 \begin{figure}[!t]
 	\begin{center}
-		%\subfigure[HPCCG strong scalability]
-		%{
-		%	\label{fig:hpccg_strong}
-		%	\includegraphics[width=0.45\textwidth]{figures/hpccg_strong}
-		%}
 		\subfigure[HPCCG weak scalability]
 		{
 			\label{fig:hpccg_weak}
-			\includegraphics[width=0.9\columnwidth]{figures/hpccg_weak}
+			\includegraphics[width=0.9\columnwidth]{figures/hpccg_weak_hpcc}
 		}
-		%\subfigure[CoMD strong scalability]
-		%{
-		%	\label{fig:comd_strong}
-		%	\includegraphics[width=0.45\textwidth]{figures/comd_strong}
-		%}
 		\subfigure[CoMD weak scalability]
 		{
 			\label{fig:comd_weak}
-			\includegraphics[width=0.9\columnwidth]{figures/comd_weak}
+			\includegraphics[width=0.9\columnwidth]{figures/comd_weak_hpcc}
 		}
 	\end{center}
 	\vskip -0.2in
 	\caption{Scalability test for number of processes from 1 to 256. Collocation ratio is 2 for rsMPI.}
 	\label{fig:scalability}
-    \vspace{-0.25in}
+    \vspace{-0.2in}
 \end{figure}
 
 Comparing between Figure~\ref{fig:hpccg_weak} and Figure~\ref{fig:comd_weak}, it is obvious that HPCCG and CoMD have different weak scaling characteristics. While the execution time for CoMD increases by 8.9\% from 1 process to 256 processes, the execution time is almost doubled for HPCCG. However, further analysis shows that from 16 to 256 processes, the execution time increases by only 2.5\% for CoMD, and 1.0\% for HPCCG. We suspect that the results are not only determined by the scalability of the application, but also impacted by other factors, such as cache and memory contention on the same node, and network interference from other jobs running on the cluster. %Note that each node in the cluster has 20 cores and we always use all the cores of a node before adding another node. Therefore, it is very likely that the node level contention leads to the substantial increase in execution time for HPCCG. The results from 16 to 256 processes show that both HPCCG and CoMD are weak scaling applications. 
@@ -74,7 +66,8 @@ To predict the overhead at exascale, we applied curve fitting to derive the corr
 \subsection{Performance under failures}
 %The last set of experiments test rsMPI's capability of tolerating failures and evaluate its performance under various failures by comparing with checkpointing/restart. 
 
-As one main goal of this work is to achieve fault tolerance, an integrated fault injector is required to evaluate the effectiveness and efficiency of rsMPI to tolerate failures during execution. To produce failures in a manner similar to naturally occurring process failures, our failure injector is designed to be distributed and co-exist with all rsMPI processes. Failure is injected by sending a specific signal to a randomly picked target process.
+As one main goal of this work is to achieve fault tolerance, an integrated fault injector is required. % to evaluate the effectiveness and efficiency of rsMPI to tolerate failures during execution. 
+To produce failures in a manner similar to naturally occurring process failures, the failure injector is designed to be distributed and co-exist with all rsMPI processes. Failure is injected by sending a specific signal to a randomly picked target process.
 
 We assume that the underlying hardware platform has a Reliability, Availability and Serviceability (RAS) system that provides failure detection. In our test system, we emulate the RAS functionality by associating a signal handler with every process. The signal handler catches failure signals sent from the failure injector, and uses a rsMPI defined failure message via a dedicated communicator to notify all other processes.% of the failure. 
 %To detect failure, rsMPI receiving operation checks for failure messages before performing the actual receiving. 
@@ -83,7 +76,7 @@ We assume that the underlying hardware platform has a Reliability, Availability 
 
 The first step was to test the effectiveness of leaping. %For each application, we identified the process state and register them with rsMPI. 
 Figure~\ref{fig:single_failure} shows the execution time of HPCCG with a single failure injected at a specific time, measured as a proportion of the total execution of the application. %, at an increment of 10\%.
-The execution time is normalized to that of the fault-free baseline.   
+The execution time is normalized to that of the failure-free baseline.   
 %with a single failure injected at various locations. 
 The blue solid line and red dashed line represent rsMPI with collocation ratio of 2 and 4, respectively. For simplicity, they are referred to as rsMPI\_2 and rsMPI\_4 in the following text.  
 %Corresponding to the x-axis, a single failure is injected at various execution time in terms of iterations. For example, 10\% means that the completion of 500 iterations for an application with 5000 iterations in total.
@@ -92,13 +85,13 @@ The blue solid line and red dashed line represent rsMPI with collocation ratio o
 
 \begin{figure}[!t]
   \begin{center}
-      \includegraphics[width=0.9\columnwidth]{figures/single_failure_2}
+      \includegraphics[width=0.9\columnwidth]{figures/single_failure_hpcc}
   \end{center}
-  \vskip -0.25in
-  \caption{Execution time of HPCCG with a single failure injected at various time.}
+  \vskip -0.2in
+  \caption{Execution time of HPCCG with a single failure injected at various time, normalized to that of the failure-free baseline.}
   %\vspace{-10pt}
   \label{fig:single_failure}
-\vspace{-0.25in}
+%\vspace{-0.25in}
 \end{figure}
 
 As shown in Figure~\ref{fig:single_failure}, rsMPI's execution time increases with the failure occurrence time, regardless of the collocation ratio. The reason is that recovery time in rsMPI is proportional to the amount of divergence between mains and shadows, which grows as the execution proceeds. 
@@ -130,18 +123,18 @@ Figure~\ref{fig:multiple_failure} compares checkpointing and rsMPI (rsMPI\_2 and
       \subfigure[Wall-clock execution time]
 		{
 			\label{fig:failures_time}
-			\includegraphics[width=0.9\columnwidth]{figures/failures_time}
+			\includegraphics[width=0.9\columnwidth]{figures/failures_time_hpcc}
 		}
 		\subfigure[Weighted execution time]
 		{
 			\label{fig:failures_ntime}
-			\includegraphics[width=0.9\columnwidth]{figures/failures_ntime}
+			\includegraphics[width=0.9\columnwidth]{figures/failures_ntime_hpcc}
 		}
   \end{center}
-  \vskip -0.2in
+  \vskip -0.1in
   \caption{Comparison between checkpointing and rsMPI with various number of failures injected to HPCCG. 256 application-visible processes, 10\% checkpointing interval.}
   \label{fig:multiple_failure}
-  \vskip -0.25in
+  \vskip -0.2in
 \end{figure}
 
 
