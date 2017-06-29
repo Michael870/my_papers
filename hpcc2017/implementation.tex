@@ -1,7 +1,7 @@
 %Implementation issues have been briefly discussed in \cite{cui_2016_scalcom}. 
 This section presents the details of our rsMPI implementation of Rejuvenating Shadows, as an MPI library. 
 Similar to rMPI and RedMPI~\cite{ferreira_sc_2011,fiala_2012_sdc}, rsMPI is implemented as a separate layer between MPI and user application. It uses the standard MPI profiling interface to intercept every MPI call (using function wrappers) and enforces Rejuvenating Shadows logic. 
-%In this way, we not only can take advantage of existing MPI performance optimization that numerous researches have spent years on, but also achieve portability across all MPI implementations that conform to the MPI specification.
+%In this way, we not only can take advantage of existing MPI performance optimization that numerous researchers have spent years on, but also achieve portability across all MPI implementations that conform to the MPI specification.
 When used, rsMPI transparently spawns the shadow processes during the initialization phase, manages the coordination between main and shadow processes, and guarantees order and consistency for messages and non-deterministic MPI events.
 %Once completed, users should be able to link to the library without any change to existing codes. 
 
@@ -9,7 +9,7 @@ When used, rsMPI transparently spawns the shadow processes during the initializa
 A rsMPI world has 3 types of identities: main process, shadow process, and coordinator process that coordinates between main and shadow. A static mapping between rsMPI rank and application-visible MPI rank is maintained so that each process can retrieve its identity. For example, if the user specifies $N$ processes to run with collocation ratio of 4, rsMPI will translate it into $N + N + N/4$ processes, %where $K$ is the number of shadowed sets. Then the first $N$ ranks will be the mains, the next $N$ ranks be the shadows, and the last $K$ ranks be the coordinators. 
 with the first $N$ ranks being the mains, the next $N$ ranks being the shadows, and the last $N/4$ ranks being the coordinators. 
 %We also allow the user to specify the collocation of shadows using a configuration file.  Figure~\ref{fig:mapping} shows the mapping between MPI ranks and rsMPI processes for the 3 shadowed sets corresponding to Figure~\ref{fig:logical_org}. 
-Using the MPI profiling interface, we added wrapper for MPI\_Comm\_rank() and MPI\_Comm\_size(), so that each process (main or shadow) gets its correct execution path.
+Using the MPI profiling interface, we added wrappers for MPI\_Comm\_rank() and MPI\_Comm\_size(), so that each process (main or shadow) gets its correct execution path.
 
 %\begin{figure}[!t]
 %  \begin{center}
@@ -21,11 +21,11 @@ Using the MPI profiling interface, we added wrapper for MPI\_Comm\_rank() and MP
 
 \subsection{Execution rate control}
 \label{sec:rate_control}
-While each main executes on a separate processor at maximum rate for HPC's throughput consideration, shadows are configured to collocate and execute at a slower rate based on a user configuration file. Accordingly, rsMPI will generate an MPI rankfile and provide it to the MPI runtime to control process mapping. Note that rsMPI always maps the main and shadow of the same task onto different nodes. This is required to prevent a fault on one node from affecting  both a main and its associated  shadow.
+While each main executes on a separate processor at the maximum rate for HPC's throughput consideration, shadows are configured to collocate and execute at a slower rate based on a user configuration file. Accordingly, rsMPI will generate an MPI rankfile and provide it to the MPI runtime to control process mapping. Note that rsMPI always maps the main and shadow of the same task onto different nodes. This is required to prevent a fault on one node from affecting  both a main and its associated  shadow.
 %In addition, rsMPI will automatically translate the number of processes (MPI ranks) specified for the application into the number of processes needed by rsMPI. For example, if the user specifies $N$ processes, rsMPI will translate it into $2N + K$ processes, where $K$ is the number of shadowed sets. Therefore, rsMPI will spawn $N$ main processes, $N$ shadow processes, and $K$ shadow coordinator processes for $K$ shadowed sets during MPI initialization. The logical organization is depicted in Figure~\ref{fig:logical_org}. 
 To minimize resource usage, each coordinator is collocated with the shadows in the shadowed set. 
 A coordinator performs  minimal work, as its main task is to simply handle incoming control messages (discussed below).  As such, the impact of coordinator on the execution rate of collocated shadows is minimal.
-%Since a coordinator simply waits for incoming control messages (discussed below) and does minimal work, it has negligible impact on the execution rate of the collocated shadows. 
+%Since a coordinator simply waits for incoming control messages (discussed below) and does minimal work, it has a negligible impact on the execution rate of the collocated shadows. 
 
 
 
@@ -57,7 +57,7 @@ Assuming that only MPI operations can introduce non-determinism, the SYNC messag
 \subsection{Coordination between mains and shadows}
 Each shadowed set has a coordinator process dedicated to coordination between the mains and shadows in the set. 
 Coordinators do not execute application code, but just wait for rsMPI defined control messages, and then carry out some 
-coordination work accordingly. There are three types of control messages: termination, failure, and leaping. They corresponds to three actions:
+coordination work accordingly. There are three types of control messages: termination, failure, and leaping. They correspond to three actions:
 \begin{itemize}
   \item When a main finishes, the coordinator forces the associated shadow to terminate.
   \item When a main fails, the coordinator temporarily speeds up the associated shadow by suspending the other collocated shadows, until the recovery is done.
