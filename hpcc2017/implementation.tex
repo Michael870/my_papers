@@ -1,8 +1,8 @@
 %Implementation issues have been briefly discussed in \cite{cui_2016_scalcom}. 
 This section presents the details of rsMPI, an implementation of Rejuvenating Shadows in MPI. 
-Similar to rMPI and RedMPI~\cite{ferreira_sc_2011,fiala_2012_sdc}, rsMPI is implemented as a separate layer between MPI and the user applications, and uses function wrappers on top of the standard MPI profiling interface to intercept MPI calls. 
+Similar to rMPI and RedMPI~\cite{ferreira_sc_2011,fiala_2012_sdc}, rsMPI is implemented as a separate layer between MPI and user applications, and uses function wrappers on top of the standard MPI profiling interface to intercept MPI calls. 
 %In this way, we not only can take advantage of existing MPI performance optimization that numerous researches have spent years on, but also achieve portability across all MPI implementations that conform to the MPI specification.
-rsMPI transparently spawns the shadow processes during the initialization phase, manages the coordination between main and shadow processes, and guarantees order and consistency for messages and non-deterministic MPI events.
+During execution, rsMPI transparently spawns the shadow processes during the initialization phase, manages the coordination between main and shadow processes, and guarantees order and consistency for messages and non-deterministic MPI events.
 %Once completed, users should be able to link to the library without any change to existing codes. 
 
 \subsection{MPI rank}

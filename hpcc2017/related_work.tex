@@ -2,7 +2,7 @@
 %an exceptional event \cite{ferreira_sc_2011}. 
 
 %The study of fault tolerance in HPC has been the focus of research, with significant progress on how we mitigate the impact of failures.
-The Exascale initiative has re-ignited the study of fault tolerance, with significant progress on how we mitigate the impact of failures. 
+The exascale initiative has re-ignited the study of fault tolerance, with significant progress on how we mitigate the impact of failures. 
 Checkpointing/restart periodically saves the execution state to a stable storage, with the anticipation that, in case of failure, 
 computation can be restarted from a saved checkpoint~\cite{Chandy:1985:DSD:214451.214456}. 
 Message logging protocols, which combines checkpointing with logging of non-deterministic events, allow the system to recover beyond the most recent consistent checkpoint~\cite{Strom85optimisticrecovery}. Proactive fault tolerance relies on a prediction model to forecast faults, so that preventive measures, such as task migration or checkpointing, can be undertaken~\cite{gainaru2012fault}. Algorithm-based fault tolerance (ABFT) uses redundant information inherent to its algorithmic structure of the problem to achieve resilience. %Although the efficiency of ABFT can be orders of magnitude higher than that of general techniques, it lacks generality~\cite{herault2015fault}.
