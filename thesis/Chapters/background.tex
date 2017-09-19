@@ -1,0 +1,83 @@
+%Extreme-scale computing presents some unique challenges to fault tolerance as faults are no longer 
+%an exceptional event \cite{ferreira_sc_2011}. 
+Rollback recovery is the dominant mechanism to achieve fault
+tolerance in current HPC environments~\cite{Deconinck93surveyof,Elnozahy:02:Survey,Egwutuoha2013}. In the most general form, rollback recovery 
+involves the periodic saving of the execution state (checkpoint), with the anticipation that
+in the case of a failure, computation can be restarted from a previously saved checkpoint. % \cite{Elnozahy:02:Survey}. %The identification of an error, before or during a checkpoint,
+%requires that the application rollback to the previously completed checkpoint. 
+Coordinated checkpointing is a popular approach for
+its ease of implementation.
+Specifically, all processes
+coordinate with one another to produce individual states that satisfy the ``happens before"
+communication relationship \cite{chandy_trans_1972}, which is proved to provide a consistent global state.
+%Essentially, the algorithm provides a method for all processes involved to stop operation ``at the same
+%time" and transfer their system state to a stable storage. 
+The major benefit of coordinated checkpointing stems from its simplicity and ease of implementation. 
+Its major drawback, however, is the lack of scalability, as it requires global coordination
+~\cite{elnozahy_dsc_2004,riesen_sandia_2010}.
+%hargrove2006berkeley}.
+
+
+In uncoordinated checkpointing, processes checkpoint their states independently and postpone creating a 
+globally consistent view until the recovery phase. The major advantage is the reduced overhead during fault free operation. However, the scheme requires that
+each process maintains multiple checkpoints %and message logs, necessary to construct a consistent 
+%state during recovery. It 
+and can also suffer the well-known domino effect 
+ \cite{randell_domino_effect,alvisi_ftc_1999,helary_rds_1997}. One hybrid approach, known as communication induced 
+checkpointing, aims at reducing coordination overhead \cite{alvisi_ftc_1999}. The approach, however, may 
+cause processes to store useless states. To address this 
+shortcoming, ``forced checkpoints" have been proposed \cite{helary_rds_1997}. This approach, however,  may lead to unpredictable
+checkpointing rates. 
+Although well-explored, uncoordinated checkpointing has not been widely adopted
+in HPC environments due to its complexities and its dependency on applications \cite{guermouche_2011_ipdps}.
+
+
+One of the largest overheads in any checkpointing process is the time necessary to write the checkpoints
+to stable storage. Incremental checkpointing attempts
+to address this by only writing the changes since previous checkpoint \cite{Agarwal:04:Adaptive,elnozahy_1992_manetho,li_trans_1994}. 
+This can be achieved using dirty-bit page flags \cite{plank_ftcs_1994,elnozahy_1992_manetho}. Hash based incremental checkpointing, on the other hand, makes use of hashes to detect changes \cite{nam_ftc_1997,Agarwal:04:Adaptive}. 
+Another proposed scheme, known as in-memory checkpointing, minimizes the overhead of disk access~\cite{zheng_2004_ftccharm,6264677}.
+%offloads the checkpointing process to a secondary task and only writes incremental checkpoints \cite{li_trans_1994}.
+The main concern of these techniques is the increase in
+memory requirement to support the simultaneous execution of the checkpointing and the application. 
+It has been suggested that nodes in extreme-scale systems should be configured with fast local storage~\cite{doe_ascr_exascale_2011}. 
+%, which
+%improves the performance of checkpointing \cite{doe_ascr_exascale_2011}. 
+Multi-level checkpointing , which consists of
+writing checkpoints to multiple storage targets, 
+can benefit from such a strategy \cite{Moody:10:SCR}. This,
+however, may lead to increased failure rates of individual nodes and complicate the checkpoint writing process.
+%Furthermore, it may complicate the checkpoint writing process and requires that the system track the
+%current location of all process's checkpoints.
+
+
+Process replication, or state machine replication, has long been used for reliability and availability in distributed and mission critical systems \cite{schneider_1990_tutorial,Sousa2005,5470865}. %Replication can be used to detect and correct system failures that are otherwise undetectable,
+%such as silent data corruption and Byzantine faults \cite{fiala_2012_sdc}. 
+%This approach is barely used in HPC systems, primarily due to its low efficiency.
+%However, upcoming extreme-scale systems are expected to 
+%require a more challenging level of fault tolerance to deal with the 
+%confront a dramatic growth in both the frequency and diversity of faults.
+%As a result,
+Although it was initially rejected in HPC communities, 
+replication has recently been proposed to address the deficiencies of checkpointing for upcoming extreme-scale systems \cite{Cappello:09:Fault,engelmann2011redundant}. 
+Full and partial
+process replication have also been studied to augment existing checkpointing techniques, and to  
+detect and correct silent data corruption \cite{stearly_2012_partial,elliott_2012_cpr,ferreira_sc_2011,fiala_2012_sdc,ni_2013_acr}. % There are several different implementations of
+%replication in the widely used MPI library, each with their different tradeoffs and overheads. The
+%overhead can be negligible or up to 70\% depending upon the communication patterns of the
+%application \cite{engelmann2011redundant}. %Moreover, replication alone is not enough to guarantee fault tolerance since
+%it is possible that all nodes executing a given process could fail simultaneously, thus
+%replication is typically paired with some form of checkpointing. 
+Our approach is largely different from classical process replication in that we dynamically configure the execution rates of main and shadow processes, so that less resource/energy is required while reliability is still assured.  
+
+
+Replication with dynamic execution rate is also explored in Simultaneous and Redundantly Threaded (SRT) processor whereby one leading thread is running ahead of trailing threads \cite{reinhardt2000transient}. However, 
+the focus of \cite{reinhardt2000transient} is on transient faults within CPU while we aim at tolerating both permanent and transient faults across all system components.
+%Also, this work differs from \cite{mills_2014_icnc,cui_en7085151,cui_2014_closer}, where shadowing with DVFS is studied for single or loosely-coupled tasks. %Instead, in this paper we explore novel ideas of shadow collocation and shadow leaping in order to satisfy the requirements of future extreme-scale HPC systems. 
+%our approach is different in that it tunes the execution rates of the leading and trailing threads in a finer grain, in order to achieve a ``parameterized" trade-off between completion time and energy consumption. 
+%Further, we take advantage of the idle time during failure recovery and ``leap" the trailing replicas to achieve forward progress%, largely improving performance in terms of both completion time and energy consumption. 
+%. This differs from \cite{reinhardt2000transient}, of which the ``leaping" of the trailing replica results in extra overhead.
+%To the best of our knowledge,
+%Lazy Shadowing is the first attempt to explore a state-machine replication based framework
+%that achieves a fine-grained tradeoff between time and hardware redundancy while meeting resilience and
+%power requirements.

@@ -1,0 +1,1043 @@
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2013.9.9)  19 SEP 2017 16:42
+entering extended mode
+ %&-line parsing enabled.
+**main
+(./main.tex
+LaTeX2e <2005/12/01>
+Babel <v3.8h> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, arabic, basque, bulgarian, coptic, welsh, czech, slovak, german, ng
+erman, danish, esperanto, spanish, catalan, galician, estonian, farsi, finnish,
+ french, greek, monogreek, ancientgreek, croatian, hungarian, interlingua, ibyc
+us, indonesian, icelandic, italian, latin, mongolian, dutch, norsk, polish, por
+tuguese, pinyin, romanian, russian, slovenian, uppersorbian, serbian, swedish, 
+turkish, ukenglish, ukrainian, loaded.
+(./pittetd.cls
+Document Class: pittetd 2004/08/17 v1.618 University of Pittsburgh ETD (Electro
+nic Thesis & Dissertations) class
+\@etdaux=\write3
+\@chapterl=\skip41
+\@sectionl=\skip42
+\@subsectionl=\skip43
+\@subsubsectionl=\skip44
+\@singleline=\skip45
+\@presubs=\skip46
+\@presubsub=\skip47
+\@floatl=\skip48
+\bibindent=\dimen102
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\c@@members=\count79
+\c@@addprel=\count80
+\c@@appno=\count81
+\c@chapter=\count82
+\c@section=\count83
+\c@subsection=\count84
+\c@subsubsection=\count85
+\c@paragraph=\count86
+\c@subparagraph=\count87
+\c@figure=\count88
+\c@table=\count89
+\@expectedprelim=\toks14
+\@committee=\toks15
+\@coadv=\toks16
+(./pitetd12.clo) (./main.etd)
+\subject=\toks17
+)
+(/usr/share/texmf/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2007/02/07 v6.75r Hypertext links for LaTeX
+
+(/usr/share/texmf/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks18
+)
+\@linkdim=\dimen103
+\Hy@linkcounter=\count90
+\Hy@pagecounter=\count91
+
+(/usr/share/texmf/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2007/02/07 v6.75r Hyperref: PDFDocEncoding definition (HO)
+)
+(/usr/share/texmf/tex/latex/config/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+(/usr/share/texmf/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2006/08/22 v2.4 Connects package keyval with LaTeX options (
+HO)
+)
+Package hyperref Info: Option `bookmarks' set `true' on input line 2238.
+Package hyperref Info: Option `hyperindex' set `false' on input line 2238.
+Package hyperref Info: Hyper figures OFF on input line 2288.
+Package hyperref Info: Link nesting OFF on input line 2293.
+Package hyperref Info: Hyper index OFF on input line 2298.
+Package hyperref Info: Plain pages OFF on input line 2303.
+Package hyperref Info: Backreferencing OFF on input line 2308.
+
+Implicit mode ON; LaTeX internals redefined
+Package hyperref Info: Bookmarks ON on input line 2444.
+(/usr/share/texmf/tex/latex/ltxmisc/url.sty
+\Urlmuskip=\muskip10
+Package: url 2005/06/27  ver 3.2  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 2599.
+\Fld@menulength=\count92
+\Field@Width=\dimen104
+\Fld@charsize=\dimen105
+\Choice@toks=\toks19
+\Field@toks=\toks20
+Package hyperref Info: Hyper figures OFF on input line 3102.
+Package hyperref Info: Link nesting OFF on input line 3107.
+Package hyperref Info: Hyper index OFF on input line 3112.
+Package hyperref Info: backreferencing OFF on input line 3117.
+Package hyperref Info: Link coloring OFF on input line 3122.
+\Hy@abspage=\count93
+\c@Item=\count94
+\c@Hfootnote=\count95
+)
+*hyperref using driver hpdftex*
+(/usr/share/texmf/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2007/02/07 v6.75r Hyperref driver for pdfTeX
+\Fld@listcount=\count96
+)
+(/usr/share/texmf/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 2006/02/20 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 90.
+
+(/usr/share/texmf/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2007/01/08 v0.04d Graphics/color for pdfTeX
+\Gread@gobject=\count97
+))
+\Gin@req@height=\dimen106
+\Gin@req@width=\dimen107
+)
+Class pittetd Info: No patch found for graphicx on input line 18.
+
+(/usr/share/texmf/tex/latex/subfigure/subfigure.sty
+Package: subfigure 2002/03/15 v2.1.5 subfigure package
+\subfigtopskip=\skip51
+\subfigcapskip=\skip52
+\subfigcaptopadj=\dimen108
+\subfigbottomskip=\skip53
+\subfigcapmargin=\dimen109
+\subfiglabelskip=\skip54
+\c@subfigure=\count98
+\c@lofdepth=\count99
+\c@subtable=\count100
+\c@lotdepth=\count101
+
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+(/usr/share/texmf/tex/latex/subfigure/subfigure.cfg)
+\subfig@top=\skip55
+\subfig@bottom=\skip56
+)
+(/usr/share/texmf/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip57
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/share/texmf/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks21
+\ex@=\dimen110
+))
+(/usr/share/texmf/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen111
+)
+(/usr/share/texmf/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count102
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count103
+\leftroot@=\count104
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count105
+\DOTSCASE@=\count106
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen112
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count107
+\c@MaxMatrixCols=\count108
+\dotsspace@=\muskip11
+\c@parentequation=\count109
+\dspbrk@lvl=\count110
+\tag@help=\toks22
+\row@=\count111
+\column@=\count112
+\maxfields@=\count113
+\andhelp@=\toks23
+\eqnshift@=\dimen113
+\alignsep@=\dimen114
+\tagshift@=\dimen115
+\tagwidth@=\dimen116
+\totwidth@=\dimen117
+\lineht@=\dimen118
+\@envbody=\toks24
+\multlinegap=\skip58
+\multlinetaggap=\skip59
+\mathdisplay@stack=\toks25
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+)
+(/usr/share/texmf/tex/latex/amscls/amsthm.sty
+Package: amsthm 2004/08/06 v2.20
+\thm@style=\toks26
+\thm@bodyfont=\toks27
+\thm@headfont=\toks28
+\thm@notefont=\toks29
+\thm@headpunct=\toks30
+\thm@preskip=\skip60
+\thm@postskip=\skip61
+\thm@headsep=\skip62
+\dth@everypar=\toks31
+)
+Class pittetd Info: No patch found for amsmatch on input line 23.
+Class pittetd Info: No patch found for amsthm on input line 24.
+ (./main.aux)
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 44.
+Package hyperref Info: Option `colorlinks' set `true' on input line 44.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 44.
+
+(/usr/share/texmf/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/usr/share/texmf/tex/latex/config/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+)
+Package hyperref Info: Link coloring ON on input line 44.
+
+(/usr/share/texmf/tex/latex/hyperref/nameref.sty
+Package: nameref 2006/12/27 v2.28 Cross-referencing by name of section
+
+(/usr/share/texmf/tex/latex/oberdiek/refcount.sty
+Package: refcount 2006/02/20 v3.0 Data extraction from references (HO)
+)
+\c@section@level=\count114
+)
+LaTeX Info: Redefining \ref on input line 44.
+LaTeX Info: Redefining \pageref on input line 44.
+ (./main.out (./main.lot)
+(./main.lof
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 6.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 6.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 6.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 6.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 6.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 6.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 6.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 6.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 7.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\rho' on input line 7.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 7.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\rho' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\rho' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 10.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 10.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 10.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 10.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 10.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 10.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 14.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 14.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 14.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 14.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 14.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 14.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 14.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\rho' on input line 14.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 14.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 17.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 17.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 17.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\rho' on input line 17.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 17.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 20.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 20.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 20.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 20.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 20.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 20.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 20.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\alpha' on input line 20.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 20.
+
+)) (./main.out (./main.lot) (./main.lof
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 6.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 6.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 6.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 6.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 6.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 6.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 6.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 6.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 7.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\rho' on input line 7.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 7.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\rho' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\rho' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 9.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 10.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 10.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 10.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 10.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 10.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 10.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 14.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 14.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 14.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 14.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 14.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 14.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 14.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\rho' on input line 14.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 14.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 17.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 17.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 17.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\rho' on input line 17.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 17.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 20.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 20.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 20.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 20.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 20.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 20.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 20.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\alpha' on input line 20.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 20.
+
+))
+\@outlinefile=\write4
+\openout4 = `main.out'.
+
+
+
+Class pittetd Warning: I assumed `2017' for the year. You can use \year to chan
+ge it.
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
+
+]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 59.
+
+(/usr/share/texmf/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 59.
+ [3
+
+]
+Abstract
+
+Underfull \vbox (badness 1275) has occurred while \output is active []
+
+ [4
+
+]
+[5]
+Table of Contents
+(./main.toc)
+\tf@toc=\write5
+\openout5 = `main.toc'.
+
+ [6
+
+] [7]
+
+Class pittetd Warning: There is no tables on input line 85.
+
+List of Tables
+(./main.lot)
+\tf@lot=\write6
+\openout6 = `main.lot'.
+
+ [8
+
+]
+List of Figures
+(./main.lof)
+\tf@lof=\write7
+\openout7 = `main.lof'.
+
+ [9
+
+]
+Preface
+
+Package hyperref Warning: No destination for bookmark of \addcontentsline,
+(hyperref)                destination is added on input line 88.
+
+[10
+
+]
+Chapter 1
+(./Chapters/intro.tex
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ô in font cmr12!
+ [1
+
+
+] [2]
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ô in font cmr12!
+ [3]
+Underfull \vbox (badness 5652) has occurred while \output is active []
+
+ [4]
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ô in font cmr12!
+
+Underfull \vbox (badness 3029) has occurred while \output is active []
+
+ [5]
+[6]
+
+LaTeX Warning: Reference `chapter:smart' on page 7 undefined on input line 211.
+
+
+
+LaTeX Warning: Reference `chapter:summary' on page 7 undefined on input line 21
+3.
+
+) [7]
+Chapter 2
+(./Chapters/background.tex [8
+
+]) [9]
+Chapter 3
+(./Chapters/shadowing.tex
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ú in font cmr12!
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ù in font cmr12!
+
+<Figures/example1.pdf, id=464, 606.265pt x 383.4325pt>
+File: Figures/example1.pdf Graphic file (type pdf)
+
+<use Figures/example1.pdf>
+<Figures/example3.pdf, id=465, 542.025pt x 382.42876pt>
+File: Figures/example3.pdf Graphic file (type pdf)
+
+<use Figures/example3.pdf>
+<Figures/example2.png, id=466, 1048.27635pt x 719.8092pt>
+File: Figures/example2.png Graphic file (type png)
+
+<use Figures/example2.png> [10
+
+]) [11 <./Figures/example1.pdf
+
+pdfTeX warning: pdflatex (file ./Figures/example1.pdf): PDF inclusion: Page Gro
+up detected which pdfTeX can't handle. Ignoring it.
+> <./Figures/example3.pdf
+
+pdfTeX warning: pdflatex (file ./Figures/example3.pdf): PDF inclusion: Page Gro
+up detected which pdfTeX can't handle. Ignoring it.
+> <./Figures/example2.png (PNG copy)>]
+Chapter 4
+(./Chapters/reward.tex [12
+
+] [13] [14]
+<Figures/rho_profit.pdf, id=524, 903.375pt x 505.89pt>
+File: Figures/rho_profit.pdf Graphic file (type pdf)
+
+<use Figures/rho_profit.pdf>
+Underfull \hbox (badness 2073) in paragraph at lines 477--477
+\OT1/cmr/m/n/10 MTBF=5 years, N=100000, W=1 hour,
+ []
+
+<Figures/t_profit.pdf, id=525, 903.375pt x 505.89pt>
+File: Figures/t_profit.pdf Graphic file (type pdf)
+
+<use Figures/t_profit.pdf>
+<Figures/n_profit.pdf, id=526, 903.375pt x 505.89pt>
+File: Figures/n_profit.pdf Graphic file (type pdf)
+
+<use Figures/n_profit.pdf>
+<Figures/mtbf_profit.pdf, id=527, 903.375pt x 505.89pt>
+File: Figures/mtbf_profit.pdf Graphic file (type pdf)
+
+<use Figures/mtbf_profit.pdf>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [15 <./Figures/rho_profit.pdf> <./Figures/t_profit.pdf> <./Figures/n_profit.pd
+f> <./Figures/mtbf_profit.pdf>]) [16]
+Chapter 5
+(./Chapters/scale.tex [17
+
+]
+<Figures/sc_mapping.pdf, id=578, 544.0325pt x 292.09125pt>
+File: Figures/sc_mapping.pdf Graphic file (type pdf)
+
+<use Figures/sc_mapping.pdf> [18 <./Figures/sc_mapping.pdf>]
+<Figures/jump1.pdf, id=595, 452.69125pt x 248.93pt>
+File: Figures/jump1.pdf Graphic file (type pdf)
+ <use Figures/jump1.pdf>
+<Figures/jump2.pdf, id=596, 539.01375pt x 356.33125pt>
+File: Figures/jump2.pdf Graphic file (type pdf)
+ <use Figures/jump2.pdf>
+[19]
+
+pdfTeX warning: pdflatex (file ./Figures/gen_time.pdf): PDF inclusion: found PD
+F version <1.5>, but at most version <1.4> allowed
+<Figures/gen_time.pdf, id=606, 903.375pt x 505.89pt>
+File: Figures/gen_time.pdf Graphic file (type pdf)
+
+<use Figures/gen_time.pdf>
+
+pdfTeX warning: pdflatex (file ./Figures/gen_energy.pdf): PDF inclusion: found 
+PDF version <1.5>, but at most version <1.4> allowed
+<Figures/gen_energy.pdf, id=607, 903.375pt x 505.89pt>
+File: Figures/gen_energy.pdf Graphic file (type pdf)
+
+<use Figures/gen_energy.pdf>
+
+Class pittetd Warning: The caption of Figure 5 is longer than one line on input
+ line 239.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [20 <./Figures/jump1.pdf> <./Figures/jump2.pdf>]
+<Figures/tnt5.png, id=650, 382.42876pt x 212.795pt>
+File: Figures/tnt5.png Graphic file (type png)
+ <use Figures/tnt5.png>
+<Figures/tne5.png, id=651, 380.42125pt x 212.795pt>
+File: Figures/tne5.png Graphic file (type png)
+ <use Figures/tne5.png>
+
+Class pittetd Warning: The caption of Figure 6 is longer than one line on input
+ line 265.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [21 <./Figures/gen_time.pdf> <./Figures/gen_energy.pdf> <./Figures/tnt5.png> <
+./Figures/tne5.png>] <Figures/ts_power_5.png, id=683, 387.4475pt x 208.78pt>
+File: Figures/ts_power_5.png Graphic file (type png)
+
+<use Figures/ts_power_5.png>
+
+Class pittetd Warning: The caption of Figure 7 is longer than one line on input
+ line 289.
+
+) [22 <./Figures/ts_power_5.png>] [23]
+Chapter 6
+(./Chapters/implementation.tex [24
+
+]
+<Figures/logical_org.png, id=699, 960.58875pt x 400.49625pt>
+File: Figures/logical_org.png Graphic file (type png)
+
+<use Figures/logical_org.png>
+Underfull \vbox (badness 4621) has occurred while \output is active []
+
+ [25 <./Figures/logical_org.png>]
+<Figures/cons_protocol.png, id=706, 74.9199pt x 61.30905pt>
+File: Figures/cons_protocol.png Graphic file (type png)
+
+<use Figures/cons_protocol.png>
+<Figures/cons_protocol_failure.png, id=707, 74.9199pt x 61.30905pt>
+File: Figures/cons_protocol_failure.png Graphic file (type png)
+
+<use Figures/cons_protocol_failure.png>
+Overfull \hbox (10.18044pt too wide) in paragraph at lines 49--51
+[]\OT1/cmr/m/n/12 We as-sume that only MPI op-er-a-tions can in-tro-duce non-de
+terminism. MPI[]ANY[]SOURCE|
+ []
+
+) [26 <./Figures/cons_protocol.png (PNG copy)> <./Figures/cons_protocol_failure
+.png (PNG copy)>] [27]
+BIBLIOGRAPHY
+(./main.bbl [28
+
+] [29] [30] [31]
+Missing character: There is no √ in font cmr12!
+Missing character: There is no © in font cmr12!
+)
+
+Class pittetd Warning: Remember to run the document with `final' option.
+
+\openout3 = `main.etd'.
+
+[32] (./main.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 3872 strings out of 256216
+ 52506 string characters out of 1917073
+ 118452 words of memory out of 1500000
+ 6922 multiletter control sequences out of 10000+200000
+ 8764 words of font info for 32 fonts, out of 1200000 for 2000
+ 645 hyphenation exceptions out of 8191
+ 31i,8n,36p,1332b,415s stack positions out of 5000i,500n,6000p,200000b,15000s
+</usr/share/texmf/fonts/type1/bluesky/cm/cmbx12.pfb></usr/share/texmf/fonts/t
+ype1/bluesky/cm/cmmi10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmmi12.pfb>
+</usr/share/texmf/fonts/type1/bluesky/cm/cmmi6.pfb></usr/share/texmf/fonts/type
+1/bluesky/cm/cmmi7.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmmi8.pfb></usr
+/share/texmf/fonts/type1/bluesky/cm/cmr10.pfb></usr/share/texmf/fonts/type1/blu
+esky/cm/cmr12.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr17.pfb></usr/shar
+e/texmf/fonts/type1/bluesky/cm/cmr5.pfb></usr/share/texmf/fonts/type1/bluesky/c
+m/cmr7.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr8.pfb></usr/share/texmf/
+fonts/type1/bluesky/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmti
+12.pfb>
+Output written on main.pdf (42 pages, 1827747 bytes).
+PDF statistics:
+ 821 PDF objects out of 1000 (max. 8388607)
+ 159 named destinations out of 1000 (max. 131072)
+ 531 words of extra memory for PDF output out of 10000 (max. 10000000)
+

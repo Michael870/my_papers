@@ -1,0 +1,373 @@
+\begin{thebibliography}{10}
+
+\bibitem{Agarwal:04:Adaptive}
+S.~Agarwal, R.~Garg, M.~S. Gupta, and J.~E. Moreira.
+\newblock Adaptive incremental checkpointing for massively parallel systems.
+\newblock In {\em ICS 04}, St. Malo, France.
+
+\bibitem{doe_ascr_exascale_2011}
+S.~Ahern, A.~Shoshani, K.-L. Ma, A.~Choudhary, T.~Critchlow, S.~Klasky,
+  V.~Pascucci, J.~Ahrens, E.~W. Bethel, H.~Childs, J.~Huang, K.~Joy, Q.~Koziol,
+  G.~Lofstead, J.~S. Meredith, K.~Moreland, G.~Ostrouchov, M.~Papka,
+  V.~Vishwanath, M.~Wolf, N.~Wright, and K.~Wu.
+\newblock {\em Scientific Discovery at the Exascale, a Report from the DOE ASCR
+  2011 Workshop on Exascale Data Management, Analysis, and Visualization}.
+\newblock 2011.
+
+\bibitem{alvisi_ftc_1999}
+L.~Alvisi, E.~Elnozahy, S.~Rao, S.~A. Husain, and A.~de~Mel.
+\newblock An analysis of communication induced checkpointing.
+\newblock In {\em Fault-Tolerant Computing}, 1999.
+
+\bibitem{exa_challenge_2010}
+S.~Ashby, B.~Pete, C.~Jackie, and C.~Phil.
+\newblock The opportunities and challenges of exascale computing, 2010.
+
+\bibitem{bartlett_1981_nonstop}
+J.~F. Bartlett.
+\newblock A nonstop kernel.
+\newblock In {\em Proceedings of the Eighth ACM Symposium on Operating Systems
+  Principles}, SOSP '81, pages 22--29, New York, NY, USA, 1981. ACM.
+
+\bibitem{Bergman08exascalecomputing}
+K.~Bergman, S.~Borkar, D.~Campbell, W.~Carlson, W.~Dally, M.~Denneau,
+  P.~Franzon, W.~Harrod, J.~Hiller, S.~Karp, S.~Keckler, D.~Klein, R.~Lucas,
+  M.~Richards, A.~Scarpelli, S.~Scott, A.~Snavely, T.~Sterling, R.~S. Williams,
+  K.~Yelick, K.~Bergman, S.~Borkar, D.~Campbell, W.~Carlson, W.~Dally,
+  M.~Denneau, P.~Franzon, W.~Harrod, J.~Hiller, S.~Keckler, D.~Klein, P.~Kogge,
+  R.~S. Williams, and K.~Yelick.
+\newblock Exascale computing study: Technology challenges in achieving exascale
+  systems peter kogge, editor \& study lead, 2008.
+
+\bibitem{Cappello:09:Fault}
+F.~Cappello.
+\newblock Fault tolerance in petascale/ exascale systems: Current knowledge,
+  challenges and research opportunities.
+\newblock {\em IJHPCA}, 23(3):212--226, 2009.
+
+\bibitem{Cappello:2009:TER:1640402.1640428}
+F.~Cappello, A.~Geist, B.~Gropp, L.~Kale, B.~Kramer, and M.~Snir.
+\newblock Toward exascale resilience.
+\newblock {\em Int. J. High Perform. Comput. Appl.}, 23(4):374--388, Nov. 2009.
+
+\bibitem{chandra2008defect}
+V.~Chandra and R.~Aitken.
+\newblock Impact of technology and voltage scaling on the soft error
+  susceptibility in nanoscale {CMOS}.
+\newblock In {\em Defect and Fault Tolerance of VLSI Systems}, 2008.
+
+\bibitem{chandy_trans_1972}
+K.~Chandy and C.~Ramamoorthy.
+\newblock Rollback and recovery strategies for computer programs.
+\newblock {\em Computers, IEEE Transactions on}, C-21(6):546--556, June 1972.
+
+\bibitem{Chandy:1985:DSD:214451.214456}
+K.~M. Chandy and L.~Lamport.
+\newblock Distributed snapshots: Determining global states of distributed
+  systems.
+\newblock {\em ACM Trans. Comput. Syst.}, 3(1):63--75, Feb. 1985.
+
+\bibitem{nam_ftc_1997}
+H.~chang Nam, J.~Kim, S.~Lee, and S.~Lee.
+\newblock Probabilistic checkpointing.
+\newblock In {\em In Proceedings of Intl. Symposium on Fault-Tolerant
+  Computing}, pages 153--160, 1997.
+
+\bibitem{cristian_comm_1991}
+F.~Cristian.
+\newblock Understanding fault-tolerant distributed systems.
+\newblock {\em Commun. ACM}, 34(2):56--78, Feb. 1991.
+
+\bibitem{cui_en7085151}
+X.~Cui, B.~Mills, T.~Znati, and R.~Melhem.
+\newblock Shadow replication: An energy-aware, fault-tolerant computational
+  model for green cloud computing.
+\newblock {\em Energies}, 7(8):5151--5176, 2014.
+
+\bibitem{cui_2014_closer}
+X.~Cui, B.~Mills, T.~Znati, and R.~Melhem.
+\newblock Shadows on the cloud: An energy-aware, profit maximizing resilience
+  framework for cloud computing.
+\newblock In {\em CLOSER}, April 2014.
+
+\bibitem{cui_2016_scalcom}
+X.~Cui, T.~Znati, and R.~Melhem.
+\newblock Adaptive and power-aware resilience for extreme-scale computing.
+\newblock In {\em 16th IEEE International Conference on Scalable Computing and
+  Communications}, July 18-21 2016.
+
+\bibitem{daly_fgcs_2006}
+J.~Daly.
+\newblock A higher order estimate of the optimum checkpoint interval for
+  restart dumps.
+\newblock {\em Future Gener. Comput. Syst.}, 22(3):303--312, Feb. 2006.
+
+\bibitem{Deconinck93surveyof}
+G.~Deconinck, J.~Vounckx, R.~Lauwereins, and J.~A. Peperstraete.
+\newblock Survey of backward error recovery techniques for multicomputers based
+  on checkpointing and rollback.
+\newblock {\em International Journal of Modeling and Simulation}, 18:262--265,
+  1993.
+
+\bibitem{di2014lessons}
+C.~Di~Martino, Z.~Kalbarczyk, R.~K. Iyer, F.~Baccanico, J.~Fullop, and
+  W.~Kramer.
+\newblock Lessons learned from the analysis of system failures at petascale:
+  The case of blue waters.
+\newblock In {\em 2014 44th Annual IEEE/IFIP International Conference on
+  Dependable Systems and Networks}, pages 610--621. IEEE, 2014.
+
+\bibitem{Egwutuoha2013}
+I.~P. Egwutuoha, D.~Levy, B.~Selic, and S.~Chen.
+\newblock A survey of fault tolerance mechanisms and checkpoint/restart
+  implementations for high performance computing systems.
+\newblock {\em The Journal of Supercomputing}, 65(3):1302--1326, 2013.
+
+\bibitem{elliott_2012_cpr}
+J.~Elliott, K.~Kharbas, D.~Fiala, F.~Mueller, K.~Ferreira, and C.~Engelmann.
+\newblock Combining partial redundancy and checkpointing for {HPC}.
+\newblock In {\em ICDCS '12}, Washington, DC, US.
+
+\bibitem{elnozahy_dsc_2004}
+E.~Elnozahy and J.~Plank.
+\newblock Checkpointing for peta-scale systems: a look into the future of
+  practical rollback-recovery.
+\newblock {\em DSC}, 1(2):97 -- 108, april-june 2004.
+
+\bibitem{elnozahy_1992_manetho}
+E.~Elnozahy and W.~Zwaenepoel.
+\newblock Manetho: Transparent rollback-recovery with low overhead, limited
+  rollback and fast output commit.
+\newblock {\em TC}, 41:526--531, 1992.
+
+\bibitem{Elnozahy:02:Survey}
+E.~N. Elnozahy, L.~Alvisi, Y.-M. Wang, and D.~B. Johnson.
+\newblock A survey of rollback-recovery protocols in message-passing systems.
+\newblock {\em {ACM} Computing Surveys}, 34(3):375--408, 2002.
+
+\bibitem{engelmann2011redundant}
+C.~Engelmann and S.~B{\"o}hm.
+\newblock Redundant execution of hpc applications with mr-mpi.
+\newblock In {\em PDCN}, pages 15--17, 2011.
+
+\bibitem{Eyerman:2011:FDU:1952998.1952999}
+S.~Eyerman and L.~Eeckhout.
+\newblock Fine-grained dvfs using on-chip regulators.
+\newblock {\em ACM Trans. Archit. Code Optim.}, 8(1):1:1--1:24, Feb. 2011.
+
+\bibitem{ferreira_sc_2011}
+K.~Ferreira, J.~Stearley, J.~H. Laros, III, R.~Oldfield, K.~Pedretti,
+  R.~Brightwell, R.~Riesen, P.~G. Bridges, and D.~Arnold.
+\newblock Evaluating the viability of process replication reliability for
+  exascale systems.
+\newblock In {\em Proceedings of 2011 International Conference for High
+  Performance Computing, Networking, Storage and Analysis}, SC '11, pages
+  44:1--44:12, 2011.
+
+\bibitem{fiala_2012_sdc}
+D.~Fiala, F.~Mueller, C.~Engelmann, R.~Riesen, K.~Ferreira, and R.~Brightwell.
+\newblock Detection and correction of silent data corruption for large-scale
+  high-performance computing.
+\newblock SC, Los Alamitos, CA, USA, 2012.
+
+\bibitem{gartner_faults_1999}
+F.~C. G\"{a}rtner.
+\newblock Fundamentals of fault-tolerant distributed computing in asynchronous
+  environments.
+\newblock {\em ACM Comput. Surv.}, 31(1):1--26, Mar. 1999.
+
+\bibitem{guermouche_2011_ipdps}
+A.~Guermouche, T.~Ropars, E.~Brunet, M.~Snir, and F.~Cappello.
+\newblock Uncoordinated checkpointing without domino effect for
+  send-deterministic mpi applications.
+\newblock In {\em IPDPS}, pages 989--1000, May 2011.
+
+\bibitem{helary_rds_1997}
+J.-M. Helary, A.~Mostefaoui, R.~H. Netzer, and M.~Raynal.
+\newblock Preventing useless checkpoints in distributed computations.
+\newblock In {\em RDS}, 1997.
+
+\bibitem{kalaiselvi_sadhana_2000}
+S.~Kalaiselvi and V.~Rajaraman.
+\newblock A survey of checkpointing algorithms for parallel and distributed
+  computers.
+\newblock {\em Sadhana}, 25(5):489--510, 2000.
+
+\bibitem{Keller:EECS-2015-257}
+B.~Keller.
+\newblock Opportunities for fine-grained adaptive voltage scaling to improve
+  system-level energy efficiency.
+\newblock Master's thesis, EECS Department, University of California, Berkeley,
+  Dec 2015.
+
+\bibitem{4658633}
+W.~Kim, M.~S. Gupta, G.~Y. Wei, and D.~Brooks.
+\newblock System level analysis of fast, per-core dvfs using on-chip switching
+  regulators.
+\newblock In {\em 2008 IEEE 14th International Symposium on High Performance
+  Computer Architecture}, pages 123--134, Feb 2008.
+
+\bibitem{LeSueur:2010:DVF:1924920.1924921}
+E.~Le~Sueur and G.~Heiser.
+\newblock Dynamic voltage and frequency scaling: The laws of diminishing
+  returns.
+\newblock In {\em Proceedings of the 2010 International Conference on Power
+  Aware Computing and Systems}, HotPower'10, pages 1--8, Berkeley, CA, USA,
+  2010. USENIX Association.
+
+\bibitem{li_trans_1994}
+K.~Li, J.~F. Naughton, and J.~S. Plank.
+\newblock Low-latency, concurrent checkpointing for parallel programs.
+\newblock {\em IEEE Trans. Parallel Distrib. Syst.}, 5(8):874--879, Aug. 1994.
+
+\bibitem{top_ten_2014}
+R.~Lucas, J.~Ang, K.~Bergman, S.~Borkar, W.~Carlson, L.~Carrington, G.~Chiu,
+  R.~Colwell, W.~Dally, J.~Dongarra, A.~Geist, G.~Grider, R.~Haring,
+  J.~Hittinger, A.~Hoisie, D.~Klein, P.~Kogge, R.~Lethin, V.~Sarkar,
+  R.~Schreiber, J.~Shalf, T.~Sterling, and R.~Stevens.
+\newblock {\em The Top Ten Exascale System Research Challenges}.
+\newblock 2014.
+
+\bibitem{meneses2014energy}
+E.~Meneses, O.~Sarood, and L.~V. Kal{\'e}.
+\newblock Energy profile of rollback-recovery strategies in high performance
+  computing.
+\newblock {\em Parallel Computing}, 40(9):536--547, 2014.
+
+\bibitem{mills2014power}
+B.~Mills.
+\newblock {\em Power-Aware Resilience for Exascale Computing}.
+\newblock PhD thesis, University of Pittsburgh, 2014.
+
+\bibitem{mills_2014_icnc}
+B.~Mills, T.~Znati, and R.~Melhem.
+\newblock Shadow computing: An energy-aware fault tolerant computing model.
+\newblock In {\em ICNC}, 2014.
+
+\bibitem{mills2014energy}
+B.~Mills, T.~Znati, R.~Melhem, K.~B. Ferreira, and R.~E. Grant.
+\newblock Energy consumption of resilience mechanisms in large scale systems.
+\newblock In {\em 2014 22nd Euromicro International Conference on Parallel,
+  Distributed, and Network-Based Processing}, pages 528--535. IEEE, 2014.
+
+\bibitem{mills_2014_pdp}
+B.~Mills, T.~Znati, R.~Melhem, R.~E. Grant, and K.~B. Ferreira.
+\newblock Energy consumption of resilience mechanisms in large scale systems.
+\newblock In {\em Parallel, Distributed and Network-Based Processing (PDP),
+  22st Euromicro International Conference}, Feb 2014.
+
+\bibitem{Moody:10:SCR}
+A.~Moody, G.~Bronevetsky, K.~Mohror, and B.~Supinski.
+\newblock Design, modeling, and evaluation of a scalable multi-level
+  checkpointing system.
+\newblock In {\em SC}, pages 1--11, 2010.
+
+\bibitem{ni_2013_acr}
+X.~Ni, E.~Meneses, N.~Jain, and L.~V. Kal{\'e}.
+\newblock Acr: Automatic checkpoint/restart for soft and hard error protection.
+\newblock SC, pages 7:1--7:12, New York, NY, USA, 2013. ACM.
+
+\bibitem{4367962}
+R.~A. Oldfield, S.~Arunagiri, P.~J. Teller, S.~Seelam, M.~R. Varela, R.~Riesen,
+  and P.~C. Roth.
+\newblock Modeling the impact of checkpoints on next-generation systems.
+\newblock In {\em 24th IEEE Conference on Mass Storage Systems and Technologies
+  (MSST 2007)}, pages 30--46, Sept 2007.
+
+\bibitem{Orgerie:2014:STI:2597757.2532637}
+A.-C. Orgerie, M.~D.~d. Assuncao, and L.~Lefevre.
+\newblock A survey on techniques for improving the energy efficiency of
+  large-scale distributed systems.
+\newblock {\em ACM Comput. Surv.}, 46(4):47:1--47:31, Mar. 2014.
+
+\bibitem{plank_ftcs_1994}
+J.~Plank and K.~Li.
+\newblock Faster checkpointing with n+1 parity.
+\newblock In {\em Fault-Tolerant Computing}, pages 288--297, June 1994.
+
+\bibitem{randell_domino_effect}
+B.~Randell.
+\newblock System structure for software fault tolerance.
+\newblock In {\em Proceedings of the international conference on Reliable
+  software}, New York, NY, USA, 1975. ACM.
+
+\bibitem{reinhardt2000transient}
+S.~K. Reinhardt and S.~S. Mukherjee.
+\newblock {\em Transient fault detection via simultaneous multithreading},
+  volume~28.
+\newblock ACM, 2000.
+
+\bibitem{riesen_sandia_2010}
+R.~Riesen, K.~Ferreira, J.~R. Stearley, R.~Oldfield, J.~H.~L. III, K.~T.
+  Pedretti, and R.~Brightwell.
+\newblock Redundant computing for exascale systems, December 2010.
+
+\bibitem{mrbs}
+A.~Sangroya, D.~Serrano, and S.~Bouchenak.
+\newblock Benchmarking dependability of mapreduce systems.
+\newblock In {\em Reliable Distributed Systems (SRDS), IEEE 31st Symp. on},
+  pages 21--30, 2012.
+
+\bibitem{schneider_1990_tutorial}
+F.~B. Schneider.
+\newblock Implementing fault-tolerant services using the state machine
+  approach: A tutorial.
+\newblock {\em ACM Comput. Surv.}, 22(4):299--319, Dec. 1990.
+
+\bibitem{snir2014addressing}
+M.~Snir, R.~W. Wisniewski, J.~A. Abraham, S.~V. Adve, S.~Bagchi, P.~Balaji,
+  J.~Belak, P.~Bose, F.~Cappello, B.~Carlson, et~al.
+\newblock Addressing failures in exascale computing.
+\newblock {\em International Journal of High Performance Computing
+  Applications}, page 1094342014522573, 2014.
+
+\bibitem{Sousa2005}
+P.~Sousa, N.~Neves, and P.~Verissimo.
+\newblock Resilient state machine replication.
+\newblock In {\em Dependable Computing. Proc. $11^{th}$ Pacific Rim Int. Symp.
+  on}, pages 305--309, 2005.
+
+\bibitem{stearly_2012_partial}
+J.~Stearley, K.~Ferreira, D.~Robinson, J.~Laros, K.~Pedretti, D.~Arnold,
+  P.~Bridges, and R.~Riesen.
+\newblock Does partial replication pay off?
+\newblock In {\em DSN-W}, pages 1--6, June 2012.
+
+\bibitem{tchana_cits_2012}
+A.~Tchana, L.~Broto, and D.~Hagimont.
+\newblock Approaches to cloud computing fault tolerance.
+\newblock In {\em Comp., Infor. \& Tele. Sys., Int. Conf. on}, pages 1--6,
+  2012.
+
+\bibitem{tsai_isads_2011}
+W.-T. Tsai, P.~Zhong, J.~Elston, X.~Bai, and Y.~Chen.
+\newblock Service replication strategies with mapreduce in clouds.
+\newblock In {\em Autonomous Decentralized Systems, $10^{th}$ Int. Symp. on},
+  pages 381--388, 2011.
+
+\bibitem{zhao2008reliability}
+B.~Zhao, H.~Aydin, and D.~Zhu.
+\newblock Reliability-aware dynamic voltage scaling for energy-constrained
+  real-time embedded systems.
+\newblock In {\em Computer Design, 2008. ICCD 2008. IEEE International
+  Conference on}, pages 633--639. IEEE, 2008.
+
+\bibitem{6264677}
+G.~Zheng, X.~Ni, and L.~V. Kalé.
+\newblock A scalable double in-memory checkpoint and restart scheme towards
+  exascale.
+\newblock In {\em DSN-W}, pages 1--6, June 2012.
+
+\bibitem{zheng_2004_ftccharm}
+G.~Zheng, L.~Shi, and L.~V. Kal{\'e}.
+\newblock {FTC-Charm++}: an in-memory checkpoint-based fault tolerant runtime
+  for {Charm++} and {MPI}.
+\newblock In {\em Cluster Computing}, pages 93--103, 2004.
+
+\bibitem{5470865}
+Q.~Zheng.
+\newblock Improving mapreduce fault tolerance in the cloud.
+\newblock In {\em Parallel Distributed Processing, Workshops and Phd Forum
+  (IPDPSW), 2010 IEEE International Symposium on}, pages 1--6, April 2010.
+
+\end{thebibliography}

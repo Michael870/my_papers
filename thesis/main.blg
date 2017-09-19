@@ -1,0 +1,55 @@
+This is BibTeX, Version 0.99c (Web2C 7.5.6)
+The top-level auxiliary file: main.aux
+The style file: abbrv.bst
+Database file #1: main.bib
+Warning--entry type for "riesen_sandia_2010" isn't style-file defined
+--line 1247 of file main.bib
+Warning--empty year in Agarwal:04:Adaptive
+Warning--empty publisher in doe_ascr_exascale_2011
+Warning--empty year in elliott_2012_cpr
+Warning--empty booktitle in fiala_2012_sdc
+Warning--empty publisher in top_ten_2014
+Warning--empty booktitle in ni_2013_acr
+Warning--can't use both volume and number fields in reinhardt2000transient
+You've used 61 entries,
+            2118 wiz_defined-function locations,
+            851 strings with 16795 characters,
+and the built_in function-call counts, 26179 in all, are:
+= -- 2437
+> -- 1588
+< -- 24
++ -- 637
+- -- 566
+* -- 1985
+:= -- 4235
+add.period$ -- 187
+call.type$ -- 61
+change.case$ -- 461
+chr.to.int$ -- 0
+cite$ -- 68
+duplicate$ -- 953
+empty$ -- 1859
+format.name$ -- 566
+if$ -- 5493
+int.to.chr$ -- 0
+int.to.str$ -- 61
+missing$ -- 59
+newline$ -- 305
+num.names$ -- 122
+pop$ -- 555
+preamble$ -- 1
+purify$ -- 404
+quote$ -- 0
+skip$ -- 705
+stack$ -- 0
+substring$ -- 1355
+swap$ -- 285
+text.length$ -- 24
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 238
+warning$ -- 7
+while$ -- 211
+width$ -- 63
+write$ -- 664
+(There were 8 warnings)
