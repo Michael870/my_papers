@@ -4,6 +4,8 @@ AUXFILE=$(PREFIX).aux
 BLGFILE=$(PREFIX).blg
 LOGFILE=$(PREFIX).log
 BBLFILE=$(PREFIX).bbl
+TOCFILE=$(PREFIX).toc
+OUTFILE=$(PREFIX).out
 
 all: plots	
 	pdflatex $(PREFIX)
@@ -16,4 +18,4 @@ plots:
 #	cd Figures; ./epstopdf.sh
 
 clean:
-	rm -f $(AUXFILE) $(BLGFILE) $(LOGFILE) $(BBLFILE);
+	rm -f $(TOCFILE) $(OUTFILE) $(AUXFILE) $(BLGFILE) $(LOGFILE) $(BBLFILE);
