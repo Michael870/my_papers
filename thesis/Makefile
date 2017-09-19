@@ -3,6 +3,8 @@ TEXFILE=$(PREFIX).tex
 AUXFILE=$(PREFIX).aux
 BLGFILE=$(PREFIX).blg
 LOGFILE=$(PREFIX).log
+LOTFILE=$(PREFIX).lot
+LOFFILE=$(PREFIX).lof
 BBLFILE=$(PREFIX).bbl
 TOCFILE=$(PREFIX).toc
 ETDFILE=$(PREFIX).etd
@@ -19,4 +21,4 @@ plots:
 #	cd Figures; ./epstopdf.sh
 
 clean:
-	rm -f $(AUXFILE) $(BLGFILE) $(LOGFILE) $(BBLFILE) $(TOCFILE) $(ETDFILE) $(OUTFILE);
+	rm -f $(LOTFILE) $(LOFFILE) $(AUXFILE) $(BLGFILE) $(LOGFILE) $(BBLFILE) $(TOCFILE) $(ETDFILE) $(OUTFILE);
