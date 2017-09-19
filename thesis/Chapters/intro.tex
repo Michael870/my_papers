@@ -1,0 +1,221 @@
+As our reliance on IT continues to increase, the complexity and urgency of the problems our society will face 
+in the future drives us to build more powerful and accessible computer systems. Among the different types of 
+computer systems, High Performance Computing (HPC) and Cloud Computing systems are the two most powerful ones. 
+For both, the computing power attributes to the massive amount of parallelism, which is enabled by 
+the massive amount of CPU cores, memory modules, communication devices, storage components, etc. 
+
+Since CPU frequency flattened out in early 2000s, parallelism has become the ``golden rule" to boost performance. 
+In HPC, Terascale performance was achieved in the late 90’s with fewer than 10,000 heavyweight single-core processors. 
+A decade later, petascale performance required about ten times more processors with multiple cores on each processor. Nowadays, a race
+is underway to build the world's first exascale machine to accelerate scientific discoveries and breakthroughs. It is 
+projected that an exascale machine will achieve billion-way parallelism by using one million sockets each supporting 
+1,000 cores~\cite{doe_ascr_exascale_2011,top_ten_2014}. 
+
+Similar trend is happening in Cloud Computing. 
+As the demand for Cloud Computing accelerates, cloud service providers  
+will be faced with the need to expand their underlying infrastructure to ensure the expected levels of performance, reliability and cost-effectiveness. 
+As a result, lots of large-scale data centers have been and are being built by IT companies
+to exploit the power and economies of scale. 
+For example, Google, Facebook, and Rackspace have hundreds of thousands 
+of web servers in dedicated data centers to support their business. 
+
+Unfortunately, several challenging issues come with the increase in system scale. As today's HPC and Cloud Computing systems grow to 
+meet tomorrow's compute power demand, the behavior of the systems will be increasingly difficult to specify, predict and manage. 
+This upward trend, in terms of scale and complexity, has a direct negative effect on the overall system reliability. 
+%Even with the expected improvement in the reliability of future computing technology, the rate of system level failures will 
+%dramatically increase with the number of components, possibly by several orders of magnitude. 
+At the same time, the rapid 
+growing power consumption, as a result of the increase in system components, is another major concern. 
+%It is reported that 
+%the power required to run the machines as well as cool them has become the largest cost factor in a large-scale system's operating 
+%expenses.  
+At future extreme-scale, failure would become a norm rather than an exception, 
+driving the system to significantly lower efficiency with unprecedented amount of power consumption. 
+
+\section{Problem Statement}
+
+The system scale needed to address our future computing needs will come at the cost of increasing complexity, unpredictability, 
+and operating expenses. As we approach future extreme-scale computing, two of the biggest challenges will be system resilience and power 
+consumption, both being direct consequences of the dramatic increase in the number of system components~\cite{exa_challenge_2010,snir2014addressing}. 
+
+Regardless of the reliability of individual component, the system level failure rate will continue to increase as the number of 
+components increases, possibly by several orders of magnitude. It is projected that the Mean Time Between Failures (MTBF) of future extreme-scale systems will be at the order of hours or even minutes, meaning 
+that many failures will occur every day~\cite{Bergman08exascalecomputing}. Without an efficient fault tolerance mechanism, faults will be so frequent that the applications running on the 
+systems will be continuously interrupted, requiring the execution to be restarted every time there is a failure. 
+
+Also thanks to the continuous growth in system components, there has been a steady rise in power consumption in large-scale distributed systems. 
+In 2005, the peak power consumption of a single supercomputer reached 3.2 Megawatts. This number was doubled only after 5 years, and reached 17.8 
+Megawatts with a machine of 3,120,000 cores in 2013. Recognizing this rapid upward trend, the U.S. Department of Energy has set 20 
+megawatts as the power limit for future exascale systems, 
+challenging the research community to provide a 1000x improvement in performance with only a 10x increase in power~\cite{exa_challenge_2010}. 
+This huge imbalance makes system power a leading design constraint on the path to exascale. 
+
+Today, two approaches exist for fault tolerance. The first approach is rollback recovery, which rolls back and restarts the execution 
+every time there is a failure. This approach is often equipped with checkpointing to periodically save the execution state to a 
+stable storage so that execution can be restarted from a recent checkpoint in the case of a failure~\cite{Elnozahy:02:Survey,kalaiselvi_sadhana_2000,Chandy:1985:DSD:214451.214456}. 
+Although checkpointing is the most widely used technique in today's HPC systems, it may not scale to 
+future extreme-scale systems~\cite{ferreira_sc_2011,elnozahy_dsc_2004,4367962}. Given the anticipated increase in system level failure rates and the time to checkpoint large-scale 
+compute-intensive and data-intensive applications, the time required to periodically checkpoint an application 
+and restart its execution will approach the system's MTBF~\cite{Cappello:2009:TER:1640402.1640428}. Consequently, applications will make little forward progress, thereby 
+reducing considerably the overall system efficiency. 
+
+The second approach, referred to as process replication, exploits hardware redundancy and executes multiple instances of the same task 
+in parallel to overcome failure and guarantee that at least one task instance reaches completion~\cite{bartlett_1981_nonstop,tsai_isads_2011,ferreira_sc_2011}. Although this approach is extensively used 
+to deal with failures in 
+Cloud Computing and mission critical systems, it has 
+never been used in any HPC system due to its low system efficiency. To replicate each process, process replication requires 
+at least double the amount of compute nodes, which also increases the power consumption proportionally. 
+
+Based on above analysis, neither of the two approaches is efficient for future extreme-scale systems. And unfortunately, neither 
+of them addresses the power cap issue. 
+Achieving high resilience to failures under strict power constraints is a daunting and critical challenge that requires new 
+computational models with scalability, adaptability, and power-awareness in mind. 
+ 
+\section{Research Overview}
+
+There is a delicate interplay between fault tolerance and power consumption. Checkpointing and process replication require 
+additional power to achieve fault tolerance. Conversely, it has been shown that lowering supply voltages, a commonly used 
+technique to conserve power, increases the probability of transient faults~\cite{chandra2008defect,zhao2008reliability}. The trade-off between fault free operation and 
+optimal power consumption has been explored in the literature~\cite{meneses2014energy,mills2014energy}. Limited insights have emerged, however, with respect to how 
+adherence to application's desired QoS requirements affects and is affected by the fault tolerance and power consumption 
+dichotomy. In addition, abrupt and unpredictable changes in system behavior may lead to unexpected fluctuations in performance, 
+which can be detrimental to applications’ QoS requirements. The inherent instability of extreme-scale computing systems, 
+in terms of the envisioned high-rate and diversity of faults, together with the demanding power constraints under which 
+these systems will be designed to operate, calls for a 
+reconsideration of the fault tolerance problem.
+
+To this end, Mills, Znati, and Melhem have proposed a novel computational model, referred to as Shadow Replication, as a  
+power-aware approach to achieve high-levels of resilience through forward progress~\cite{mills_2014_icnc,mills_2014_pdp,mills2014power}. Based on Dynamic Voltage and Frequency Scaling (DVFS)~\cite{Orgerie:2014:STI:2597757.2532637,4658633,LeSueur:2010:DVF:1924920.1924921}, Mills studied the computational model and its performance in terms of completion time and energy consumption in HPC systems. Through the use of analytical models, simulations, and experimentation, Mills demonstrated that Shadow Replication can achieve resilience more efficiently than both checkpointing and traditional replication when power is limited. However, in Mills' work Shadow Replication is limited to the use of DVFS, which has been shown to have multiple issues that question its viability~\cite{Eyerman:2011:FDU:1952998.1952999,Keller:EECS-2015-257,chandra2008defect,zhao2008reliability}. In addition, Mills' study is limited to HPC systems and focuses exclusively on minimizing energy consumption with constraints on time to completion. In contrast, QoS requirements for various computing systems can be expressed in multiple dimensions that go beyond time and energy. At the same time, an implementation is needed to verify the computational model both with and without failures. 
+
+
+%In this thesis, our research objective is to simultaneously address the power and resilience challenges for future extreme-scale 
+%systems so that both system efficiency and application QoS are guaranteed.
+%To this end, we propose an adaptive and power-aware computational model, referred to as Lazy Shadowing, as an efficient and 
+%scalable alternative to achieve high-levels of resilience, through forward progress, in extreme-scale, failure-prone 
+%computing environments. 
+%The basic tenet of Lazy Shadowing is to associate with each main process a suite of “shadows” whose size depends on the 
+%``criticality" of the application and its performance requirements. Each shadow process is an exact replica of the original 
+%main process. To tolerate failures, the main process and its associated shadow processes will execute in parallel, but on 
+%different compute nodes. 
+%The shadows initially execute at a reduced rate %via Dynamic Voltage Frequency and Scaling (DVFS) 
+%to save power. 
+%If the main process completes the task successfully, we will 
+%terminate the shadows immediately. If the main process fails, however, we will promote one of the shadow processes to be a 
+%new main process and possibly increase its execution rate to mitigate delay.
+
+To address the above limitations, this thesis builds on the computational model of Shadow Replication, and seeks to simultaneously address the power and resilience challenges for future extreme-scale systems while guaranteeing system efficiency and application QoS.
+Specifically, this thesis tries to answer 4 questions: 1) is Shadow Replication general enough to achieve objectives beyond time to completion; %, such as multiple simultaneous requirements defined in a SLA in the Cloud; 
+2) how to enable Shadow Replication when DVFS is not viable, and ensure forward progress in failure-prone, extreme-scale systems; 3) is the computational model realistic in real environments; and 4) how to make the computational model reflective of the propensity of the processing elements to failures and adaptive to different environments and requirements.
+With these questions in mind, 
+I have studied different techniques to embody and augment the model, and developed analytical frameworks for different objectives in the Cloud and HPC environments~\cite{cui_2014_closer,cui_en7085151,cui_2016_scalcom}.
+%Previously, we have formally defined the computational model, studied possible techniques to realize and optimize the idea, and 
+%built analytical models for performance evaluation. 
+To complete my thesis, I propose to extend the study in the following two aspects.
+Firstly, I propose to implement a prototype in the context of Message Passing Interface (MPI), to validate the 
+computational model as well as measure its performance in real environment. Secondly, I propose to study  
+``smart shadowing" which adapts to the system configuration, application characteristics, and QoS requirement.
+In summary, my thesis will consist of the following main components.
+
+%\subsection{Lazy Shadowing: a novel fault-tolerant computational model (completed)}
+
+%The basic tenet of Lazy Shadowing is to associate with each main process a suite of “shadows” whose size depends on the 
+%``criticality" of the application and its performance requirements. Each shadow process is an exact replica of the original 
+%main process. To tolerate failures, the main process and its associated shadow processes will execute in parallel, but on 
+%different compute nodes. 
+%The shadows initially execute at a reduced rate %via Dynamic Voltage Frequency and Scaling (DVFS) 
+%to save power. 
+%If the main process completes the task successfully, we will 
+%terminate the shadows immediately. If the main process fails, however, we will promote one of the shadow processes to be a 
+%new main process and possibly increase its execution rate to mitigate delay. This continues until the task completes. 
+
+%Given that the failure rate of an individual node is much lower than the aggregate system failure, it is very likely that 
+%the main process will always complete its execution successfully, thereby achieving fault tolerance at a significantly reduced 
+%cost of power. Consequently, the high probability that shadows never have to complete the full task, coupled with the fact that 
+%they initially only consume a minimal amount of power, dramatically increases a power-constrained system's tolerance to failure.
+
+\subsection{Reward-based optimal Shadow Replication (completed)}
+Shadow Replication is a flexible computational model that can achieve multi-dimensional QoS requirements. 
+The major challenge resides in determining jointly the execution rates of all task instances, 
+both before and after a failure occurs, with the objective to optimize performance, resilience, power consumption, or their combinations.
+In this work we focus on the Service Level Agreement (SLA) requirements in the Cloud and develop a reward-based analytical framework, in order to derive the optimal execution rates for maximizing reward and minimizing energy 
+costs under strict completion time constraints~\cite{cui_2014_closer,cui_en7085151}. 
+
+%To define the reward-based analytical framework, we first define a failure model that considers the failure distribution of each process, and a power model that describes the power consumption characteristics under different states. Based on the failure model and power model, we then derive the expected income as a function of completion time, and the expected energy cost as a product of power and time. Lastly, the reward is defined as the optimization objective to balance between completion time and energy cost.  
+
+
+
+\subsection{Lazy Shadowing (completed)}
+
+Enabling Shadow Replication for resiliency in extreme-scale computing brings about a number of challenges and design decisions, including the applicability of this concept to a large number of tasks executing in parallel, 
+the effective way to control shadows’ execution rates, and the runtime mechanisms and communications support to ensure efficient 
+coordination between a main and its shadow. Taking into consideration the main characteristics of compute-intensive and 
+highly-scalable applications, 
+we devise novel ideas of shadow collocation and shadow leaping, and integrate them with Shadow Replication to form a more efficient and scalable paradigm that we call Lazy Shadowing~\cite{cui_2016_scalcom}.
+%we design two novel techniques, referred to as shadow collocation and shadow leaping, 
+%in order to achieve high tolerance to failures while minimizing delay and power consumption.
+
+%To control the processes' execution rate, DVFS can be applied while each process resides on one core exclusively. 
+%The effectiveness of DVFS, however, may be markedly 
+%limited by the granularity of voltage control, the number of frequencies available, and the negative effects on 
+%reliability. 
+%An alternative is to collocate multiple processes on each core while keeping all the cores executing at maximum frequency. 
+%Then time sharing can be used to achieve the desired execution rates for each collocated process. 
+%Since this approach collocates multiple processes on a core, it simultaneously reduces the number of compute nodes and 
+%the power consumption. 
+%
+%Furthermore, we identify a unique opportunity that ensures forward progress in failure-prone environments. Since each shadow process is associated with a main process, the lagging shadow can benefit from the faster execution 
+%of the main with minimal overhead. Specifically, when a failure occurs, Lazy Shadowing takes advantage of 
+%the recovery time and leaps forward each shadow by copying states from its associated main. This technique not only achieves forward 
+%progress for the shadow processes at minimized power and delay, but also reduces the recovery time after each failure.
+
+\subsection{lsMPI: an implementation in MPI (in progress)}
+
+Though Lazy Shadowing has been evaluated analytically, a real implementation 
+is necessary for validation and performance measurement in real systems. I am implementing a prototype of Lazy 
+Shadowing as a runtime for Message Passing Interface (MPI). %, which is the de facto programming paradigm for HPC. 
+%Instead of 
+%a full-feature MPI implementation, the runtime is designed to be a separate layer between MPI and user application, in order 
+%to take advantage of existing MPI performance optimizations that numerous researches have spent years on. 
+The runtime will spawn 
+the shadow processes at initialization phase, manage the coordination between main and shadow processes, 
+and guarantee order and consistency for messages and non-deterministic events. With this implementation, we will perform thorough 
+experiments to measure its runtime overhead as well as performance under failures.
+
+\subsection{Smart shadowing (future)}
+Lazy Shadowing is a flexible and adaptive computational model that deserves further investigation. Previous studies have shown that 
+different nodes tend to have different failure probabilities, e.g., 19\% of the nodes account for 92\% of the machine check errors on Blue Waters~\cite{di2014lessons}. The reason 
+is complicated and may attribute to the manufacture process, heterogeneous architecture, environment factors (e.g. temperature), 
+and/or workloads. % I propose to apply machine learning techniques to learn the heterogeneity in failure distributions among a given 
+%system's nodes. 
+Under differernt failure distribution assumptions, I will study how the mapping from processes to physical cores can impact the performance and cost dichotomy. 
+In addition, I will further consider allocating different number of shadow processes for different tasks to reduce cost while 
+maintaining performance. 
+
+\section{Contributions}
+When completed, this thesis will make the following contributions:
+
+\begin{itemize}
+\item A reward-based framework for Shadow Replication to satisfy SLA requirements as well as maximize profit in Cloud Computing
+\item Study of Lazy Shadowing as an enhanced model for future extreme-scale systems
+\item A fully functional implementation of Lazy Shadowing for Message Passing Interface
+\item Exploration of Lazy Shadowing's adaptivity to different environments, workloads, and QoS requirements. 
+\end{itemize}
+
+
+\section{OUTLINE}
+\label{outline}
+The rest of this proposal is organized as follow:  
+Chapter \ref{chapter:background} reviews existing fault tolerance techniques in large-scale distributed systems, 
+and Chapter \ref{chapter:shadowing} introduces the Shadow Replication computational model. In Chapter \ref{chapter:reward} we build a reward-based optimization framework for Shadow Replication in the Cloud environment.
+In Chapter \ref{chapter:scale}, we introduce Lazy Shadowing which enhances Shadow Replication for extreme-scale systems. 
+Implementation issues are discussed in Chapter \ref{chapter:implementation}. Adaptivity and smart shadowing are discussed in Chapter \ref{chapter:smart}.
+%Chapter \ref{chapter:timeline} and \ref{chapter:summary} lists the timeline and concludes the proposal, respectively.
+Chapter~\ref{chapter:summary}  concludes the proposal.
+
+
+
+
+
+
+
+
