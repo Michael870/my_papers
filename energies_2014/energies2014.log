@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  3 MAR 2015 10:23
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  21 SEP 2017 15:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -487,7 +487,7 @@ Package: soul 2003/11/17 v2.4 letterspacing/underlining (mf)
 \SOUL@uldp=\dimen157
 \SOUL@ulht=\dimen158
 ) (./defs.tex)
-(./energies2014.aux)
+No file energies2014.aux.
 \openout1 = `energies2014.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 110.
@@ -505,7 +505,6 @@ LaTeX Font Info:    ... okay on input line 110.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 110.
 LaTeX Font Info:    ... okay on input line 110.
 LaTeX Font Info:    Try loading font information for T1+ptm on input line 110.
-
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
@@ -567,293 +566,241 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <32> not available
 (Font)              Font shape `T1/ptm/b/it' tried instead on input line 110.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <18> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 110.
-(./abstract.tex) (./intro_bnm.tex [1
+(./abstract.tex) (./intro_bnm.tex
+
+Package natbib Warning: Citation `tchana_cits_2012' on page 1 undefined on inpu
+t line 7.
+
+[1
 
 {/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+Package natbib Warning: Citation `ec2_site' on page 2 undefined on input line 1
+9.
+
+
+Package natbib Warning: Citation `schroeder_2010_dsc' on page 2 undefined on in
+put line 36.
+
+
+Package natbib Warning: Citation `Elnozahy03energyconservation' on page 2 undef
+ined on input line 50.
+
+
+Package natbib Warning: Citation `Raghavendra:2008:NPS' on page 2 undefined on 
+input line 52.
+
+
+Package natbib Warning: Citation `Gelenbe:1990:OPT' on page 2 undefined on inpu
+t line 58.
+
+
+Package natbib Warning: Citation `tsai_isads_2011' on page 2 undefined on input
+ line 77.
+
+
+Package natbib Warning: Citation `ko_socc_2010' on page 2 undefined on input li
+ne 77.
+
+[2]
 Underfull \hbox (badness 2088) in paragraph at lines 84--96
 \T1/ptm/m/n/12 profit max-i-miza-tion frame-work, re-ferred to as ``Shadow Repl
 i-ca-tion'', for re-silience in cloud
  []
 
-[2]
 LaTeX Font Info:    Try loading font information for OMS+ptm on input line 116.
 
- (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/omsptm.fd
+(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 116.
-)
-(./cloud_computing_workload.tex
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[3]) (./shadow_replication.tex
-<diagrams/example1.pdf, id=132, 606.265pt x 383.4325pt>
+LaTeX Warning: Reference `sec:cloud_computing_workload' on page 3 undefined on 
+input line 154.
+
+
+LaTeX Warning: Reference `sec:shadow_replication' on page 3 undefined on input 
+line 156.
+
+
+LaTeX Warning: Reference `sec:reward_model' on page 3 undefined on input line 1
+57.
+
+
+LaTeX Warning: Reference `sec:reward_model_2' on page 3 undefined on input line
+ 157.
+
+
+LaTeX Warning: Reference `sec:reward_model_3' on page 3 undefined on input line
+ 157.
+
+
+LaTeX Warning: Reference `sec:evaluation' on page 3 undefined on input line 159
+.
+
+
+LaTeX Warning: Reference `sec:related_work' on page 3 undefined on input line 1
+59.
+
+
+LaTeX Warning: Reference `sec:conclusion' on page 3 undefined on input line 160
+.
+
+) (./cloud_computing_workload.tex
+
+Package natbib Warning: Citation `Ferdman:2012:CCS:2150976.2150982' on page 3 u
+ndefined on input line 6.
+
+
+Package natbib Warning: Citation `mrbs' on page 3 undefined on input line 6.
+
+
+LaTeX Warning: Reference `tbl:apps' on page 3 undefined on input line 6.
+
+[3]
+
+Package natbib Warning: Citation `lin2010data' on page 4 undefined on input lin
+e 34.
+
+
+Package natbib Warning: Citation `mrbs' on page 4 undefined on input line 45.
+
+) (./shadow_replication.tex
+<diagrams/example1.pdf, id=100, 606.265pt x 383.4325pt>
 File: diagrams/example1.pdf Graphic file (type pdf)
 
 <use diagrams/example1.pdf>
 Package pdftex.def Info: diagrams/example1.pdf used on input line 7.
 (pdftex.def)             Requested size: 159.33907pt x 100.77248pt.
 
-<diagrams/example3.pdf, id=133, 542.025pt x 382.42876pt>
+<diagrams/example3.pdf, id=101, 542.025pt x 382.42876pt>
 File: diagrams/example3.pdf Graphic file (type pdf)
 
 <use diagrams/example3.pdf>
 Package pdftex.def Info: diagrams/example3.pdf used on input line 12.
 (pdftex.def)             Requested size: 144.39438pt x 101.87415pt.
 
-<diagrams/example2.png, id=134, 1048.27635pt x 719.8092pt>
+<diagrams/example2.png, id=102, 1048.27635pt x 719.8092pt>
 File: diagrams/example2.png Graphic file (type png)
 
 <use diagrams/example2.png>
 Package pdftex.def Info: diagrams/example2.png used on input line 17.
 (pdftex.def)             Requested size: 164.31557pt x 112.82137pt.
- [4] [5 <./diagrams/example1.pdf> <./diagrams/example3.pdf
+ [4]
+
+LaTeX Warning: Reference `fig:sc_overview' on page 5 undefined on input line 48
+.
+
+
+LaTeX Warning: Reference `fig:sc_no_fail' on page 5 undefined on input line 48.
+
+
+
+LaTeX Warning: Reference `fig:sc_shadow_fail' on page 5 undefined on input line
+ 49.
+
+
+LaTeX Warning: Reference `fig:sc_main_fail' on page 5 undefined on input line 4
+9.
+
+[5 <./diagrams/example1.pdf> <./diagrams/example3.pdf
 
 pdfTeX warning: pdflatex (file ./diagrams/example3.pdf): PDF inclusion: multipl
 e pdfs with page group included in a single page
-> <./diagrams/example2.png>]) (./reward_model.tex [6]
-<diagrams/reward.pdf, id=186, 635.37375pt x 296.10625pt>
+> <./diagrams/example2.png>]) (./reward_model.tex
+
+Package natbib Warning: Citation `gartner_faults_1999' on page 6 undefined on i
+nput line 6.
+
+
+Package natbib Warning: Citation `cristian_comm_1991' on page 6 undefined on in
+put line 6.
+
+[6]
+
+LaTeX Warning: Reference `fig:reward' on page 7 undefined on input line 82.
+
+
+LaTeX Warning: Reference `fig:sc_no_fail' on page 7 undefined on input line 105
+.
+
+
+LaTeX Warning: Reference `fig:sc_shadow_fail' on page 7 undefined on input line
+ 105.
+
+
+LaTeX Warning: Reference `fig:sc_main_fail' on page 7 undefined on input line 1
+12.
+
+
+LaTeX Warning: Reference `fig:reward' on page 7 undefined on input line 122.
+
+
+Package natbib Warning: Citation `Daw:2002:LRP:639717.639720' on page 7 undefin
+ed on input line 126.
+
+<diagrams/reward.pdf, id=138, 635.37375pt x 296.10625pt>
 File: diagrams/reward.pdf Graphic file (type pdf)
 
 <use diagrams/reward.pdf>
 Package pdftex.def Info: diagrams/reward.pdf used on input line 131.
 (pdftex.def)             Requested size: 497.92322pt x 232.05986pt.
- [7] [8 <./diagrams/reward.pdf>] [9]
+ [7]
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 1178) in paragraph at lines 388--392
-[]\T1/ptm/m/n/12 Based on the above for-mal-iza-tion of the op-ti-miza-tion pro
-b-lem, the MAT-LAB Op-ti-miza-tion
- []
-
-) [10] (./reward_model_2.tex) [11] (./reward_model_3.tex) (./evaluation.tex
-[12]
-Package epstopdf Info: Source file: <diagrams/rho_profit.eps>
-(epstopdf)                    date: 2015-03-03 10:23:37
-(epstopdf)                    size: 23129 bytes
-(epstopdf)             Output file: <diagrams/rho_profit-eps-converted-to.pdf>
-(epstopdf)                    date: 2015-03-03 10:23:40
-(epstopdf)                    size: 7265 bytes
-(epstopdf)             Command: <repstopdf --outfile=diagrams/rho_profit-eps-co
-nverted-to.pdf diagrams/rho_profit.eps>
-(epstopdf)             \includegraphics on input line 116.
-Package epstopdf Info: Output file is already uptodate.
- <diagrams/rho_profit-eps-converted-to.pdf, id=265, 903.375pt x 505.89pt>
-File: diagrams/rho_profit-eps-converted-to.pdf Graphic file (type pdf)
-
-<use diagrams/rho_profit-eps-converted-to.pdf>
-Package pdftex.def Info: diagrams/rho_profit-eps-converted-to.pdf used on input
- line 116.
-(pdftex.def)             Requested size: 497.92322pt x 278.84245pt.
+Package natbib Warning: Citation `flautner_2002_APS' on page 8 undefined on inp
+ut line 162.
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[13]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-Package epstopdf Info: Source file: <diagrams/t_profit.eps>
-(epstopdf)                    date: 2015-03-03 10:23:37
-(epstopdf)                    size: 23561 bytes
-(epstopdf)             Output file: <diagrams/t_profit-eps-converted-to.pdf>
-(epstopdf)                    date: 2015-03-03 10:23:41
-(epstopdf)                    size: 7446 bytes
-(epstopdf)             Command: <repstopdf --outfile=diagrams/t_profit-eps-conv
-erted-to.pdf diagrams/t_profit.eps>
-(epstopdf)             \includegraphics on input line 216.
-Package epstopdf Info: Output file is already uptodate.
-<diagrams/t_profit-eps-converted-to.pdf, id=275, 903.375pt x 505.89pt>
-File: diagrams/t_profit-eps-converted-to.pdf Graphic file (type pdf)
-
-<use diagrams/t_profit-eps-converted-to.pdf>
-Package pdftex.def Info: diagrams/t_profit-eps-converted-to.pdf used on input l
-ine 216.
-(pdftex.def)             Requested size: 497.92322pt x 278.84245pt.
+Package natbib Warning: Citation `pillai_2001_sosp' on page 8 undefined on inpu
+t line 162.
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[14 <./diagrams/rho_profit-eps-converted-to.pdf>] [15 <./diagrams/t_profit-eps-
-converted-to.pdf>]
-Package epstopdf Info: Source file: <diagrams/n_profit.eps>
-(epstopdf)                    date: 2015-03-03 10:23:37
-(epstopdf)                    size: 21675 bytes
-(epstopdf)             Output file: <diagrams/n_profit-eps-converted-to.pdf>
-(epstopdf)                    date: 2015-03-03 10:23:42
-(epstopdf)                    size: 6736 bytes
-(epstopdf)             Command: <repstopdf --outfile=diagrams/n_profit-eps-conv
-erted-to.pdf diagrams/n_profit.eps>
-(epstopdf)             \includegraphics on input line 296.
-Package epstopdf Info: Output file is already uptodate.
-
-<diagrams/n_profit-eps-converted-to.pdf, id=300, 903.375pt x 505.89pt>
-File: diagrams/n_profit-eps-converted-to.pdf Graphic file (type pdf)
-
-<use diagrams/n_profit-eps-converted-to.pdf>
-Package pdftex.def Info: diagrams/n_profit-eps-converted-to.pdf used on input l
-ine 296.
-(pdftex.def)             Requested size: 497.92322pt x 278.84245pt.
- [16 <./diagrams/n_profit-eps-converted-to.pdf>]
-Package epstopdf Info: Source file: <diagrams/mtbf_profit.eps>
-(epstopdf)                    date: 2015-03-03 10:23:37
-(epstopdf)                    size: 22247 bytes
-(epstopdf)             Output file: <diagrams/mtbf_profit-eps-converted-to.pdf>
-
-(epstopdf)                    date: 2015-03-03 10:23:43
-(epstopdf)                    size: 7353 bytes
-(epstopdf)             Command: <repstopdf --outfile=diagrams/mtbf_profit-eps-c
-onverted-to.pdf diagrams/mtbf_profit.eps>
-(epstopdf)             \includegraphics on input line 388.
-Package epstopdf Info: Output file is already uptodate.
-
-<diagrams/mtbf_profit-eps-converted-to.pdf, id=315, 903.375pt x 505.89pt>
-File: diagrams/mtbf_profit-eps-converted-to.pdf Graphic file (type pdf)
-
-<use diagrams/mtbf_profit-eps-converted-to.pdf>
-Package pdftex.def Info: diagrams/mtbf_profit-eps-converted-to.pdf used on inpu
-t line 388.
-(pdftex.def)             Requested size: 497.92322pt x 278.84245pt.
+Package natbib Warning: Citation `rusu_2003_ecs' on page 8 undefined on input l
+ine 181.
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+Package natbib Warning: Citation `zhai_2004_dac' on page 8 undefined on input l
+ine 181.
 
-[17] <diagrams/application_comparison.png, id=330, 362.3136pt x 217.7736pt>
-File: diagrams/application_comparison.png Graphic file (type png)
+[8 <./diagrams/reward.pdf>]
 
-<use diagrams/application_comparison.png>
-Package pdftex.def Info: diagrams/application_comparison.png used on input line
- 451.
-(pdftex.def)             Requested size: 497.92322pt x 299.28177pt.
+LaTeX Warning: Reference `eq:power_model' on page 9 undefined on input line 190
+.
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[18 <./diagrams/mtbf_profit-eps-converted-to.pdf>]
-Underfull \hbox (badness 4940) in paragraph at lines 523--524
-[]|\T1/ptm/m/n/10 Tasks are fully-dependent upon other tasks and re-quire con-s
-tant
- []
+LaTeX Warning: Reference `fig:sc_overview' on page 9 undefined on input line 20
+1.
 
 
-Underfull \hbox (badness 1803) in paragraph at lines 523--524
-\T1/ptm/m/n/10 com-mu-ni-ca-tion be-tween tasks. This rep-re-sents an ap-pli-ca
--tion that
- []
+LaTeX Warning: Reference `fig:sc_no_fail' on page 9 undefined on input line 216
+.
 
 
-Overfull \hbox (36.79996pt too wide) in alignment at lines 517--525
-[][][] 
- []
-
-[19 <./diagrams/application_comparison.png>]
-Package epstopdf Info: Source file: <diagrams/sr_vs_re_rho.eps>
-(epstopdf)                    date: 2015-03-03 10:23:37
-(epstopdf)                    size: 22877 bytes
-(epstopdf)             Output file: <diagrams/sr_vs_re_rho-eps-converted-to.pdf
->
-(epstopdf)                    date: 2015-03-03 10:23:45
-(epstopdf)                    size: 7363 bytes
-(epstopdf)             Command: <repstopdf --outfile=diagrams/sr_vs_re_rho-eps-
-converted-to.pdf diagrams/sr_vs_re_rho.eps>
-(epstopdf)             \includegraphics on input line 540.
-Package epstopdf Info: Output file is already uptodate.
-
-<diagrams/sr_vs_re_rho-eps-converted-to.pdf, id=357, 903.375pt x 505.89pt>
-File: diagrams/sr_vs_re_rho-eps-converted-to.pdf Graphic file (type pdf)
-
-<use diagrams/sr_vs_re_rho-eps-converted-to.pdf>
-Package pdftex.def Info: diagrams/sr_vs_re_rho-eps-converted-to.pdf used on inp
-ut line 540.
-(pdftex.def)             Requested size: 497.92322pt x 278.84245pt.
+LaTeX Warning: Reference `fig:sc_shadow_fail' on page 9 undefined on input line
+ 231.
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+LaTeX Warning: Reference `fig:sc_main_fail' on page 9 undefined on input line 2
+45.
 
-Package epstopdf Info: Source file: <diagrams/sr_vs_tr_rho.eps>
-(epstopdf)                    date: 2015-03-03 10:23:37
-(epstopdf)                    size: 23115 bytes
-(epstopdf)             Output file: <diagrams/sr_vs_tr_rho-eps-converted-to.pdf
->
-(epstopdf)                    date: 2015-03-03 10:23:46
-(epstopdf)                    size: 7357 bytes
-(epstopdf)             Command: <repstopdf --outfile=diagrams/sr_vs_tr_rho-eps-
-converted-to.pdf diagrams/sr_vs_tr_rho.eps>
-(epstopdf)             \includegraphics on input line 549.
-Package epstopdf Info: Output file is already uptodate.
-<diagrams/sr_vs_tr_rho-eps-converted-to.pdf, id=362, 903.375pt x 505.89pt>
-File: diagrams/sr_vs_tr_rho-eps-converted-to.pdf Graphic file (type pdf)
+[9]
 
-<use diagrams/sr_vs_tr_rho-eps-converted-to.pdf>
-Package pdftex.def Info: diagrams/sr_vs_tr_rho-eps-converted-to.pdf used on inp
-ut line 549.
-(pdftex.def)             Requested size: 497.92322pt x 278.84245pt.
- [20]
+LaTeX Warning: Reference `fig:reward' on page 10 undefined on input line 315.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+[10]
 
-) (./related_work.tex [21 <./diagrams/sr_vs_re_rho-eps-converted-to.pdf>])
-(./conclusion.tex [22 <./diagrams/sr_vs_tr_rho-eps-converted-to.pdf>])
-(./energies2014.bbl [23]
-Underfull \hbox (badness 3354) in paragraph at lines 75--79
-[]\T1/ptm/m/n/12 Gärtner, F.C.  Fun-da-men-tals of fault-tolerant dis-tributed 
-com-put-ing in asyn-chronous
- []
-
-[24]) 
-AED: lastpage setting LastPage
-
-Underfull \hbox (badness 5924) in paragraph at lines 210--210
-\T1/ptm/m/n/12 dis-tributed un-der the terms and con-di-tions of the Cre-ative 
-Com-mons At-tri-bu-tion li-cense
- []
-
-[25]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 210.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 210.
- (./energies2014.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 210.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 210.
-Package rerunfilecheck Info: File `energies2014.out' has not changed.
-(rerunfilecheck)             Checksum: A5672B4C34DE8B27226A1B715244C791;1228.
+Package natbib Warning: Citation `Elnozahy03energyconservation' on page 11 unde
+fined on input line 348.
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+Package natbib Warning: Citation `Raghavendra:2008:NPS' on page 11 undefined on
+ input line 348.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 210.
- ) 
-Here is how much of TeX's memory you used:
- 9224 strings out of 493315
- 136195 string characters out of 6137904
- 261336 words of memory out of 5000000
- 12372 multiletter control sequences out of 15000+600000
- 42591 words of font info for 57 fonts, out of 8000000 for 9000
- 957 hyphenation exceptions out of 8191
- 43i,15n,45p,1639b,455s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
-xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/local
-/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/
-texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/t
-exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/tex
-live/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texli
-ve/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive
-/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/20
-13/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2013/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2013/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2013/tex
-mf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fo
-nts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1
-/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times
-/utmri8a.pfb>
-Output written on energies2014.pdf (25 pages, 874520 bytes).
-PDF statistics:
- 504 PDF objects out of 1000 (max. 8388607)
- 433 compressed objects within 5 object streams
- 118 named destinations out of 1000 (max. 500000)
- 208 words of extra memory for PDF output out of 10000 (max. 10000000)
 
+Package natbib Warning: Citation `matlab_opt' on page 11 undefined on input lin
+e 389.
+
+
+LaT

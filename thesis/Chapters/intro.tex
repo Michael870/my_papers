@@ -1,54 +1,112 @@
+By applying computing to all kinds of areas, information technology (IT) has been transforming the way we 
+understand and change the world. Over the past few decades, IT has realized the fast analysis of massive 
+quantities of data and the rapid transmission of tremendous amount of information, facilitating 
+countless advances in areas of science and technology. 
+%enable the solution of vastly more accurate predictive models and the analysis of massive quantities of data, 
+%producing quantum advances in areas of science and technology.
 As our reliance on IT continues to increase, the complexity and urgency of the problems our society will face 
-in the future drives us to build more powerful and accessible computer systems. Among the different types of 
-computer systems, High Performance Computing (HPC) and Cloud Computing systems are the two most powerful ones. 
-For both, the computing power attributes to the massive amount of parallelism, which is enabled by 
-the massive amount of CPU cores, memory modules, communication devices, storage components, etc. 
+in the future necessitate the building of more powerful and ubiquitous computing systems. 
 
-Since CPU frequency flattened out in early 2000s, parallelism has become the ``golden rule" to boost performance. 
-In HPC, Terascale performance was achieved in the late 90’s with fewer than 10,000 heavyweight single-core processors. 
-A decade later, petascale performance required about ten times more processors with multiple cores on each processor. Nowadays, a race
-is underway to build the world's first exascale machine to accelerate scientific discoveries and breakthroughs. It is 
-projected that an exascale machine will achieve billion-way parallelism by using one million sockets each supporting 
-1,000 cores~\cite{doe_ascr_exascale_2011,top_ten_2014}. 
+Since CPU frequency flattened out in early 2000s, parallelism has become the ``golden rule" to boost performance 
+in computer industry. Among the different types of modern computing systems, large-scale High Performance 
+Computing (HPC) and Cloud Computing systems are the two most powerful ones. 
+For both of them, the extraordinary computing capacity attributes to a massive amount of parallelism, which is achieved by 
+equiping the system with hundreds or thousands of CPUs, coprocessors, communication devices, storage components, etc. 
 
-Similar trend is happening in Cloud Computing. 
-As the demand for Cloud Computing accelerates, cloud service providers  
-will be faced with the need to expand their underlying infrastructure to ensure the expected levels of performance, reliability and cost-effectiveness. 
-As a result, lots of large-scale data centers have been and are being built by IT companies
-to exploit the power and economies of scale. 
-For example, Google, Facebook, and Rackspace have hundreds of thousands 
-of web servers in dedicated data centers to support their business. 
 
-Unfortunately, several challenging issues come with the increase in system scale. As today's HPC and Cloud Computing systems grow to 
-meet tomorrow's compute power demand, the behavior of the systems will be increasingly difficult to specify, predict and manage. 
+With the increase in the number of system components, it become more and more challenging for 
+researchers to continually offer more computing capacity with sustainable performance and reliability. 
+As today's HPC and Cloud systems grow to 
+meet tomorrow's demands, the behavior of the systems will be increasingly difficult to specify, predict and manage. 
 This upward trend, in terms of scale and complexity, has a direct negative effect on the overall system reliability. 
 %Even with the expected improvement in the reliability of future computing technology, the rate of system level failures will 
 %dramatically increase with the number of components, possibly by several orders of magnitude. 
-At the same time, the rapid 
-growing power consumption, as a result of the increase in system components, is another major concern. 
-%It is reported that 
-%the power required to run the machines as well as cool them has become the largest cost factor in a large-scale system's operating 
-%expenses.  
-At future extreme-scale, failure would become a norm rather than an exception, 
+At the same time, the rapid growing power consumption is another major concern. 
+It is reported that 
+the power required to run the machines as well as cool them has become the largest cost factor in a large-scale system's operating 
+expenses~\cite{scaramella2014worldwide}.  
+In future-generation large-scale computing systems, failure would become a norm rather than an exception, 
 driving the system to significantly lower efficiency with unprecedented amount of power consumption. 
 
-\section{Problem Statement}
+%Since CPU frequency flattened out in early 2000s, parallelism has become the ``golden rule" to boost performance. 
+%In HPC, Terascale performance was achieved in the late 90’s with fewer than 10,000 heavyweight single-core processors. 
+%A decade later, petascale performance required about ten times more processors with multiple cores on each processor. Nowadays, a race
+%is underway to build the world's first exascale machine to accelerate scientific discoveries and breakthroughs. It is 
+%projected that an exascale machine will achieve billion-way parallelism by using one million sockets each supporting 
+%1,000 cores~\cite{doe_ascr_exascale_2011,top_ten_2014}. 
+%
+%Similar trend is happening in Cloud Computing. 
+%As the demand for Cloud Computing accelerates, cloud service providers  
+%will be faced with the need to expand their underlying infrastructure to ensure the expected levels of performance, reliability and cost-effectiveness. 
+%As a result, lots of large-scale data centers have been and are being built by IT companies
+%to exploit the power and economies of scale. 
+%For example, Google, Facebook, and Rackspace have hundreds of thousands 
+%of web servers in dedicated data centers to support their business. 
+%
+%Unfortunately, several challenging issues come with the increase in system scale. As today's HPC and Cloud Computing systems grow to 
+%meet tomorrow's compute power demand, the behavior of the systems will be increasingly difficult to specify, predict and manage. 
+%This upward trend, in terms of scale and complexity, has a direct negative effect on the overall system reliability. 
+%%Even with the expected improvement in the reliability of future computing technology, the rate of system level failures will 
+%%dramatically increase with the number of components, possibly by several orders of magnitude. 
+%At the same time, the rapid 
+%growing power consumption, as a result of the increase in system components, is another major concern. 
+%%It is reported that 
+%%the power required to run the machines as well as cool them has become the largest cost factor in a large-scale system's operating 
+%%expenses.  
+%At future extreme-scale, failure would become a norm rather than an exception, 
+%driving the system to significantly lower efficiency with unprecedented amount of power consumption. 
 
-The system scale needed to address our future computing needs will come at the cost of increasing complexity, unpredictability, 
-and operating expenses. As we approach future extreme-scale computing, two of the biggest challenges will be system resilience and power 
-consumption, both being direct consequences of the dramatic increase in the number of system components~\cite{exa_challenge_2010,snir2014addressing}. 
+\section{Extreme-scale Computing}
+
+Nowadays, large-scale computing systems are embracing two transformative trends, i.e., the rapid growth
+in HPC with in particular an international
+exascale initiative, and the dramatic expansion of Cloud infrastructures accompanied by the Big Data explosion. 
+With concerted efforts from researchers in hardware, software, algorithm, and resource management, a race
+is underway in the HPC community to build the world's first exascale machine, featuring a computing capability of exaFLOPS, 
+to accelerate scientific discoveries and breakthroughs. It is 
+projected that within the next decade an exascale machine will achieve billion-way parallelism by using one million sockets each supporting 
+1,000 cores~\cite{doe_ascr_exascale_2011,top_ten_2014}. 
+
+Similarly, rapid expansion is happening in Cloud Computing.  
+Due to its incomparable advantages, such as low entry cost and on demand resource provisioning, 
+Cloud Computing has become the fastest growing segment in the software industry~\cite{anderson2013forecast}.
+As the demand for Cloud Computing accelerates, cloud service providers  
+will be faced with the need to expand their underlying infrastructure to ensure the expected levels of performance, reliability and cost-effectiveness. 
+As a result, nemerous large-scale data centers have been and are being built by IT companies
+to exploit the power and economies of scale. 
+For example, Google and Rackspace have hundreds of thousands 
+of web servers in dedicated data centers to support their business. 
+
+The path to future extreme-scale computing involves several major road blocks and numerous challenges inherent 
+to the complexity and scale of these systems. 
+The system scale needed to address our future computing needs will come at the cost of increasing unreliability 
+and operating expenses. As we approach extreme-scale computing, two of the biggest challenges will be power 
+consumption and system resilience, both being direct consequences of the dramatic increase in the 
+number of system components~\cite{exa_challenge_2010,snir2014addressing}. 
+
+As a result of the continuous growth in system components, there has been a steady rise in power consumption in large-scale systems. 
+In 2005, the peak power consumption of a single supercomputer reached 3.2 Megawatts (MW). This number was doubled only after 5 years, and 
+further climbed to 17.8 
+MW with a machine of 3,120,000 cores in 2013. Recognizing this upward trend, the U.S. Department of Energy has set 20 
+MW as the power limit for future exascale systems, so that a power budget of \$20 million per year is preserved for any one supercomputer. 
+%challenging the research community to provide a 1000x improvement in performance with only a 10x increase in power~\cite{exa_challenge_2010}. 
+%This huge imbalance makes system power a leading design constraint on the path to exascale. 
+Although largely pragmatic, this constraint challenges the HPC community to design future systems capable of sustaining 50 GFlops
+per Watt (GF/W). Currently, the most energy-efficient system on the Green500 list is the new TSUBAME 3.0 at the Tokyo Institute 
+of Technology~\cite{top500}. It achieved 14.110 GF/W during its 1.998-petaflop Linpack performance run. To enable future exascale system, 
+combined efforts from hardware, OS, and software must improve energy efficiency by a factor of over 3.5X. 
+This makes system power a leading design constraint on the path to exascale. 
+
+
+%System power has become a leading design constraint on the path to exascale computing. To mitigate the operational expenditure, U.S. DoE has set 20 MW  as the power cap for a full exascale-capable system, challenging the HPC community to design future systems capable of sustaining 50 GFlops
+%per Watt (GF/W). Currently, the most energy-efficient system on the Green500 list is the new TSUBAME 3.0 at the Tokyo Institute of Technology. It achieved 14.110 GF/W during its 1.998-petaflop Linpack performance run. To enable future exascale system, combined efforts from hardware, OS, and software must improve energy efficiency by a factor of over 3.5X.
 
 Regardless of the reliability of individual component, the system level failure rate will continue to increase as the number of 
 components increases, possibly by several orders of magnitude. It is projected that the Mean Time Between Failures (MTBF) of future extreme-scale systems will be at the order of hours or even minutes, meaning 
 that many failures will occur every day~\cite{Bergman08exascalecomputing}. Without an efficient fault tolerance mechanism, faults will be so frequent that the applications running on the 
-systems will be continuously interrupted, requiring the execution to be restarted every time there is a failure. 
+systems will be continuously interrupted and restarted, greatly slowing down the application progress. 
 
-Also thanks to the continuous growth in system components, there has been a steady rise in power consumption in large-scale distributed systems. 
-In 2005, the peak power consumption of a single supercomputer reached 3.2 Megawatts. This number was doubled only after 5 years, and reached 17.8 
-Megawatts with a machine of 3,120,000 cores in 2013. Recognizing this rapid upward trend, the U.S. Department of Energy has set 20 
-megawatts as the power limit for future exascale systems, 
-challenging the research community to provide a 1000x improvement in performance with only a 10x increase in power~\cite{exa_challenge_2010}. 
-This huge imbalance makes system power a leading design constraint on the path to exascale. 
+
 
 Today, two approaches exist for fault tolerance. The first approach is rollback recovery, which rolls back and restarts the execution 
 every time there is a failure. This approach is often equipped with checkpointing to periodically save the execution state to a 
@@ -202,7 +260,7 @@ When completed, this thesis will make the following contributions:
 \end{itemize}
 
 
-\section{OUTLINE}
+\section{Thesis Outline}
 \label{outline}
 The rest of this proposal is organized as follow:  
 Chapter \ref{chapter:background} reviews existing fault tolerance techniques in large-scale distributed systems, 
