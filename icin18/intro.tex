@@ -1,0 +1,45 @@
+Modern scientific discoveries and business intelligence rely heavily on large-scale
+simulation and data analytics. The next generation of parallel applications will require massive computing capacity to support the execution of predictive models and analysis of massive quantities of
+data, with significantly higher resolution and fidelity than what is possible within existing computing infrastructures. 
+In order to deliver the desired performance of emerging 
+applications, future Cloud computing infrastructure is
+expected to support millions, if not billions, of threads,
+executing on a large of number of cores, while
+requiring a dramatic increase in the number of memory
+modules, communications devices and storage components~\cite{Bergman08exascalecomputing}.
+
+The dramatic increase in the number of components brings about several daunting scalability challenges. With the explosive growth in the system scale, there will be a significant increase in the propensity to faults, and the power consumption will rise to extreme heights. Unfortunately, in so far as performance is concerned,
+resilience to faults and adherence to power budget constraints are two conflicting objectives, as achieving high
+performance may push the system’s components past their thermal limit and increase their likelihood of failure. 
+
+Due to the complexity and scale of Cloud computing systems, a major road-block is the increasing propensity of the system to diverse types of failures, including both crash failure and silent data corruption.
+Regardless of the individual component reliability, system resilience will continue to decrease as the number of components increases. 
+An immediate implication of this trend is the degradation of Quality of Service (QoS), which is critical to the sustainability of the Cloud computing business.
+
+At the same time, system power has become a leading design constraint on the path to extreme-scale computing. As a result of the continuous growth in system scale, there has been a steady rise in power consumption in large-scale systems. 
+Google engineers, operating data centers that host thousands of servers, warned that if power consumption continues to grow, power costs can easily overtake hardware costs by a large margin~\cite{barroso2005price}. 
+To enable sustainable and green Cloud computing, 
+efforts from hardware, OS, and software must be combined to improve energy efficiency.
+
+Rollback recovery has been the dominant fault tolerance mechanism in large-scale systems. For example, re-execution
+is used to overcome faults in MapReduce~\cite{Dean2004}. By periodically saving intermediate execution states, checkpoint/restart avoids full re-execution of a failing application. Recent work, however, show that existing techniques are  not likely to scale to the level of faults anticipated in emerging extreme-scale environments. Furthermore, the nature and diversity of errors in future systems are such that checkpoint/restart may not be an adequate approach. 
+State machine replication has also been proposed as a
+viable solution to dealing with faults at scale. Its popularity
+stems from its potential to achieve higher scalability, and
+its ability to detect and correct silent failures~\cite{fiala2012detection,ferreira2011evaluating}. Its major shortcomings, however, are the waste of hardware resources, and the proportionally increased power consumption.
+
+
+Recognizing this challenge, we propose a systematic computational model, referred to \textit{Shadow Computing}, that achieves power-aware fault tolerance for both compute- and data-intensive applications. Similar to state machine replication, Shadow Computing replicates each process to achieve redundancy. However, in Shadow Computing replicas are assigned different roles with different resource allocation and dynamic rate adjustment, in order to maximize resource utilization and performance under power constraints.  
+Shadow Computing is a flexible model that covers a spectrum of fault tolerance strategies. including re-execution and state machine replication. By taking into consideration the nature of the underlying application and the types of failure, Shadow Computing is able to achieve a desired trade-off among multiple conflicting objectives, such as performance, resilience, and power budget.  
+
+The main challenge in Shadow Computing reside in jointly determining the resource allocation and execution rates for different roles, with the objective to minimize time and power, while satisfying resource constraints. 
+In previous works, we studied the application of the Shadow Computing model to compute-intensive workloads in HPC, in which communication and synchronization may be frequent~\cite{6787325,en7085151,7816907}. Both analytical models and empirical experiments demonstrate that it can achieve higher performance and significant energy savings in comparison to existing approaches in most cases. This paper focuses on data-intensive applications in the Cloud and presents novels schemes based on the Shadow Computing model to handle multiple types of failures. The main contributions of this paper are as follows:
+\begin{itemize}
+	\item A fault tolerance scheme designed for crash failures and silent data corruption, respectively.
+    \item An optimization framework for Shadow Computing that minimizes energy consumption while maintaining acceptable response time.
+    \item An evaluation framework that demonstrates Shadow Computing's power awareness and energy savings compared to state-of-the-art approach.
+    \item A discussion on simultaneously tolerating multiple types of failures. 
+\end{itemize}
+
+This paper begins by describing an execution model typically used for processing data-parallel tasks (Section~\ref{sec:execution_framework}). Then we discuss two novel schemes that apply the Shadow Computing model to deal with two different types of failures in Section~\ref{sec:crash_collocation} and \ref{sec:silent_cp_leap}, and present experiment results in Section~\ref{sec:eval}. Finally, %Section~\ref{sec:multiple} explores the tolerance of multiple failures, 
+Section~\ref{sec:related_work} surveys related work, and Section~\ref{sec:conclusion} concludes.

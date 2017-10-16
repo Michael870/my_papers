@@ -1,0 +1,12 @@
+The increase of failures in large-scale systems
+brought to the forefront the need for new fault tolerance techniques. 
+Rollback recovery is the dominant mechanism to achieve
+fault tolerance, due to its simplicity and satisfactory performance under infrequent failures~\cite{elnozahy2002survey}. It is also used extensively in data-parallel computing frameworks, such as Spark and MapReduce~\cite{Dean2004,Zaharia180560}. For long running applications, coordinated checkpointing/restart is often used to save intermediate computation state, so that if a failure occurs the computation can be restarted from a saved checkpoint~\cite{agarwal2004adaptive,elnozahy2004checkpointing,zheng2004ftc,moody2010design}. As the scale of the system continues to increase, however, the viability of coordinated checkpointing has become questionable. Recent studies show that high failure rates, coupled with the checkpointing overhead, limit its scalability with decreasing system efficiency~\cite{cappello2009fault,ferreira2011evaluating}. 
+
+State machine replication has long
+been used for reliability and availability in distributed and
+mission critical systems~\cite{schneider1990implementing}. Replication has recently been
+proposed to address the deficiencies of checkpointing for upcoming extreme-scale systems~\cite{ferreira2011evaluating,engelmann2011redundant,elliott2012combining}. 
+By simultaneously executing one or more replicas of each process on different computing nodes, state machine replication effectively mitigates the delay incurred by failures. Furthermore, state machine replication is capable of detecting and correcting failures that are impossible with rollback based approaches~\cite{fiala2012detection}. %Although it enhances fault tolerance without incurring excessive delay, state machine replication slows its acceptance by the industry due to the substantial increase in the computing resources and power consumption. 
+
+As the significance of power and energy consumption in large computing systems increases, energy management becomes critical. Schemes are proposed to optimize power consumption by shutting down servers, using CPU Dynamic Voltage and Frequency Scaling (DVFS), or collocating processes~\cite{sarood2014maximizing,yu2015energy,Pillai2001,7816907}. Shadow Computing is a novel computational model that combines power awareness and fault tolerance. Its unique design offers flexibility to deal with multiple types of failures in failure-prone systems.
