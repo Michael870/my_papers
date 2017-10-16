@@ -7,10 +7,10 @@ PDF_FILES = $(PREFIX).pdf
 BIB_FILES = $(PREFIX).bib
 
 all: plots
-	pdflatex $(PREFIX)
+	pdflatex --shell-escape $(PREFIX)
 	bibtex $(PREFIX)
-	pdflatex $(PREFIX)
-	pdflatex $(PREFIX)
+	pdflatex --shell-escape $(PREFIX)
+	pdflatex --shell-escape $(PREFIX)
 
 plots:
 	#rm diagrams/*.eps

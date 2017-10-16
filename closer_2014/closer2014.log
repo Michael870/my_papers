@@ -1,6 +1,6 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  24 FEB 2015 20:42
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  16 OCT 2017 15:33
 entering extended mode
- restricted \write18 enabled.
+ \write18 enabled.
  %&-line parsing enabled.
 **closer2014
 (./closer2014.tex
@@ -511,14 +511,14 @@ e pdfs with page group included in a single page
 > <./diagrams/example2.png>] [5 <./diagrams/reward.pdf>] [6])
 (./reward_model_2.tex) (./reward_model_3.tex) (./evaluation.tex [7]
 Package epstopdf Info: Source file: <diagrams/rho_profit.eps>
-(epstopdf)                    date: 2015-02-24 20:42:30
-(epstopdf)                    size: 23129 bytes
+(epstopdf)                    date: 2017-10-16 15:33:13
+(epstopdf)                    size: 24873 bytes
 (epstopdf)             Output file: <diagrams/rho_profit-eps-converted-to.pdf>
-(epstopdf)                    date: 2015-02-24 20:42:33
-(epstopdf)                    size: 7265 bytes
-(epstopdf)             Command: <repstopdf --outfile=diagrams/rho_profit-eps-co
-nverted-to.pdf diagrams/rho_profit.eps>
-(epstopdf)             \includegraphics on input line 113.
+(epstopdf)                    date: 2017-10-16 15:33:16
+(epstopdf)                    size: 7274 bytes
+(epstopdf)             Command: <epstopdf --outfile=diagrams/rho_profit-eps-con
+verted-to.pdf diagrams/rho_profit.eps>
+(epstopdf)             \includegraphics on input line 75.
 Package epstopdf Info: Output file is already uptodate.
 
 <diagrams/rho_profit-eps-converted-to.pdf, id=286, 903.375pt x 505.89pt>
@@ -526,39 +526,39 @@ File: diagrams/rho_profit-eps-converted-to.pdf Graphic file (type pdf)
 
 <use diagrams/rho_profit-eps-converted-to.pdf>
 Package pdftex.def Info: diagrams/rho_profit-eps-converted-to.pdf used on input
- line 113.
+ line 75.
 (pdftex.def)             Requested size: 213.41443pt x 119.50941pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 Package epstopdf Info: Source file: <diagrams/t_profit.eps>
-(epstopdf)                    date: 2015-02-24 20:42:30
-(epstopdf)                    size: 23561 bytes
+(epstopdf)                    date: 2017-10-16 15:33:13
+(epstopdf)                    size: 25323 bytes
 (epstopdf)             Output file: <diagrams/t_profit-eps-converted-to.pdf>
-(epstopdf)                    date: 2015-02-24 20:42:34
-(epstopdf)                    size: 7446 bytes
-(epstopdf)             Command: <repstopdf --outfile=diagrams/t_profit-eps-conv
-erted-to.pdf diagrams/t_profit.eps>
-(epstopdf)             \includegraphics on input line 213.
+(epstopdf)                    date: 2017-10-16 15:33:16
+(epstopdf)                    size: 7468 bytes
+(epstopdf)             Command: <epstopdf --outfile=diagrams/t_profit-eps-conve
+rted-to.pdf diagrams/t_profit.eps>
+(epstopdf)             \includegraphics on input line 146.
 Package epstopdf Info: Output file is already uptodate.
 <diagrams/t_profit-eps-converted-to.pdf, id=287, 903.375pt x 505.89pt>
 File: diagrams/t_profit-eps-converted-to.pdf Graphic file (type pdf)
 
 <use diagrams/t_profit-eps-converted-to.pdf>
 Package pdftex.def Info: diagrams/t_profit-eps-converted-to.pdf used on input l
-ine 213.
+ine 146.
 (pdftex.def)             Requested size: 213.41443pt x 119.50941pt.
  [8 <./diagrams/rho_profit-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <diagrams/n_profit.eps>
-(epstopdf)                    date: 2015-02-24 20:42:30
-(epstopdf)                    size: 21675 bytes
+(epstopdf)                    date: 2017-10-16 15:33:13
+(epstopdf)                    size: 23374 bytes
 (epstopdf)             Output file: <diagrams/n_profit-eps-converted-to.pdf>
-(epstopdf)                    date: 2015-02-24 20:42:35
-(epstopdf)                    size: 6736 bytes
-(epstopdf)             Command: <repstopdf --outfile=diagrams/n_profit-eps-conv
-erted-to.pdf diagrams/n_profit.eps>
-(epstopdf)             \includegraphics on input line 293.
+(epstopdf)                    date: 2017-10-16 15:33:16
+(epstopdf)                    size: 6737 bytes
+(epstopdf)             Command: <epstopdf --outfile=diagrams/n_profit-eps-conve
+rted-to.pdf diagrams/n_profit.eps>
+(epstopdf)             \includegraphics on input line 199.
 Package epstopdf Info: Output file is already uptodate.
 
 <diagrams/n_profit-eps-converted-to.pdf, id=296, 903.375pt x 505.89pt>
@@ -566,7 +566,7 @@ File: diagrams/n_profit-eps-converted-to.pdf Graphic file (type pdf)
 
 <use diagrams/n_profit-eps-converted-to.pdf>
 Package pdftex.def Info: diagrams/n_profit-eps-converted-to.pdf used on input l
-ine 293.
+ine 199.
 (pdftex.def)             Requested size: 213.41443pt x 119.50941pt.
 
 
@@ -575,15 +575,15 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [9 <./diagrams/t_profit-eps-converted-to.pdf> <./diagrams/n_profit-eps-converte
 d-to.pdf>]
 Package epstopdf Info: Source file: <diagrams/mtbf_profit.eps>
-(epstopdf)                    date: 2015-02-24 20:42:30
-(epstopdf)                    size: 22247 bytes
+(epstopdf)                    date: 2017-10-16 15:33:13
+(epstopdf)                    size: 23964 bytes
 (epstopdf)             Output file: <diagrams/mtbf_profit-eps-converted-to.pdf>
 
-(epstopdf)                    date: 2015-02-24 20:42:36
-(epstopdf)                    size: 7353 bytes
-(epstopdf)             Command: <repstopdf --outfile=diagrams/mtbf_profit-eps-c
-onverted-to.pdf diagrams/mtbf_profit.eps>
-(epstopdf)             \includegraphics on input line 385.
+(epstopdf)                    date: 2017-10-16 15:33:17
+(epstopdf)                    size: 7380 bytes
+(epstopdf)             Command: <epstopdf --outfile=diagrams/mtbf_profit-eps-co
+nverted-to.pdf diagrams/mtbf_profit.eps>
+(epstopdf)             \includegraphics on input line 270.
 Package epstopdf Info: Output file is already uptodate.
 
 <diagrams/mtbf_profit-eps-converted-to.pdf, id=310, 903.375pt x 505.89pt>
@@ -591,7 +591,7 @@ File: diagrams/mtbf_profit-eps-converted-to.pdf Graphic file (type pdf)
 
 <use diagrams/mtbf_profit-eps-converted-to.pdf>
 Package pdftex.def Info: diagrams/mtbf_profit-eps-converted-to.pdf used on inpu
-t line 385.
+t line 270.
 (pdftex.def)             Requested size: 213.41443pt x 119.50941pt.
 
 <diagrams/application_comparison.png, id=311, 362.3136pt x 217.7736pt>
@@ -599,7 +599,7 @@ File: diagrams/application_comparison.png Graphic file (type png)
 
 <use diagrams/application_comparison.png>
 Package pdftex.def Info: diagrams/application_comparison.png used on input line
- 441.
+ 326.
 (pdftex.def)             Requested size: 213.41443pt x 128.27263pt.
  [10 <./diagrams/mtbf_profit-eps-converted-to.pdf> <./diagrams/application_comp
 arison.png>]) (./related_work.tex
@@ -637,7 +637,7 @@ msy10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/symbol/usyr.pfb><
 /texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2
 013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb></usr/local/texlive/2013/texmf
 -dist/fonts/type1/urw/zapfchan/uzcmi8a.pfb>
-Output written on closer2014.pdf (12 pages, 846258 bytes).
+Output written on closer2014.pdf (12 pages, 846316 bytes).
 PDF statistics:
  363 PDF objects out of 1000 (max. 8388607)
  225 compressed objects within 3 object streams
