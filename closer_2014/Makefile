@@ -21,7 +21,7 @@ plots:
 	#cd gp: gnuplot rho
 
 clean: 
-	rm -f $(DVI_FILES) $(PS_FILES) *.aux *.blg *.pdf
+	rm -f $(DVI_FILES) $(PS_FILES) *.aux *.blg *.pdf *.log *.bbl
 	rm -f diagrams/*converted*.pdf
 	rm -f diagrams/rho_*.eps
 	rm -f diagrams/mtbf_*.eps
