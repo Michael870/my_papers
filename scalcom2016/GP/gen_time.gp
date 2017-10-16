@@ -102,8 +102,8 @@ unset y2tics
 
 set output "../Figures/gen_time.eps"
 
-plot "../Data/general_time.dat" using 1:2 title "Process replication ({/Symbol a}=1)" smooth bezier linestyle 1, \
-     "" using 1:3 title "Lazy Shadowing ({/Symbol a}=5)" smooth bezier ls 2, \
-     "" using 1:4 title "Lazy Shadowing ({/Symbol a}=10)" smooth bezier ls 3
+plot "../Data/general_time.dat" using 1:2 title "Process Replication ({/Symbol a}=1)" smooth bezier linestyle 1, \
+     "" using 1:3 title "Leaping Shadows ({/Symbol a}=5)" smooth bezier ls 2, \
+     "" using 1:4 title "Leaping Shadows ({/Symbol a}=10)" smooth bezier ls 3
 
 
