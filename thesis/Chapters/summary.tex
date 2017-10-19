@@ -1,3 +1,11 @@
+HPC and Cloud are two ecosystems that are designed for different applications and with disparate design principles. However, Big data technologies, such as Hadoop, clustered storage, and data visualization, are now merging with traditional HPC technologies. 
+On the one hand, an increasing portion of HPC workloads is becoming data intensive.
+On the other hand, Big data applications are requiring more and more computing power. 
+As the boundaries between Cloud and HPC continue to blur, it is clear that there is an urgent demand for a systematic computational model that adapts to the computing platform and accommodates the underlying
+workloads. SO WE NEED ADPATIVE SHADOW.
+
+
+
 Current fault tolerance approaches rely exclusively on either time or hardware redundancy to hide failures from being seen by users. 
 Rollback recovery, which exploits time redundancy, requires full or partial re-execution when failure occurs.  
 Such an approach
@@ -14,35 +22,7 @@ A combination of modeling, simulation, and experiments will be used to test the 
 Table~\ref{tab:timeline}.
 
 
-\begin{table}[ht]
-\vspace{-0.3in}
-\caption{Timeline of Proposed Work.}
-\vspace{-0.15in}
-\centering
-\scalebox{0.85}
-{
-\begin{tabularx}{\textwidth}{|c|X|X|}
-\toprule
-\textbf{Date} & \textbf{Content} & \textbf{Deliverable results} \\
-\midrule
-Sep. - Nov.  & Finish the implementation of lsMPI with shadow leaping & A functional MPI library for Lazy Shadowing \\
-\hline
-December & Measure the performance of lsMPI w/ and w/o failures & A paper for publication \\
-\hline
-January & Analysis of failure repository & Failure distribution across nodes within a system \\
-\hline
-Feb. - Mar.  & Study the problem of process mapping and partial shadowing & Analytical models and optimization problem formulation \\
-\hline
-April  & Build a trace based simulator to evaluate process mapping and partial shadowing & A paper for publication \\ 
-\hline
-May - Aug. & Thesis writing & Thesis ready for defense \\
-\hline
-Sep. - Oct. & Thesis revising & Completed thesis \\ 
-\bottomrule
-\end{tabularx}
-}
-\label{tab:timeline}
-\end{table}
+
 
 
 

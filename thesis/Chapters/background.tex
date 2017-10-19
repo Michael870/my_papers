@@ -1,83 +1,179 @@
-%Extreme-scale computing presents some unique challenges to fault tolerance as faults are no longer 
-%an exceptional event \cite{ferreira_sc_2011}. 
-Rollback recovery is the dominant mechanism to achieve fault
-tolerance in current HPC environments~\cite{Deconinck93surveyof,Elnozahy:02:Survey,Egwutuoha2013}. In the most general form, rollback recovery 
-involves the periodic saving of the execution state (checkpoint), with the anticipation that
-in the case of a failure, computation can be restarted from a previously saved checkpoint. % \cite{Elnozahy:02:Survey}. %The identification of an error, before or during a checkpoint,
-%requires that the application rollback to the previously completed checkpoint. 
-Coordinated checkpointing is a popular approach for
-its ease of implementation.
+Research in fault tolerance and power management have been fruitful in the past few decades, with numerous mature techniques made available for various computing platforms, spanning from mobile devices to large-scale clusters. This chapter reviews the literature and provides a background study for the work presented in this thesis. Firstly, definitions of fault and failure are provided to set stage for how to achieve fault tolerance. The next two sections discuss two families of fault tolerance strategies that are widely adopted today, with a focus on large-scale computing systems. Finally, this chapter presents a survey of research work in the area of power and energy management.
+
+\section{Fault, Failure, and Fault Tolerance}
+
+There is a clear distinction between fault and failure. Generally, a \textit{fault} refers to an exception or detect in the system at its lowest level~\cite{Jalote:1994:FTD:179250,gartner1999fundamentals}. For example, a common fault in storage systems is hard disk drive malfunction. Such a fault is \textit{reproducible} as it always re-occurs until the faulty disk is removed and replaced. On the contrary, a bit flip in the main memory caused by cosmic rays is usually transient, thus non-reproducible. Oftentimes fault is not visible to the application or end user. Instead, the externally visible manifestation of a fault is called a \textit{failure}~\cite{gartner1999fundamentals}. Using the disk fault example again, a failure when trying to read from the disk could be corrupted data, or inability to access, or even slowing down due to repeated read attempts. In cases where no distinction is made between a fault and the resulting failure, these terms are used interchangeably. 
+
+Failures in computing systems can be attributed to various factors, including software, hardware, network, human, overloading, environment, etc~\cite{schroeder_dsn_2006}. The disk malfunction mentioned above is a hardware failure. Bugs, race conditions, and deadlock are examples of software failure. One example of failure induced by overloading is a low priority job terminated to make room for a high priority one. In the environment category, A/C failure leading to overheat is an example.     
+
+Due to the rich causes and varied effects, faults and their resulting behavior are typically abstracted by fault models, which are grouped in an hierarchical structure~\cite{gartner1999fundamentals,cristian1991understanding,schneider1993good}. Below are three popular fault models.
+
+\begin{itemize}
+	\item \textbf{Fail-stop} A faulty processor stops execution and this failure can easily be detected by other processors. 
+    \item \textbf{Silent data corruption} A faulty processor continues execution but may silently generate incorrect results. 
+    \item \textbf{Byzantine} A faulty processor continues execution but may behave in an arbitrary or even malicious way.
+\end{itemize}
+
+When studying fault tolerance, the correctness and efficiency of a particular approach is assessed with respect to a specific fault model. 
+It is not hard to see that Byzantine fault model is the most generic in this list, as it covers the other two models, whereas fail-stop is the most restrictive, as it requires that a processor halt in response to a failure and that failure be detected, which may not be realistic in certain circumstances. 
+
+\subsection{Fault Tolerance}
+Fault tolerance aims at guarding a system against faults, so that the system operates in accordance with established specifications~\cite{laprie1985dependable}. A system is fault tolerant if it has build-in fault tolerance capability and never deviates from the expected behavior. To achieve fault tolerance, a system requires additional resources that exceed the minimum amount needed to satisfy the performance requirements of an application. This is referred to as redundancy and is the foundation of all fault tolerance techniques today.  
+
+Redundancy comes in four forms: time, information, hardware, and software~\cite{koren2010fault}. To leverage time redundancy, a system re-executes partial or entire portion of lost work after a failure, therefore coping with failure at the sacrifice of time resource. As the name suggests, information redundancy increases reliability through storing and processing additional information. A simple example is to replicate a file across multiple locations, such as Hadoop distributed file system~\cite{hdfs2014}. Other examples involve more complicated encoding techniques, like Algorithm-based fault tolerance (ABFT) and RAID~\cite{huang1984algorithm,patterson1988case}. Hardware redundancy refers to the use of extra hardware resources to execute redundant instances of a task. Software redundancy, on the other hand, consists of writing the same function using different methods and then comparing the output to detect and correct failures. 
+
+Research in fault tolerance has been a fertile ground, with significant progress on how we understand failures~\cite{cfdr,Cappello:09:Fault,calhoun2017towards}, detect failures~\cite{bosilca2016failure,fiala_2012_sdc,di2016adaptive}, and mitigate the
+impact of failures~\cite{bland2013post,herault2015practical,fang2017letgo}. Rollback recovery is the direct application of time redundancy. It is often optimized by checkpointing techniques to periodically save
+the execution state to a stable storage, with the anticipation
+that, in case of failure, computation can be restarted from
+a saved checkpoint~\cite{chandy_trans_1985}. Message logging protocols, which
+combines checkpointing with logging of non-deterministic
+events, allow a system to recover beyond the most recent
+consistent checkpoint~\cite{strom1985optimistic}. Proactive fault tolerance relies
+on a prediction model to forecast faults, so that preventive
+measures, such as task migration or checkpointing, can be
+undertaken~\cite{6468487,engelmann2009proactive,chakravorty2006proactive,liang2006bluegene}. Algorithm-based fault tolerance
+uses redundant information inherent to its algorithmic structure of the problem to achieve resilience~\cite{luk1988analysis,bosilca2009algorithm}. For the past 30
+years, disk-based coordinated checkpoint/restart has been the primary fault
+tolerance technique in production HPC systems~\cite{ferreira_sc_2011}. However, its foreseen low efficiency in emerging extreme-scale systems re-ignited the study of state machine replication as a promising alternative.
+
+
+
+
+\section{Rollback Recovery}
+ 
+Rollback recovery is the dominant mechanism to ensure correctness in the presence of failures in current HPC environments, where failures are infrequent and considered as exception~\cite{Deconinck93surveyof,Elnozahy:02:Survey,Egwutuoha2013}. Based on rollback recovery, techniques available today can be classified into checkpoint-based approaches and log-based approaches~\cite{Elnozahy:02:Survey}.
+
+\subsection{Checkpoint-based Approach}
+To avoid rolling back to the very beginning every time there is a failure, checkpointing can be periodically invoked to save the intermediate execution state to a \textit{stable storage}. Stable storage is an abstraction of a storage medium that persists through the anticipated failures and ensures that the stored information is available during recovery~\cite{Elnozahy:02:Survey}. Typically, a stable storage is implemented on top of a magnetic disk based storage subsystem that is accessible through a network~\cite{silva1998using}. In the case of a failure, previously saved execution state can be retrieved to resume the computation. 
+
+In distributed systems, a global state consists of a collection of process state, each saved by its own process. In a message-passing system, however, rollback recovery is complicated by the issue of \textit{rollback propagation} due to inter-process communication. When one process $P_1$ sends a message \textit{m} to another process $P_2$, the event of sending at $P_1$ and the receipt at $P_2$ form a ``happened before" relationship~\cite{lamport_comm_1978}. The rollback propagation issue is such that, if $P_1$ were to roll back to a state before sending \textit{m}, $P_2$ needs to roll back to a state before receiving \textit{m}. Otherwise, the states of the two processes would end up being \textit{inconsistent} because they would show that \textit{m} has not been sent but already received, which never exists in any correct execution. Therefore, checkpoint/restart in message passing systems needs to guarantee, either at checkpointing time or restart time, that a global consistent state can be constructed from the saved checkpoints. %This condition is satisfied either at checkpointing time or restart time. 
+
+Coordinated checkpointing is a popular approach that coordinates the checkpoint writing process to record a globally consistent state.
 Specifically, all processes
-coordinate with one another to produce individual states that satisfy the ``happens before"
-communication relationship \cite{chandy_trans_1972}, which is proved to provide a consistent global state.
-%Essentially, the algorithm provides a method for all processes involved to stop operation ``at the same
-%time" and transfer their system state to a stable storage. 
+coordinate with each other to save individual states that collectively satisfy the ``happened before" relationship~\cite{chandy_trans_1985}.
+As a result, only the last successfully saved checkpoint needs to be kept.
+One way to perform coordination is to quiesce the communication channels before writing a checkpoint~\cite{tamir1984error,hargrove2006berkeley}. For example, barrier synchronization in the underlying application is a natural point to produce a checkpoint. At the same time, non-blocking protocols exist to save the communication state during the operation~\cite{coti2006blocking,chandy_trans_1985,lai1987distributed}.
+%Essentially, the algorithm provides a method for all processes involved to stop operation ``at the same time" and transfer their system state to a stable storage. 
 The major benefit of coordinated checkpointing stems from its simplicity and ease of implementation. 
 Its major drawback, however, is the lack of scalability, as it requires global coordination
-~\cite{elnozahy_dsc_2004,riesen_sandia_2010}.
-%hargrove2006berkeley}.
+~\cite{elnozahy_dsc_2004,riesen_sandia_2010,hargrove2006berkeley}.
 
 
 In uncoordinated checkpointing, processes checkpoint their states independently and postpone creating a 
-globally consistent view until the recovery phase. The major advantage is the reduced overhead during fault free operation. However, the scheme requires that
-each process maintains multiple checkpoints %and message logs, necessary to construct a consistent 
-%state during recovery. It 
-and can also suffer the well-known domino effect 
- \cite{randell_domino_effect,alvisi_ftc_1999,helary_rds_1997}. One hybrid approach, known as communication induced 
-checkpointing, aims at reducing coordination overhead \cite{alvisi_ftc_1999}. The approach, however, may 
+globally consistent view until the recovery phase. The major advantage is the reduced overhead during fault free operation. Since each process is allowed to checkpoint its state independently, optimizations can be explored to checkpoint when the process state is small, or when there is abundant I/O bandwidth to access stable storage.
+However, the scheme requires that
+each process maintains multiple checkpoints, necessary to construct a consistent state during recovery. Furthermore, it can also suffer the well-known domino effect 
+ \cite{randell_domino_effect,alvisi_ftc_1999,helary_rds_1997}, which makes all saved checkpoints useless and forces the execution to roll back to its initial state. 
+Although well-explored, uncoordinated checkpoint/restart has not been widely adopted
+in HPC environments, due to its complexities of handling recovery and its heavy dependency on applications \cite{Elnozahy:02:Survey,guermouche_2011_ipdps}. 
+ 
+One hybrid approach of coordinated and uncoordinated checkpointing, known as communication induced 
+checkpointing, aims at reducing coordination overhead by taking advantage of the communication patterns of an application\cite{alvisi_ftc_1999}. The approach, however, may 
 cause processes to store useless states. To address this 
-shortcoming, ``forced checkpoints" have been proposed \cite{helary_rds_1997}. This approach, however,  may lead to unpredictable
-checkpointing rates. 
-Although well-explored, uncoordinated checkpointing has not been widely adopted
-in HPC environments due to its complexities and its dependency on applications \cite{guermouche_2011_ipdps}.
+shortcoming, ``forced checkpoints" have been proposed \cite{helary_rds_1997} to avoid creating useless checkpoints. This approach, however,  may lead to unpredictable checkpointing rates. 
 
+One of the largest overheads in any disk-based checkpointing technique is the time necessary to write the checkpoints
+to a stable storage. Given the amount of system memory and I/O bandwidth, it takes minutes to save a single global checkpoint to a centralized storage subsystem~\cite{mills2014power}.  
+Incremental checkpointing attempts
+to reduce the state saved in a checkpoint by only writing the changes during the last checkpointing interval \cite{Agarwal:04:Adaptive,elnozahy_1992_manetho,li_trans_1994}. 
+On a memory page granularity, this can be achieved using dirty-bit page flags \cite{plank_ftcs_1994,elnozahy_1992_manetho}. Hash based incremental checkpointing, on the other hand, makes use of hash algorithms to detect changes that are finer-grained than pages, at the cost of extra computation \cite{nam_ftc_1997,Agarwal:04:Adaptive}. However, whether the benefits in reducing checkpoint size offset the increased computation cost remains unclear~\cite{elnozahy1998safe,nam2002probabilistic}. 
+Copy-on-write checkpointing offloads the checkpointing process to a secondary task and only writes incremental checkpoints \cite{li_trans_1994}.
 
-One of the largest overheads in any checkpointing process is the time necessary to write the checkpoints
-to stable storage. Incremental checkpointing attempts
-to address this by only writing the changes since previous checkpoint \cite{Agarwal:04:Adaptive,elnozahy_1992_manetho,li_trans_1994}. 
-This can be achieved using dirty-bit page flags \cite{plank_ftcs_1994,elnozahy_1992_manetho}. Hash based incremental checkpointing, on the other hand, makes use of hashes to detect changes \cite{nam_ftc_1997,Agarwal:04:Adaptive}. 
-Another proposed scheme, known as in-memory checkpointing, minimizes the overhead of disk access~\cite{zheng_2004_ftccharm,6264677}.
-%offloads the checkpointing process to a secondary task and only writes incremental checkpoints \cite{li_trans_1994}.
+Another proposed scheme, known as in-memory checkpointing, minimizes the overhead of disk access by saving checkpoints in main memory~\cite{zheng_2004_ftccharm,6264677}.
 The main concern of these techniques is the increase in
 memory requirement to support the simultaneous execution of the checkpointing and the application. 
 It has been suggested that nodes in extreme-scale systems should be configured with fast local storage~\cite{doe_ascr_exascale_2011}. 
 %, which
 %improves the performance of checkpointing \cite{doe_ascr_exascale_2011}. 
 Multi-level checkpointing , which consists of
-writing checkpoints to multiple storage targets, 
-can benefit from such a strategy \cite{Moody:10:SCR}. This,
+writing checkpoints to multiple storage media, 
+can benefit from such an upgrade \cite{Moody:10:SCR}. This,
 however, may lead to increased failure rates of individual nodes and complicate the checkpoint writing process.
 %Furthermore, it may complicate the checkpoint writing process and requires that the system track the
 %current location of all process's checkpoints.
 
 
-Process replication, or state machine replication, has long been used for reliability and availability in distributed and mission critical systems \cite{schneider_1990_tutorial,Sousa2005,5470865}. %Replication can be used to detect and correct system failures that are otherwise undetectable,
-%such as silent data corruption and Byzantine faults \cite{fiala_2012_sdc}. 
-%This approach is barely used in HPC systems, primarily due to its low efficiency.
-%However, upcoming extreme-scale systems are expected to 
-%require a more challenging level of fault tolerance to deal with the 
-%confront a dramatic growth in both the frequency and diversity of faults.
-%As a result,
+
+
+\subsection{Log-based Approach}
+Log-based rollback-recovery is often a
+natural choice for applications that frequently
+interact with the outside world. 
+Log-based rollback-recovery combines checkpointing with logging of non-deterministic events, and allows the system to recover beyond the most recent consistent checkpoint~\cite{strom1985optimistic}.
+To enforce determinism in the presence of non-deterministic events (e.g., message receipt), log-based rollback-recovery relies on the \textit{piecewise deterministic (PWD)} assumption, which states that all non-deterministic events can be identified and \textit{determinants} can be recorded to replay the events in their original order~\cite{alvisi1996trade}. By replaying the non-deterministic
+events according to the logged determinants, a
+process can re-construct its
+state up to the first unlogged non-deterministic event, even if this state has not been checkpointed.
+
+Depending on how the determinants are
+logged, log-based rollback-recovery has three flavors. Pessimistic logging takes a blocking approach, such that 
+the application execution is suspended until the determinants have been safely stored in a stable storage~\cite{huang1995optimistic,johnson1987sender,juang1991crash}.
+Pessimistic logging simplifies recovery and garbage collection, at the cost of failure-free performance.
+Optimistic logging makes the optimistic assumption that logging
+will complete before a failure occurs, thus allowing determinants to be spooled to a stable storage asynchronously, avoiding blocking the application~\cite{strom1985optimistic,sistla1989efficient,smith1996minimizing}. Optimistic
+logging reduces the failure-free overhead,
+but complicates recovery. 
+Also, several checkpoints may need to be
+kept~\cite{Elnozahy:02:Survey}.
+Finally, 
+causal logging combines the benefits of optimistic and
+pessimistic logging to achieve low failure-free overhead
+while allowing simple recovery~\cite{meneses2011evaluation,lee1998efficient,alvisi1996trade}. Different from optimistic logging, causal logging limits
+the rollback to the most recent checkpoint.
+This reduces the storage overhead and the amount of work at risk. 
+
+
+
+
+
+\section{State Machine Replication}
+In contrast to rollback recovery, forward recovery allows applications to proceed in the case of a failure instead of rolling back. The most well-know forward recovery technique is state machine replication, 
+which has long been used for reliability and availability in mission critical systems and storage systems~\cite{schneider_1990_tutorial,Sousa2005,5470865}. 
+Potentially faulty entities are considered as black boxes that implement state machines, delivering identical outputs when presented with the same sequence of inputs. A similar idea to state machine replication is redundant multi-threading, which has been implemented in both hardware and software, and used to increase reliability in CPUs and GPUs~\cite{reinhardt2000transient,Wadden:2014:RDE:2665671.2665686}. In the case where each black box is a process, this technique is also referred to as process replication, which instantiates multiple copies (replicas) of each process and let them execute the same code. 
+
+To ensure consistent state across replicas, all application messages must be delivered to all replicas of a given process, typically done by using a message ordering protocol~\cite{defago2004total,baldoni2005total}. Additionally, if any non-deterministic event is involved in the computation,  then extra consensus protocols must be enforced~\cite{lamport1998part,zhao2010fault}. 
+By distributing replicas across the available compute nodes and minimizing the required state comparisons, low runtime overheads can be achieved with process replication, while masking a large number of failures from the underlying application. However, the undesired property of this technique is the increase in hardware resources, as long as the proportional increase in power consumption.
+
+
 Although it was initially rejected in HPC communities, 
-replication has recently been proposed to address the deficiencies of checkpointing for upcoming extreme-scale systems \cite{Cappello:09:Fault,engelmann2011redundant}. 
+replication has recently been proposed to address the deficiencies of checkpoint/restart for upcoming extreme-scale systems \cite{Cappello:09:Fault,engelmann2011redundant,riesen_sandia_2010,ferreira_sc_2011}. These studies predict that process replication achieves better scalability and system efficiency than checkpoint/restart in future failure-prone extreme-scale computing environments. 
 Full and partial
 process replication have also been studied to augment existing checkpointing techniques, and to  
-detect and correct silent data corruption \cite{stearly_2012_partial,elliott_2012_cpr,ferreira_sc_2011,fiala_2012_sdc,ni_2013_acr}. % There are several different implementations of
-%replication in the widely used MPI library, each with their different tradeoffs and overheads. The
-%overhead can be negligible or up to 70\% depending upon the communication patterns of the
-%application \cite{engelmann2011redundant}. %Moreover, replication alone is not enough to guarantee fault tolerance since
+detect and correct silent data corruption \cite{stearly_2012_partial,elliott_2012_cpr,ferreira_sc_2011,fiala_2012_sdc,ni_2013_acr,lefray_2013_rsd}. There are several different implementations of
+replication in the widely used MPI library and cloud environments, each with their different trade-offs and overheads \cite{engelmann2011redundant,ferreira_sc_2011,zhao2010fault}. The
+overhead can be negligible or up to 70\% depending upon the communication patterns of the
+application \cite{engelmann2011redundant}. %Moreover, replication alone is not enough to guarantee fault tolerance since
 %it is possible that all nodes executing a given process could fail simultaneously, thus
 %replication is typically paired with some form of checkpointing. 
-Our approach is largely different from classical process replication in that we dynamically configure the execution rates of main and shadow processes, so that less resource/energy is required while reliability is still assured.  
 
 
-Replication with dynamic execution rate is also explored in Simultaneous and Redundantly Threaded (SRT) processor whereby one leading thread is running ahead of trailing threads \cite{reinhardt2000transient}. However, 
-the focus of \cite{reinhardt2000transient} is on transient faults within CPU while we aim at tolerating both permanent and transient faults across all system components.
-%Also, this work differs from \cite{mills_2014_icnc,cui_en7085151,cui_2014_closer}, where shadowing with DVFS is studied for single or loosely-coupled tasks. %Instead, in this paper we explore novel ideas of shadow collocation and shadow leaping in order to satisfy the requirements of future extreme-scale HPC systems. 
-%our approach is different in that it tunes the execution rates of the leading and trailing threads in a finer grain, in order to achieve a ``parameterized" trade-off between completion time and energy consumption. 
-%Further, we take advantage of the idle time during failure recovery and ``leap" the trailing replicas to achieve forward progress%, largely improving performance in terms of both completion time and energy consumption. 
-%. This differs from \cite{reinhardt2000transient}, of which the ``leaping" of the trailing replica results in extra overhead.
-%To the best of our knowledge,
-%Lazy Shadowing is the first attempt to explore a state-machine replication based framework
-%that achieves a fine-grained tradeoff between time and hardware redundancy while meeting resilience and
-%power requirements.
+%Our approach is largely different from classical process replication in that we dynamically configure the execution rates of main and shadow processes, so that less resource/energy is required while reliability is still assured.  
+
+\section{Power Management}
+Energy conservation is a major concern today. In computer systems, power and energy are critical in terms of both cost and availability. In mobile, battery-operated devices, power dissipation directly translates into a limitation on operation hours. In large-scale computing systems, energy costs account for a significant portion of the operating expenses~\cite{scaramella2014worldwide}. Despite large or small systems, most of the energy consumed is converted into heat, resulting in wear and reduced reliability of hardware components~\cite{sarood_2013_CWI,Albers:2010:EA:1735223.1735245}.
+
+
+Energy saving can be targeted at all levels of a system, ranging from circuit level to architecture level and operation level~\cite{mittal2014power,Villa2014}. At the operation level, a large body of scheduling work has been explored, based on the observation that one can save energy by leveraging execution slack~\cite{ge2007cpu,hsu2005power,huang2009energy,freeh2008just,lim2006adaptive,rountree2009adagio,tiwari2012green}. 
+All of them resolve around two underlying mechanisms, i.e., power-down and dynamic speed scaling~\cite{Albers:2010:EA:1735223.1735245,liu2010survey}. 
+
+
+Power-down, also known as dynamic resource sleeping, conserves energy by dynamically turning resources into low-power standby or sleeping modes, and then waking them up on demand.  Each resource may be in an active running state, or in one of intermediate sleeping states, or in the completely power-off state.
+For instance, in the Intel Nehalem-EP processor, the clock and other components could be turned off to make a transition into a low-power mode~\cite{liu2010survey}. The deeper the resource sleeps, the less power it consumes, but the more energy is
+needed to wake it up~\cite{Albers:2010:EA:1735223.1735245}. In addition to processor, some memory controllers support the dynamic switch of memory ranks between on and off states~\cite{pandey2006dma}. Similarly, disks may also exploit active, ready, and standby states to reduce power consumption~\cite{colarelli2002massive,pinheiro2006exploiting}.
+
+Dynamic speed scaling is another power management mechanism that allows dynamic tuning of the performance state of the target component to save power, i.e. it slows down when possible to reduce power consumption and speeds up when needed at the cost of greater power consumption.
+Dynamic Voltage Frequency Scaling (DVFS) is probably the best known example~\cite{Eyerman:2011:FDU:1952998.1952999,4658633,qi_2010_global,rountree2009adagio,freeh2008just,tiwari2012green,lim2006adaptive,elnozahy2003energy,pillai2001real,flautner2001automatic}. 
+This technique is widely available in today's processors, including Intel Xeon, AMD Atholon, and ATI co-processors. 
+Generally, the reduction in power consumption is achieved through reducing the supply voltage , which in turn reduces the processor clock frequency~\cite{venkatachalam2005power}. 
+Other examples of dynamic speed scaling include multi-frequency memories and multi-speed disks, which dynamically scale the working frequency and thus the data rate~\cite{david2011memory,gurumurthi2003drpm,carrera2003conserving}.
+In all of these methods, however, it is unavoidable that the transition between different performance states consumes additional energy and introduces latency~\cite{venkatachalam2005power}.
+
+
+
+
+\section{Summary}
+This chapter reviews related work in the fields of fault tolerance and power management. We begin with a clarification of what we mean by fault and failure, followed by how fault tolerance works in general. Then, state-of-the-art fault tolerance techniques are discussed, each with its advantages and limitations. We recognize the dominance of checkpoint/restart in current HPC systems, and point out the emergent process replication approach as it attracts growing attention. Lastly, we survey a number of power management techniques that build on top of power-down and dynamic speed scaling.   
+
+Motivated by the extreme-scale challenges, this thesis targets at work that lies at the intersection of fault tolerance and power management. Existing work in this area has mainly focused upon measuring power and energy consumption of fault tolerance techniques~\cite{meneses2012assessing,saito2013energy,mills2014energy}. Instead, this thesis proposes a new fault tolerance model, \textit{Leaping Shadows}, which 
+explores the trade-offs between time and hardware redundancy to achieve fault tolerance with power awareness. The flexibility in balancing these trade-offs, together with the ability to rejuvenate after failures, allows Leaping Shadows to maximize system efficiency and maintain a persistent level of resilience to failure while minimizing energy consumption.

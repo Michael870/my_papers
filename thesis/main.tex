@@ -1,7 +1,7 @@
 %\documentclass[dvipdfm,final]{pittetd}%   If you want to use dvipdfm. The file is to be normally processed (LaTeX), and 
 %                                   then the program dvipdfm applied to it. This will create the PDF file with bookmarks
 %                                   and links. It will also try to convert any PS graphics included.
-\documentclass[pdftex]{pittetd}   % If you want to use PDFLaTeX instead. This will create the PDF file directly.
+\documentclass[pdftex,final]{pittetd}   % If you want to use PDFLaTeX instead. This will create the PDF file directly.
 %                                   Processing time can be longer. No PS graphics conversion will take place 
 %                                   automatically.
 %
@@ -17,6 +17,10 @@
 %
 \usewithpatch{graphicx}%            Better \usewithpatch than \usepackage because it makes pittetd look for any 
 %                                   available patch for the package. 
+\usepackage{afterpage}
+\usepackage{listings}
+\usepackage[linesnumbered]{algorithm2e}
+\usepackage{tabularx}
 \usepackage{subfigure}
 \usepackage{amsmath,amsthm}%        But you can't use \usewithpatch for several packages as in this line. The search for
 %                                   patches has to be then forced through:
@@ -25,14 +29,15 @@
 %
 %\patch{pittdiss}                   If you started writing your thesis with the pittdiss class, this patch makes 
 %                                   pittetd interpret pittdiss commands.
-
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}[theorem]
 \renewcommand\thesubfigure{(\alph{subfigure})}
 %\patch{pitthesis}                  Analogous for the pitthesis class.
 \title[Adaptive and Power-aware Fault Tolerance for Future Extreme-scale Computing]{Adaptive and Power-aware Fault Tolerance for Future Extreme-scale Computing}% The optional argument is the %                                   version of the title that will appear in Acrobat Reader's Document Info dialog box.
 \author{Xiaolong Cui}
 \degree{B.E. in Computer Science, Xi'an Jiaotong University, 2012 \\ M.S. in Computer Science, University of Pittsburgh, 2017}
 %\date{July 20th 1967}%             This date is the date of the thesis defense. Default is \today
-%\year{1967}                        pittetd will use the current year unless otherwise indicated. So this command is not
+\year{2017}                        %pittetd will use the current year unless otherwise indicated. So this command is not
 %                                   necessary.
 \keywords{Extreme-scale computing, Forward recovery, Reliability, Fault tolerance, Shadow Replication, Leaping}% This list appears in the field 'Keywords' of Acrobat Reader's Document Info
 %                                   dialog box, and also, optionally, after the abstract.
@@ -58,43 +63,11 @@
 \makecommittee
 \copyrightpage        %             Uncomment this to get a copyright page.
 \begin{abstract}
-Two major trends in large-scale computing systems are the rapid growth
-in HPC with in particular an international
-exascale initiative, and the dramatic expansion of Cloud infrastructure accompanied by the Big Data trends.  
-To satisfy the continuous demands for increasing computing capacity, future extreme-scale systems will embrace a multi-fold 
-increase in the number of computing, storage, and communication components, in order to support an unprecedented level 
-of parallelism. Despite the capacity and economies benefits, making the upward transformation to extreme-scale poses numerous 
-scientific and technological challenges, two of which are the power consumption and fault tolerance. With the 
-increase in system scale, failure would become a norm rather than an exception, driving the system to significantly lower 
-efficiency with unforeseen power consumption.
+Two major trends in large-scale computing are the rapid growth in HPC with in particular an international exascale initiative, and the dramatic expansion of Cloud infrastructures accompanied by the Big Data passion. To satisfy the continuous demands for increasing computing capacity, future extreme-scale systems will embrace a multi-fold increase in the number of computing, storage, and communication components, in order to support an unprecedented level of parallelism. Despite the capacity and economies benefits, making the upward transformation to extreme-scale poses numerous scientific and technological challenges, two of which are the power consumption and fault tolerance. With the increase in system scale, failure would become a norm rather than an exception, driving the system to significantly lower efficiency with unforeseen power consumption.
 
-%As the demand for computing power continues to increase, both HPC community and Cloud service providers are building larger computing platforms to take advantage of the power and economies of scale. On the HPC side, %several of the most powerful countries are competing for developing the next generation supercomputer--exascale computing machines 
-%a race is underway to build the world's first exascale supercomputer 
-%to accelerate scientific discoveries, big data analytics, etc. On the Cloud side, major IT companies are all expanding large-scale datacenters, for both private usage and public services. 
-%However, making the transition to extreme-scale poses numerous unavoidable scientific and technological challenges.
-%%However, aside from the benefits, several daunting challenges will appear when it comes to extreme-scale.
+This thesis aims at simultaneously addressing the above two challenges by introducing a novel fault-tolerant computational model, referred to as \textit{Leaping Shadows}. Based on Shadow Replication, Leaping Shadows associates with each main process a suite of coordinated shadow processes, which execute in parallel but at differential rates, to deal with failures and meet the QoS requirements of the underlying application under strict power/energy constraints. In failure-prone extreme-scale computing environments, this new model addresses the limitations of the basic Shadow Replication model, and achieves adaptive and power-aware fault tolerance that is more time and energy efficient than existing techniques. 
 
-This thesis aims at simultaneously addressing the above two challenges by introducing a novel fault-tolerant 
-computational model, referred to as \textit{Leaping Shadows}. %, so that application QoS and system efficiency are maintained. 
-Based on Shadow Replication, Leaping Shadows associates with 
-each main process a suite of coordinated shadow processes, which execute in parallel but at differential rates, 
-to deal with failures and meet the QoS requirements 
-of the underlying application under strict power/energy constraints. In failure-prone extreme-scale computing 
-environments, this new model addresses the limitations 
-of the basic Shadow Replication model, and achieves adaptive and power-aware fault tolerance 
-that is more time and energy efficient than existing techniques. 
-
-In this thesis, we first present an analytical model based optimization framework that demonstrates 
-Shadow Replication's adaptivity and flexibility in achieving multi-dimensional QoS requirements. Then, 
-we introduce Leaping Shadows as a novel power-aware fault tolerance model, which tolerates multiple types of 
-failures, guarantees forward progress, and maintains consistent level of resilience. Lastly, the details of a 
-Leaping Shadows implementation in MPI is discussed, along with extensive performance evaluation that includes 
-comparison to checkpointing/restart.
-
-
-%We study a novel computational model that is power-aware and fault-tolerant. Different techniques have been explored to embody this model. Accordingly, precise analytical models and optimization framework have been developed to quantify and optimize the performance, respectively. 
-
-%In this document, I summarize my progress in the development of the Lazy Shadowing concept and propose to continue the research in two aspects. Firstly, I propose to develop a MPI-based prototype to validate Lazy Shadowing in real environment. Using the prototype, I will run benchmarks and real applications to measure its performance and compare to state-of-the-art approaches. Then, I propose to further explore the adaptivity of Lazy Shadowing and improve its efficiency. Based on the specific system configuration, application characteristics, and QoS requirement, I will study the impact of process mapping and the viability of partial shadowing.     
+In this thesis, we first present an analytical model based optimization framework that demonstrates Shadow Replication's adaptivity and flexibility in achieving multi-dimensional QoS requirements. Then, we introduce Leaping Shadows as a novel power-aware fault tolerance model, which tolerates multiple types of failures, guarantees forward progress, and maintains consistent level of resilience. Lastly, the details of a Leaping Shadows implementation in MPI is discussed, along with extensive performance evaluation that includes comparison to checkpoint/restart. Collectively, these efforts advocate an adaptive and power-aware fault tolerance alternative for future extreme-scale computing.
 
 
 \end{abstract}
@@ -132,13 +105,21 @@ comparison to checkpointing/restart.
 \label{chapter:reward}
 \input{Chapters/reward}
 
-\chapter{Lazy Shadowing}
+\chapter{Leaping Shadows}
 \label{chapter:scale}
 \input{Chapters/scale}
+
+\chapter{Tolerance of Silent data corruption}
+\label{chapter:sdc}
+\input{Chapters/sdc}
 
 \chapter{\texorpdfstring{\MakeLowercase{ls}MPI}{lsMPI}: an implementation in MPI}
 \label{chapter:implementation}
 \input{Chapters/implementation}
+
+\chapter{Conclusion}
+\label{chapter:summary}
+%\input{Chapters/summary}
 
 
 
