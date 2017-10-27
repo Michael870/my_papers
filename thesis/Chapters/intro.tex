@@ -15,7 +15,7 @@ equipping the system with hundreds or thousands of CPUs, accelerators, communica
 
 
 With the increase in the number of components, it become more and more challenging for 
-researchers to continually offer more computing capacity with sustainable performance and reliability. 
+researchers to continuously offer more computing capacity with sustainable performance and reliability. 
 As today's HPC and Cloud systems grow to 
 meet tomorrow's demands, the behavior of the systems will be increasingly difficult to specify, predict and manage. 
 This upward trend, in terms of scale and complexity, has a direct negative effect on the overall system reliability. 
@@ -126,17 +126,18 @@ Due to the expected complexity and scale of future extreme-scale systems, anothe
 Regardless of the reliability of individual component, the system level failure rate will continue to increase as the number of 
 components increases, possibly by several orders of magnitude. It is projected that the Mean Time Between Failures (MTBF) of future extreme-scale systems will be at the order of hours or even minutes, implying 
 that many failures will occur every day~\cite{Bergman08exascalecomputing}. Without an efficient fault tolerance mechanism, faults will be so frequent that the applications running on the 
-systems will be continuously interrupted and restarted.%, greatly slowing down the application progress. 
+systems will be constantly interrupted and restarted.%, greatly slowing down the application progress. 
 
 Today, fault tolerance in computing systems mainly relies on rollback recovery, which rolls back and restarts the execution 
 every time there is a failure. This approach is often equipped with checkpointing to periodically save the execution state to a 
 stable storage, so that execution can be restarted from a recent checkpoint in the case of a failure~\cite{Elnozahy:02:Survey,kalaiselvi_sadhana_2000,chandy_trans_1985}. 
 Although checkpoint/restart is the most widely used technique in today's HPC systems, several studies predict that it is not likely to scale to future extreme-scale systems~\cite{ferreira_sc_2011,elnozahy_dsc_2004,4367962}. 
-Table~\ref{tbl:cp_effi} shows that at 100k nodes, only 35\% of the time will be spent on useful work, while 55\% of the time will be wasted on checkpointing and restarting. 
 Given the anticipated increase in system level failure rates and the time to checkpoint large-scale 
 compute-intensive and data-intensive applications, the time required to periodically checkpoint an application 
 and restart its execution will approach the system's MTBF~\cite{Cappello:2009:TER:1640402.1640428}. Consequently, applications will make little forward progress, thereby 
-reducing considerably the overall system efficiency and wasting a lot of energy. Furthermore, the nature and diversity of failures in extreme-scale systems are such that checkpoint/restart alone may not be an adequate approach. Based on this observation, recent work has proposed state machine replication as a scalable solution to handling diverse types of faults~\cite{fiala_2012_sdc,ferreira_sc_2011}. 
+reducing considerably the overall system efficiency and wasting a lot of energy. 
+Table~\ref{tbl:cp_effi} shows that at 100k nodes, only 35\% of the time will be spent on useful work, while 55\% of the time will be wasted on checkpointing and restarting. 
+Furthermore, the nature and diversity of failures in extreme-scale systems are such that checkpoint/restart alone may not be an adequate approach. Based on this observation, recent work has proposed state machine replication as a scalable solution to handling diverse types of faults~\cite{fiala_2012_sdc,ferreira_sc_2011}. 
 
 \begin{table}
 \centering
@@ -229,7 +230,7 @@ quantify and optimize the performance.
 
 \textbf{A proof-of-concept implementation of Leaping Shadows in MPI}.
 Though Leaping Shadows has been evaluated analytically, a real implementation 
-is needed for validation and performance measurement in real systems. We have developed \textit{lsMPI} as a prototype of Leaping Shadows in Message Passing Interface (MPI), which is the de facto programming paradigm for HPC. 
+is needed for validation and performance measurement in real systems. We have developed \textit{rsMPI} as a prototype of Leaping Shadows in Message Passing Interface (MPI), which is the de facto programming paradigm for HPC. 
 Instead of a full implementation of MPI, the library is designed to be a separate layer between MPI runtime and user application, in order to take advantage of existing MPI performance optimizations that numerous researches have spent years on. 
 This implementation transparently spawns 
 a shadow for each main process during the initialization phase, manages the coordination between mains and shadows, 
@@ -238,7 +239,7 @@ In addition, we have implemented leaping and rejuvenation to efficiently tolerat
 
 
 \textbf{Performance evaluation of Leaping Shadows}.
-With the lsMPI implementation, extensive experiments have been conducted to measure its real system performance, using benchmark applications that represent a wide range of HPC workloads. As a first step, we measured the failure-free runtime overheads resulted from the enforced consistency protocol. This experiment reveals that the overheads depend on application, and vary from 0.64\% to 2.47\%. Then we measured the scalability in order to predict the performance at extreme-scale, which suggested that the overheads would remain under 8\% at $2^{20}$ processes. Lastly, we also implemented in-memory checkpoint/restart to compare with lsMPI in the presence of failures. The results demonstrate Leaping Shadows'
+With the rsMPI implementation, extensive experiments have been conducted to measure its real system performance, using benchmark applications that represent a wide range of HPC workloads. As a first step, we measured the failure-free runtime overheads resulted from the enforced consistency protocol. This experiment revealed that the overheads depend on application and vary from 0.04\% to 2.73\%. Then we measured the scalability in order to predict the performance at extreme-scale, which suggested that the overheads would remain under 9.4\% at $2^{20}$ processes. Lastly, we also implemented in-memory checkpoint/restart to compare with rsMPI in the presence of failures. The results demonstrated Leaping Shadows'
 ability to tolerate high failure rates, and to outperform in-memory checkpoint/restart in both execution time and
 resource utilization.
 

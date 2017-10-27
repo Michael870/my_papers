@@ -1,25 +1,34 @@
+As our reliance on IT continues to increase, the complexity and urgency of the problems our society will face in the future will increase much faster than are our abilities to understand and deal with them. Future IT systems are likely to exhibit a level of interconnected complexity that makes it prone to failure and exceptional behaviors. The high risk of relying on IT systems that are failure-prone calls for new approaches to enhance their performance and resiliency to failure.
+
 HPC and Cloud are two ecosystems that are designed for different applications and with disparate design principles. However, Big data technologies, such as Hadoop, clustered storage, and data visualization, are now merging with traditional HPC technologies. 
 On the one hand, an increasing portion of HPC workloads is becoming data intensive.
 On the other hand, Big data applications are requiring more and more computing power. 
-As the boundaries between Cloud and HPC continue to blur, it is clear that there is an urgent demand for a systematic computational model that adapts to the computing platform and accommodates the underlying
-workloads. SO WE NEED ADPATIVE SHADOW.
+As the boundaries between Cloud and HPC continue to blur, it is clear that there is an urgent demand for a systematic computational model that adapts to the computing platform and accommodates the underlying workloads. 
+
+This thesis presents Leaping Shadows as a novel fault-tolerant computational model that unifies HPC and Big Data analytics and scales to future extreme-scale computing systems. The flexibility in the model allows it to embrace different execution strategies in accordance with the underlying workloads, whether it is compute-intensive or data-intensive. Leaping Shadows takes advantage of the unique design in the Shadow Replication model that original main processes are associated with ``lazy" shadows. The differential and dynamic execution rates control enables Leaping Shadows to achieve fault tolerance with power awareness, as well as adaptivity to trade-offs among performance, resilience, and energy costs.  Furthermore, by incorporating creative optimization techniques, Leaping Shadows is able to maintain a consistent level of resilience across high rate and diverse types of failures, with improved performance and reduced resource requirements. 
+
+This thesis systematically studies the viability of Leaping Shadows to enhance system resilience in emerging extreme-scale, failure-prone computing environments. As a first step, customized execution dynamics are designed to deal with different types of failures. Then, analytical models and optimization frameworks are built to derive the optimal process execution rates, while at the same time multiple mechanisms are explored to effectively achieve the desired execution rates. To further verify Leaping Shadows and to validate the analytical models, a prototype implementation is provided in the context of HPC. Empirical evaluation with various benchmark applications confirms that Leaping Shadows is able to outperform state-of-the art fault tolerance approaches. 
+
+The study of the Leaping Shadows model in this thesis is not meant to be complete. The flexibility and diversity in the model point to many future directions. In current design of Leaping Shadows, each main is associated with the same number of shadows. This is ignorant of the variance in the underlying hardware reliability and above application criticality. 
+Previous studies have shown that failure rates both vary across systems and vary from node to node within the same system~\cite{schroeder2007,di2014lessons}. According to \cite{di2014lessons}, 19\% of the nodes account for 92\% of the machine check errors on Blue Waters. %The reason for the non-uniform distribution of failure is complicated and may attribute to the manufacture process, heterogeneous architecture, environment factors (e.g. temperature, voltage supply), and/or workloads. 
+At the same time, within a system processes may have different criticality. %One possible reason is that the execution model assigns different roles to different processes. 
+For example, in the master-slave execution model the master process is a single point of failure, making the failure of the master process much more severe than that of a slave process. %Another possibility is when the user has the option to specify the QoS. For example, in Cloud Computing, users may choose different level of QoS in terms of Service Level Agreement with different amount of payment. 
+In fact, \textit{heterogeneous shadowing} techniques can be explored to dynamically harness all available resources to achieve the highest level of QoS. 
+%Firstly, in a system where CPU cores have different propensity to failures, mapping from processes to physical cores will largely impact the successful execution of each process. Secondly, Lazy Shadowing allows different tasks to use different number of shadows. 
+Within the resource limitation, more shadows would be allocated for more critical mains or mains that are more likely to fail. 
+
+Failure-induced leaping has proven to be critical in reducing the divergence between a main and its shadow, thus reducing the recovery time for subsequent failures. Consequently, the time to recover from a failure increases with failure intervals. Based on this observation, a proactive approach is to ``force" leaping when the divergence between a main and its shadow exceeds a specified threshold. This is analogous to checkpoint/restart in that checkpoints are periodically taken to minimize the cost of lost work due to a failure. Thus, it is worth studying this approach to determine what behavior triggers forced leaping in order to optimize the average recovery time.
+
+Another future direction is topology-aware process mapping~\cite{von2012topology}. Process mapping is of vital importance in Leaping Shadows, since it not only determines the failure isolation degree, but also impacts communication performance. For the main and shadow(s) of the same task, we would like to place them far away so that they are unlikely to be victims of a single failure. On the other hand, placing mains and shadows close to each other tends to minimize message forwarding cost, especially under the receiver-forwarding protocol. Therefore, a process mapping algorithm needs to be developed to balance the trade-offs, while considering the interconnect topology. 
+
+In the extreme cases where hardware resources are quite limited, there may be no redundant hardware to support the execution of the shadows. If this is the case, one might still apply Leaping Shadows with every main collocated with a shadow, which is associated with a different main. Furthermore, to prevent shadows from taking too much resources and extensively slowing down the mains, shadows may only be allowed to ``steal" CPU cycles when mains are blocked. It is expected that Leaping Shadows with such collocation should be able to achieve fault tolerance with comparable performance under the given limitation on resources. However, it remains a question whether there is an efficient mechanism to precisely control the CPU sharing while ensuring performance isolation. Also, process mapping is an important problem to study.
+
+Lastly, the idea of approximate computing can be applied to shadows. Instead of having shadows as exact replicas of the mains, one can assign a reduced version of the computation to the shadows or let them process a portion of the input data. Many workloads today, such as HPC simulation and large-scale machine learning, often have the flexibility in tuning the fidelity of their results, such as the granularity of a simulation or the precision of convergence.
+Energy and performance gains may be achieved, when relaxing the precision constraints in the case of a failure.
 
 
 
-Current fault tolerance approaches rely exclusively on either time or hardware redundancy to hide failures from being seen by users. 
-Rollback recovery, which exploits time redundancy, requires full or partial re-execution when failure occurs.  
-Such an approach
-can incur a significant delay, % subjecting cloud service providers to SLA violations,
-and high power costs due to extended execution time.
-On the other hand, Process Replication relies on hardware redundancy and executes multiple
-instances of the same task in parallel to guarantee completion with minimal delay. 
-This solution, however, requires a significant increase in hardware resources and increases the power consumption proportionally. 
 
-The system scale needed to solve the complex and urgent problems that our society will be facing is going beyond the scope of existing 
-fault tolerance approaches. This thesis builds on top of the shadow replication fault-tolerant computational model, and 
-devises novel techniques to simultaneously address the power and resilience challenges for future extreme-scale systems while guaranteeing system efficiency and application QoS. 
-A combination of modeling, simulation, and experiments will be used to test the viability of the proposed ideas. The proposed work will be completed following the timeline shown in 
-Table~\ref{tab:timeline}.
 
 
 

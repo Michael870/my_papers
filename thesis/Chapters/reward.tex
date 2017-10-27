@@ -378,7 +378,7 @@ resulting nonlinear optimization problem. The parameters of this
 problem are listed in Table~\ref{tbl:symbols}. 
 
 
-\subsection{Profit-aware Stretched Replication}
+\section{Profit-aware Stretched Replication}
 We compare Shadow Replication to two other replication techniques,
 traditional replication and profit-aware stretched replication.
 Traditional replication requires that the two processes always execute
@@ -415,7 +415,7 @@ $\sigma_m=\sigma_b=\sigma_a=\sigma_r$ respectively, we can easily derive the
 expected energy consumption using Equation~\ref{eq:total_energy} with $E_4$
 fixed at 0 and then compute the expected expense using Equation~\ref{eq:expense}.
 
-\subsection{Re-execution} 
+\section{Re-execution} 
 Contrary to replication, re-execution initially assigns a single
 process for the execution of a task. If the original task fails, the
 process is re-executed. In the Cloud computing execution framework,
@@ -459,7 +459,7 @@ completing a job of $N$ tasks is
 E[energy]=N \times (E_5 + E_6)
 \end{equation}
 
-\subsection{Evaluation}
+\section{Evaluation}
 \noindent This section evaluates the expected profit of each of the fault tolerance
 methods discussed above under different system environments. We have identified 5
 important parameters which affect the expected profit:
@@ -492,7 +492,7 @@ respectively. Since the maximum power consumption is 1 unit, the
 energy needed for the task with one process at maximum rate is also 1
 unit. 
 
-\subsubsection{Sensitivity to Static Power}
+\subsection{Sensitivity to Static Power}
 
 With various architectures and organizations, servers deployed at
 different data centers will have different characteristics in terms of
@@ -500,7 +500,7 @@ power consumption. The static power ratio is used to abstract the
 amount of static power consumed versus dynamic power.  
 
 \begin{table}[!h]\small
-	\caption{Rates for different static power ratio. MTBF=5 years, N=100000, W=1 hour, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.}
+	\caption{Optimal execution rates for different static power ratio. MTBF=5 years, N=100000, W=1 hour, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.}
 	\centering
 		\begin{tabular}{|p{1cm}|p{1cm}|p{1cm}|p{1cm}|}
 		\hline
@@ -560,7 +560,7 @@ average, 19.3\% more profit than traditional replication, 8.9\% more
 than profit-aware stretched replication, and 28.8\% more than re-execution.
 
 
-\subsubsection{Sensitivity to Response Time}
+\subsection{Sensitivity to Response Time}
 
 Response time is critical in the negotiation of SLA as customers
 always expect their tasks to complete as soon as possible. In this
@@ -573,7 +573,7 @@ values have no effect on the choice of fault tolerance methods because
 they are all affected in a similar way.
 
 \begin{table}[!h]\small
-	\caption{Rates for different response time threshold. $\rho$=0.5, MTBF=5 years, N=100000, W=1 hour.}
+	\caption{Optimal execution rates for different response time threshold. $\rho$=0.5, MTBF=5 years, N=100000, W=1 hour.}
 	\centering
 		\begin{tabular}{|p{1cm}|  p{1cm}|p{1cm}|p{1cm}|}
 		\hline
@@ -630,7 +630,7 @@ replication and profit-aware stretched replication, and the profit
 gains are 52.8\% and 39.0\% on average. 
 
 
-\subsubsection{Sensitivity to Number of Tasks}
+\subsection{Sensitivity to Number of Tasks}
 The number of tasks has a direct influence upon the system level
 failure probability because as the number of tasks increase the
 probability that failure will occur to at least one task
@@ -640,7 +640,7 @@ Replication will adjust its execution rates to reduce the waiting
 time.
 
 \begin{table}[!h]\small
-	\caption{Rates for different number of tasks. $\rho$=0.5, MTBF=5 years, W=1 hour, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.}
+	\caption{Optimal execution rates for different number of tasks. $\rho$=0.5, MTBF=5 years, W=1 hour, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.}
 	\centering
 		\begin{tabular}{|r|p{1cm}|p{1cm}|p{1cm}|}
 		\hline
@@ -686,7 +686,7 @@ more profits than profit-aware stretched replication, traditional replication an
 	\label{fig:n}
 \end{figure}
 
-\subsubsection{Sensitivity to Failure Vulnerability}
+\subsection{Sensitivity to Failure Vulnerability}
 
 The ratio between task size and node MTBF represents the task's
 vulnerability to failure. Specifically, it is an approximation of the
@@ -697,7 +697,7 @@ as reducing node MTBF. Therefore, we analyze these together using the
 system parameters.
 
 \begin{table}[!h]\small
-	\caption{Rates for different task size over MTBF. $\rho$=0.5, N=100000, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.}
+	\caption{Optimal execution rates for different task size over MTBF. $\rho$=0.5, N=100000, $t_{R_1}$=1.3 hours, $t_{R_2}$=2.6 hours.}
 	\centering
 		\begin{tabular}{|c|p{1cm}|p{1cm}|p{1cm}|}
 		\hline
@@ -742,7 +742,7 @@ number of tasks (Table~\ref{tbl:n}). As expected,
 re-execution is desired when the vulnerability to failure is
 low. As always, Shadow Replication can adjust its execution strategy to maximize the profits, as shown in Figure~\ref{fig:mtbf}.
 
-\subsubsection{Application Comparison}
+\subsection{Application Comparison}
 
 To compare the potential benefit of Shadow Replication, we evaluate
 the expected profit of each resilience technique using three different

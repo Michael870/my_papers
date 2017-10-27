@@ -77,7 +77,7 @@ a computational \textit{divergence} will occur between the pair of processes. As
 This problem deteriorates as dependencies incurred by messages and synchronization barriers would propagate the delay of one task to others. 
 At the same time, divergence has another side-effect in message passing systems. Specifically, forwarding messages from mains to shadows in a message passing system will cause undesired message accumulation. Similarly, the message buffer will bear higher pressure as divergence increases. 
 
-\begin{figure}[!h]
+\begin{figure}[!t]
 	\begin{center}
 			\includegraphics[width=\columnwidth]{Figures/divergence}
 	\end{center}
@@ -347,7 +347,7 @@ From Corollary 1.1 we know that the delay is at most $(1-\sigma_s^b)w \le w$, so
 
 
 
-\section{Performance Evaluation}
+\section{Evaluation}
 Careful analysis of the models above leads us to identify several important factors that determine the performance. These factors can be classified into three categories, i.e., system, application, and algorithm. The system category includes static power ratio $\rho$ ($\rho=p_s/p$), total number of processors $N$, and MTBF of each processor; the application category is mainly the total workload, $W$; and collocation ratio $\alpha$ in the algorithm category determines the number of main processors and shadow processors ($N=M+S$ and $\alpha=M/S$). In this section, we evaluate each performance metric of Leaping Shadows,  with the influence of each of the factors considered. %First we calculate the application failure probability for various scenarios. Then we proceed to study the expected energy consumption and completion time under different application failure probabilities. 
 
 
