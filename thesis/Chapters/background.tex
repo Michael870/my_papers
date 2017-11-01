@@ -27,7 +27,7 @@ impact of failures~\cite{bland2013post,herault2015practical,fang2017letgo}. Roll
 the execution state to a stable storage, with the anticipation
 that, in case of failure, computation can be restarted from
 a saved checkpoint~\cite{chandy_trans_1985}. Message logging protocols, which
-combines checkpointing with logging of non-deterministic
+combine checkpointing with logging of non-deterministic
 events, allow a system to recover beyond the most recent
 consistent checkpoint~\cite{strom1985optimistic}. Proactive fault tolerance relies
 on a prediction model to forecast faults, so that preventive
@@ -47,7 +47,7 @@ Rollback recovery is the dominant mechanism to ensure correctness in the presenc
 \subsection{Checkpoint-based Approach}
 To avoid rolling back to the very beginning every time there is a failure, checkpointing can be periodically invoked to save the intermediate execution state to a \textit{stable storage}. Stable storage is an abstraction of a storage medium that persists through the anticipated failures and ensures that the stored information is available during recovery~\cite{Elnozahy:02:Survey}. Typically, a stable storage is implemented on top of a magnetic disk based storage subsystem that is accessible through a network~\cite{silva1998using}. In the case of a failure, previously saved execution state can be retrieved to resume the computation. 
 
-In distributed systems, a global state consists of a collection of process state, each saved by its own process. In a message-passing system, however, rollback recovery is complicated by the issue of \textit{rollback propagation} due to inter-process communication. When one process $P_1$ sends a message \textit{m} to another process $P_2$, the event of sending at $P_1$ and the receipt at $P_2$ form a ``happened before" relationship~\cite{lamport_comm_1978}. The rollback propagation issue is such that, if $P_1$ were to roll back to a state before sending \textit{m}, $P_2$ needs to roll back to a state before receiving \textit{m}. Otherwise, the states of the two processes would end up being \textit{inconsistent} because they would show that \textit{m} has not been sent but already received, which never exists in any correct execution. Therefore, checkpoint/restart in message passing systems needs to guarantee, either at checkpointing time or restart time, that a global consistent state can be constructed from the saved checkpoints. %This condition is satisfied either at checkpointing time or restart time. 
+In distributed systems, a global state consists of a collection of process state, each saved by its own process. In a message-passing system, however, rollback recovery is complicated by the issue of \textit{rollback propagation} due to inter-process communication. When one process $P_1$ sends a message \textit{m} to another process $P_2$, the event of sending at $P_1$ and the receipt at $P_2$ form a ``happened before" relationship~\cite{lamport_comm_1978}. The rollback propagation issue is such that, if $P_1$ were to roll back to a state before sending \textit{m}, $P_2$ needs to roll back to a state before receiving \textit{m}. Otherwise, the states of the two processes would end up being \textit{inconsistent} because they would show that \textit{m} has not been sent but already received, which never exists in any correct execution. Therefore, checkpoint/restart in message passing systems needs to guarantee, either at checkpointing time or restart time, that a globally consistent state can be constructed from the saved checkpoints. %This condition is satisfied either at checkpointing time or restart time. 
 
 Coordinated checkpointing is a popular approach that coordinates the checkpoint writing process to record a globally consistent state.
 Specifically, all processes
@@ -86,7 +86,7 @@ memory requirement to support the simultaneous execution of the checkpointing an
 It has been suggested that nodes in extreme-scale systems should be configured with fast local storage~\cite{doe_ascr_exascale_2011}. 
 %, which
 %improves the performance of checkpointing \cite{doe_ascr_exascale_2011}. 
-Multi-level checkpointing , which consists of
+Multi-level checkpointing, which consists of
 writing checkpoints to multiple storage media, 
 can benefit from such an upgrade \cite{Moody:10:SCR}. This,
 however, may lead to increased failure rates of individual nodes and complicate the checkpoint writing process.
@@ -133,7 +133,7 @@ which has long been used for reliability and availability in mission critical sy
 Potentially faulty entities are considered as black boxes that implement state machines, delivering identical outputs when presented with the same sequence of inputs. A similar idea to state machine replication is redundant multi-threading, which has been implemented in both hardware and software, and used to increase reliability in CPUs and GPUs~\cite{reinhardt2000transient,Wadden:2014:RDE:2665671.2665686}. In the case where each black box is a process, this technique is also referred to as process replication, which instantiates multiple copies (replicas) of each process and let them execute the same code. 
 
 To ensure consistent state across replicas, all application messages must be delivered to all replicas of a given process, typically done by using a message ordering protocol~\cite{defago2004total,baldoni2005total}. Additionally, if any non-deterministic event is involved in the computation,  then extra consensus protocols must be enforced~\cite{lamport1998part,zhao2010fault}. 
-By distributing replicas across the available compute nodes and minimizing the required state comparisons, low runtime overheads can be achieved with process replication, while masking a large number of failures from the underlying application. However, the undesired property of this technique is the increase in hardware resources, as long as the proportional increase in power consumption.
+By distributing replicas across the available compute nodes and minimizing the required state comparisons, low runtime overheads can be achieved with process replication, while masking a large number of failures from the underlying application. However, the undesired property of this technique is the increase in hardware resources, as well as the proportional increase in power consumption.
 
 
 Although it was initially rejected in HPC communities, 

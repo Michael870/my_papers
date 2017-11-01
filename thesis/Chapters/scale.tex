@@ -18,22 +18,22 @@ This chapter focuses on tolerating crash failures under the fail-stop fault mode
 whereby a failed process halts and its internal state and
 memory content are irretrievably lost. As a consequence, each main process is replicated with one shadow.  A study of tolerating silent failures will be discussed in Chapter~\ref{chapter:sdc}. 
 
-To achieve higher efficiency and better scalability, however, we adopt radically different methodologies in the design of Leaping Shadows from the Shadow Replication model.
-In the original Shadow Replication, shadows are designed to
-substitute for their associated mains when failure occurs. The tight coupling and ensuing fate sharing between a main and its shadow increase the implementation complexity and reduce the efficiency of
+To achieve higher efficiency and better scalability, however, we adopt radically different methodologies from the Shadow Replication model in the design of Leaping Shadows.
+In the original Shadow Replication model, shadows are designed to
+substitute for their associated mains when failure occurs. The tight coupling and ensuing fate sharing between a main and its associated shadow increase the implementation complexity and reduce the efficiency of
 the system to deal with failures.
 In this new model, we deviate from the original design, and use each shadow as a ``rescuer", whose role is to restore the associated main
 to its exact state before failure.
 
-Instead of using DVFS to achieve the desired execution rates, this work applies collocation to shadowing for the first time, in order to simultaneously save power and computing resources. In addition, two issues, \textit{divergence} and \textit{vulnerability}, have been identified that limit Shadow Replication's effectiveness in large-scale, failure-prone computing environments. This chapter discusses innovative techniques of {\it leaping} and {\it  rejuvenation} as the provided solutions, respectively. %, to achieve higher efficiency and better scalability.
+Instead of using DVFS to achieve the desired execution rates, this work applies collocation to shadow processes for the first time, in order to simultaneously save power and computing resources. In addition, two issues, \textit{divergence} and \textit{vulnerability}, have been identified that limit Shadow Replication's effectiveness in large-scale, failure-prone computing environments. This chapter discusses innovative techniques of {\it leaping} and {\it  rejuvenation} as the provided solutions, respectively. %, to achieve higher efficiency and better scalability.
 
 \section{Shadow Collocation}
 \label{sec:shadow_collocation}
 In HPC, throughput consideration requires that the rate of the main, $\sigma_m$, and the rate of the shadow after failure, 
-$\sigma_s^a$, be set to the maximum. 
-The initial execution rate of the shadow, $\sigma_s^b$, however, can be derived by balancing the trade-offs between delay and energy.
-For a delay-tolerant, energy-stringent application, $\sigma_s^b$ is set to 0, and the shadow starts executing only upon failure of the main process. 
-For a delay-stringent, energy-tolerant application, the shadow starts executing at $\sigma_s^b=\sigma_m$ to guarantee the completion of the task at the specified time $t_m$, regardless of when the failure occurs.  
+$\sigma_a$, be set to the maximum. 
+The initial execution rate of the shadow, $\sigma_b$, however, can be derived by balancing the trade-offs between delay and energy.
+For a delay-tolerant, energy-stringent application, $\sigma_b$ is set to 0, and the shadow starts executing only upon failure of the main process. 
+For a delay-stringent, energy-tolerant application, the shadow starts executing at $\sigma_b=\sigma_m$ to guarantee the completion of the task at the specified time $t_m$, regardless of when the failure occurs.  
 In addition, a broad spectrum of delay and energy trade-offs in between can be explored either empirically or by using optimization frameworks for delay and energy tolerant applications.
 
 
@@ -56,7 +56,7 @@ thereby reducing power and energy consumption. Furthermore, the collocation rati
 propensity of the system to failure. This flexibility, however,
 comes at the increased cost of memory requirement at the
 shared processor. It is to be noted that this limitation is not
-intrinsic to Leaping Shadows, as in-memory checkpoint/restart and multilevel checkpoint/restart also require additional memory to store checkpoints.
+intrinsic to Leaping Shadows, as in-memory checkpoint/restart and multi-level checkpoint/restart also require additional memory to store checkpoints.
 
 Under Shadow Replication, collocation has an important ramification with respect to the resilience of the system. Specifically, only
 one failure can be tolerated in each shadowed set. If a shadow processor fails, all the shadows in the 
@@ -140,7 +140,7 @@ wasteful and costly in terms of energy consumption. Instead, Leaping Shadows emb
 
 The main objective of rejuvenation is to enable the
 system to maintain its intended level of resilience, in the
-event of multiple failures. The proposed approach is to use the rescuer shadow to \textit{rejuvenate} the failed main.  Specifically, while the shadow is executing at a high speed to reach the state at which the main failed, a new process is launched to replace the failed main. Furthermore, rather than starting the new process from its initial state, \textit{rejuvenation-induced leaping} is invoked to synchronize the new process' state with that of the recovering shadow. Similar to leaping, rejuvenation is applicable, in spite of the underlying execution rate control mechanism. The following discussion focuses on collocation as it represents the most comprehensive scenario. 
+event of multiple failures. The proposed approach is to use the rescuer shadow to \textit{rejuvenate} the failed main.  Specifically, while the shadow is executing at a high rate to reach the state at which the main failed, a new process is launched to replace the failed main. Furthermore, rather than starting the new process from its initial state, \textit{rejuvenation-induced leaping} is invoked to synchronize the new process' state with that of the recovering shadow. Similar to leaping, rejuvenation is applicable, in spite of the underlying execution rate control mechanism. The following discussion focuses on collocation as it represents the most comprehensive scenario. 
 
 %A direct implication of rejuvenation is that none of the shadows collocated with the recovering shadow need to be terminated, but only suspended  until the recovery is complete. In addition to restoring the system to its intended resilience level, rejuvenation also reduces the overall execution time. 
 
@@ -176,7 +176,7 @@ Because of the failure of $M_i$, the other mains are blocked at the next synchro
 \clearpage
 }
 
-Figure~\ref{fig:rejuvenation} and the above description assume that the time for rebooting is no longer than the recovery time. If the new $M_i$ is not yet ready when $S_i$ catches up at $T_1$, however, two design choices are possible. In the first, $S_i$ can assume the role of a main and continue execution. In the second, $S_i$ can wait until the launching of the new $M_i$ is complete. The first option requires that all non-failed processes update their internal mapping to identify the shadow as a new main and continue to correctly receive messages, if any. This not only complicates the implementation, but also requires expensive global coordination that is detrimental to scalability. We, therefore, chose the second design option.
+Figure~\ref{fig:rejuvenation} and the above description assume that the time for rebooting is no longer than the recovery time. If the new $M_i$ is not yet ready when $S_i$ catches up at $T_1$, however, two design choices are possible. In the first, $S_i$ can assume the role of a main and continue execution. In the second, $S_i$ can wait until the launching of the new $M_i$ is complete. The first option requires that all non-failed processes update their internal mapping to identify the shadow as a new main and continue to correctly receive messages. This not only complicates the implementation, but also requires expensive global coordination that is detrimental to scalability. We, therefore, chose the second design option.
 
 The above analysis focuses on rejuvenating a failed main process. 
 Failure of a shadow can be addressed in a similar manner. Each failure requires a rebooting of the target processor to launch replacing process(es), but the only difference is that the leap-provider and leap-recipient are reversed, i.e., the main process becomes the leap-provider and shadow becomes the leap-recipient. Collocation makes the rejuvenation of shadow process slightly more complicated, since a shadow processor failure will impact all the collocated shadows on that processor. Specifically, 
@@ -266,24 +266,24 @@ The following theorem expresses the completion time, $T_c^k$, as a function of $
 
 \begin{theorem}
 Assuming that failures do not overlap and no application fatal failure occurs, then using Leaping Shadows, 
-	$$T_c^k = w + (1-\sigma_s^b)\sum_{i=1}^k\Delta_i$$
+	$$T_c^k = w + (1-\sigma_b)\sum_{i=1}^k\Delta_i$$
 \end{theorem}
 \begin{proof}
 Leaping Shadows guarantees that all the shadows reach the same execution point as the mains (See Figure~\ref{fig:leap}) after a previous recovery, so every recovery time is proportional to its previous execution interval. 
-That is, $\tau_i = \Delta_i \times (1 - \sigma_s^b)$. 
+That is, $\tau_i = \Delta_i \times (1 - \sigma_b)$. 
 According to Figure~\ref{fig:progress}, the completion time with $k$ failures is 
-	$T_c^k = \sum_{i=1}^{k+1}\Delta_i + \sum_{i=1}^k\tau_i = w + (1-\sigma_s^b)\sum_{i=1}^k\Delta_i$
+	$T_c^k = \sum_{i=1}^{k+1}\Delta_i + \sum_{i=1}^k\tau_i = w + (1-\sigma_b)\sum_{i=1}^k\Delta_i$
 \end{proof}
 
 Although it may seem that the delay would keep growing with the number of failures, 
 it turns out to be well bounded, as a benefit of shadow leaping: 
 
 \begin{corollary}
-The delay induced by failures is bounded by $(1-\sigma_s^b)w$.
+The delay induced by failures is bounded by $(1-\sigma_b)w$.
 \end{corollary}
 \begin{proof}
-From above theorem we can see the delay from $k$ failures is $(1-\sigma_s^b)\sum_{i=1}^k\Delta_i$. It is straightforward that, for any non-negative integer of $k$, we have the equation $\sum_{i=1}^{k+1}\Delta_i= w$. As a result, 
-$\sum_{i=1}^{k}\Delta_i = w - \Delta_{k+1} \le w$. Therefore, $(1-\sigma_s^b)\sum_{i=1}^k\Delta_i \le (1-\sigma_s^b)w$.
+From above theorem we can see the delay from $k$ failures is $(1-\sigma_b)\sum_{i=1}^k\Delta_i$. It is straightforward that, for any non-negative integer of $k$, we have the equation $\sum_{i=1}^{k+1}\Delta_i= w$. As a result, 
+$\sum_{i=1}^{k}\Delta_i = w - \Delta_{k+1} \le w$. Therefore, $(1-\sigma_b)\sum_{i=1}^k\Delta_i \le (1-\sigma_b)w$.
 \end{proof}
 
 Typically, the number of failures to be encountered is stochastic. Given a failure distribution, however, we can calculate the probability for a specific value of $k$. We assume that failures do not occur during recovery, so the failure probability of a processor during the execution can be calculated as $P_c = F(w)$. Then the probability that there are $k$ failures among the $N$ processors is 
@@ -335,7 +335,7 @@ If no subsequent failure happens before the recovery of the previous failure, th
 $(2N * p_s + N * p_d + S * p_{l})*w$.
 \end{theorem}
 \begin{proof}
-From Corollary 1.1 we know that the delay is at most $(1-\sigma_s^b)w \le w$, so $T_{total} \le 2w$. Also, since the leaping time overlaps with the recovery time (delay), $T_l \le (1-\sigma_s^b)w \le w$. Therefore, $En = N * p_s * T_{total} + N * p_d * w + S * p_{l} * T_l \le N * p_s * (2w) + N * p_d * w + S * p_{l} * w = (2N * p_s + N * p_d + S * p_{l})*w$.
+From Corollary 1.1 we know that the delay is at most $(1-\sigma_b)w \le w$, so $T_{total} \le 2w$. Also, since the leaping time overlaps with the recovery time (delay), $T_l \le (1-\sigma_b)w \le w$. Therefore, $En = N * p_s * T_{total} + N * p_d * w + S * p_{l} * T_l \le N * p_s * (2w) + N * p_d * w + S * p_{l} * w = (2N * p_s + N * p_d + S * p_{l})*w$.
 \end{proof}
 
 
@@ -357,7 +357,7 @@ We compare with both process replication and checkpoint/restart, assuming the sa
 The completion time with checkpoint/restart is calculated with Daly's model~\cite{daly_fgcs_2006} assuming 10 minutes for both checkpointing and restart. The energy consumption is then derived with Equation~\ref{eq:exp_energy1}. It is important to point out that we always assume the same number of processors, so that process replication and Leaping Shadows do not use extra processors for the replicas. 
 
 It is clear from THEOREM 1 that the total recovery delay $\sum_{i=1}^k\tau_i$ is determined by the execution time $\sum_{i=1}^k\Delta_i$, independent of the distribution of failures. 
-Therefore, our models are generic with no assumption about failure probability distribution, and the expectation of the total delay from all failures is the same as if failures are uniformly distributed~\cite{daly_fgcs_2006}. Specifically, $\Delta_i = w/(k+1)$, and $T_c^k = w + w*(1-\sigma_s^b)*\frac{k}{k+1}$. Further, we assume that each shadow gets a fair share of its processor's execution rate so that $\sigma_s^b = \frac{1}{\alpha}$. 
+Therefore, our models are generic with no assumption about failure probability distribution, and the expectation of the total delay from all failures is the same as if failures are uniformly distributed~\cite{daly_fgcs_2006}. Specifically, $\Delta_i = w/(k+1)$, and $T_c^k = w + w*(1-\sigma_b)*\frac{k}{k+1}$. Further, we assume that each shadow gets a fair share of its processor's execution rate so that $\sigma_b = \frac{1}{\alpha}$. 
 To calculate Equation~\ref{eq:exp_energy2}, we assume that the dynamic power during leaping is twice of that during normal execution, i.e., $p_{l}=2*p_d$, and the time for leaping is half of the recovery time, i.e., $T_l=0.5*(T_{total} - w)$. 
 
 The first study uses $N=1$ million processors, effectively simulating future extreme-scale computing environments, and assumes that $W=1$ million hours, and static power ratio $\rho=0.5$. 
@@ -454,10 +454,10 @@ is able to save 20\%-24\% energy for the MTBF of 5 to 25 years. The saving decre
 
 \begin{figure}[!h]
 	\begin{center}
-		\includegraphics[width=0.7\columnwidth]{Figures/ts_power_5}
+		\includegraphics[width=0.6\columnwidth]{Figures/ts_power_5}
 	\end{center}
 	%\vskip -0.22in 
-	\caption{Impact of static power ratio on energy consumption. $W=10^6$ hours, $N=10^6$, $\alpha$=5.}
+	\caption{Impact of static power ratio on energy consumption. $W=10^6$ hours, $N=10^6$, $\alpha$=5. All energies are normalized to that of process replication.}
 	\label{fig:power_ratio}
 \end{figure}
 
@@ -466,12 +466,12 @@ is able to save 20\%-24\% energy for the MTBF of 5 to 25 years. The saving decre
 \label{eval_collocation}
 %The last study is conducted to capture the impact on the 
 %performance of Leaping Shadows brought by 
-%collocation overhead. We re-model the speed of shadows as $\sigma_s^b=\frac{1}{\alpha^{1.5}}$ to simulate the 
+%collocation overhead. We re-model the speed of shadows as $\sigma_b=\frac{1}{\alpha^{1.5}}$ to simulate the 
 %effect of memory thrashing and context switch. 
 
 Leaping Shadows increases memory requirement\footnote{Note that this problem is not intrinsic to Leaping Shadows, as in-memory checkpoint/restart also requires extra memory.} when multiple shadows are collocated. Moreover, this may have an impact on the execution rate of the shadows due to cache contention and context switch. 
 To capture this effect,  
-we re-model the rate of shadows as $\sigma_s^b=\frac{1}{\alpha^{1.5}}$.
+we re-model the rate of shadows as $\sigma_b=\frac{1}{\alpha^{1.5}}$.
 Figure~\ref{fig:comp_vary_fail_speed} shows the impact of collocation overhead on expected energy consumption for Leaping Shadows with $\alpha=5$, with all the values normalized to that of process replication. %The results for other values of $\alpha$ have similar behavior and thus are not shown. 
 As expected, energy consumption is penalized because
 of slowing down of the shadows. It is surprising, however, that the impact is quite small, with the largest difference being 4.4\%. The reason is that failure-induced leaping can take advantage of the recovery time after each failure and achieve forward progress for shadow processes that fall behind. 
@@ -482,11 +482,11 @@ When $\alpha=10$, the largest difference further decreases to 2.5\%.
 %of slowing down of the shadows. It is surprising, however, that Leaping Shadows with $\alpha=3$ is impacted by the 
 %most, while when $\alpha=9$, which means collocating more shadows on each shadow processor, is slightly influenced. After careful analysis,
 %we realize that the reason is $\alpha=3$ had the largest values for completion time and energy consumption. Even the percentage of increase after adding the penalty is the smallest, the absolute increase is still the largest. 
-%When $\alpha=9$, Leaping Shadows can still achieve 15\%-20\% energy saving with less than 7\% increase in completion time. 
+%When $\alpha=9$, Leaping Shadows can still achieve 15\%-20\% energy saving with less than 7\% increase in completion time.
 
 \begin{figure}[!h]
 	\begin{center}
-		\includegraphics[width=0.7\columnwidth]{Figures/tne5}
+		\includegraphics[width=0.7\columnwidth]{Figures/collocation.pdf}
         %\includegraphics[width=0.7\columnwidth]{Figures/collocation.pdf}
 	\end{center}
 	\caption{Impact of collocation overhead on energy consumption. $W=10^6$ hours, $N=10^6$, $\rho$=0.5, $\alpha$=5.}

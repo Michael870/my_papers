@@ -220,12 +220,12 @@ costs under strict completion time constraints~\cite{cui_2014_closer,cui_en70851
 
 \textbf{The Leaping Shadows model}.
 Enabling Shadow Replication for resiliency in extreme-scale computing brings about a number of challenges and design decisions, including the applicability of this concept to a large number of tasks executing in parallel, 
-the effective way to control shadows’ execution rates, and maintenance of consistent resilience through a large number of failures. Taking into consideration the main characteristics of compute-intensive and 
+the effective way to control shadows' execution rates, and maintenance of consistent resilience through a large number of failures. Taking into consideration the main characteristics of compute-intensive and 
 highly-scalable applications, 
 we devise novel ideas of shadow collocation, leaping, and rejuvenation, and integrate them with Shadow Replication to establish a more efficient and scalable model of Leaping Shadows~\cite{cui_2016_scalcom}.
 
 \textbf{Tolerance of Silent Data Corruption (SDC) with extended Leaping Shadows}.
-Different from crash failures, which terminate the execution on a faulty processor, SDC allows a faulty processor to continue to completion but may silently generate incorrect results. In order to detect and correct a single SDC, Leaping Shadows associates 2 shadows with each main process. The primary shadow is scheduled to run at the same rate as its associated main, so that voting can be used to detect SDC in a timely manner, and correct results can be confirmed if no SDC. In order to minimize energy, the secondary shadow initially executes at a reduced rate. As a result, it can also benefit from leaping to achieve forward progress with minimal overhead. Based on this idea, we have established precise analytical models and optimization frameworks to
+Different from crash failures, which terminate the execution on a faulty processor, SDC allows a faulty processor to continue to completion but may silently generate incorrect results. In order to detect and correct a single SDC, Leaping Shadows associates 2 shadows with each main process. The primary shadow is scheduled to run at the same rate as its associated main, so that voting can be used to detect SDC in a timely manner, and correct results can be confirmed if no SDC occurs. In order to minimize energy, the secondary shadow initially executes at a reduced rate. As a result, it can also benefit from leaping to achieve forward progress with minimal overhead. Based on this idea, we have established precise analytical models and optimization frameworks to
 quantify and optimize the performance. 
 
 \textbf{A proof-of-concept implementation of Leaping Shadows in MPI}.

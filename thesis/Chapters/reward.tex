@@ -6,7 +6,7 @@ parameterized trade-off between response time, energy consumption and resilience
 
 After figuring out the shadow suite size according to the fault tolerance requirements, a major challenge resides in determining
 jointly the execution rates of all task instances, both before and
-after a failure occurs, with the consideration of any objective and any constraint. This chapter addresses the above challenge by formulating it into a generic optimization problem, so that standard and well-known math methods (e.g., quasi-newton) can be naturally applied to solve it and derive the optimal execution rates. Within this optimization framework, this chapter also provides a case study in the Cloud with a series of analytical models for failure, power, energy, etc. 
+after a failure occurs, with the consideration of any objective and any constraint. This chapter addresses the above challenge by formulating it into a generic optimization problem, so that standard and well-known math methods (e.g., quasi-newton) can be naturally applied to solve it and derive the optimal execution rates. With this optimization framework, this chapter also provides a case study in the Cloud with a series of analytical models for failure, power, energy, etc. 
 
 \section{Generic Optimization Framework}
 As mentioned in Section~\ref{sec:shadowing_adaptivity}, large-scale computing systems typically aim at maximizing performance, resilience, power/energy consumption, or any of their combination. Given a specific objective, by tuning its execution rates Shadow Replication can be optimized with respect to that objective, while satisfying the provided constraints, if any. A generic optimization framework for this purpose is depicted in Figure~\ref{fig:opt_problem}.
@@ -42,7 +42,7 @@ In its basic form, an SLA is a contract between the CSPs and consumers that spec
 
 
 To understand the question of how
-fault tolerance might impact power consumption and ultimately the expected profit of CSPs, this section studies the application of Shadow Replication to satisfying SLA requirements in the presence of crash failures in Cloud computing. The rest of the section is organized as follows. We begin by describing a computing model typically used in cloud computing for compute- and data-intensive applications. We then present our analytical models and optimization problem formulation, followed by experiments and evaluation. 
+fault tolerance might impact power consumption and ultimately the expected profit of CSPs, this section studies the application of Shadow Replication to satisfying SLA requirements in the presence of crash failures in Cloud computing. The rest of the section is organized as follows. We begin by describing a parallel computing model typically used in cloud computing for compute- and data-intensive applications. We then present our analytical models and optimization problem formulation, followed by experiments and evaluation. 
 
 
 \subsection{Cloud Workloads}
@@ -88,7 +88,7 @@ time of the entire phase.
 
 \subsection{Optimization}
 This part describes an optimization problem for a single job on top of the Cloud computing execution model described above. Using this
-framework we compute profit-optimized execution rates for Shadow Replication with double redundancy: 
+framework we compute profit-optimized execution rates for Shadow Replication with dual modular redundancy (i.e., one shadow process per main process): 
 
 \begin{equation}
 \label{optimization_problem}
@@ -144,7 +144,7 @@ It would be trivial to extend this reward model to any convex function, but we w
 \end{figure}
 
 
-When applying Shadow Replication with double redundancy (i.e., one shadow process per main) to deal with crash failures, 
+When applying Shadow Replication with dual modular redundancy to deal with crash failures, 
 there are two facts that the service provider must take into account
 when negotiating the terms of the SLA. The first is the response time
 of the main process assuming no failure (Figure
@@ -169,12 +169,12 @@ Failure can occur at any point during the execution of the main or
 shadow process. Our assumption is that at most one failure occurs,
 therefore if the main process fails it is implied that the shadow will
 complete the task without failure. We can make this assumption because
-we know the failure of any one node is rare thus the failure
+we know the failure of any one node is rare, thus the failure
 of any two specific nodes is very unlikely.
 
 We assume that two probability density functions, $f_m(t_f)$ and
 $f_s(t_f)$, exist which express the probabilities of the main and shadow
-process failing at time $t_f$ separately. The model does not assume a
+process failing at time $t_f$, separately. The model does not assume a
 specific distribution. However, in the remainder of this section we use
 an exponential probability density function, $f_m(t_f)=f_s(t_f)=\lambda
 e^{-\lambda t_f}$, of which the mean time between failures (MTBF) is $\frac{1}{\lambda}$.
@@ -747,7 +747,7 @@ low. As always, Shadow Replication can adjust its execution strategy to maximize
 To compare the potential benefit of Shadow Replication, we evaluate
 the expected profit of each resilience technique using three different
 benchmark applications representing a wide range of
-application~\cite{mrbs}: Business Intelligence, Bioinformatics and
+Cloud workloads~\cite{mrbs}: Business Intelligence, Bioinformatics and
 Recommendation System. The business intelligence benchmark application
 is a decision support system for a wholesale supplier. It emphasizes
 executing business-oriented ad-hoc queries using Apache Hive. The
@@ -763,9 +763,9 @@ products.
 		\begin{tabular}{|c|c|}
 			\hline
 			Application               & Processing Rate \\
-			\hline
-			Business Intelligence     & 3.3 (MB/s)      \\ 
-			Bioinformatics            & 6.6 (MB/s)      \\ 
+			\hline\hline
+			Business Intelligence     & 3.3 (MB/s)      \\ \hline
+			Bioinformatics            & 6.6 (MB/s)      \\ \hline
 			Recommendation System     & 13.2 (MB/s)     \\
 			\hline
        \end{tabular}
