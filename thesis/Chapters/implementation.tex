@@ -1,7 +1,7 @@
 In a complex system like the supercomputers we have today, the performance of Leaping Shadows is subject to both the hardware configuration, such as failure detection ability and the execution rate control mechanism, and software behavior, such as communication patterns and the amount of synchronization. 
 It's extremely difficult for an analytical framework to precisely capture every details of Leaping Shadows when it runs in a real environment. Therefore, an executable prototype is necessary to prove its validity as well as measure its actual performance. 
 
-As a proof of concept, we implement Leaping Shadows in a runtime library, referred to as rsMPI\footnote{The source code is available on BitBucket at git@bitbucket.org:Michael870/lsmpi.git}, for Message Passing Interface (MPI), which is the de facto programming paradigm for HPC. With the understanding that MPI standard keeps evolving to support new features and semantics, we focus on the most essential aspects and make srMPI MPI-1 compliant. %\footnote{rsMPI is developed in C programming language. Because MPI\_Request in Fortran has different type from C, rsMPI does not support MPI\_Isend() and MPI\_Irecv() that use MPI\_Request.}. 
+As a proof of concept, we implement Leaping Shadows in a runtime library, referred to as rsMPI\footnote{The source code is available on BitBucket at git@bitbucket.org:Michael870/lsmpi.git}, for Message Passing Interface (MPI), which is the de facto programming paradigm for HPC. With the understanding that MPI standard keeps evolving to support new features and semantics, we focus on the most essential aspects and make rsMPI MPI-1 compliant. %\footnote{rsMPI is developed in C programming language. Because MPI\_Request in Fortran has different type from C, rsMPI does not support MPI\_Isend() and MPI\_Irecv() that use MPI\_Request.}. 
 Currently, rsMPI focuses on tolerating crash failures and associates one shadow process with each main process. %Collocation is used to achieve the desired execution rate of each shadow. 
 With the rejuvenation technique introduced in Chapter~\ref{chapter:scale}, applying Leaping Shadows with dual modular redundancy minimizes the hardware and power costs, while being able to tolerate multiple failures. It is to be noted that, it is straightforward to extend this implementation to associate two shadows with each main, for the purpose of dealing with silent failures, as discussed in Chapter~\ref{chapter:sdc}. 
 
@@ -76,7 +76,7 @@ We assume that two copies of the same message are sent in an atomic manner.
 
 For MPI point-to-point communication routines, we add wrappers to implement the above consistency protocols. For sending functions, such as MPI\_Send() and MPI\_Isend(), the sender-forwarding protocol requires the main to duplicate the message, while in the receiver-forwarding protocol the main just does the normal sending. Again, the shadow is suppressed from sending, in both protocols. For receiving functions, such as MPI\_Recv() and MPI\_Irecv(), the sender-forwarding protocol requires that both the main and the shadow do one receiving from the main process at the sending side. In the receiver-forwarding protocol, MPI\_Recv() is modified such that the main performs a receiving followed by a sending to forward the message, and the shadow receives from its own main. For MPI\_Irecv(), it is slightly different that message forwarding is moved to MPI\_Test() and MPI\_Wait(), so that the message is assured to have arrived.
 
-Collective communications, such as MPI\_Bcast() and MPI\_Allreduce(), are also supported in srMPI. To prevent the mains from slowing down by the shadows due to the synchronous semantic of collective communication, rsMPI maintains communicators that only contain the mains, and calls the original MPI function among the mains to perform a collective communication. Since the original MPI collective function is used, rsMPI automatically benefits from the optimization that has been put into the collective communications, such as~\cite{thakur2005optimization}. To keep the shadows consistent, results, if any, are forwarded from mains to shadows, so that shadows do not need to perform collective operation.
+Collective communications, such as MPI\_Bcast() and MPI\_Allreduce(), are also supported in rsMPI. To prevent the mains from slowing down by the shadows due to the synchronous semantic of collective communication, rsMPI maintains communicators that only contain the mains, and calls the original MPI function among the mains to perform a collective communication. Since the original MPI collective function is used, rsMPI automatically benefits from the optimization that has been put into the collective communications, such as~\cite{thakur2005optimization}. To keep the shadows consistent, results, if any, are forwarded from mains to shadows, so that shadows do not need to perform collective operation.
 %, while the receiver-forwarding protocol changes the main to perform a receiving followed by a sending, and modifies the shadow to receive from its own main. 
 %Collective communication in rsMPI uses point-to-point communication in a binomial tree topology, which demonstrates excellent scalability.
 
@@ -137,17 +137,17 @@ As discussed in Section~\ref{sec:msg_consistency}, rsMPI requires that mains for
 This has been confirmed with our previous implementation where MPI communication is used for the forwarded messages. In many MPI implementations, two protocols are used for the communication. The eager protocol, which is used to transfer small messages, pushes the entire message to the receiver side regardless of the receiver being ready or not. In the rendezvous protocol, which is used for large messages, the sender is blocked until the receiver posts a matching receive. In order to prevent the shadows from blocking mains, lots of efforts need to be spent on tuning the eager threshold and buffer sizes for each application, not to mention that the eager threshold cannot be increased infinitely\footnote{In OpenMPI 1.10, the limit is 160 KB}. 
 Due to message forwarding, another issue is that the divergence mentioned in Chapter~\ref{chapter:scale} will cause messages to accumulate at the shadow side, eventually leading to buffer overflow if no action is taken. With the previous implementation, we are not able to monitor or manipulate the buffers, which are managed by MPI runtime.
 
-To simultaneously addressing these two issues, srMPI adopts a layered architecture, as shown in Figure~\ref{fig:flow_control}, to establish communication channels between mains and shadows with flow control capability. Under the receiver-forwarding protocol, each pair of main and shadow only requires one such channel. 
+To simultaneously addressing these two issues, rsMPI adopts a layered architecture, as shown in Figure~\ref{fig:flow_control}, to establish communication channels between mains and shadows with flow control capability. Under the receiver-forwarding protocol, each pair of main and shadow only requires one such channel. 
 
 \begin{figure}[!t]
   \begin{center}
       \includegraphics[width=\columnwidth]{Figures/flow_control}
   \end{center}
-  \caption{A layered architecture for flow control in srMPI.}
+  \caption{A layered architecture for flow control in rsMPI.}
   \label{fig:flow_control}
 \end{figure}
 
-At the lowest level, a socket connection to transfer application messages is established between each main and its associated shadow. When Remote Direct Memory Access (RDMA) is available, such as on the InfiniBand interconnects, srMPI uses the rsocket library, which provides a socket programming interface but internally uses RDMA for communication. Rather than copying data to the buffers of the operating system, RDMA enables the network adapter to transfer data directly from the main process to its shadow. The zero-copy networking feature of RDMA considerably reduces latency, thereby enabling fast transfer of data. When RDMA is not available, srMPI reverts back to TCP connections. 
+At the lowest level, a socket connection to transfer application messages is established between each main and its associated shadow. When Remote Direct Memory Access (RDMA) is available, such as on the InfiniBand interconnects, rsMPI uses the rsocket library, which provides a socket programming interface but internally uses RDMA for communication. Rather than copying data to the buffers of the operating system, RDMA enables the network adapter to transfer data directly from the main process to its shadow. The zero-copy networking feature of RDMA considerably reduces latency, thereby enabling fast transfer of data. When RDMA is not available, rsMPI reverts back to TCP connections. 
 
 
 At each shadow, a circular message queue, referred to as MQ, is implemented to store the messages that have been sent by main but not yet consumed by shadow. Similar to Linux socket buffer or Unix mbuf, MQ consists of two layers. The control layer contains fixed-length elements, each of which stores the meta-data of a message. The data layer is the actual buffer where variable-length message contents are stored. The control layer and data layer are connected via pointers. 
@@ -159,7 +159,7 @@ At the process level, a helper thread is added to each main and shadow process. 
 
 
 \section{Leaping}
-With the focus on dealing with crash failures, three types of leaping are implemented in srMPI. To facilitate the following discussion, we summarize each leaping type along with the leap-provider and leap-recipient information in Table~\ref{tbl:srmpi_leaping}.
+With the focus on dealing with crash failures, three types of leaping are implemented in rsMPI. To facilitate the following discussion, we summarize each leaping type along with the leap-provider and leap-recipient information in Table~\ref{tbl:srmpi_leaping}.
 
 \begin{table}[!h]
 \caption{Leaping types used in rsMPI.}
@@ -232,7 +232,7 @@ the runtime overhead due to the enforced consistency and coordination depends on
 Figure~\ref{fig:runtime_overhead} shows the comparison of the execution time for the 8 applications in the absence of faults. All the experiments are conducted with 256 application-visible processes, except that LULESH requires the number of processes to be a cube of an integer. When the baseline uses 256 MPI ranks, rsMPI uses 256 mains together with 256 shadows. The baseline execution time varies from seconds to 15 minutes, so we plotted the time in log-scale. 
 From the figure we can see that rsMPI has comparable execution time to the baseline for all applications except FT. The reason for the exception is that FT uses a lot of broadcast, reduce, and all-to-all communication, and thus is heavily communication-intensive. This is verified by adding fake computation to the application and we can see an immediate drop of the overhead to negligible level. 
 We argue that all-to-all communication applications like FT are not scalable, and as a result, they are not suitable for massively parallel HPC. 
-For all others, the overhead varies from 0.04\% (LULESH) to 2.73\% (miniAero). Even for HPCCG, which uses MPI\_ANY\_SOURCE, the overhead is only 0.75\%, thanks to the flow control mechanism deployed in srMPI. 
+For all others, the overhead varies from 0.04\% (LULESH) to 2.73\% (miniAero). Even for HPCCG, which uses MPI\_ANY\_SOURCE, the overhead is only 0.75\%, thanks to the flow control mechanism deployed in rsMPI. 
 Therefore, we conclude that rsMPI's runtime overheads are modest for applications that exhibit a fair communication-to-computation ratio.
 
 
@@ -284,7 +284,7 @@ The blue solid line and red dashed line represent rsMPI with collocation ratio o
 
 \begin{figure}[!t]
   \begin{center}
-      \includegraphics[width=0.6\columnwidth]{Figures/single_failure_srmpi}
+      \includegraphics[width=0.6\columnwidth]{Figures/single_failure_rsmpi}
   \end{center}
   \vskip -0.2in
   \caption{Execution time of HPCCG under rsMPI with a single failure injected at various time, normalized to that of the failure-free baseline.}
@@ -317,12 +317,12 @@ Figure~\ref{fig:multiple_failure} compares checkpoint/restart and rsMPI, based o
       \subfigure[Wall-clock execution time]
 		{
 			\label{fig:failures_time}
-			\includegraphics[width=0.45\columnwidth]{Figures/failures_time_srmpi}
+			\includegraphics[width=0.45\columnwidth]{Figures/failure_time_rsmpi}
 		}
 		\subfigure[Weighted execution time]
 		{
 			\label{fig:failures_ntime}
-			\includegraphics[width=0.45\columnwidth]{Figures/failures_ntime_srmpi}
+			\includegraphics[width=0.45\columnwidth]{Figures/failure_ntime_rsmpi}
 		}
   \end{center}
   \caption{Comparison between checkpoint/restart and rsMPI with various number of failures injected to HPCCG. 256 application-visible processes, 10\% checkpointing interval.}
@@ -331,7 +331,7 @@ Figure~\ref{fig:multiple_failure} compares checkpoint/restart and rsMPI, based o
 
 
 Careful analysis of Figure~\ref{fig:failures_time} reveals that, as the number of failures increases, checkpoint/restart and rsMPI exhibit different performance degradation. As expected, the execution time for checkpoint/restart increases proportionally with the number of failures. For rsMPI, however, the increase is sub-linear. This is due to fact that as more failures occur, the interval between failures is reduced, and as a result, the recovery time per failure is also reduced. 
-Eventually, the constant rebooting time dominates the recovery overhead. This is the reason why the execution time of srMPI\_2 and srMPI\_4 tends to converge as the number of failure increases. 
+Eventually, the constant rebooting time dominates the recovery overhead. This is the reason why the execution time of rsMPI\_2 and rsMPI\_4 tends to converge as the number of failure increases. 
 %Although not shown in Figure~\ref{fig:failures_time}, rebooting time will eventually dominate the recovery time when more failures occur, resulting in a linear increase in execution time for rsMPI. This increase, however, occurs at a significantly slower rate than checkpoint/restart.
 
 Incorporating hardware overhead, Figure~\ref{fig:failures_ntime} compares the weighted execution time between checkpoint/restart and rsMPI.  As expected, checkpoint/restart is better when the number of  failures is small (e.g., 5 failures).  When the number of failures increases,  however, checkpoint/restart loses its advantage quickly. At 30 failures, for example, rsMPI\_2 and rsMPI\_4 are 16.5\% and 30.4\% more efficient than checkpoint/restart, respectively.

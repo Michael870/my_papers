@@ -4,6 +4,11 @@ AUXFILE=$(PREFIX).aux
 BLGFILE=$(PREFIX).blg
 LOGFILE=$(PREFIX).log
 BBLFILE=$(PREFIX).bbl
+LOFFILE=$(PREFIX).lof
+LOTFILE=$(PREFIX).lot
+TOCFILE=$(PREFIX).toc
+OUTFILE=$(PREFIX).out
+ETDFILE=$(PREFIX).etd
 
 all: plots	
 	pdflatex  --shell-escape $(PREFIX)
@@ -16,4 +21,4 @@ plots:
 #	cd Figures; ./epstopdf.sh
 
 clean:
-	rm -f $(AUXFILE) $(BLGFILE) $(LOGFILE) $(BBLFILE);
+	rm -f $(AUXFILE) $(BLGFILE) $(LOGFILE) $(BBLFILE) $(LOFFILE) $(LOTFILE) $(TOCFILE) $(OUTFILE) $(ETDFILE);

@@ -147,6 +147,8 @@ s.t.  \qquad          & 0 \leq \sigma_m \leq \sigma_{max} \\
 \end{alignedat}
 \end{equation}
 
+
+
 The first constraint says the execution rate of the main process and primary shadow should observe the physical processor limit. The second constraint indicates that the initial rate of the secondary shadow should not exceed that of the main process and primary shadow. The third constraint ensures that the secondary shadow could speed up after detecting a failure. The last constraint guarantees that the deadline is met even in the case of failure. Same as before, non-linear optimization techniques can be used to solve the above problem, and the output will be the three optimal execution rates.
 
 \section{Evaluation}
