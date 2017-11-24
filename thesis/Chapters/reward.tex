@@ -20,7 +20,7 @@ As mentioned in Section~\ref{sec:shadowing_adaptivity}, large-scale computing sy
     \vskip -0.1in
 \end{figure}
 
-As shown in Figure~\ref{fig:opt_problem}, the inputs to the problem consist of system parameters and application parameters. System parameters include the failure distribution, system scale, and power consumption characteristics. Application parameters could be QoS requirements, total workload, and/or the communication and synchronization patters. In addition, constraints, such as power cap and deadline, can be specified in observation of resource limitations. Finally, the outputs are the derived execution rates for all processes, which optimize the given objective.
+As shown in Figure~\ref{fig:opt_problem}, the inputs to the problem consist of system parameters and application parameters. System parameters include the failure distribution, system scale, and power consumption characteristics. Application parameters could be QoS requirements, total workload, and/or the communication and synchronization patterns. In addition, constraints, such as power cap and deadline, can be specified in observation of resource limitations. Finally, the outputs are the derived execution rates for all processes, which optimize the given objective.
 
 The above optimization framework can be tailored to various computing environments for different needs. For example, in HPC systems, the problem can be simplified by fixing $\sigma_m$ and $\sigma_a$ at the maximum CPU rate and only optimize $\sigma_b$ to minimize energy consumption under deadline constraint~\cite{mills_2014_icnc}. The following section discusses another case study in the Cloud environment that relaxes the constraints on $\sigma_m$ and $\sigma_a$~\cite{cui_2014_closer}. The resulting work, referred to as reward-based optimal Shadow Replication, considers Service Level Agreements (SLA) in the Cloud and optimizes a ``reward'' for Cloud service providers. The flexibility in the definition of reward demonstrates the ability of Shadow Replication to achieve objectives that go beyond time and energy. 
 
@@ -49,7 +49,7 @@ fault tolerance might impact power consumption and ultimately the expected profi
 Cloud computing workload ranges from business applications and
 intelligence, to analytics and social networks mining and log
 analysis, to scientific applications in various fields of sciences and
-discovery. These applications exhibit different behaviors, in term of
+discovery. These applications exhibit different behaviors, in terms of
 computation requirements and data access patterns. While some
 applications are compute-intensive, others involve the processing of
 increasingly large amounts of data. The scope and scale of these
@@ -196,7 +196,7 @@ when executing at maximum rate, referred to as $\rho$. Hence, node power consump
 $p(\sigma)=\rho \times \sigma_{max}^n + (1-\rho)\times \sigma^n$. When the execution rate is zero
 the machine is in a sleep state, powered off or not assigned as a
 resource; therefore it will not be consuming any power, static or
-dynamic.  Throughout this paper we assume that dynamic power is cubic
+dynamic.  Throughout this thesis we assume that dynamic power is cubic
 in relation to
 rate~\cite{rusu2003maximizing,zhai2004theoretical}, therefore the
 overall system power when executing at rate $\sigma$ is defined as:
@@ -329,7 +329,7 @@ E[\text{expense}] = C \times E[\text{energy}]
 \end{equation}
 
 However, the expenditure of running the cloud computing service is more
-than just energy, and must includes hardware, maintenance, and human
+than just energy, and must include hardware, maintenance, and human
 labor. These costs can be accounted for by amortizing these costs into the
 static power factor, $\rho$. Because previous studies have
 suggested
