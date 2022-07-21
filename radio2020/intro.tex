@@ -1,0 +1,58 @@
+High performance computing (HPC) is the technology to perform complex calculations and data processing at high speeds. 
+Today's scientific discoveries and business intelligence are driven by high-fidelity, 
+large-scale simulation and data analytics. To meet the increasing computing demands from 
+virtually every aspect of society, HPC is continuously evolving to solve more 
+complex and challenging problems. 
+%On the one hand, national labs and research institutes run HPC on 
+%supercomputers for scientific breakthroughs and national security. On the other hand, enterprises and 
+%organizations deploy HPC on small to medium sized clusters to process data and extract insights. 
+Recently, the explosive growth of machine learning applications has increased the adoption as well as 
+impact of HPC, as they also exploit parallelism and hardware acceleration to process  
+massive amount of data.
+
+
+HPC workloads have traditionally been run only on bare-metal cluster to drive maximum 
+performance. 
+The roadblock to virtualization was due to the concern that the extra hypervisor layer could introduce 
+performance overhead. 
+However, this has changed with the introduction of increasingly sophisticated 
+hardware support for virtualization and software optimization~\cite{madukkarumukumana2008resource,bugnion2017hardware}. Performance of 
+these highly parallel HPC workloads has increased dramatically over the last decade, 
+enabling organizations to begin to embrace the numerous benefits that a virtualization platform can 
+offer~\cite{michael2018overcommit}. As a result, we are witnessing a popular trend that enterprises convert 
+their on-prem bare-metal clusters to virtualized, shared private cloud. For instance, the Johns Hopkins 
+University Applied Physics Laboratory recently virtualized their 3728-core bare-metal cluster 
+to share between Windows and Linux users. 
+%The reported improvement in resource utilization 
+%ranges from 9.1\% to 29.2\%, and simulations speed up by 4\% on average~\cite{vmware2017josh}.
+It is reported that resource utilization improved and simulations ran faster~\cite{vmware2017josh}.
+
+At the same time, public cloud, such as Amazon AWS and Google GCP, is becoming a popular option for 
+HPC practitioners. Recent studies show that the usage of public cloud has grown more than five-fold among all HPC 
+sites worldwide, from 13\% in 2011 to 74\% in 2018~\cite{hyperion2019}.
+With virtually unlimited scalability and on-demand resource subscription, public cloud starts to host 
+compute- and data-intensive workloads across various industry verticals. These workloads span the traditional HPC 
+applications, like genomics and 
+weather prediction, as well as emerging applications, like machine learning and deep learning. 
+
+Regardless of public cloud, private cloud, or hybrid cloud, the trend of virtualizing HPC is a great opportunity 
+for VMware as a core SDDC player. VMware already has solutions for virtualizing compute/networking/storage  and  
+managing cluster resources. If we can create a VMware solution to meet extreme performance requirements, VMware will be in a position to 
+expand its market share and secure a new long-term source of revenue. 
+
+
+To this end, we present \textit{vHERO} as a novel approach to  \textbf{v}irtualizing  
+ \textbf{H}PC workloads with multi-t\textbf{e}nancy and  \textbf{r}esource  \textbf{o}ver-commitment. Based on VMs, vHERO goes beyond the traditional way of 
+statically splitting resources among tenants and instead applies resource over-commitment to optimize 
+system utilization and throughput. By giving each tenant a virtual cluster that mimics the 
+underlying physical cluster, vHERO delegates the resource management task 
+to the ESXi hypervisor to improve flexibility as well as efficiency. When all tenants are busy consuming their cycles, 
+vHERO guarantees that each tenant is getting his/her fair share. When 
+some tenant is not fully using the allocation, vHERO takes advantage of the work-conserving 
+property of the ESXi scheduler to assign the idle resources to other tenant(s) who can benefit 
+from additional resources. Consequently, vHERO can ensure quality-of-service while maximizing 
+system utilization. 
+
+The rest of the paper is organized as follows. 
+Section II provides background and motivation. Section III introduces the design of vHERO, followed by validation 
+and empirical evaluation results in Section IV. Section V concludes this work and points out future directions.
