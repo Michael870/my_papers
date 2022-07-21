@@ -1,0 +1,29 @@
+Coupled with the rapid growth of AI/ML applications, HPC is increasingly influencing our daily life. 
+At the same time, cloud computing is transforming
+HPC by providing ubiquitous access and on-demand scalability in today's digital, data-driven world. 
+In this paper, 
+we present and validate an optimization to cloud resource management in order to enhance system efficiency with QoS guarantees for HPC workloads. We argue that system admins can
+continue to enjoy the elasticity and efficiency benefits of cloud computing while meeting the demand of HPC 
+use cases. For those HPC users who are strict about performance consistency but are flexible 
+in the trade-off between throughput performance and economic cost, this paper offers a unique 
+solution to balancing this trade-off with negotiable service level agreement (SLA) in both public and private cloud. 
+
+This is pioneering work to apply CPU plus memory 
+over-commitment to HPC workloads. We carry out comprehensive performance study on its feasibility and limitation. As a first step, we validate up to 4X CPU over-commitment by simultaneously running 
+multiple virtual clusters on a single physical cluster. Experiment results demonstrate that system 
+throughput can be improved by CPU over-commitment, while resource allocation and performance can be 
+precisely controlled by adjusting the hypervisor scheduler parameters. Furthermore, we identify that, although HyperThreading is often disabled in HPC system, system admins should consider 
+enabling it if throughput performance is the major goal. Then, we move on to over-commit 
+both CPU and memory with the design of three scenarios to cover different workload patterns. These 
+scenarios help us to recognize that detrimental behavior (e.g., guest OS failure) could occur when 
+applications consume too much active memory and force hypervisor to swap memory to disk. However, 
+we also demonstrate that memory over-commitment is practical when the applications take turns to 
+stress memory, and we provide guidelines regarding how to avoid hypervisor swapping. Most importantly, 
+we prove that QoS guarantee on $99^{th}$ percentile tail latency is achievable for HPC cloud 
+when 2X CPU plus memory 
+over-commitment is practiced. 
+
+In the future, 
+we plan to extend the scope of this work to cover more workloads, such as MPI workloads, and to study disk and network resource over-commitment. In addition, we will investigate into building 
+analytical models to predict the trade-off between performance and over-commitment degree based on 
+workload characterization~\cite{arlitt1997internet,234855}. 

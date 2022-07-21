@@ -1,0 +1,75 @@
+Today's scientific discoveries and business intelligence are driven by large-scale parallel simulation and data analytics. To meet the increasing computing demands from 
+virtually every aspect of the society, HPC is continuously evolving to solve more 
+complex and challenging problems. On the one hand, national labs and research institutes run 
+simulations on 
+supercomputers for scientific breakthroughs and national security. On the other hand, enterprises and 
+organizations deploy HPC on small to medium sized clusters to process data and extract insights. 
+Recently, the explosively growing machine learning applications have increased the adoption as well as 
+impact of HPC technologies as they also exploit parallelism and hardware acceleration to speed up the processing of 
+massive amount of data.
+
+
+HPC workloads have traditionally been run only on bare-metal, unvirtualized hardware to drive maximum 
+performance. 
+The roadblock to virtualization was due to the concern that the extra hypervisor layer could introduce 
+performance overhead. 
+%The concern was that virtualization could introduce performance overhead due to the extra software 
+%layer of hypervisor. 
+However, this has changed with the introduction of increasingly sophisticated 
+hardware support for virtualization and software optimization~\cite{mergen2006virtualization,madukkarumukumana2008resource,bugnion2017hardware}. Performance of 
+these highly parallel HPC workloads has increased dramatically over the last decade, 
+enabling organizations to embrace the numerous benefits that a virtualization platform can 
+offer~\cite{michael2018overcommit}. As a result, we are witnessing a popular trend that institutions transform 
+their on-prem bare-metal clusters to virtualized, shared private cloud. For instance, the Johns Hopkins 
+University Applied Physics Laboratory has virtualized their 3728-core bare-metal cluster 
+to share between Windows and Linux users. It is reported that resource utilization 
+has improved by 9.1\% to 29.2\%, and simulation workloads have sped up by an average of 4\%~\cite{vmware2017josh}.
+
+At the same time, public cloud, such as Amazon AWS and Google GCP, is becoming a popular option for 
+HPC practitioners. Recent studies show that the usage of public cloud has grown more than five-fold among all HPC 
+sites worldwide, from 13\% in 2011 to 74\% in 2018~\cite{hyperion2019}.
+With virtually unlimited scalability and on-demand resource subscription, public cloud starts to host 
+both compute- and data-intensive workloads across various industry verticals. These workloads span the traditional HPC 
+applications, like genomics and 
+weather prediction, as well as emerging applications, like machine learning and deep learning. 
+
+
+There is a fruitful body of research on resource management in 
+cloud computing~\cite{singh2016survey,zhan2015cloud,gill2018chopper}. Dynamic resource scheduling and 
+load balancing are used 
+to maximize system utilization and efficiency~\cite{adhikari2018heuristic,panwar2015load}. These techniques, however, 
+are not straightforward to apply to HPC workloads which are highly sensitive to resource change and interference. 
+In fact, resource management has been identified as one of the open 
+challenges for HPC cloud~\cite{netto2018hpc}. 
+Currently, system admins are often limited to statically and conservatively reserve 
+resources based on peak resource requirements to adhere to service level agreement (SLA). For example, Microsoft Azure collaborates with Cray to offer supercomputers to HPC users, 
+and Amazon AWS reserves dedicated nodes to provide full-size VMs. 
+This essentially offsets 
+the elasticity and efficiency promises of the cloud computing business model. 
+
+% To this end, we present \textit{vHERO} as a novel approach to cloud 
+% resource allocation for HPC, by \underline{v}irtualizing 
+% \underline{H}PC workloads with multi-t\underline{e}nancy and  \underline{r}esource  \underline{o}ver-commitment.
+% Based on full virtualization virtual machine (VM), vHERO goes beyond traditional way of 
+% statically partitioning resources among tenants and instead applies resource over-commitment to optimize 
+% system utilization and maximize throughput. By giving each tenant a virtual cluster that mimics the 
+% underlying physical cluster, vHERO delegates the resource management task 
+% to the hypervisor to add an extra layer of flexibility as well as to improve efficiency. When all tenants are busy consuming their cycles, 
+% vHERO guarantees that each tenant is getting his/her fair share according to pre-defined SLA. When 
+% some tenant is not fully using the allocated resources, vHERO takes advantage of the work-conserving 
+% property of the hypervisor scheduler to assign the idle resources to other tenant(s) who can benefit 
+% from additional resources. Consequently, system admins can ensure quality-of-service (QoS) while maximizing system utilization. 
+
+To this end, we present our exploratory work in combining virtualization with resource over-commitment for running HPC cloud.
+Based on full virtualization virtual machine (VM), we go beyond traditional way of 
+statically partitioning resources among tenants and instead offer each tenant a virtual 
+cluster of VMs that mimic the underlying physical cluster. By simulateneously running 
+multiple virtual clusters on a phyiscal cluster and delegating the resource management task 
+to the hypervisor, our approach not only supports 
+multi-tenancy with security isolation, but also achieves improved flexbility and efficiency. Specifically, when all tenants are busy consuming their cycles, 
+the hypervisor can guarantee that each tenant is getting his/her fair share according to pre-defined SLA; when 
+some tenant is not fully using the allocated resources, a work-conserving scheduler in the hypervisor can assign the idle resources to other tenant(s) who can benefit 
+from additional resources. Consequently, when our approach is applied, system admins will be able to ensure quality-of-service (QoS) while maximizing system utilization. In the remainder of this paper, we will use VMware ESXi hypervisor to demonstrate our approach as well as share our experience and best practices. 
+
+The rest of the paper is organized as follows. 
+Section II provides background and motivation. Section III explains our approach of virtual infrastructure configuration and how we integrate resource over-commitment. Section IV presents empirical evaluation results along with experience that we have gained. Section V concludes this work and points out future directions.
