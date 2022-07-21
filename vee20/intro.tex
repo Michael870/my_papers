@@ -1,0 +1,69 @@
+Today's scientific discoveries and business intelligence are driven by high-fidelity, 
+large-scale simulation and data analytics. To meet the increasing computing demands from 
+virtually every aspect of the society, HPC is continuously evolving to solve more 
+complex and challenging problems. On the one hand, national labs and research institutes run HPC on 
+supercomputers for scientific breakthroughs and national security. On the other hand, enterprises and 
+organizations deploy HPC on small to medium sized clusters to process data and extract insights. 
+Recently, the explosively growing machine learning applications have increased the adoption as well as 
+impact of HPC as they also exploit parallelism and hardware acceleration to speed up the processing of 
+massive amount of data.
+
+
+HPC workloads have traditionally been run only on bare-metal, unvirtualized hardware to drive maximum 
+performance. 
+The roadblock to virtualization was due to the concern that the extra hypervisor layer could introduce 
+performance overhead. 
+%The concern was that virtualization could introduce performance overhead due to the extra software 
+%layer of hypervisor. 
+However, this has started to change with the introduction of increasingly sophisticated 
+hardware support for virtualization and software optimization~\cite{madukkarumukumana2008resource,bugnion2017hardware}. Performance of 
+these highly parallel HPC workloads has increased dramatically over the last decade, 
+enabling organizations to begin to embrace the numerous benefits that a virtualization platform can 
+offer~\cite{michael2018overcommit}. As a result, we are witnessing a popular trend that enterprises convert 
+their on-prem bare-metal clusters to virtualized, shared private cloud. For instance, the Johns Hopkins 
+University Applied Physics Laboratory recently virtualized their 3728-core bare-metal cluster 
+to share between Windows and Linux users. The reported improvement in resource utilization 
+ranges from 9.1\% to 29.2\%, and simulations speed up by 4\% on average~\cite{vmware2017josh}.
+
+At the same time, public cloud, such as Amazon AWS and Google GCP, is becoming a popular alternative for 
+HPC practitioners. Recent studies show that the usage of public cloud has grown more than five-fold among all HPC 
+sites worldwide, from 13\% in 2011 to 74\% in 2018~\cite{hyperion2019}.
+With virtually unlimited scalability and on-demand resource subscription, public cloud starts to host 
+compute- and data-intensive workloads across various industry verticals. These workloads span the traditional HPC 
+applications, like genomics and 
+weather prediction, as well as emerging applications, like machine learning and deep learning. 
+
+There is a fruitful body of research on resource management in 
+Cloud Computing~\cite{singh2016survey,zhan2015cloud,gill2018chopper}. Dynamic resource scheduling and 
+load balancing are used 
+to maximize system utilization and efficiency~\cite{adhikari2018heuristic,panwar2015load}. These techniques, however, 
+are not straightforward to apply to HPC workloads which are highly sensitive to resource change and interference. 
+Actually, resource management has been identified as one of the open 
+challenges for HPC cloud~\cite{netto2018hpc}. 
+Currently, cloud service providers (CSPs) are often limited to statically and conservatively reserve 
+resources based on peak resource requirements to respect service level agreements (SLAs). For example, Microsoft Azure 
+allocates dedicated supercomputers from Cray, and Amazon AWS offers dedicated nodes for full-size VMs. 
+% allocate physical resources
+% Despite the 
+% numerous benefits promised by Cloud Computing, however, cloud service providers (CSPs) are often limited to statically 
+% allocate physical resources to HPC tenants in order to avoid performance interference and enforce 
+% service level agreements (SLAs). 
+This essentially offsets 
+the elasticity and efficiency benefits of the Cloud Computing business model. 
+
+In this paper, we present \textit{virtual throughput clusters (VTC)} as a novel approach for cloud 
+resource allocation to efficiently and effectively support 
+HPC workloads with multi-tenancy. Based on virtual machine (VM), VTC goes beyond traditional way of 
+statically splitting resources among tenants and applies resource over-commitment to optimize 
+system utilization and throughput. By giving each tenant a virtual cluster that mimics the 
+underlying physical cluster, VTC delegates the resource management task 
+to the hypervisor to improve flexibility as well as efficiency. When all tenants are busy consuming their cycles, 
+VTC guarantees that each tenant is getting his/her fair share according to pre-defined SLA terms. When 
+some tenant is not fully using the allocated resources, VTC takes advantage of the work-conserving 
+property of the hypervisor scheduler to assign the idle resources to other tenant(s) who can benefit 
+from additional resources. Consequently, CSPs can ensure quality-of-service while maximizing 
+system utilization. 
+
+The rest of the paper is organized as follows. 
+Section II provides background and motivation. Section III introduces the design of VTC, followed by validation 
+and empirical evaluation results in Section IV. Section V concludes this work and points out future directions.
